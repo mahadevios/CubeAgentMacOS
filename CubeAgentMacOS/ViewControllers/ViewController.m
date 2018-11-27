@@ -15,7 +15,7 @@
 
 - (void)viewDidLoad
 {
-    
+    //changes from martina
     [super viewDidLoad];
     
     NSString*  macId=[Keychain getStringForKey:@"udid"];
