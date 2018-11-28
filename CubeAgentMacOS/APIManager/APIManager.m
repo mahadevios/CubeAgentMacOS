@@ -90,7 +90,7 @@ static APIManager *singleton = nil;
 {
     
     NSError* error;
-    NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:username,@"UserName",password,@"Password", nil];
+    NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:password,@"pwd",username,@"username", nil];
     
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
@@ -106,7 +106,7 @@ static APIManager *singleton = nil;
     
     NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
     
-    NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary1, nil];
+    NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
     
     DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:AUTHENTICATE_API withRequestParameter:array withResourcePath:AUTHENTICATE_API withHttpMethd:POST];
     
