@@ -176,7 +176,7 @@
         
         if (statusCode == 200)
         {
-            if (response == 0)
+            if ([response longLongValue] == 0)
             {
                 NSDictionary* reponseDict = [[NSDictionary alloc] initWithObjectsAndKeys:FAILURE,RESPONSE_IS_MAC_ID_VALID,@"200",RESPONSE_CODE, nil];
                 
@@ -198,25 +198,19 @@
         
     }
 
-    
- 
-
-
 
 if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
 
 {
-                NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:response options:0];
-                NSData* data=[decodedData AES256DecryptWithKey:SECRET_KEY];
-                NSString* responseString=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    if (response != nil)
-    {
-
-//        NSString* code=[response objectForKey:RESPONSE_CODE];
-//        NSString* pinVerify=[response objectForKey:RESPONSE_PIN_VERIFY];
-
-        
-    }
+//                NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:response options:0];
+//                NSData* data=[decodedData AES256DecryptWithKey:SECRET_KEY];
+//                NSString* responseString=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//    if (response != nil)
+//    {
+//
+//
+//        
+//    }
 }
 
 
