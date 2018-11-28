@@ -164,29 +164,29 @@
                                                                error:&error];
     
     
-    if ([encryptedResponse containsString:@"ExceptionMessage"] || [encryptedResponse containsString:@"ExceptionType"] || [encryptedResponse containsString:@"Message"] || [encryptedResponse containsString:@"StackTrace"])
-    {
-//         [[AppPreferences sharedAppPreferences] showAlertViewWithTitle:@"Error" withMessage:@"Something went wrong, please try again" withCancelText:nil withOkText:@"OK" withAlertTag:1000];
-        
-        return;
-    }
-            NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:encryptedResponse options:0];
-            NSData* data=[decodedData AES256DecryptWithKey:SECRET_KEY];
-            NSString* responseString=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//    if ([encryptedResponse containsString:@"ExceptionMessage"] || [encryptedResponse containsString:@"ExceptionType"] || [encryptedResponse containsString:@"Message"] || [encryptedResponse containsString:@"StackTrace"])
+//    {
+////         [[AppPreferences sharedAppPreferences] showAlertViewWithTitle:@"Error" withMessage:@"Something went wrong, please try again" withCancelText:nil withOkText:@"OK" withAlertTag:1000];
+//
+//        return;
+//    }
+//            NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:encryptedResponse options:0];
+//            NSData* data=[decodedData AES256DecryptWithKey:SECRET_KEY];
+//            NSString* responseString=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
-    NSDictionary *response;
-    if (responseString!=nil)
-    {
-        responseString=[responseString stringByReplacingOccurrencesOfString:@"True" withString:@"1"];
-        responseString=[responseString stringByReplacingOccurrencesOfString:@"False" withString:@"0"];
-        
-        NSData *responsedData = [responseString dataUsingEncoding:NSUTF8StringEncoding];
-        
-        response = [NSJSONSerialization JSONObjectWithData:responsedData
-                                                                 options:NSJSONReadingAllowFragments
-                                                                   error:&error];
-
-    }
+//    NSDictionary *response;
+//    if (responseString!=nil)
+//    {
+//        responseString=[responseString stringByReplacingOccurrencesOfString:@"True" withString:@"1"];
+//        responseString=[responseString stringByReplacingOccurrencesOfString:@"False" withString:@"0"];
+//
+//        NSData *responsedData = [responseString dataUsingEncoding:NSUTF8StringEncoding];
+//
+//        response = [NSJSONSerialization JSONObjectWithData:responsedData
+//                                                                 options:NSJSONReadingAllowFragments
+//                                                                   error:&error];
+//
+//    }
 
 
 
@@ -195,14 +195,14 @@ if([self.downLoadEntityJobName isEqualToString:CHECK_DEVICE_REGISTRATION])
 
 {
     
-    if (response != nil)
-    {
-
-//        NSString* code=[response objectForKey:RESPONSE_CODE];
-//        NSString* pinVerify=[response objectForKey:RESPONSE_PIN_VERIFY];
-
-        
-    }
+//    if (response != nil)
+//    {
+//
+////        NSString* code=[response objectForKey:RESPONSE_CODE];
+////        NSString* pinVerify=[response objectForKey:RESPONSE_PIN_VERIFY];
+//
+//        
+//    }
 }
 
 
