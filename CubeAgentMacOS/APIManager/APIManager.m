@@ -17,7 +17,7 @@
 #import <objc/runtime.h>
 
 @implementation APIManager
-@synthesize incompleteFileTransferCount,inCompleteFileTransferNamesArray,transferFailedCount,todaysFileTransferCount,awaitingFileTransferCount,awaitingFileTransferNamesArray,deletedListArray,transferredListArray,responsesData,session;
+@synthesize responsesData,session;
 static APIManager *singleton = nil;
 
 // Shared method
@@ -77,13 +77,40 @@ static APIManager *singleton = nil;
     
     NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
     
-    DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:UPDATE_MAC_ID withRequestParameter:array withResourcePath:UPDATE_MAC_ID withHttpMethd:POST];
+    DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:UPDATE_MAC_ID_API withRequestParameter:array withResourcePath:UPDATE_MAC_ID_API withHttpMethd:POST];
     [downloadmetadatajob startMetaDataDownLoad];
     //    }
     //    else
     //    {
     //
     //    }
+    
+}
+-(void) authenticateUser:(NSString*) password username:(NSString* )username;
+{
+    
+    NSError* error;
+    NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:password,@"pwd",username,@"username", nil];
+    
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
+                                                       options:0 // Pass 0 if you don't care about the readability of the generated string
+                                                         error:&error];
+    
+    
+    NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
+    
+    
+    
+    NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
+    
+    NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
+    
+    NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
+    
+    DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:AUTHENTICATE_API withRequestParameter:array withResourcePath:AUTHENTICATE_API withHttpMethd:POST];
+    
+    [downloadmetadatajob startMetaDataDownLoad];
     
 }
 -(void) authenticateUserMacIDLocal:(NSString*) macID password:(NSString*) password username:(NSString* )username

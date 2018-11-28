@@ -19,20 +19,20 @@
 
 +(APIManager *) sharedManager;
 
-@property(nonatomic,strong) NSMutableArray* inCompleteFileTransferNamesArray;
-@property(nonatomic,strong) NSMutableArray* awaitingFileTransferNamesArray;
-@property(nonatomic,strong) NSMutableArray* todaysFileTransferNamesArray;
-@property(nonatomic,strong) NSMutableArray* failedTransferNamesArray;
-
-@property(nonatomic,strong) NSMutableArray* deletedListArray;
-@property(nonatomic,strong) NSMutableArray* transferredListArray;
-
-@property(nonatomic)int awaitingFileTransferCount;
-@property(nonatomic)int todaysFileTransferCount;
-@property(nonatomic)int transferFailedCount;
-@property(nonatomic)int incompleteFileTransferCount;
-@property(nonatomic)bool  userSettingsOpened;
-@property(nonatomic)bool  userSettingsClosed;
+//@property(nonatomic,strong) NSMutableArray* inCompleteFileTransferNamesArray;
+//@property(nonatomic,strong) NSMutableArray* awaitingFileTransferNamesArray;
+//@property(nonatomic,strong) NSMutableArray* todaysFileTransferNamesArray;
+//@property(nonatomic,strong) NSMutableArray* failedTransferNamesArray;
+//
+//@property(nonatomic,strong) NSMutableArray* deletedListArray;
+//@property(nonatomic,strong) NSMutableArray* transferredListArray;
+//
+//@property(nonatomic)int awaitingFileTransferCount;
+//@property(nonatomic)int todaysFileTransferCount;
+//@property(nonatomic)int transferFailedCount;
+//@property(nonatomic)int incompleteFileTransferCount;
+//@property(nonatomic)bool  userSettingsOpened;
+//@property(nonatomic)bool  userSettingsClosed;
 
 @property(nonatomic)NSMutableDictionary* responsesData;
 @property(nonatomic,strong)NSString* taskId;
@@ -41,6 +41,8 @@
 //-(void) validateUser:(NSString *) usernameString andPassword:(NSString *) passwordString;
 
 -(void) updateDeviceMacID:(NSString*) macID password:(NSString*) password username:(NSString* )username;
+
+-(void) authenticateUser:(NSString*) password username:(NSString* )username;
 
 -(NSString*)getMacId;//get macid of current device
 -(uint64_t)getFreeDiskspace;

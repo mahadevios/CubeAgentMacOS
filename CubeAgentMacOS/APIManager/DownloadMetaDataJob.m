@@ -159,7 +159,7 @@
 //                                                                   error:&error];
     
     
-    NSString *encryptedResponse = [NSJSONSerialization JSONObjectWithData:responseData
+    NSString *response = [NSJSONSerialization JSONObjectWithData:responseData
                                                              options:NSUTF8StringEncoding
                                                                error:&error];
     
@@ -170,36 +170,45 @@
 //
 //        return;
 //    }
-//            NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:encryptedResponse options:0];
-//            NSData* data=[decodedData AES256DecryptWithKey:SECRET_KEY];
-//            NSString* responseString=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    
-//    NSDictionary *response;
-//    if (responseString!=nil)
-//    {
-//        responseString=[responseString stringByReplacingOccurrencesOfString:@"True" withString:@"1"];
-//        responseString=[responseString stringByReplacingOccurrencesOfString:@"False" withString:@"0"];
-//
-//        NSData *responsedData = [responseString dataUsingEncoding:NSUTF8StringEncoding];
-//
-//        response = [NSJSONSerialization JSONObjectWithData:responsedData
-//                                                                 options:NSJSONReadingAllowFragments
-//                                                                   error:&error];
-//
-//    }
+
+
+    if([self.downLoadEntityJobName isEqualToString:UPDATE_MAC_ID_API])
+        
+    {
+        
+        if (statusCode == 200)
+        {
+            if ([response longLongValue] == 0)
+            {
+                NSDictionary* reponseDict = [[NSDictionary alloc] initWithObjectsAndKeys:FAILURE,RESPONSE_IS_MAC_ID_VALID,@"200",RESPONSE_CODE, nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_UPDATE_MAC_ID_API object:reponseDict];
+                
+                return;
+            }
+            else
+            {
+               NSDictionary* reponseDict = [[NSDictionary alloc] initWithObjectsAndKeys:SUCCESS,RESPONSE_IS_MAC_ID_VALID,@"200",RESPONSE_CODE, nil];
+                
+                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_UPDATE_MAC_ID_API object:reponseDict];
+            }
+        }
+        else
+        {
+            return;
+        }
+        
+    }
 
 
 
-
-if([self.downLoadEntityJobName isEqualToString:CHECK_DEVICE_REGISTRATION])
+if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
 
 {
-    
+
 //    if (response != nil)
 //    {
 //
-////        NSString* code=[response objectForKey:RESPONSE_CODE];
-////        NSString* pinVerify=[response objectForKey:RESPONSE_PIN_VERIFY];
 //
 //        
 //    }
@@ -208,27 +217,6 @@ if([self.downLoadEntityJobName isEqualToString:CHECK_DEVICE_REGISTRATION])
 
 
 
-if ([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
-{
-    
-//    if (response != nil)
-//    {
-//    [response objectForKey:@"code"];
-//        if ([[response objectForKey:@"code"]intValue]==200)
-//        {
-//            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_AUTHENTICATE_API object:response];
-//            
-//            
-//        }else
-//        {
-//            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_AUTHENTICATE_API object:response];
-//
-//        }
-//    }else
-//    {
-//        [[AppPreferences sharedAppPreferences] showAlertViewWithTitle:@"Error" withMessage:@"Something went wrong, please try again" withCancelText:nil withOkText:@"OK" withAlertTag:1000];
-//    }
-}
 
 
  

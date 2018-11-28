@@ -28,6 +28,7 @@
 		841E1CD321A82670006F5C63 /* SBJson4Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 841E1CC821A82670006F5C63 /* SBJson4Parser.m */; };
 		841E1CD421A82670006F5C63 /* SBJson4StreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 841E1CCB21A82670006F5C63 /* SBJson4StreamWriter.m */; };
 		841E1CD521A82691006F5C63 /* SBJson4.h in Sources */ = {isa = PBXBuildFile; fileRef = 841E1CC621A82670006F5C63 /* SBJson4.h */; };
+		841E1CD921A84415006F5C63 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841E1CD821A84415006F5C63 /* IOKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		841E1CCB21A82670006F5C63 /* SBJson4StreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJson4StreamWriter.m; sourceTree = "<group>"; };
 		841E1CCC21A82670006F5C63 /* SBJson4Writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4Writer.h; sourceTree = "<group>"; };
 		841E1CCD21A82670006F5C63 /* SBJson4StreamWriterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamWriterState.h; sourceTree = "<group>"; };
+		841E1CD821A84415006F5C63 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841E1CD921A84415006F5C63 /* IOKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +129,7 @@
 				841E1B5921A80BCF006F5C63 /* CubeAgentMacOSTests */,
 				841E1B6421A80BCF006F5C63 /* CubeAgentMacOSUITests */,
 				841E1B4121A80BCB006F5C63 /* Products */,
+				841E1CD721A84414006F5C63 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -263,6 +267,14 @@
 				841E1B4721A80BCB006F5C63 /* ViewController.m */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		841E1CD721A84414006F5C63 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				841E1CD821A84415006F5C63 /* IOKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
