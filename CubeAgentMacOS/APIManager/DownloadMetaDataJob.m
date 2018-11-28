@@ -170,6 +170,8 @@
 //
 //        return;
 //    }
+
+
     if([self.downLoadEntityJobName isEqualToString:UPDATE_MAC_ID_API])
         
     {
@@ -199,12 +201,11 @@
     }
 
 
+
 if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
 
 {
-//                NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:response options:0];
-//                NSData* data=[decodedData AES256DecryptWithKey:SECRET_KEY];
-//                NSString* responseString=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+
 //    if (response != nil)
 //    {
 //
