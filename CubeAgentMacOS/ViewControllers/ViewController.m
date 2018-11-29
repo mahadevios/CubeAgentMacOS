@@ -17,8 +17,10 @@
 {
     //changes from martina
     [super viewDidLoad];
-    
-    NSString*  macId=[Keychain getStringForKey:@"udid"];
+    //setting background color for submit button
+//    self.submitButton.layer.backgroundColor = NSColor.redColor.CGColor;
+
+//    NSString*  macId=[Keychain getStringForKey:@"udid"];
     
     
     //    NSLog(@"doKeyForPassword: %@",key);
@@ -27,9 +29,23 @@
     //    [[APIManager sharedManager] authenticateUserMacIDLocal:@"DDCF3B2D-362B-4C81-8AB3-DD56D49E5365" password:@"d" username:@"SAN"];
     //6DBC967F-3C38-46C9-BE74-DF3588C77475
 //    4DE5E8E1-4764-566D-8C35-AC3F7C5A447D --uuid
-    NSUUID* uid = [NSUUID UUID];
-    NSString* uuidOfMac = [self getMACUUID];
+//    NSUUID* uid = [NSUUID UUID];
+    NSString* macId = [[NSUserDefaults standardUserDefaults] objectForKey:MAC_ID];
     
+    NSString* uuidOfMac;
+    
+    if (macId == nil)
+    {
+        uuidOfMac = [self getMACUUID];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:uuidOfMac forKey:MAC_ID];
+    }
+    else
+    {
+        uuidOfMac = macId;
+    }
+    
+
     [[APIManager sharedManager] updateDeviceMacID:uuidOfMac password:@"d" username:@"SAN"];
     
     NSError* error;
@@ -77,10 +93,10 @@
 - (NSString *)getMACUUID
 {
     io_service_t    platformExpert = IOServiceGetMatchingService(kIOMasterPortDefault,
-                                                                 
+
                                                                  IOServiceMatching("IOPlatformExpertDevice"));
     CFStringRef serialNumberAsCFString = NULL;
-    
+
 //    kIOPlatformUUIDKey
 //    kIOPlatformSerialNumberKey
     if (platformExpert) {
@@ -89,19 +105,19 @@
                                                                  kCFAllocatorDefault, 0);
         IOObjectRelease(platformExpert);
     }
-    
+
     NSString *serialNumberAsNSString = nil;
     if (serialNumberAsCFString) {
         serialNumberAsNSString = [NSString stringWithString:(__bridge NSString *)serialNumberAsCFString];
         CFRelease(serialNumberAsCFString);
     }
-    
-   
+
+
 //    get_platform_uuid(str, strlen(str));
     return serialNumberAsNSString;
-    
-    
-    
+
+
+
 //SYS_gethostuuid
 }
 
@@ -134,4 +150,10 @@
 //}
 
 
+- (IBAction)autoModeCheckBoxClicked:(id)sender {
+}
+- (IBAction)rememberMeCheckBoxClicked:(id)sender {
+}
+- (IBAction)submitButtonClicked:(id)sender {
+}
 @end

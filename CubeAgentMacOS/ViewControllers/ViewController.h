@@ -11,6 +11,16 @@
 
 @interface ViewController : NSViewController
 
+@property (weak) IBOutlet NSButton *autoModeCheckBox;
+- (IBAction)autoModeCheckBoxClicked:(id)sender;
+@property (weak) IBOutlet NSButton *rememberMeCheckBox;
+- (IBAction)rememberMeCheckBoxClicked:(id)sender;
+@property (weak) IBOutlet NSButton *submitButton;
+- (IBAction)submitButtonClicked:(id)sender;
+@property (weak) IBOutlet NSTextField *loginTextField;
+@property (weak) IBOutlet NSSecureTextField *paswordTextField;
+@property (weak) IBOutlet NSTextField *macIdLabel;
+@property (weak) IBOutlet NSTextField *versionLabel;
 
 @end
 
