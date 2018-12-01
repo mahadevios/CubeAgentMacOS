@@ -27,11 +27,17 @@
 //#define  BASE_URL_PATH                        @"http://192.168.3.150:8081/CubeAPI/api"
 #define UPDATE_MAC_ID_API                         @"MacBook_UpdateMACID"
 #define AUTHENTICATE_API                          @"MacBook_Authenticate"
-#define ACCESS_CUBE_CONFIG_API                    @"AccessCubeConfig0"
-#define AUDIO_FILE_EXTENSIONS_API                 @"AudioFileExtensions"
-#define GET_TC_NAME_API                           @"GetTCName"
+#define ACCESS_CUBE_CONFIG_API                    @"MacBook_AccessCubeConfig0"
+#define AUDIO_FILE_EXTENSIONS_API                 @"MacBook_AudioFileExtensions"
+#define GET_TC_NAME_API                           @"MacBook_GetTCName"
 
-#define  CHECK_DEVICE_REGISTRATION            @"encrdecr_MobileCheckDeviceRegistration"
+//NSNOTIFICATION
+#define NOTIFICATION_UPDATE_MAC_ID_API              @"notificationUpdateMacIdAPI"
+#define NOTIFICATION_AUTHENTICATE_API               @"notificationAuthenticateAPI"
+#define NOTIFICATION_CUBE_CONFIG_API                @"notificationCubeCOnfigAPI"
+#define NOTIFICATION_AUDIO_FILE_EXTENSIONS_API      @"notificationAudioFileExtAPI"
+#define NOTIFICATION_TC_NAME_API                    @"notificationTCNameAPI"
+
 //DDCF3B2D-362B-4C81-8AB3-DD56D49E5365
 //#define  AUTHENTICATE_API                     @"UpdateMACID"
 //#define  AUTHENTICATE_API                     @"encrdecr_MobileAuthenticate"
@@ -52,9 +58,7 @@
 #define  FAILURE                        @"1001"
 
 
-//NSNOTIFICATION
-#define NOTIFICATION_UPDATE_MAC_ID_API              @"notificationUpdateMacIdAPI"
-#define NOTIFICATION_CHECK_DEVICE_REGISTRATION      @"notificationForMobileCheckDeviceRegistration"
+
 
 
 
@@ -79,7 +83,7 @@
 #define DATE_TIME_FORMAT                       @"yyyy-MM-dd HH:mm:ss"
 
 #define RESPONSE_CODE                          @"code"
-#define RESPONSE_IS_MAC_ID_VALID                        @"responseMacID"
+#define RESPONSE_IS_MAC_ID_VALID               @"responseMacID"
 
 
 #define SHARED_GROUP_IDENTIFIER                @"group.com.coreFlexSolutions.CubeDictate"
