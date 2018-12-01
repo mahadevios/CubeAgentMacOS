@@ -113,13 +113,13 @@ static APIManager *singleton = nil;
     [downloadmetadatajob startMetaDataDownLoad];
     
 }
--(void) authenticateUserMacIDLocal:(NSString*) macID password:(NSString*) password username:(NSString* )username
+-(void) getCubeConfig:(NSString*) userId
 {
 //    if ([[AppPreferences sharedAppPreferences] isReachable])
 //    {
     
         NSError* error;
-        NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:macID,@"macid",password,@"pwd",username,@"username", nil];
+        NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userid", nil];
         
         
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
@@ -137,7 +137,7 @@ static APIManager *singleton = nil;
         
         NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
         
-        DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:AUTHENTICATE_API withRequestParameter:array withResourcePath:AUTHENTICATE_API withHttpMethd:POST];
+        DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:ACCESS_CUBE_CONFIG_API withRequestParameter:array withResourcePath:ACCESS_CUBE_CONFIG_API withHttpMethd:POST];
         [downloadmetadatajob startMetaDataDownLoad];
 //    }
 //    else
@@ -147,6 +147,73 @@ static APIManager *singleton = nil;
     
 }
 
+-(void) getAudioFileExtensions
+{
+    //    if ([[AppPreferences sharedAppPreferences] isReachable])
+    //    {
+    
+//    NSError* error;
+//    NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userid", nil];
+//
+//
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
+//                                                       options:0 // Pass 0 if you don't care about the readability of the generated string
+//                                                         error:&error];
+//
+//
+//    NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
+//
+//
+//
+//    NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
+//
+//    NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
+//
+//    NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
+    
+    DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:AUDIO_FILE_EXTENSIONS_API withRequestParameter:nil withResourcePath:AUDIO_FILE_EXTENSIONS_API withHttpMethd:POST];
+    [downloadmetadatajob startMetaDataDownLoad];
+    //    }
+    //    else
+    //    {
+    //
+    //    }
+    
+}
+
+-(void) getTransCompanyName:(NSString*) tcId
+{
+    //    if ([[AppPreferences sharedAppPreferences] isReachable])
+    //    {
+    
+    NSError* error;
+    NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"101",@"TCID", nil];
+    
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
+                                                       options:0 // Pass 0 if you don't care about the readability of the generated string
+                                                         error:&error];
+    
+    
+    NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
+    
+    
+    
+    NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
+    
+    NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
+    
+    NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
+    
+    DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:GET_TC_NAME_API withRequestParameter:array withResourcePath:GET_TC_NAME_API withHttpMethd:POST];
+    [downloadmetadatajob startMetaDataDownLoad];
+    //    }
+    //    else
+    //    {
+    //
+    //    }
+    
+}
 -(void) authenticateUserMacID:(NSString*) macID password:(NSString*) password username:(NSString* )username
 {
     //DDCF3B2D-362B-4C81-8AB3-DD56D49E5365

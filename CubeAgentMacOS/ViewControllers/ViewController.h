@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "APIManager.h"
+#import "AppPreferences.h"
 
 @interface ViewController : NSViewController
 
@@ -21,6 +22,6 @@
 @property (weak) IBOutlet NSSecureTextField *paswordTextField;
 @property (weak) IBOutlet NSTextField *macIdLabel;
 @property (weak) IBOutlet NSTextField *versionLabel;
-
+@property(nonatomic, strong)NSSavePanel* savePanel;
 @end
 

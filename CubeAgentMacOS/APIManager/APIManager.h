@@ -44,6 +44,12 @@
 
 -(void) authenticateUser:(NSString*) password username:(NSString* )username;
 
+-(void) getCubeConfig:(NSString*) userId;
+
+-(void) getAudioFileExtensions;
+
+-(void) getTransCompanyName:(NSString*) tcId;
+
 -(NSString*)getMacId;//get macid of current device
 -(uint64_t)getFreeDiskspace;
 

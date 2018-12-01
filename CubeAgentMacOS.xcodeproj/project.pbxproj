@@ -30,6 +30,9 @@
 		841E1CD421A82670006F5C63 /* SBJson4StreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 841E1CCB21A82670006F5C63 /* SBJson4StreamWriter.m */; };
 		841E1CD521A82691006F5C63 /* SBJson4.h in Sources */ = {isa = PBXBuildFile; fileRef = 841E1CC621A82670006F5C63 /* SBJson4.h */; };
 		841E1CD921A84415006F5C63 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841E1CD821A84415006F5C63 /* IOKit.framework */; };
+		846EB11621B1568D006EA4FF /* AppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 846EB11521B1568D006EA4FF /* AppPreferences.m */; };
+		846EB11A21B15974006EA4FF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 846EB11921B15974006EA4FF /* User.m */; };
+		846EB11D21B16FCA006EA4FF /* CubeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 846EB11C21B16FCA006EA4FF /* CubeConfig.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +100,12 @@
 		841E1CCC21A82670006F5C63 /* SBJson4Writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4Writer.h; sourceTree = "<group>"; };
 		841E1CCD21A82670006F5C63 /* SBJson4StreamWriterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamWriterState.h; sourceTree = "<group>"; };
 		841E1CD821A84415006F5C63 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		846EB11421B1568D006EA4FF /* AppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppPreferences.h; sourceTree = "<group>"; };
+		846EB11521B1568D006EA4FF /* AppPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppPreferences.m; sourceTree = "<group>"; };
+		846EB11821B15974006EA4FF /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		846EB11921B15974006EA4FF /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		846EB11B21B16FCA006EA4FF /* CubeConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CubeConfig.h; sourceTree = "<group>"; };
+		846EB11C21B16FCA006EA4FF /* CubeConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CubeConfig.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +160,7 @@
 			children = (
 				841E1B4321A80BCB006F5C63 /* AppDelegate.h */,
 				841E1B4421A80BCB006F5C63 /* AppDelegate.m */,
+				846EB11721B158FB006EA4FF /* Models */,
 				841E1CD621A82A1E006F5C63 /* ViewControllers */,
 				841E1BCC21A80CA7006F5C63 /* APIManager */,
 				841E1BC421A80CA6006F5C63 /* Categories */,
@@ -231,6 +241,8 @@
 		841E1BCC21A80CA7006F5C63 /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
+				846EB11421B1568D006EA4FF /* AppPreferences.h */,
+				846EB11521B1568D006EA4FF /* AppPreferences.m */,
 				841E1BCD21A80CA7006F5C63 /* DownloadMetaDataJob.h */,
 				841E1BD121A80CA7006F5C63 /* DownloadMetaDataJob.m */,
 				841E1BCF21A80CA7006F5C63 /* APIManager.h */,
@@ -280,6 +292,17 @@
 				841E1CD821A84415006F5C63 /* IOKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		846EB11721B158FB006EA4FF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				846EB11821B15974006EA4FF /* User.h */,
+				846EB11921B15974006EA4FF /* User.m */,
+				846EB11B21B16FCA006EA4FF /* CubeConfig.h */,
+				846EB11C21B16FCA006EA4FF /* CubeConfig.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -416,6 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				846EB11A21B15974006EA4FF /* User.m in Sources */,
 				841E1CD521A82691006F5C63 /* SBJson4.h in Sources */,
 				841E1CCE21A82670006F5C63 /* SBJson4StreamParser.m in Sources */,
 				841E1B4821A80BCB006F5C63 /* ViewController.m in Sources */,
@@ -428,7 +452,9 @@
 				841E1BF921A80CA7006F5C63 /* DownloadMetaDataJob.m in Sources */,
 				841E1B5021A80BCE006F5C63 /* main.m in Sources */,
 				841E1BF021A80CA7006F5C63 /* Reachability.m in Sources */,
+				846EB11621B1568D006EA4FF /* AppPreferences.m in Sources */,
 				841E1CD021A82670006F5C63 /* SBJson4StreamParserState.m in Sources */,
+				846EB11D21B16FCA006EA4FF /* CubeConfig.m in Sources */,
 				841E1CD321A82670006F5C63 /* SBJson4Parser.m in Sources */,
 				841E1B4521A80BCB006F5C63 /* AppDelegate.m in Sources */,
 				841E1CD121A82670006F5C63 /* SBJson4StreamWriterState.m in Sources */,
@@ -604,6 +630,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xanadutec.CubeAgentMacOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -622,6 +649,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xanadutec.CubeAgentMacOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

@@ -9,7 +9,7 @@
 #import "DownloadMetaDataJob.h"
 #include <sys/xattr.h>
 #import "AppDelegate.h"
-
+#import "User.h"
 /*================================================================================================================================================*/
 
 @implementation DownloadMetaDataJob
@@ -87,7 +87,13 @@
 //    NSString *encString = [encryptedData base64EncodedStringWithOptions:0];
     
 //    NSDictionary* dic=[array objectAtIndex:0];
-    NSData *requestData = [NSJSONSerialization dataWithJSONObject:array options:kNilOptions error:&error];
+    NSData *requestData;
+    
+    if (array != nil)
+    {
+        requestData = [NSJSONSerialization dataWithJSONObject:array options:kNilOptions error:&error];
+
+    }
     
     
     [request setHTTPBody:requestData];
@@ -140,7 +146,7 @@
     NSLog(@"%@ Entity Job -",self.downLoadEntityJobName);
     
     
-    if ([self.downLoadEntityJobName isEqualToString:CHECK_DEVICE_REGISTRATION])
+    if ([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
     {
      
         
@@ -205,19 +211,82 @@
 if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
 
 {
-
-//    if (response != nil)
-//    {
-//
-//
-//        
-//    }
+    if (statusCode == 200)
+    {
+        if ([response longLongValue] != 0)
+        {
+            long userId = [response longLongValue];
+            
+            NSString* userIdString = [NSString stringWithFormat:@"%ld", userId];
+            
+            NSDictionary* reponseDict = [[NSDictionary alloc] initWithObjectsAndKeys:userIdString,@"userIdString",@"200",RESPONSE_CODE, nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_AUTHENTICATE_API object:reponseDict];
+            
+            return;
+        }
+        else
+        {
+            
+        }
+    }
 }
+    
+    if([self.downLoadEntityJobName isEqualToString:ACCESS_CUBE_CONFIG_API])
+        
+    {
+        if (statusCode == 200)
+        {
+//            if ([response longLongValue] != 0)
+//            {
+//                long userId = [response longLongValue];
+            
+//                NSString* userIdString = [NSString stringWithFormat:@"%ld", userId];
+            
+//                NSDictionary* reponseDict = [[NSDictionary alloc] initWithObjectsAndKeys:userIdString,@"userIdString",@"200",RESPONSE_CODE, nil];
+            
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CUBE_CONFIG_API object:response];
+                
+                return;
+//            }
+//            else
+//            {
+//
+//            }
+        }
+    }
 
 
+    if([self.downLoadEntityJobName isEqualToString:AUDIO_FILE_EXTENSIONS_API])
+        
+    {
+        if (statusCode == 200)
+        {
+            
+            
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_AUDIO_FILE_EXTENSIONS_API object:response];
+                
+                return;
+           
+        }
+    }
 
 
-
+    if([self.downLoadEntityJobName isEqualToString:GET_TC_NAME_API])
+        
+    {
+        if (statusCode == 200)
+        {
+            
+            
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TC_NAME_API object:response];
+                
+                return;
+           
+        }
+    }
 
  
 
