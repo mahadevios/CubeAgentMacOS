@@ -31,12 +31,41 @@
 #define AUDIO_FILE_EXTENSIONS_API                 @"MacBook_AudioFileExtensions"
 #define GET_TC_NAME_API                           @"MacBook_GetTCName"
 
+#define GET_ENCRYPT_DECRYPT_STRING_API            @"MacBook_GetEncryptDecryptString"
+#define GET_SINGLE_QEURY_EXECUTE_QUERY_API        @"MacBook_GetSingleQueryValue_ExecuteQuery"
+#define CHECK_DUPLICATE_AUDIO_FOR_DAY_API         @"MacBook_CheckDuplicateAudioForDay"
+#define UPDATE_DOWNLOAD_FILE_STATUS_API           @"MacBook_UpdateDownloadFileStatus"
+#define FTP_GET_TC_ID_VIEW_API                    @"MacBook_FTP_GetTCIDView"
+
+#define FILE_UPLOAD_API                           @"MacBook_FileUpload"
+#define GET_BROWSER_AUDIO_FILES_DOWNLOAD_API      @"MacBook_GetBrowserAudioFilesForDownload_CubeApp"
+#define GET_DICTATION_IDS_API                     @"MacBook_GetDictationIds"
+#define DOWNLOAD_FILE_API                         @"MacBook_DownloadFile"
+#define GET_DICTATORS_FOLDER_API                  @"MacBook_GetDictatorsFolder"
+#define GENERATE_FILENAME_API                     @"MacBook_GenerateFileName"
+
+
 //NSNOTIFICATION
+
 #define NOTIFICATION_UPDATE_MAC_ID_API              @"notificationUpdateMacIdAPI"
 #define NOTIFICATION_AUTHENTICATE_API               @"notificationAuthenticateAPI"
 #define NOTIFICATION_CUBE_CONFIG_API                @"notificationCubeCOnfigAPI"
 #define NOTIFICATION_AUDIO_FILE_EXTENSIONS_API      @"notificationAudioFileExtAPI"
 #define NOTIFICATION_TC_NAME_API                    @"notificationTCNameAPI"
+
+
+#define NOTIFICATION_GET_ENCRYPT_DECRYPT_STRING_API              @"notificationEncryptDecrypt"
+#define NOTIFICATION_GET_SINGLE_QEURY_EXECUTE_QUERY_API          @"notificationAuthenticateAPI"
+#define NOTIFICATION_CHECK_DUPLICATE_AUDIO_FOR_DAY_API           @"notificationCubeCOnfigAPI"
+#define NOTIFICATION_UPDATE_DOWNLOAD_FILE_STATUS_API             @"notificationAudioFileExtAPI"
+#define NOTIFICATION_FTP_GET_TC_ID_VIEW_API                      @"notificationTCNameAPI"
+
+#define NOTIFICATION_FILE_UPLOAD_API                             @"notificationFileUpload"
+#define NOTIFICATION_GET_BROWSER_AUDIO_FILES_DOWNLOAD_API        @"notificationBrowserFiles"
+#define NOTIFICATION_GET_DICTATION_IDS_API                       @"notificationDictationIds"
+#define NOTIFICATION_DOWNLOAD_FILE_API                           @"notificationDownloadFile"
+#define NOTIFICATION_GET_DICTATORS_FOLDER_API                    @"notificationDictatorsFolder"
+#define NOTIFICATION_GENERATE_FILENAME_API                       @"notificationGenerateFileName"
 
 //DDCF3B2D-362B-4C81-8AB3-DD56D49E5365
 //#define  AUTHENTICATE_API                     @"UpdateMACID"
