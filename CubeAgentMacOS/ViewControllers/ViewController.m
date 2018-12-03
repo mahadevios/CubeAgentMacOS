@@ -76,6 +76,20 @@
     NSArray *fileURLs = [NSArray arrayWithObjects:fileURL1 ,nil];
     
 //    [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:fileURLs];
+    
+//    NSURL *fileURL = [NSURL fileURLWithPath: filePath];
+//    NSURL *fileURL = [savePanel URL];
+//    NSURL *folderURL = [fileURL URLByDeletingLastPathComponent];
+    
+    NSWorkspace * workSpace = [NSWorkspace sharedWorkspace];
+    
+    NSString* str;
+    
+//    [workSpace type:str conformsToType:@""];
+    
+        [workSpace activateFileViewerSelectingURLs:fileURLs];
+
+//    [workSpace openURL: folderURL];
 //    NSLog(@"home directory = %@", )
 //    [self getDirectory];
     // Do any additional setup after loading the view.

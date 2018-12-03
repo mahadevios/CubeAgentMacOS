@@ -288,9 +288,168 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
     }
 
- 
+    if([self.downLoadEntityJobName isEqualToString:GET_ENCRYPT_DECRYPT_STRING_API])
+        
+    {
+        if (statusCode == 200)
+        {
+            
+            
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GET_ENCRYPT_DECRYPT_STRING_API object:response];
+            
+            return;
+            
+        }
+    }
 
-
+    if([self.downLoadEntityJobName isEqualToString:GET_SINGLE_QEURY_EXECUTE_QUERY_API])
+        
+    {
+        if (statusCode == 200)
+        {
+            
+            
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GET_SINGLE_QEURY_EXECUTE_QUERY_API object:response];
+            
+            return;
+            
+        }
+    }
+    
+    if([self.downLoadEntityJobName isEqualToString:CHECK_DUPLICATE_AUDIO_FOR_DAY_API])
+        
+    {
+        if (statusCode == 200)
+        {
+            
+            
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CHECK_DUPLICATE_AUDIO_FOR_DAY_API object:response];
+            
+            return;
+            
+        }
+    }
+    
+    if([self.downLoadEntityJobName isEqualToString:UPDATE_DOWNLOAD_FILE_STATUS_API])
+        
+    {
+        if (statusCode == 200)
+        {
+            
+            
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_UPDATE_DOWNLOAD_FILE_STATUS_API object:response];
+            
+            return;
+            
+        }
+    }
+    
+    if([self.downLoadEntityJobName isEqualToString:FTP_GET_TC_ID_VIEW_API])
+        
+    {
+        if (statusCode == 200)
+        {
+            
+            
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FTP_GET_TC_ID_VIEW_API object:response];
+            
+            return;
+            
+        }
+    }
+    
+    if([self.downLoadEntityJobName isEqualToString:FILE_UPLOAD_API])
+        
+    {
+        if (statusCode == 200)
+        {
+        
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FILE_UPLOAD_API object:response];
+            
+            return;
+            
+        }
+    }
+    
+    if([self.downLoadEntityJobName isEqualToString:GET_BROWSER_AUDIO_FILES_DOWNLOAD_API])
+        
+    {
+        if (statusCode == 200)
+        {
+            
+            
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GET_BROWSER_AUDIO_FILES_DOWNLOAD_API object:response];
+            
+            return;
+            
+        }
+    }
+    
+    if([self.downLoadEntityJobName isEqualToString:GET_DICTATION_IDS_API])
+        
+    {
+        if (statusCode == 200)
+        {
+            
+            
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GET_DICTATION_IDS_API object:response];
+            
+            return;
+            
+        }
+    }
+    
+    if([self.downLoadEntityJobName isEqualToString:DOWNLOAD_FILE_API])
+        
+    {
+        if (statusCode == 200)
+        {
+            
+            
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DOWNLOAD_FILE_API object:response];
+            
+            return;
+            
+        }
+    }
+    
+    if([self.downLoadEntityJobName isEqualToString:GET_DICTATORS_FOLDER_API])
+        
+    {
+        if (statusCode == 200)
+        {
+            
+            
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DOWNLOAD_FILE_API object:response];
+            
+            return;
+            
+        }
+    }
+    
+    if([self.downLoadEntityJobName isEqualToString:GENERATE_FILENAME_API])
+        
+    {
+        if (statusCode == 200)
+        {
+            
+            
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GENERATE_FILENAME_API object:response];
+            
+            return;
+            
+        }
+    }
 }
 
 @end
