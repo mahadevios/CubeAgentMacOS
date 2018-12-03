@@ -12,9 +12,7 @@
 {
     NSDictionary* result;
     NSString* filnameString;
-    int departmentId;
-    int transferStatus;
-    int mobileDictationIdVal;
+   
 }
 
 +(APIManager *) sharedManager;
@@ -50,30 +48,45 @@
 
 -(void) getTransCompanyName:(NSString*) tcId;
 
+-(void) getEncryptDecryptString;
+
+-(void) getSingleQueryValueComment:(NSString*) comment;
+
+-(void) checkDuplicateAudioForDay:(NSString*) userid originalFileName:(NSString* )filename;
+
+-(void) updateDownloadFileStatus:(NSString*) status dictationId:(NSString* )dictationId;
+
+-(void) FTPGetTCIdView:(NSString*) userId;
+
+
+-(void) uploadFile:(NSString*) data;
+
+-(void) getBrowserAudioFilesForDownload:(NSString*) userId;
+
+-(void) getDicatationIds:(NSString*) userId;
+
+-(void) downloadFile:(NSString*) dictationId;
+
+-(void) getDictatorsFolder:(NSString*) userId;
+
+-(void) generateFilenameDictationId:(NSString*) DictationId userId:(NSString*)userId;
+
+
 -(NSString*)getMacId;//get macid of current device
+
 -(uint64_t)getFreeDiskspace;
 
-//-(void) validateUser:(NSString *) usernameString Password:(NSString *) passwordString andDeviceId:(NSString*)DeviceId;
 
--(void) checkDeviceRegistrationMacID:(NSString*) macID;
 
-//-(void) checkDeviceRegistrationMacIDEncr:(NSData*) macID;
 
--(void) authenticateUserMacID:(NSString*) macID password:(NSString*) password username:(NSString* )username;
 
--(void) authenticateUserMacIDLocal:(NSString*) macID password:(NSString*) password username:(NSString* )username;
 
--(void) acceptPinMacID:(NSString*) macID Pin:(NSString*)pin;
 
--(void) validatePinMacID:(NSString*) macID Pin:(NSString*)pin;
 
--(void)mobileDictationsInsertMobileStatus:(NSString* )mobilestatus OriginalFileName:(NSString*)OriginalFileName andMacID:(NSString*)macID;
 
--(void)mobileDataSynchronisationMobileStatus:(NSString*)mobilestatus OriginalFileName:(NSString*)OriginalFileName macID:(NSString*)macid DeleteFlag:(NSString*)DeleteFlag;
 
 //-(void)uploadFileFilename:(NSString*)filename macID:(NSString*)macID fileSize:(NSString*)filesize;
 
--(void)changePinOldPin:(NSString*)oldpin NewPin:(NSString*)newpin macID:(NSString*)macID;
 
 -(NSString*)getDateAndTimeString;
 
@@ -83,7 +96,7 @@
 
 -(void)uploadFileToServer:(NSString*)str;
 
--(void)checkAPI;
+
 
 
 
