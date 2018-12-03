@@ -240,7 +240,7 @@ static APIManager *singleton = nil;
 }
 
 
--(void) checkDuplicateAudioForDay:(NSString*) userid originalFileName:(NSString* )filename;
+-(void) checkDuplicateAudioForDay:(NSString*) userid originalFileName:(NSString* )filename
 {
     
     NSError* error;
@@ -268,7 +268,7 @@ static APIManager *singleton = nil;
     
 }
 
--(void) updateDownloadFileStatus:(NSString*) status dictationId:(NSString* )dictationId;
+-(void) updateDownloadFileStatus:(NSString*) status dictationId:(NSString* )dictationId
 {
     
     NSError* error;
@@ -671,7 +671,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
                        
                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                            
-                           [self uploadFileAfterGettingdatabaseValues:str departmentID:departmentId transferStatus:transferStatus mobileDictationIdVal:mobileDictationIdVal];
+                           [self uploadFileAfterGettingdatabaseValues:str departmentID:1 transferStatus:1 mobileDictationIdVal:122];
                            
                        });
                        
@@ -739,11 +739,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
         transferStatus=5;
     }
     
-    if (departmentId == 0)
-    {
-        //        departmentId= [[Database shareddatabase] getDepartMentIdForFileName:str];
-        
-    }
+  
     
     // NSString* authorisation=[NSString stringWithFormat:@"%@*%d*%ld*%d*%d",macId,filesizeint,deptObj.Id,1,0];
     NSString* authorisation=[NSString stringWithFormat:@"%@*%d*%d*%d*%d",macId,filesizeint,departmentID,transferStatus,mobileDictationIdVal];
