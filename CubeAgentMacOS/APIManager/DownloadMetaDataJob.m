@@ -288,20 +288,20 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
     }
 
-    if([self.downLoadEntityJobName isEqualToString:GET_ENCRYPT_DECRYPT_STRING_API])
-        
-    {
-        if (statusCode == 200)
-        {
-            
-            
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GET_ENCRYPT_DECRYPT_STRING_API object:response];
-            
-            return;
-            
-        }
-    }
+//    if([self.downLoadEntityJobName isEqualToString:GET_ENCRYPT_DECRYPT_STRING_API])
+//        
+//    {
+//        if (statusCode == 200)
+//        {
+//            
+//            
+//            
+//            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GET_ENCRYPT_DECRYPT_STRING_API object:response];
+//            
+//            return;
+//            
+//        }
+//    }
 
     if([self.downLoadEntityJobName isEqualToString:GET_SINGLE_QEURY_EXECUTE_QUERY_API])
         

@@ -11,6 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeViewController : NSViewController
+{
+    NSMutableArray *listOfAudioToUploadFiles;
+}
 @property (weak) IBOutlet NSTextField *finishedCheckingFilesLabel;
 @property (weak) IBOutlet NSScrollView *logTextView;
 @property (weak) IBOutlet NSScrollView *fileListingTableView;

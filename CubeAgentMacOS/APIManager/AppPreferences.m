@@ -212,6 +212,125 @@ static AppPreferences *singleton = nil;
 //    }
 }
 
+-(NSString*)getCubeFilesDirectoryPath
+{
+    NSString *pathToCubeFiles = [NSString stringWithFormat:@"/Users/%@/Documents/CubeFiles", NSUserName()];
+    
+    NSError* error;
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeFiles])
+        {
+            [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeFiles withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+            NSLog(@"");
+        }
+    
+    return pathToCubeFiles;
+}
+
+-(NSString*)getCubeLogDirectoryPath
+{
+    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    
+    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeFiles/CubeLog", documentsDirectoryPath];
+  
+    NSError* error;
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeFiles])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeFiles withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+        NSLog(@"");
+    }
+    
+    return pathToCubeFiles;
+}
+
+-(NSString*)getCubeTempDirectoryPath
+{
+    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    
+    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeFiles/CubeTemp", documentsDirectoryPath];
+    
+   
+    NSError* error;
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeFiles])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeFiles withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+        NSLog(@"");
+    }
+    
+    return pathToCubeFiles;
+}
+
+-(NSString*)getUsernameBacupAudioDirectoryPath
+{
+    NSString *pathToCubeFiles = [NSString stringWithFormat:@"/Users/%@/Documents/CubeFiles/%@/BackupAudio", NSUserName(),[AppPreferences sharedAppPreferences].loggedInUser.userName];
+    
+    NSError* error;
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeFiles])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeFiles withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+        NSLog(@"");
+    }
+    
+    return pathToCubeFiles;
+}
+
+-(NSString*)getUsernameTranscriptionDirectoryPath
+{
+    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    
+    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/Transcription", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+    
+    
+    NSError* error;
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeFiles])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeFiles withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+        NSLog(@"");
+    }
+    
+    return pathToCubeFiles;
+}
+
+-(NSString*)getUsernameUploadAudioDirectoryPath
+{
+    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+
+    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/UploadAudio", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+    
+//    NSString *pathToCubeFiles = [NSString stringWithFormat:@"/Users/%@/Documents/CubeFiles", NSUserName()];
+
+    NSURL* url = [NSURL fileURLWithPath:pathToCubeFiles];
+    NSError* error;
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:url.relativePath])
+    {
+       BOOL created =  [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeFiles withIntermediateDirectories:true attributes:nil error:&error]; //Create folder
+        NSLog(@"");
+    }
+    
+    return pathToCubeFiles;
+}
+
+-(NSString*)getUsernameInregrationDirectoryPath
+{
+    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    
+    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/Integration", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+    
+    NSError* error;
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeFiles])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeFiles withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+        NSLog(@"");
+    }
+    
+    return pathToCubeFiles;
+}
 /*=================================================================================================================================================*/
 
 -(void) showHudWithTitle:(NSString*)title detailText:(NSString*)detailText
@@ -272,29 +391,6 @@ static AppPreferences *singleton = nil;
     return result == 0;
 }
 
--(void)createDatabaseReplica
-{
-    NSString *destpath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Cube_DB_Replica.sqlite"];
-    // NSString *sourcepath=[[NSBundle mainBundle]pathForResource:@"Cube_DB" ofType:@"sqlite"];
-    NSString *sourcepath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Cube_DB.sqlite"];
-    
-    NSLog(@"%@",NSHomeDirectory());
-    
-    if(![[NSFileManager defaultManager] fileExistsAtPath:destpath])
-    {
-        //  NSLog(@"%@",NSHomeDirectory());
-        
-        [[NSFileManager defaultManager] copyItemAtPath:sourcepath toPath:destpath error:nil];
-    }
-    else
-    {
-        [[NSFileManager defaultManager] removeItemAtPath:destpath error:nil];
-        
-        [[NSFileManager defaultManager] copyItemAtPath:sourcepath toPath:destpath error:nil];
-        
-    }
-    
-}
 
 
 

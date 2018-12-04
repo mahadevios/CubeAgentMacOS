@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "Keychain.h"
 #import "Constants.h"
+#import "HomeViewController.h"
 
 @implementation ViewController
 
@@ -17,23 +18,9 @@
     //changes from martina
     [super viewDidLoad];
  
-    NSString* macId = [[NSUserDefaults standardUserDefaults] objectForKey:MAC_ID];
-    
-    NSString* uuidOfMac;
-    
-    if (macId == nil)
-    {
-        uuidOfMac = [self getMACUUID];
-        
-        [[NSUserDefaults standardUserDefaults] setObject:uuidOfMac forKey:MAC_ID];
-    }
-    else
-    {
-        uuidOfMac = macId;
-    }
+   
     
 
-    [[APIManager sharedManager] updateDeviceMacID:uuidOfMac password:@"d" username:@"SAN"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(validateMacIDResponse:) name:NOTIFICATION_UPDATE_MAC_ID_API
@@ -65,29 +52,20 @@
 //    }
 //
     
-   
-    
-    NSLog(@"home = %@", [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]);
-    
     NSString* filePath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     
     NSURL* fileURL1 = [NSURL fileURLWithPath:filePath];
     
     NSArray *fileURLs = [NSArray arrayWithObjects:fileURL1 ,nil];
     
-//    [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:fileURLs];
+    NSLog(@"home = %@", [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]);
     
-//    NSURL *fileURL = [NSURL fileURLWithPath: filePath];
-//    NSURL *fileURL = [savePanel URL];
-//    NSURL *folderURL = [fileURL URLByDeletingLastPathComponent];
-    
+   
     NSWorkspace * workSpace = [NSWorkspace sharedWorkspace];
-    
-    NSString* str;
-    
+
 //    [workSpace type:str conformsToType:@""];
     
-        [workSpace activateFileViewerSelectingURLs:fileURLs];
+    [workSpace activateFileViewerSelectingURLs:fileURLs];
 
 //    [workSpace openURL: folderURL];
 //    NSLog(@"home directory = %@", )
@@ -131,6 +109,8 @@
         User* user = [[User alloc] init];
         
         user.userId = [userIdString longLongValue];
+        
+        user.userName = self.loginTextField.stringValue;
         
         [AppPreferences sharedAppPreferences].loggedInUser = user;
         
@@ -198,7 +178,31 @@
     
     [AppPreferences sharedAppPreferences].transCompanyName = transCompanyName;
     
+    HomeViewController* hvc = [self.storyboard instantiateControllerWithIdentifier:@"HomeViewController"];
+    
+    [self presentViewControllerAsModalWindow:hvc];
 }
+
+-(NSString*)getFinalMacId
+{
+    NSString* macId = [[NSUserDefaults standardUserDefaults] objectForKey:MAC_ID];
+    
+    NSString* uuidOfMac;
+    
+    if (macId == nil)
+    {
+        uuidOfMac = [self getMACUUID];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:uuidOfMac forKey:MAC_ID];
+    }
+    else
+    {
+        uuidOfMac = macId;
+    }
+    
+    return uuidOfMac;
+}
+
 - (NSString *)getMACUUID
 {
     io_service_t    platformExpert = IOServiceGetMatchingService(kIOMasterPortDefault,
@@ -235,7 +239,12 @@
 }
 - (IBAction)rememberMeCheckBoxClicked:(id)sender {
 }
-- (IBAction)submitButtonClicked:(id)sender {
+- (IBAction)submitButtonClicked:(id)sender
+{
+    NSString* macId = [self getFinalMacId];
+    
+    [[APIManager sharedManager] updateDeviceMacID:macId password:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
+
 }
 
 -(void)getDirectory

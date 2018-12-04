@@ -45,6 +45,21 @@
 
 -(void) startReachabilityNotifier;
 -(void)createDatabaseReplica;
+
+-(NSString*)getUsernameInregrationDirectoryPath;
+
+-(NSString*)getUsernameUploadAudioDirectoryPath;
+
+-(NSString*)getUsernameTranscriptionDirectoryPath;
+
+-(NSString*)getUsernameBacupAudioDirectoryPath;
+
+-(NSString*)getCubeTempDirectoryPath;
+
+-(NSString*)getCubeLogDirectoryPath;
+
+-(NSString*)getCubeFilesDirectoryPath;
+
 @end
 
 

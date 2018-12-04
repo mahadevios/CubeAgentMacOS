@@ -222,7 +222,7 @@ static APIManager *singleton = nil;
     NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
     
     
-    
+
     NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
     
     NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];

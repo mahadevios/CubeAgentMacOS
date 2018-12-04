@@ -55,10 +55,10 @@
 
 
 #define NOTIFICATION_GET_ENCRYPT_DECRYPT_STRING_API              @"notificationEncryptDecrypt"
-#define NOTIFICATION_GET_SINGLE_QEURY_EXECUTE_QUERY_API          @"notificationAuthenticateAPI"
-#define NOTIFICATION_CHECK_DUPLICATE_AUDIO_FOR_DAY_API           @"notificationCubeCOnfigAPI"
-#define NOTIFICATION_UPDATE_DOWNLOAD_FILE_STATUS_API             @"notificationAudioFileExtAPI"
-#define NOTIFICATION_FTP_GET_TC_ID_VIEW_API                      @"notificationTCNameAPI"
+#define NOTIFICATION_GET_SINGLE_QEURY_EXECUTE_QUERY_API          @"notificationExecuteQueryAPI"
+#define NOTIFICATION_CHECK_DUPLICATE_AUDIO_FOR_DAY_API           @"notificationDuplicateAPI"
+#define NOTIFICATION_UPDATE_DOWNLOAD_FILE_STATUS_API             @"notificationDownloadFileStatusAPI"
+#define NOTIFICATION_FTP_GET_TC_ID_VIEW_API                      @"notificationTCIdAPI"
 
 #define NOTIFICATION_FILE_UPLOAD_API                             @"notificationFileUpload"
 #define NOTIFICATION_GET_BROWSER_AUDIO_FILES_DOWNLOAD_API        @"notificationBrowserFiles"
@@ -72,12 +72,7 @@
 //#define  AUTHENTICATE_API                     @"encrdecr_MobileAuthenticate"
 
 
-#define  ACCEPT_PIN_API                       @"encrdecr_MobileAcceptPIN"
-#define  VALIDATE_PIN_API                     @"encrdecr_MobileValidatePIN"
-#define  DICTATIONS_INSERT_API                @"encrdecr_MobileDictationsInsert"
-#define  DATA_SYNCHRONISATION_API             @"encrdecr_MobileDataSynchronisation"
-#define  FILE_UPLOAD_API                      @"encrdecr_MobileFileUpload"
-#define  PIN_CANGE_API                        @"encrdecr_MobilePINChange"
+
 #define  SECRET_KEY                           @"cubemob"
 #define  POST                           @"POST"
 #define  GET                            @"GET"
