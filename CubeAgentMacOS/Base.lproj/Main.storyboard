@@ -137,7 +137,6 @@
                                         </buttonCell>
                                         <connections>
                                             <action selector="submitButtonClicked:" target="XfG-lQ-9wD" id="i4h-bw-Wbb"/>
-                                            <segue destination="IWL-eU-fpj" kind="show" id="f9W-eG-eik"/>
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jvN-LJ-wgQ">
@@ -213,10 +212,10 @@
             </objects>
             <point key="canvasLocation" x="692" y="-90.5"/>
         </scene>
-        <!--CubeAgent-04-->
+        <!--HomeViewController-->
         <scene sceneID="x8n-sd-ox4">
             <objects>
-                <viewController title="CubeAgent-04" id="IWL-eU-fpj" customClass="HomeViewController" sceneMemberID="viewController">
+                <viewController title="HomeViewController" identifier="HomeViewController" storyboardIdentifier="HomeViewController" id="IWL-eU-fpj" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" id="c1y-fQ-e4r">
                         <rect key="frame" x="0.0" y="0.0" width="863" height="770"/>
                         <autoresizingMask key="autoresizingMask"/>

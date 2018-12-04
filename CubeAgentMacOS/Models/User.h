@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface User : NSObject
 
 @property (nonatomic) long  userId;
+@property (nonatomic, strong) NSString*  userName;
 
 //+(User*)getLoggedInUser;
 
