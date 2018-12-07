@@ -41,6 +41,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(validateTransCompName:) name:NOTIFICATION_TC_NAME_API
                                                object:nil];
+    
+    
+    CGSize size =  CGSizeMake(580, 269);
+    self.preferredContentSize = size;
+    
 //    NSError* error;
 //
 //    NSString *pathToDesktop = [NSString stringWithFormat:@"/Users/%@/Documents/UploadFiles", NSUserName()];
@@ -52,20 +57,7 @@
 //    }
 //
     
-    NSString* filePath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    
-    NSURL* fileURL1 = [NSURL fileURLWithPath:filePath];
-    
-    NSArray *fileURLs = [NSArray arrayWithObjects:fileURL1 ,nil];
-    
-    NSLog(@"home = %@", [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]);
-    
-   
-    NSWorkspace * workSpace = [NSWorkspace sharedWorkspace];
-
-//    [workSpace type:str conformsToType:@""];
-    
-    [workSpace activateFileViewerSelectingURLs:fileURLs];
+  
 
 //    [workSpace openURL: folderURL];
 //    NSLog(@"home directory = %@", )
@@ -180,7 +172,16 @@
     
     HomeViewController* hvc = [self.storyboard instantiateControllerWithIdentifier:@"HomeViewController"];
     
-    [self presentViewControllerAsModalWindow:hvc];
+    
+//    [self.view.window setContentView:hvc.view];
+    
+//    NSWindowController* wc = [self.storyboard instantiateControllerWithIdentifier:@"MainWindow"];
+    NSWindowController* wc = [[NSWindowController alloc] initWithWindow:self.view.window];
+    
+    wc.contentViewController = hvc;
+    
+    [wc showWindow:[NSApplication sharedApplication].keyWindow];
+
 }
 
 -(NSString*)getFinalMacId

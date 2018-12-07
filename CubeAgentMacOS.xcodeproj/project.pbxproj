@@ -33,6 +33,8 @@
 		846EB11621B1568D006EA4FF /* AppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 846EB11521B1568D006EA4FF /* AppPreferences.m */; };
 		846EB11A21B15974006EA4FF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 846EB11921B15974006EA4FF /* User.m */; };
 		846EB11D21B16FCA006EA4FF /* CubeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 846EB11C21B16FCA006EA4FF /* CubeConfig.m */; };
+		84CB517121B7C98100E868A0 /* ViewTCIdList.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CB517021B7C98100E868A0 /* ViewTCIdList.m */; };
+		84CB517421B7F30A00E868A0 /* VCIdList.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CB517321B7F30A00E868A0 /* VCIdList.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +108,10 @@
 		846EB11921B15974006EA4FF /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		846EB11B21B16FCA006EA4FF /* CubeConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CubeConfig.h; sourceTree = "<group>"; };
 		846EB11C21B16FCA006EA4FF /* CubeConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CubeConfig.m; sourceTree = "<group>"; };
+		84CB516F21B7C98100E868A0 /* ViewTCIdList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewTCIdList.h; sourceTree = "<group>"; };
+		84CB517021B7C98100E868A0 /* ViewTCIdList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewTCIdList.m; sourceTree = "<group>"; };
+		84CB517221B7F30A00E868A0 /* VCIdList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCIdList.h; sourceTree = "<group>"; };
+		84CB517321B7F30A00E868A0 /* VCIdList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCIdList.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +307,10 @@
 				846EB11921B15974006EA4FF /* User.m */,
 				846EB11B21B16FCA006EA4FF /* CubeConfig.h */,
 				846EB11C21B16FCA006EA4FF /* CubeConfig.m */,
+				84CB516F21B7C98100E868A0 /* ViewTCIdList.h */,
+				84CB517021B7C98100E868A0 /* ViewTCIdList.m */,
+				84CB517221B7F30A00E868A0 /* VCIdList.h */,
+				84CB517321B7F30A00E868A0 /* VCIdList.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -445,6 +455,7 @@
 				841E1B4821A80BCB006F5C63 /* ViewController.m in Sources */,
 				841E1CD421A82670006F5C63 /* SBJson4StreamWriter.m in Sources */,
 				841E1CCF21A82670006F5C63 /* SBJson4StreamTokeniser.m in Sources */,
+				84CB517121B7C98100E868A0 /* ViewTCIdList.m in Sources */,
 				50E3B6DD21AFF5F8002F904A /* HomeViewController.m in Sources */,
 				841E1BF421A80CA7006F5C63 /* Keychain.m in Sources */,
 				841E1CD221A82670006F5C63 /* SBJson4Writer.m in Sources */,
@@ -457,6 +468,7 @@
 				846EB11D21B16FCA006EA4FF /* CubeConfig.m in Sources */,
 				841E1CD321A82670006F5C63 /* SBJson4Parser.m in Sources */,
 				841E1B4521A80BCB006F5C63 /* AppDelegate.m in Sources */,
+				84CB517421B7F30A00E868A0 /* VCIdList.m in Sources */,
 				841E1CD121A82670006F5C63 /* SBJson4StreamWriterState.m in Sources */,
 				841E1BF821A80CA7006F5C63 /* SharedSession.m in Sources */,
 				841E1BFA21A80CA7006F5C63 /* APIManager.m in Sources */,
