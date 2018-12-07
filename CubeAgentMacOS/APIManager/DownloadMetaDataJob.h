@@ -20,7 +20,7 @@
     NSString        *downLoadEntityJobName;
     NSString        *downLoadResourcePath;
     NSString        *httpMethod;
-   
+    
     NSMutableData   *responseData;
     
     NSDictionary      *requestParameter;
@@ -35,6 +35,11 @@
     NSDate          *startDate;
     
     int             statusCode;
+    
+    NSURLSessionUploadTask* uploadTask;
+    NSURLSession* session;
+
+
 }
 
 /*================================================================================================================================================*/
@@ -42,8 +47,8 @@
 @property (nonatomic,strong)  NSString              *downLoadEntityJobName;
 @property (nonatomic,strong)  NSString              *downLoadResourcePath;
 @property (nonatomic,strong)  NSDictionary          *requestParameter;
-@property (nonatomic,strong)  NSMutableArray          *dataArray;
-
+@property (nonatomic,strong)  NSMutableArray        *dataArray;
+@property (nonatomic,strong)  NSString              *audioFileName;
 @property (nonatomic,strong)  NSString              *httpMethod;
 @property (nonatomic,strong)  id<DownloadMetaDataJobDelegate> downLoadJobDelegate;
 
@@ -54,7 +59,7 @@
 
 -(id) initWithdownLoadEntityJobName:(NSString *) jobName withRequestParameter:(id) localRequestParameter withResourcePath:(NSString *) resourcePath withHttpMethd:(NSString *) httpMethodParameter;
 -(void) startMetaDataDownLoad;
-
+-(void)uploadFileAfterGettingdatabaseValues:(NSString*)filename dictatorId:(long)dictatorId FTPAudioPath:(NSString*)FTPAudioPath strInHouse:(int)strInHouse clinicName:(NSString*)clinicName userId:(long)userId dictatorFirstName:(NSString*)dictatorFirstName tcId:(long)tcId vcId:(long)vcId filePath:(NSString*)filePath;
 
 @end
 

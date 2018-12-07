@@ -10,7 +10,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="MainWindow" id="B8D-0N-5wS" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -566,6 +566,9 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="pasteAudioFilesButtonClicked:" target="IWL-eU-fpj" id="uMO-13-lrz"/>
+                                        </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pS2-0P-Ig7">
                                         <rect key="frame" x="202" y="677" width="200" height="32"/>
@@ -573,6 +576,9 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="getDownloadedFilesButtonClicked:" target="IWL-eU-fpj" id="5UN-Xi-LOf"/>
+                                        </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xKH-vb-sIz">
                                         <rect key="frame" x="410" y="677" width="200" height="32"/>
@@ -580,6 +586,9 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="getBackupFilesButtonClicked:" target="IWL-eU-fpj" id="MXp-93-KQP"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -622,10 +631,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backupFileButton" destination="xKH-vb-sIz" id="x5K-kF-d9X"/>
                         <outlet property="directoryOutline" destination="q6o-eG-7ah" id="LnX-i9-fQF"/>
                         <outlet property="fileListing" destination="2cI-Sa-kfW" id="8Tl-73-V9I"/>
                         <outlet property="finishedCheckingFileLabel" destination="nx8-AU-4b5" id="Afo-K4-IXu"/>
+                        <outlet property="getDownloadFileButton" destination="pS2-0P-Ig7" id="zRP-t8-RdQ"/>
                         <outlet property="logTextView" destination="C0b-TJ-RoM" id="NIQ-No-3dR"/>
+                        <outlet property="pasteAudioFileButton" destination="8Pt-Q2-Qmi" id="K6S-48-8ic"/>
                     </connections>
                 </viewController>
                 <customObject id="Lve-wz-UFv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

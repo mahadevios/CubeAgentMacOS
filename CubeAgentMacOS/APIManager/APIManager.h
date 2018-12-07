@@ -12,6 +12,7 @@
 {
     NSDictionary* result;
     NSString* filnameString;
+    NSURLSessionUploadTask* uploadTask;
    
 }
 
@@ -50,13 +51,15 @@
 
 -(void) getEncryptDecryptString;
 
+-(void) setVCID:(NSString*) userId;
+
 -(void) getSingleQueryValueComment:(NSString*) comment;
 
 -(void) checkDuplicateAudioForDay:(NSString*) userid originalFileName:(NSString* )filename;
 
 -(void) updateDownloadFileStatus:(NSString*) status dictationId:(NSString* )dictationId;
 
--(void) FTPGetTCIdView:(NSString*) userId;
+-(void) FTPGetTCIdView:(NSString*) userId  originalFileName:(NSString* )filename;
 
 
 -(void) uploadFile:(NSString*) data;
@@ -76,7 +79,7 @@
 
 -(uint64_t)getFreeDiskspace;
 
-
+-(void)uploadFileAfterGettingdatabaseValues:(NSString*)filename dictatorId:(long)dictatorId FTPAudioPath:(NSString*)FTPAudioPath strInHouse:(int)strInHouse clinicName:(NSString*)clinicName userId:(long)userId dictatorFirstName:(NSString*)dictatorFirstName tcId:(long)tcId vcId:(long)vcId filePath:(NSString*)filePath;
 
 
 
@@ -90,7 +93,6 @@
 
 -(NSString*)getDateAndTimeString;
 
--(uint64_t)getFileSize:(NSString*)filePath;
 
 -(BOOL)deleteFile:(NSString*)fileName;
 

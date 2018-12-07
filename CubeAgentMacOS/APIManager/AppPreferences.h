@@ -60,6 +60,12 @@
 
 -(NSString*)getCubeFilesDirectoryPath;
 
+-(void)deleteFileAtPath:(NSString*)filePath;
+
+-(void)moveAudioFileToBackup:(NSString*)filePath;
+
+-(uint64_t)getFileSize:(NSString*)filePath;
+
 @end
 
 

@@ -214,7 +214,9 @@ static AppPreferences *singleton = nil;
 
 -(NSString*)getCubeFilesDirectoryPath
 {
-    NSString *pathToCubeFiles = [NSString stringWithFormat:@"/Users/%@/Documents/CubeFiles", NSUserName()];
+    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+
+    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles", documentsDirectoryPath];
     
     NSError* error;
     
@@ -231,7 +233,7 @@ static AppPreferences *singleton = nil;
 {
     NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     
-    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeFiles/CubeLog", documentsDirectoryPath];
+    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeLog", documentsDirectoryPath];
   
     NSError* error;
     
@@ -248,7 +250,7 @@ static AppPreferences *singleton = nil;
 {
     NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     
-    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeFiles/CubeTemp", documentsDirectoryPath];
+    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeTemp", documentsDirectoryPath];
     
    
     NSError* error;
@@ -264,7 +266,10 @@ static AppPreferences *singleton = nil;
 
 -(NSString*)getUsernameBacupAudioDirectoryPath
 {
-    NSString *pathToCubeFiles = [NSString stringWithFormat:@"/Users/%@/Documents/CubeFiles/%@/BackupAudio", NSUserName(),[AppPreferences sharedAppPreferences].loggedInUser.userName];
+    
+    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    
+    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/BackupAudio", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
     
     NSError* error;
     
@@ -331,6 +336,71 @@ static AppPreferences *singleton = nil;
     
     return pathToCubeFiles;
 }
+
+-(void)deleteFileAtPath:(NSString*)filePath
+{
+    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    
+    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeTemp", documentsDirectoryPath];
+    
+    NSString* fileName = [filePath lastPathComponent];
+    
+    pathToCubeFiles = [[pathToCubeFiles stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@".fcfe"];
+    
+    NSError* error;
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:pathToCubeFiles])
+    {
+        bool isRemoved = [[NSFileManager defaultManager] removeItemAtPath:pathToCubeFiles error:&error];
+        
+        NSLog(@"%d", isRemoved);
+    }
+    
+}
+
+-(void)moveAudioFileToBackup:(NSString*)filePath
+{
+    
+    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    
+    NSString* fileName = [filePath lastPathComponent];
+
+    NSString *pathToBackUpFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/BackupAudio", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+    
+     NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/UploadAudio", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+    
+    pathToCubeFiles = [pathToCubeFiles stringByAppendingPathComponent:fileName];
+    
+    NSError* error;
+
+    [[NSFileManager defaultManager] moveItemAtPath:pathToCubeFiles toPath:pathToBackUpFiles error:&error];
+    
+}
+
+-(uint64_t)getFileSize:(NSString*)filePath
+{
+    uint64_t totalSpace = 0;
+    //    uint64_t totalFreeSpace = 0;
+    NSError *error = nil;
+    
+    NSDictionary *dictionary = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath  error:&error];
+    
+    if (dictionary)
+    {
+        NSNumber *fileSystemSizeInBytes = [dictionary objectForKey: NSFileSize];
+        
+        totalSpace = [fileSystemSizeInBytes unsignedLongLongValue];
+        
+    }
+    else
+    {
+        // NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %ld", [error domain], (long)[error code]);
+    }
+    
+    return totalSpace;
+}
+
+
 /*=================================================================================================================================================*/
 
 -(void) showHudWithTitle:(NSString*)title detailText:(NSString*)detailText
