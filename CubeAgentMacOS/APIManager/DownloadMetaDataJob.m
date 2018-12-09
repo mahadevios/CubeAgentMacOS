@@ -307,14 +307,14 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
 //        }
 //    }
 
-    if([self.downLoadEntityJobName isEqualToString:FTP_SET_TCID_VERIFY_API])
+    if([self.downLoadEntityJobName isEqualToString:FTP_SET_VC_ID_VERIFY_API])
         
     {
         if (statusCode == 200)
         {
             
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FTP_SET_TCID_VERIFY_API object:response];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FTP_SET_VC_ID_VERIFY_API object:response];
             
             return;
             
@@ -518,24 +518,26 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         
         NSLog(@"");
         
-        NSString* audioFileName = self.audioFileName;
+        NSString* audioFileName = self.audioFileObject.originalFileNamePath;
 
+        
         if (encryptedDict != nil)
         {
             encryptedDict = [NSMutableDictionary new];
 
-            [encryptedDict setObject:audioFileName forKey:@"audioFileName"];
-
-            [encryptedDict setObject:@"true" forKey:@"isUploaded"];
+            self.audioFileObject.status = @"uploaded";
+            
+            [encryptedDict setObject:self.audioFileObject forKey:@"audioFileObject"];
 
         }
         else
         {
             encryptedDict = [NSMutableDictionary new];
             
-            [encryptedDict setObject:audioFileName forKey:@"audioFileName"];
+            self.audioFileObject.status = @"notUploaded";
+
+            [encryptedDict setObject:audioFileName forKey:@"audioFileObject"];
             
-            [encryptedDict setObject:@"false" forKey:@"isUploaded"];
         }
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FILE_UPLOAD_API object:encryptedDict];
@@ -610,31 +612,79 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
         
         NSString* progressShow= [NSString stringWithFormat:@"%@%%",progressPercent];
         
+        NSString* fileName = self.audioFileObject.fileName;
+        
+        self.audioFileObject.totalBytesSent = totalBytesSent;
+        
+        if ([progressShow isEqualToString:@"100%"])
+        {
+//            if ([AppPreferences sharedAppPreferences].nextToBeUploadedPoolArray.count > 0)
+//            {
+//                NSBlockOperation* nextOperation = [[AppPreferences sharedAppPreferences].nextToBeUploadedPoolArray objectAtIndex:0];
+//                
+//                [[AppPreferences sharedAppPreferences].audioUploadQueue addOperation:nextOperation];
+//                
+//                [[AppPreferences sharedAppPreferences].nextToBeUploadedPoolArray  removeObjectAtIndex:0];
+//            }
+        }
+        
+//        if (self.firstUploadingFile == nil)
+//        {
+//            self.firstUploadingFile = self.audioFileName;
+        
+            [AppPreferences sharedAppPreferences].currentUploadingFileName = self.audioFileObject.fileName;
+
+            [AppPreferences sharedAppPreferences].currentUploadingPercentage = progressPercentInInt;
+            
+            [[AppPreferences sharedAppPreferences].progressCountFileNameDict setObject:progressPercent forKey:self.audioFileObject.fileName];
+
+//        }
+//        else if ([[[AppPreferences sharedAppPreferences].progressCountFileNameDict objectForKey:self.firstUploadingFile] isEqualToString:@"100"])
+//        {
+//            self.firstUploadingFile = nil;
+//        }
+//        else if ([self.audioFileName isEqualToString:self.firstUploadingFile])
+//        {
+//            NSLog(@"self.audioFileName = %@", self.audioFileName);
+//            NSLog(@"self.firstUploadingFile = %@", self.firstUploadingFile);
+//
+//
+//            [AppPreferences sharedAppPreferences].currentUploadingPercentage = progressPercentInInt;
+//
+//        }
+
+        
+      
+        [[AppPreferences sharedAppPreferences].progressCountFileNameDict setObject:progressPercent forKey:self.audioFileObject.fileName];
+//        NSLog(@"out 100= %ld", [AppPreferences sharedAppPreferences].totalUploadedCount);
+
+        NSLog(@"%@ = %@", fileName,progressShow);
+        
         NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu",(unsigned long)task.taskIdentifier]];
         
     });
     
 }
--(void)uploadFileAfterGettingdatabaseValues:(NSString*)filename dictatorId:(long)dictatorId FTPAudioPath:(NSString*)FTPAudioPath strInHouse:(int)strInHouse clinicName:(NSString*)clinicName userId:(long)userId dictatorFirstName:(NSString*)dictatorFirstName tcId:(long)tcId vcId:(long)vcId filePath:(NSString*)filePath
+-(void)uploadFileAfterGettingdatabaseValues:(ViewTCIdList*)tcList vcList:(VCIdList*)vcList audioFile:(AudioFile*)audioFile
 {
     NSString* parameterString  = @"";
     
     //    -DictId,FTPAudioPath,strInhouse,ClinicName,UserID,DictatorFirstName,intTCID,intVCID
-    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%ld,", dictatorId]];
+    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%ld,", tcList.UserID]];
     
-    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%@,", FTPAudioPath]];
+    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%@,", tcList.TCName]];
     
-    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%d,", strInHouse]];
+    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%d,", vcList.Inhouse]];
     
-    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%@,", clinicName]];
+    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%@,", tcList.ClinicName]];
     
-    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%ld,", userId]];
+    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%ld,", tcList.UserID]];
     
-    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%@,", dictatorFirstName]];
+    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%@,", tcList.DictatorFirstName]];
     
-    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%ld,", tcId]];
+    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%d,", tcList.TCID]];
     
-    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%ld", vcId]];
+    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%ld", vcList.VCID]];
     
     
     //    NSString* filePath = [NSHomeDirectory() stringByAppendingPathComponent:
@@ -669,21 +719,26 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     
     [request setValue:str2 forHTTPHeaderField:@"Authorization"];
     
-    NSData *httpBody = [self createBodyWithBoundary:boundary parameters:dict paths:@[filePath] fieldName:filename];
+    NSData *httpBody = [self createBodyWithBoundary:boundary parameters:dict paths:@[audioFile.originalFileNamePath] fieldName:audioFile.fileName];
     
     request.HTTPBody = httpBody;
     
-    session = [SharedSession getSharedSession:self];
+//    session = [SharedSession getSharedSession:self];
     
-    uploadTask = [session uploadTaskWithRequest:request fromData:nil];
+    
+//    NSURLSessionConfiguration * backgroundConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"Xanadutec1"];
+
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:nil];
+    
+    NSURLSessionUploadTask* uploadTask = [session uploadTaskWithRequest:request fromData:nil];
+    
     
     NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu", (unsigned long)uploadTask.taskIdentifier]];
     
-    
-    dispatch_async(dispatch_get_main_queue(), ^
-                   {
-                       
-                   });
+    if([AppPreferences sharedAppPreferences].progressCountFileNameDict)
+    {
+        [AppPreferences sharedAppPreferences].progressCountFileNameDict = [NSMutableDictionary new];
+    }
     
     [uploadTask resume];
     

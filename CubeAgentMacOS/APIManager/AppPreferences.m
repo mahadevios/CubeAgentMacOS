@@ -38,6 +38,10 @@ static AppPreferences *singleton = nil;
     if (self)
     {
         self.currentSelectedItem = 0;
+        self.totalUploadedCount = 1;
+        self.audioUploadQueue = [[NSOperationQueue alloc] init];
+        
+        self.nextToBeUploadedPoolArray = [NSMutableArray new];
         //[self startReachabilityNotifier];
     }
     
@@ -345,7 +349,7 @@ static AppPreferences *singleton = nil;
     
     NSString* fileName = [filePath lastPathComponent];
     
-    pathToCubeFiles = [[pathToCubeFiles stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@".fcfe"];
+    pathToCubeFiles = [[pathToCubeFiles stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"fcfe"];
     
     NSError* error;
     
@@ -365,15 +369,25 @@ static AppPreferences *singleton = nil;
     
     NSString* fileName = [filePath lastPathComponent];
 
-    NSString *pathToBackUpFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/BackupAudio", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+    NSString *pathToBackUpFiles = [self getUsernameBacupAudioDirectoryPath];
     
-     NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/UploadAudio", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+     NSString *pathToCubeFiles = [self getUsernameUploadAudioDirectoryPath];
     
     pathToCubeFiles = [pathToCubeFiles stringByAppendingPathComponent:fileName];
     
+    pathToBackUpFiles = [pathToBackUpFiles stringByAppendingPathComponent:fileName];
+
     NSError* error;
 
-    [[NSFileManager defaultManager] moveItemAtPath:pathToCubeFiles toPath:pathToBackUpFiles error:&error];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:pathToBackUpFiles])
+    {
+        bool isRemoved = [[NSFileManager defaultManager] removeItemAtPath:pathToBackUpFiles error:&error];
+
+    }
+
+   bool isMoved = [[NSFileManager defaultManager] moveItemAtPath:pathToCubeFiles toPath:pathToBackUpFiles error:&error];
+    
+    NSLog(@"ismoved"); 
     
 }
 

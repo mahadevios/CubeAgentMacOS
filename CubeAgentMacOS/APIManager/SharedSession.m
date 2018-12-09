@@ -21,14 +21,14 @@ static NSURLSession * sharedSession =nil;
        
         sharedSession = [[SharedSession alloc] init];
         
-        NSURLSessionConfiguration * backgroundConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"Xanadutec"];
+        NSURLSessionConfiguration * backgroundConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"Xanadutec1"];
 
-        sharedSession = [NSURLSession sessionWithConfiguration:backgroundConfig delegate:sender delegateQueue:[NSOperationQueue mainQueue]];
+        sharedSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:sender delegateQueue:[NSOperationQueue mainQueue]];
         
         return sharedSession;
     }
     else
-    {
+    {        
         return  sharedSession;
     }
     
