@@ -32,7 +32,7 @@
 #define GET_TC_NAME_API                           @"MacBook_GetTCName"
 
 #define GET_ENCRYPT_DECRYPT_STRING_API            @"MacBook_GetEncryptDecryptString"
-#define FTP_SET_TCID_VERIFY_API               @"MacBook_FTP_SetTCID_Verify"
+#define FTP_SET_VC_ID_VERIFY_API               @"MacBook_FTP_SetTCID_Verify"
 #define GET_SINGLE_QEURY_EXECUTE_QUERY_API        @"MacBook_GetSingleQueryValue_ExecuteQuery"
 #define CHECK_DUPLICATE_AUDIO_FOR_DAY_API         @"MacBook_CheckDuplicateAudioForDay"
 #define UPDATE_DOWNLOAD_FILE_STATUS_API           @"MacBook_UpdateDownloadFileStatus"
@@ -56,7 +56,7 @@
 
 
 #define NOTIFICATION_GET_ENCRYPT_DECRYPT_STRING_API              @"notificationEncryptDecrypt"
-#define NOTIFICATION_FTP_SET_TCID_VERIFY_API                 @"notificationSetTCId"
+#define NOTIFICATION_FTP_SET_VC_ID_VERIFY_API                    @"notificationSetVCId"
 #define NOTIFICATION_GET_SINGLE_QEURY_EXECUTE_QUERY_API          @"notificationGetExecuteQueryAPI"
 #define NOTIFICATION_CHECK_DUPLICATE_AUDIO_FOR_DAY_API           @"notificationDuplicateAPI"
 #define NOTIFICATION_UPDATE_DOWNLOAD_FILE_STATUS_API             @"notificationDownloadFileStatusAPI"

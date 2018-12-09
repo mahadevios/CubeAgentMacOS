@@ -10,6 +10,8 @@
 #import "APIManager.h"
 #import "Constants.h"
 #import "AppPreferences.h"
+#import "DownloadMetaDataJob.h"
+#import "AudioFile.h"
 
 @interface HomeViewController ()
 
@@ -20,7 +22,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do view setup here.
+    
+    self.uploadedAudioFilesArrayForTableView = [NSMutableArray new];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(validateSingleQueryReponse:) name:NOTIFICATION_GET_SINGLE_QEURY_EXECUTE_QUERY_API
                                                object:nil];
@@ -34,7 +38,7 @@
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(validateVCIDViewReponse:) name:NOTIFICATION_FTP_SET_TCID_VERIFY_API
+                                             selector:@selector(validateVCIDViewReponse:) name:NOTIFICATION_FTP_SET_VC_ID_VERIFY_API
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -42,84 +46,26 @@
                                                object:nil];
     
     NSString* StrSQL = [NSString stringWithFormat:@"Select d.DictatorFirstName  + ' ' + d.DictatorLastName as DictatorFullName from Users a inner join Clinics b on a.ParentCompanyID=b.ClinicID INNER JOIN Dictators d on d.DictatorID=a.UserID WHERE a.UserID=%ld",[AppPreferences sharedAppPreferences].loggedInUser.userId];
-   
-//    NSString *escaped = [StrSQL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//843,770
+  
     [[APIManager sharedManager] setVCID:[NSString stringWithFormat:@"%ld",[AppPreferences sharedAppPreferences].loggedInUser.userId]];
     
     [[APIManager sharedManager] getSingleQueryValueComment:StrSQL];
 
-    [self getFilesToBeUploadFromUploadFilesFolder];
+//    [self getFilesToBeUploadFromUploadFilesFolder];
 
     CGSize size =  CGSizeMake(900, 770);
+    
     self.preferredContentSize = size;
 
+    [self checkForFilesFirstTimeAfterLoginRapidTimer];
 //    [[APIManager sharedManager] getEncryptDecryptString];
 }
 
--(void)validateFileUploadReponse:(NSNotification*)notification
-{
-    NSDictionary* dict =  notification.object;
-    
-    NSString* isUploaded = [dict objectForKey:@"isUploaded"];
-    
-    NSString* audioFilePath = [dict objectForKey:@"audioFileName"];
-
-    if ([isUploaded  isEqual: @"true"])
-    {
-        [self performCleanUp:audioFilePath];
-       
-    }
-    else
-    {
-        
-    }
-}
-
--(void)performCleanUp:(NSString*)audioFilePath
-{
-    NSString* audioFileName = [audioFilePath lastPathComponent];
-
-    // delete the encypted file
-    [[AppPreferences sharedAppPreferences] deleteFileAtPath:audioFilePath];
-    
-    // remove object from dictionary
-    [listOfAudioFilesToUploadDict removeObjectForKey:audioFileName];
-    
-    // move file to backup
-    [[AppPreferences sharedAppPreferences] moveAudioFileToBackup:audioFilePath];
-    
-    // if dict.count value is 0 start the upload timer
-    if (listOfAudioFilesToUploadDict.count == 0)
-    {
-        // retsart the timer to upload audio
-    }
-}
-
--(void)validateVCIDViewReponse:(NSNotification*)notification
-{
-    NSDictionary* responseString = notification.object;
-    
-    NSArray* verifyArray = [responseString valueForKey:@"SetTCID_Verifylist"];
-
-    NSDictionary* verifyDict = [verifyArray objectAtIndex:0];
-
-    
-    vcIdList = [[VCIdList alloc] init];
-    
-//    vcIdList.AutoOutsourceTime =  [[verifyDict valueForKey:@"AutoOutsourceTime"] intValue];
-    vcIdList.Inhouse =  [[verifyDict valueForKey:@"Inhouse"] intValue];
-    vcIdList.TCID =  [[verifyDict valueForKey:@"TCID"] intValue];
-    vcIdList.VCID =  [[verifyDict valueForKey:@"VCID"] intValue];
-    vcIdList.verify =  [[verifyDict valueForKey:@"Verify"] boolValue];
-
-    
-    NSLog(@"");
-}
+#pragma mark : Notification Callback Methods
 
 -(void)validateSingleQueryReponse:(NSNotification*)notification
 {
-
+    
     NSString* responseString = notification.object;
     
     NSLog(@"");
@@ -132,14 +78,14 @@
     NSString* response = [responseString objectForKey:@"response"];
     
     NSString* audioFileName = [responseString objectForKey:@"audioFileName"];
-
+    
     if ([response isEqualToString:@"No Records"])
     {
         NSString* audioUploadFolderPath = [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
         
         NSString* audioFilePath = [audioUploadFolderPath stringByAppendingPathComponent:audioFileName];
         
-       uint64_t fileSize = [[AppPreferences sharedAppPreferences] getFileSize:audioFilePath];
+        uint64_t fileSize = [[AppPreferences sharedAppPreferences] getFileSize:audioFilePath];
         
         if (fileSize > 104857600)
         {
@@ -153,10 +99,109 @@
     else
     {
         [self performCleanUp:audioFileName];
+        
+        [listOfAudioFilesToUploadDict removeObjectForKey:[[audioFileName lastPathComponent] lastPathComponent]];
+        
         // move audio to backup path
         // remove object and key from dictionary and check if dictioanry count is 0, if yes start the timer to upload next files
     }
     NSLog(@"");
+}
+
+-(void)validateVCIDViewReponse:(NSNotification*)notification
+{
+    NSDictionary* responseString = notification.object;
+    
+    NSArray* verifyArray = [responseString valueForKey:@"SetTCID_Verifylist"];
+    
+    NSDictionary* verifyDict = [verifyArray objectAtIndex:0];
+    
+    
+    vcIdList = [[VCIdList alloc] init];
+    
+    //    vcIdList.AutoOutsourceTime =  [[verifyDict valueForKey:@"AutoOutsourceTime"] intValue];
+    vcIdList.Inhouse =  [[verifyDict valueForKey:@"Inhouse"] intValue];
+    vcIdList.TCID =  [[verifyDict valueForKey:@"TCID"] intValue];
+    vcIdList.VCID =  [[verifyDict valueForKey:@"VCID"] intValue];
+    vcIdList.verify =  [[verifyDict valueForKey:@"Verify"] boolValue];
+    
+    
+    NSLog(@"");
+}
+
+-(void)validateFileUploadReponse:(NSNotification*)notification
+{
+    NSDictionary* dict =  notification.object;
+    
+    
+    AudioFile* audioFileObject = [dict objectForKey:@"audioFileObject"];
+
+    NSString* isUploaded = audioFileObject.status;
+
+    [AppPreferences sharedAppPreferences].totalUploadedCount = [AppPreferences sharedAppPreferences].totalUploadedCount + 1;
+    
+    if ([isUploaded  isEqual: @"uploaded"])
+    {
+        [self performCleanUp:audioFileObject.originalFileNamePath];
+        
+        // remove object from dictionary
+        [listOfAudioFilesToUploadDict removeObjectForKey:audioFileObject.fileName];
+       
+    }
+    else
+    {
+        [self performCleanUp:audioFileObject.originalFileNamePath];
+        
+        [listOfAudioFilesToUploadDict removeObjectForKey:audioFileObject.fileName];
+
+    }
+    
+    if ([AppPreferences sharedAppPreferences].nextToBeUploadedPoolArray.count > 0)
+    {
+        NSBlockOperation* nextOperation = [[AppPreferences sharedAppPreferences].nextToBeUploadedPoolArray objectAtIndex:0];
+        
+        [[AppPreferences sharedAppPreferences].audioUploadQueue addOperation:nextOperation];
+        
+        [[AppPreferences sharedAppPreferences].nextToBeUploadedPoolArray  removeObjectAtIndex:0];
+        
+    }
+    else
+    {
+        if ([AppPreferences sharedAppPreferences].nextToBeUploadedPoolArray.count == 0)
+        {
+            
+            [progressTimer invalidate];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+            
+                 self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Uploaded %lu of %lu", (unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount,(unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount];
+                
+                [self performSelector:@selector(updateUploadedFileAndQueueCount:) withObject:nil afterDelay:3.0];
+                
+                
+//                self.uploadingCountLabel.stringValue = @"";
+
+                
+            });
+            
+           
+            
+            [self checkForNewFilesSubSequentTimer];
+        }
+    }
+    
+    [self.uploadedAudioFilesArrayForTableView addObject:audioFileObject];
+
+    [self.tableView reloadData];
+    
+   
+}
+
+-(void)updateUploadedFileAndQueueCount:(id)obj
+{
+    [AppPreferences sharedAppPreferences].totalUploadedCount = 1;
+    
+    [AppPreferences sharedAppPreferences].uploadFilesQueueCount = 0;
 }
 
 -(void)validateTCIDViewReponse:(NSNotification*)notification
@@ -191,25 +236,124 @@
     
     NSString* filePath = [folderPath stringByAppendingPathComponent:audioFileName];
     
-    queue = [[NSOperationQueue alloc] init];
+    uint64_t fileSize = [[AppPreferences sharedAppPreferences] getFileSize:filePath];
+
+    [AppPreferences sharedAppPreferences].audioUploadQueue.maxConcurrentOperationCount = 1;
     
-    
-    /* Push an expensive computation to the operation queue, and then
-     * display the response to the user on the main thread. */
-    [queue addOperationWithBlock: ^{
-        /* Perform expensive processing with data on our background thread */
-        [[APIManager sharedManager] uploadFileAfterGettingdatabaseValues:audioFileName dictatorId:tcIdList.UserID FTPAudioPath:tcIdList.TCName strInHouse:vcIdList.Inhouse clinicName:tcIdList.ClinicName userId:tcIdList.UserID dictatorFirstName:tcIdList.DictatorFirstName tcId:tcIdList.TCID vcId:vcIdList.VCID filePath:filePath];
+    NSOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
+        
+        DownloadMetaDataJob* job = [DownloadMetaDataJob new];
+        AudioFile* audioFile = [AudioFile new];
+        audioFile.fileName = audioFileName;
+        audioFile.originalFileNamePath = filePath;
+        audioFile.originalFileName = audioFileName;
+        audioFile.fileSize = fileSize;
+        job.audioFileObject = audioFile;
+        [job uploadFileAfterGettingdatabaseValues:self->tcIdList vcList:self->vcIdList audioFile:audioFile];
         
     }];
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//
-//
-//
-//    });
-   
+    
+    
+    if ([AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1)
+    {
+        [[AppPreferences sharedAppPreferences].audioUploadQueue addOperation:blockOperation];
+    }
+    else
+    {
+        [[AppPreferences sharedAppPreferences].nextToBeUploadedPoolArray addObject:blockOperation];
+    }
+    
+    // get the count of total files to upload to show on view ( uploading 2 0f uploadFilesQueueCount )
+    [AppPreferences sharedAppPreferences].uploadFilesQueueCount = [AppPreferences sharedAppPreferences].uploadFilesQueueCount + 1;
+    
+    if (!progressTimer.isValid)
+    {
+        [self startFileUploadProgressBarTimer];
+
+    }
 
 }
 
+-(void)performCleanUp:(NSString*)audioFilePath
+{
+    NSString* audioFileName = [audioFilePath lastPathComponent];
+    
+    // delete the encypted file
+    [[AppPreferences sharedAppPreferences] deleteFileAtPath:audioFilePath];
+    
+    // remove object from dictionary
+    //    [listOfAudioFilesToUploadDict removeObjectForKey:audioFileName];
+    
+    // move file to backup
+    [[AppPreferences sharedAppPreferences] moveAudioFileToBackup:audioFilePath];
+    
+    // if dict.count value is 0 start the upload timer
+    if (listOfAudioFilesToUploadDict.count == 0)
+    {
+        // retsart the timer to upload audio
+    }
+    
+    
+}
+
+#pragma mark: Timer And Methods
+
+-(void)checkForFilesFirstTimeAfterLoginRapidTimer
+{
+    checkForNewFilesTimer =  [NSTimer scheduledTimerWithTimeInterval:7.0 target:self selector:@selector(checkForNewFilesForFirstTime) userInfo:nil repeats:YES];
+    
+}
+
+-(void)checkForNewFilesForFirstTime
+{
+    [self getFilesToBeUploadFromUploadFilesFolder];
+}
+
+-(void)checkForNewFilesSubSequentTimer
+{
+    if (checkForNewFilesTimer != nil)
+    {
+        [checkForNewFilesTimer invalidate];
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self->checkForNewFilesTimer =  [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(checkForNewFilesForSubSequentTime) userInfo:nil repeats:YES];
+    });
+   
+    
+    
+    
+}
+
+-(void)checkForNewFilesForSubSequentTime
+{
+    self.checkingFilesLabel.stringValue = @"Checking Files...";
+
+    [self getFilesToBeUploadFromUploadFilesFolder];
+}
+
+-(void)startFileUploadProgressBarTimer
+{
+    progressTimer =  [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(updateFileUploadProgresCount) userInfo:nil repeats:YES];
+}
+
+-(void)updateFileUploadProgresCount
+{
+    if (!([AppPreferences sharedAppPreferences].totalUploadedCount > [AppPreferences sharedAppPreferences].uploadFilesQueueCount))
+    {
+        self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Uploading %ld of %lu", [AppPreferences sharedAppPreferences].totalUploadedCount,(unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount];
+    }
+    else
+        if (([AppPreferences sharedAppPreferences].totalUploadedCount >= [AppPreferences sharedAppPreferences].uploadFilesQueueCount))
+        {
+            self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Uploaded %lu of %lu", (unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount,(unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount];
+        
+        }
+    
+    [self.progressIndicator setDoubleValue:[AppPreferences sharedAppPreferences].currentUploadingPercentage];
+}
+
+#pragma mark: Supportive Methods
 -(void)openFolderInFinder:(NSString*)folderPath
 {
     //    NSString* filePath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
@@ -230,10 +374,7 @@
 
 -(void)getFilesToBeUploadFromUploadFilesFolder
 {
-//    [AppPreferences sharedAppPreferences].loggedInUser = [User new];
-//
-//    [AppPreferences sharedAppPreferences].loggedInUser.userName = @"Sanjay";
-    
+
     NSString* filePath =  [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
     
     NSError * error;
@@ -310,36 +451,143 @@
     
 //    NSDictionary* dict = listOfAudioFilesToUploadDict;
     
-    for(NSString *filename in [listOfAudioFilesToUploadDict allKeys])
+    if (listOfAudioFilesToUploadDict.count > 0)
     {
-//        if([[filename uppercaseString] containsString:@"CLINICDATE"])
-//        {
-//            NSArray* separatedName = [[filename uppercaseString] componentsSeparatedByString:@"CLINICDATE"];
-//
-//            NSString* newFileName = [separatedName objectAtIndex:1];
-//
-//            NSString* oldFilePath = [listOfAudioFilesToUploadDict objectForKey:filename];
-//
-//            NSString* newFileSubPath = [oldFilePath stringByDeletingLastPathComponent];
-//
-//            newFileSubPath = [newFileSubPath stringByAppendingPathComponent:newFileName];
-//
-//            [listOfAudioFilesToUploadDict removeObjectForKey:filename];
-//
-//            [listOfAudioFilesToUploadDict setObject:newFileName forKey:newFileSubPath];
-//
-//            [[APIManager sharedManager] checkDuplicateAudioForDay:[NSString stringWithFormat:@"%ld", [AppPreferences sharedAppPreferences].loggedInUser.userId] originalFileName:newFileSubPath];
-//        }
-//        else
-//        {
+        for(NSString *filename in [listOfAudioFilesToUploadDict allKeys])
+        {
+            //        if([[filename uppercaseString] containsString:@"CLINICDATE"])
+            //        {
+            //            NSArray* separatedName = [[filename uppercaseString] componentsSeparatedByString:@"CLINICDATE"];
+            //
+            //            NSString* newFileName = [separatedName objectAtIndex:1];
+            //
+            //            NSString* oldFilePath = [listOfAudioFilesToUploadDict objectForKey:filename];
+            //
+            //            NSString* newFileSubPath = [oldFilePath stringByDeletingLastPathComponent];
+            //
+            //            newFileSubPath = [newFileSubPath stringByAppendingPathComponent:newFileName];
+            //
+            //            [listOfAudioFilesToUploadDict removeObjectForKey:filename];
+            //
+            //            [listOfAudioFilesToUploadDict setObject:newFileName forKey:newFileSubPath];
+            //
+            //            [[APIManager sharedManager] checkDuplicateAudioForDay:[NSString stringWithFormat:@"%ld", [AppPreferences sharedAppPreferences].loggedInUser.userId] originalFileName:newFileSubPath];
+            //        }
+            //        else
+            //        {
+            
+            self.checkingFilesLabel.stringValue = @"Finished Checking Files.";
+            
+            [checkForNewFilesTimer invalidate];
+            
+            
+            
             NSString* fileSubPath = [listOfAudioFilesToUploadDict objectForKey:filename];
             
-             [[APIManager sharedManager] checkDuplicateAudioForDay:[NSString stringWithFormat:@"%ld", [AppPreferences sharedAppPreferences].loggedInUser.userId] originalFileName:fileSubPath];
-//        }
+            
+            [[APIManager sharedManager] checkDuplicateAudioForDay:[NSString stringWithFormat:@"%ld", [AppPreferences sharedAppPreferences].loggedInUser.userId] originalFileName:fileSubPath];
+            //        }
+        }
     }
+    else
+    {
+        self.checkingFilesLabel.stringValue = @"Finished Checking Files.";
+
+    }
+   
     NSLog(@"directoryContents ====== %@",@"ds");
 
 }
+
+#pragma mark: TableView DataSource And Delegate
+
+-(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+    NSString* identifier;
+    
+    NSTableCellView* cell;
+    
+    if (tableColumn == self.tableView.tableColumns[0])
+    {
+        identifier = @"fileName";
+        
+        cell = [self.tableView makeViewWithIdentifier:identifier owner:nil];
+        
+        AudioFile* audioFile = [self.uploadedAudioFilesArrayForTableView objectAtIndex:row];
+        
+        cell.textField.stringValue = audioFile.fileName;
+    }
+    else
+        if (tableColumn == self.tableView.tableColumns[1])
+        {
+            identifier = @"fileSize";
+            
+            cell = [self.tableView makeViewWithIdentifier:identifier owner:nil];
+            
+            AudioFile* audioFile = [self.uploadedAudioFilesArrayForTableView objectAtIndex:row];
+            
+            cell.textField.stringValue = [NSString stringWithFormat:@"%ld", audioFile.fileSize];
+
+        }
+        else
+            if (tableColumn == self.tableView.tableColumns[2])
+            {
+                identifier = @"byteSent";
+                
+                cell = [self.tableView makeViewWithIdentifier:identifier owner:nil];
+                
+                AudioFile* audioFile = [self.uploadedAudioFilesArrayForTableView objectAtIndex:row];
+                
+                cell.textField.stringValue = [NSString stringWithFormat:@"%ld", audioFile.totalBytesSent];
+            }
+            else
+                if (tableColumn == self.tableView.tableColumns[3])
+                {
+                    identifier = @"status";
+                    
+                    cell = [self.tableView makeViewWithIdentifier:identifier owner:nil];
+                    
+                    AudioFile* audioFile = [self.uploadedAudioFilesArrayForTableView objectAtIndex:row];
+                    
+                    cell.textField.stringValue = [NSString stringWithFormat:@"%@", audioFile.status];
+                }
+                else
+                    if (tableColumn == self.tableView.tableColumns[4])
+                    {
+                        identifier = @"originalFileName";
+                        
+                        cell = [self.tableView makeViewWithIdentifier:identifier owner:nil];
+                        
+                        AudioFile* audioFile = [self.uploadedAudioFilesArrayForTableView objectAtIndex:row];
+                        
+                        cell.textField.stringValue = audioFile.originalFileName;
+                    }
+                    else
+                        if (tableColumn == self.tableView.tableColumns[5])
+                        {
+                            identifier = @"originalFileNamePath";
+                            
+                            cell = [self.tableView makeViewWithIdentifier:identifier owner:nil];
+                            
+                            AudioFile* audioFile = [self.uploadedAudioFilesArrayForTableView objectAtIndex:row];
+                            
+                            cell.textField.stringValue = audioFile.originalFileNamePath;
+                        }
+    
+    
+    
+    
+    
+    
+    return cell;
+}
+
+-(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+    return self.uploadedAudioFilesArrayForTableView.count;
+}
+
+#pragma mark: Storyboard Actions
 
 - (IBAction)pasteAudioFilesButtonClicked:(id)sender
 {

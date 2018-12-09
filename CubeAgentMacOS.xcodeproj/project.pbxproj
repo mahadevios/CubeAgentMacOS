@@ -30,6 +30,7 @@
 		841E1CD421A82670006F5C63 /* SBJson4StreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 841E1CCB21A82670006F5C63 /* SBJson4StreamWriter.m */; };
 		841E1CD521A82691006F5C63 /* SBJson4.h in Sources */ = {isa = PBXBuildFile; fileRef = 841E1CC621A82670006F5C63 /* SBJson4.h */; };
 		841E1CD921A84415006F5C63 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841E1CD821A84415006F5C63 /* IOKit.framework */; };
+		8438169221BD44E800465805 /* AudioFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438169121BD44E800465805 /* AudioFile.m */; };
 		846EB11621B1568D006EA4FF /* AppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 846EB11521B1568D006EA4FF /* AppPreferences.m */; };
 		846EB11A21B15974006EA4FF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 846EB11921B15974006EA4FF /* User.m */; };
 		846EB11D21B16FCA006EA4FF /* CubeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 846EB11C21B16FCA006EA4FF /* CubeConfig.m */; };
@@ -102,6 +103,8 @@
 		841E1CCC21A82670006F5C63 /* SBJson4Writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4Writer.h; sourceTree = "<group>"; };
 		841E1CCD21A82670006F5C63 /* SBJson4StreamWriterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson4StreamWriterState.h; sourceTree = "<group>"; };
 		841E1CD821A84415006F5C63 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		8438169021BD44E800465805 /* AudioFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioFile.h; sourceTree = "<group>"; };
+		8438169121BD44E800465805 /* AudioFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioFile.m; sourceTree = "<group>"; };
 		846EB11421B1568D006EA4FF /* AppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppPreferences.h; sourceTree = "<group>"; };
 		846EB11521B1568D006EA4FF /* AppPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppPreferences.m; sourceTree = "<group>"; };
 		846EB11821B15974006EA4FF /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -311,6 +314,8 @@
 				84CB517021B7C98100E868A0 /* ViewTCIdList.m */,
 				84CB517221B7F30A00E868A0 /* VCIdList.h */,
 				84CB517321B7F30A00E868A0 /* VCIdList.m */,
+				8438169021BD44E800465805 /* AudioFile.h */,
+				8438169121BD44E800465805 /* AudioFile.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -449,6 +454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8438169221BD44E800465805 /* AudioFile.m in Sources */,
 				846EB11A21B15974006EA4FF /* User.m in Sources */,
 				841E1CD521A82691006F5C63 /* SBJson4.h in Sources */,
 				841E1CCE21A82670006F5C63 /* SBJson4StreamParser.m in Sources */,

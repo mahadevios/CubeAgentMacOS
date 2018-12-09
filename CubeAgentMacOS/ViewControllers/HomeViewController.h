@@ -12,16 +12,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeViewController : NSViewController
+@interface HomeViewController : NSViewController<NSTableViewDataSource,NSTableViewDelegate>
 {
     NSMutableArray *listOfAudioToUploadFiles;
     NSMutableDictionary *listOfAudioFilesToUploadDict;
 
     ViewTCIdList* tcIdList;
     VCIdList* vcIdList;
-    NSOperationQueue *queue;
+    NSTimer* progressTimer;
+    NSTimer* checkForNewFilesTimer;
+
 }
-@property (weak) IBOutlet NSTextField *finishedCheckingFilesLabel;
+@property (weak) IBOutlet NSTableView *tableView;
 @property (weak) IBOutlet NSScrollView *logTextView;
 @property (weak) IBOutlet NSScrollView *fileListingTableView;
 @property (weak) IBOutlet NSScrollView *directoryOutline;
@@ -31,6 +33,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak) IBOutlet NSButton *backupFileButton;
 @property (weak) IBOutlet NSButton *getDownloadFileButton;
 @property (weak) IBOutlet NSButton *pasteAudioFileButton;
+@property (weak) IBOutlet NSProgressIndicator *progressIndicator;
+@property (weak) IBOutlet NSTextField *uploadingCountLabel;
+@property (weak) IBOutlet NSTextField *checkingFilesLabel;
+@property (nonatomic, strong) NSMutableArray*  uploadedAudioFilesArrayForTableView;
 
 @end
 

@@ -12,10 +12,13 @@
 #import "objc/runtime.h"
 #import "Constants.h"
 #import "NSData+AES256.h"
+#import "AudioFile.h"
+#import "VCIdList.h"
+#import "ViewTCIdList.h"
 
 @protocol DownloadMetaDataJobDelegate;
 
-@interface DownloadMetaDataJob : NSObject
+@interface DownloadMetaDataJob : NSObject<NSURLSessionDelegate>
 {
     NSString        *downLoadEntityJobName;
     NSString        *downLoadResourcePath;
@@ -39,7 +42,6 @@
     NSURLSessionUploadTask* uploadTask;
     NSURLSession* session;
 
-
 }
 
 /*================================================================================================================================================*/
@@ -48,7 +50,9 @@
 @property (nonatomic,strong)  NSString              *downLoadResourcePath;
 @property (nonatomic,strong)  NSDictionary          *requestParameter;
 @property (nonatomic,strong)  NSMutableArray        *dataArray;
+@property (nonatomic,strong)  AudioFile              *audioFileObject;
 @property (nonatomic,strong)  NSString              *audioFileName;
+
 @property (nonatomic,strong)  NSString              *httpMethod;
 @property (nonatomic,strong)  id<DownloadMetaDataJobDelegate> downLoadJobDelegate;
 
@@ -57,9 +61,11 @@
 @property (nonatomic,assign)  int                   currentSaveTrintIndex;
 @property (nonatomic,assign)  NSNumber              *isNewMatchFound;
 
+@property (nonatomic,strong)  NSString* firstUploadingFile;
+
 -(id) initWithdownLoadEntityJobName:(NSString *) jobName withRequestParameter:(id) localRequestParameter withResourcePath:(NSString *) resourcePath withHttpMethd:(NSString *) httpMethodParameter;
 -(void) startMetaDataDownLoad;
--(void)uploadFileAfterGettingdatabaseValues:(NSString*)filename dictatorId:(long)dictatorId FTPAudioPath:(NSString*)FTPAudioPath strInHouse:(int)strInHouse clinicName:(NSString*)clinicName userId:(long)userId dictatorFirstName:(NSString*)dictatorFirstName tcId:(long)tcId vcId:(long)vcId filePath:(NSString*)filePath;
+-(void)uploadFileAfterGettingdatabaseValues:(ViewTCIdList*)tcList vcList:(VCIdList*)vcList audioFile:(AudioFile*)audioFile;
 
 @end
 

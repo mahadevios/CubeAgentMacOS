@@ -18,6 +18,8 @@
 @interface AppPreferences : NSObject 
 {
     id<AppPreferencesDelegate> alertDelegate;
+    
+    
 }
 
 @property (nonatomic,strong)    id<AppPreferencesDelegate> alertDelegate;
@@ -41,7 +43,13 @@
 @property (nonatomic, strong) CubeConfig *cubeConfig;
 @property (nonatomic, strong) NSMutableArray *supportedAudioFileExtensions;
 @property (nonatomic, strong) NSString *transCompanyName;
-
+@property (nonatomic, strong) NSMutableDictionary* progressCountFileNameDict;
+@property (nonatomic, strong) NSString *currentUploadingFileName;
+@property (nonatomic) int currentUploadingPercentage;
+@property (nonatomic) long totalUploadedCount;
+@property (nonatomic) NSUInteger     uploadFilesQueueCount;
+@property(nonatomic, strong) NSMutableArray* nextToBeUploadedPoolArray;
+@property(nonatomic, strong) NSOperationQueue *audioUploadQueue;
 
 -(void) startReachabilityNotifier;
 -(void)createDatabaseReplica;

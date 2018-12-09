@@ -228,7 +228,8 @@ static APIManager *singleton = nil;
     
     NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
     
-    DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:FTP_SET_TCID_VERIFY_API withRequestParameter:array withResourcePath:FTP_SET_TCID_VERIFY_API withHttpMethd:POST];
+    DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:FTP_SET_VC_ID_VERIFY_API withRequestParameter:array withResourcePath:FTP_SET_VC_ID_VERIFY_API withHttpMethd:POST];
+    
     [downloadmetadatajob startMetaDataDownLoad];
     //    }
     //    else
@@ -724,7 +725,7 @@ static APIManager *singleton = nil;
     
     download.audioFileName = filePath;
     
-    [download uploadFileAfterGettingdatabaseValues:filename dictatorId:dictatorId FTPAudioPath:FTPAudioPath strInHouse:strInHouse clinicName:clinicName userId:userId dictatorFirstName:dictatorFirstName tcId:tcId vcId:vcId filePath:filePath];
+//    [download uploadFileAfterGettingdatabaseValues:filename dictatorId:dictatorId FTPAudioPath:FTPAudioPath strInHouse:strInHouse clinicName:clinicName userId:userId dictatorFirstName:dictatorFirstName tcId:tcId vcId:vcId filePath:filePath];
 //    NSString* parameterString  = @"";
 //
 //    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%ld,", dictatorId]];
