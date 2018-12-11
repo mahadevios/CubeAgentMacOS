@@ -40,8 +40,13 @@ static AppPreferences *singleton = nil;
         self.currentSelectedItem = 0;
         self.totalUploadedCount = 1;
         self.audioUploadQueue = [[NSOperationQueue alloc] init];
+        self.docDownloadQueue = [[NSOperationQueue alloc] init];
+
+        self.nextBlockToBeUploadPoolArray = [NSMutableArray new];
+        self.progressCountFileNameDict = [NSMutableDictionary new];
         
-        self.nextToBeUploadedPoolArray = [NSMutableArray new];
+        self.nextBlockToBeDownloadPoolArray = [NSMutableArray new];
+
         //[self startReachabilityNotifier];
     }
     

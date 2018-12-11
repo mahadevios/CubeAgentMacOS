@@ -32,13 +32,13 @@
 #define GET_TC_NAME_API                           @"MacBook_GetTCName"
 
 #define GET_ENCRYPT_DECRYPT_STRING_API            @"MacBook_GetEncryptDecryptString"
-#define FTP_SET_VC_ID_VERIFY_API               @"MacBook_FTP_SetTCID_Verify"
+#define FTP_SET_VC_ID_VERIFY_API                  @"MacBook_FTP_SetTCID_Verify"
 #define GET_SINGLE_QEURY_EXECUTE_QUERY_API        @"MacBook_GetSingleQueryValue_ExecuteQuery"
 #define CHECK_DUPLICATE_AUDIO_FOR_DAY_API         @"MacBook_CheckDuplicateAudioForDay"
 #define UPDATE_DOWNLOAD_FILE_STATUS_API           @"MacBook_UpdateDownloadFileStatus"
 #define FTP_GET_TC_ID_VIEW_API                    @"MacBook_FTP_GetTCIDView"
-
 #define FILE_UPLOAD_API                           @"MacBook_FileUpload"
+
 #define GET_BROWSER_AUDIO_FILES_DOWNLOAD_API      @"MacBook_GetBrowserAudioFilesForDownload_CubeApp"
 #define GET_DICTATION_IDS_API                     @"MacBook_GetDictationIds"
 #define DOWNLOAD_FILE_API                         @"MacBook_DownloadFile"

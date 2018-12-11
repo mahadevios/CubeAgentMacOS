@@ -284,13 +284,13 @@
                                         </scroller>
                                     </scrollView>
                                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cI-Sa-kfW">
-                                        <rect key="frame" x="0.0" y="-28" width="844" height="409"/>
+                                        <rect key="frame" x="0.0" y="2" width="844" height="379"/>
                                         <clipView key="contentView" id="j3j-sa-Syf">
-                                            <rect key="frame" x="1" y="0.0" width="842" height="408"/>
+                                            <rect key="frame" x="1" y="0.0" width="842" height="378"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="Lvr-oi-dAs" viewBased="YES" id="KwQ-bT-N8G">
-                                                    <rect key="frame" x="0.0" y="0.0" width="842" height="383"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="842" height="353"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -363,7 +363,7 @@
                                                             </prototypeCellViews>
                                                         </tableColumn>
                                                         <tableColumn identifier="byteSent" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="Muc-56-fUK">
-                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Byte Sent">
+                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Bytes Sent/Received">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -614,7 +614,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="C0b-TJ-RoM" firstAttribute="leading" secondItem="nx8-AU-4b5" secondAttribute="leading" id="1E6-A7-8BB"/>
-                                    <constraint firstItem="2cI-Sa-kfW" firstAttribute="height" secondItem="3we-Jx-g6D" secondAttribute="height" multiplier="0.7" constant="-130" id="40S-qS-WNR"/>
+                                    <constraint firstItem="2cI-Sa-kfW" firstAttribute="height" secondItem="3we-Jx-g6D" secondAttribute="height" multiplier="0.7" constant="-160" id="40S-qS-WNR"/>
                                     <constraint firstItem="2cI-Sa-kfW" firstAttribute="leading" secondItem="oqD-7I-PO3" secondAttribute="leading" id="669-fc-Izu"/>
                                     <constraint firstItem="pS2-0P-Ig7" firstAttribute="centerY" secondItem="8Pt-Q2-Qmi" secondAttribute="centerY" id="8Qp-jR-MYi"/>
                                     <constraint firstItem="nx8-AU-4b5" firstAttribute="leading" secondItem="3we-Jx-g6D" secondAttribute="leading" id="9gJ-5o-4Ms"/>
