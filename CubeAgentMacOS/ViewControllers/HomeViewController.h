@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
     VCIdList* vcIdList;
     NSTimer* progressTimer;
     NSTimer* checkForNewFilesTimer;
-
+    int totalFilesToBeAddedInTableView;
 }
 @property (weak) IBOutlet NSTableView *tableView;
 @property (weak) IBOutlet NSScrollView *logTextView;
@@ -37,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak) IBOutlet NSTextField *uploadingCountLabel;
 @property (weak) IBOutlet NSTextField *checkingFilesLabel;
 @property (nonatomic, strong) NSMutableArray*  uploadedAudioFilesArrayForTableView;
+@property (nonatomic, strong) NSMutableArray*  queueAudioFilesArrayForTableView;
+@property (nonatomic, strong) NSMutableArray*  dictationIdsArrayForDownload;
 
 @end
 

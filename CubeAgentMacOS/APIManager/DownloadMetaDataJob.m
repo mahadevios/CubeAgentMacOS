@@ -104,10 +104,18 @@
 //    NSError* error;
 //    NSData *requestData = [NSJSONSerialization dataWithJSONObject:array options:kNilOptions error:&error];
 
+    NSURLConnection *urlConnection;
+    
+    if ([self.downLoadEntityJobName  isEqual: GET_BROWSER_AUDIO_FILES_DOWNLOAD_API] || [self.downLoadEntityJobName  isEqual: DOWNLOAD_FILE_API])
+    {
+        [self downloadFilesUsingNSUrlSession:request];
+    }
+    else
+    {
+        urlConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 
+    }
     
-    
-    NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     NSLog(@"%@",urlConnection);
 }
 
@@ -132,7 +140,7 @@
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     
-    NSLog(@"%@",data);
+//    NSLog(@"%@",data);
     
 	[responseData appendData:data];
 }
@@ -423,9 +431,6 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
     {
         if (statusCode == 200)
         {
-            
-            
-            
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GET_BROWSER_AUDIO_FILES_DOWNLOAD_API object:response];
             
             return;
@@ -471,7 +476,7 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
             
             
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DOWNLOAD_FILE_API object:response];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GET_DICTATORS_FOLDER_API object:response];
             
             return;
             
@@ -497,16 +502,7 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
 {
-    //    NSMutableData *responseData = self.responsesData[@(dataTask.taskIdentifier)];
-    //    if (!responseData) {
-    //        responseData = [NSMutableData dataWithData:data];
-    //        //self.responsesData[@(dataTask.taskIdentifier)] = responseData;
-    //    } else {
-    //        [responseData appendData:data];
-    //    }
-    
-    //    NSString* fileName = self.responsesData[@(dataTask.taskIdentifier)];
-    
+   
     if (!(data == nil))
     {
         NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu",(unsigned long)dataTask.taskIdentifier]];
@@ -516,31 +512,47 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
                                                                              options:NSJSONReadingAllowFragments
                                                                                error:&error1];
         
-        NSLog(@"");
-        
-        NSString* audioFileName = self.audioFileObject.originalFileNamePath;
-
-        
-        if (encryptedDict != nil)
+        if ([self.downLoadEntityJobName  isEqual: FILE_UPLOAD_API])
         {
-            encryptedDict = [NSMutableDictionary new];
-
-            self.audioFileObject.status = @"uploaded";
+            NSLog(@"");
             
-            [encryptedDict setObject:self.audioFileObject forKey:@"audioFileObject"];
-
+            NSString* audioFileName = self.audioFileObject.originalFileNamePath;
+            
+            
+            if (encryptedDict != nil)
+            {
+                encryptedDict = [NSMutableDictionary new];
+                
+                self.audioFileObject.status = @"Uploaded";
+                
+                [encryptedDict setObject:self.audioFileObject forKey:@"audioFileObject"];
+                
+            }
+            else
+            {
+                encryptedDict = [NSMutableDictionary new];
+                
+                self.audioFileObject.status = @"Not Uploaded";
+                
+                [encryptedDict setObject:audioFileName forKey:@"audioFileObject"];
+                
+            }
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FILE_UPLOAD_API object:encryptedDict];
         }
         else
-        {
-            encryptedDict = [NSMutableDictionary new];
-            
-            self.audioFileObject.status = @"notUploaded";
+        if ([self.downLoadEntityJobName  isEqual: GET_BROWSER_AUDIO_FILES_DOWNLOAD_API])
 
-            [encryptedDict setObject:audioFileName forKey:@"audioFileObject"];
-            
+        {
+            NSError* error1;
+            NSDictionary* encryptedDict = [NSJSONSerialization JSONObjectWithData:data
+                                                                                 options:NSJSONReadingAllowFragments
+                                                                                   error:&error1];
+
+
+             NSLog(@"jobname = %@", self.downLoadEntityJobName);
         }
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FILE_UPLOAD_API object:encryptedDict];
 
         //        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FILE_UPLOAD_API object:encryptedString];
         
@@ -597,72 +609,59 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
 totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 {
     
-    
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        float progress = (double)totalBytesSent / (double)totalBytesExpectedToSend;
-        //NSLog(@"progress %f",progress);
-        
-        NSString* progressPercent= [NSString stringWithFormat:@"%f",progress*100];
-        
-        int progressPercentInInt=[progressPercent intValue];
-        
-        progressPercent=[NSString stringWithFormat:@"%d",progressPercentInInt];
-        
-        NSString* progressShow= [NSString stringWithFormat:@"%@%%",progressPercent];
-        
-        NSString* fileName = self.audioFileObject.fileName;
-        
-        self.audioFileObject.totalBytesSent = totalBytesSent;
-        
-        if ([progressShow isEqualToString:@"100%"])
-        {
-//            if ([AppPreferences sharedAppPreferences].nextToBeUploadedPoolArray.count > 0)
-//            {
-//                NSBlockOperation* nextOperation = [[AppPreferences sharedAppPreferences].nextToBeUploadedPoolArray objectAtIndex:0];
-//                
-//                [[AppPreferences sharedAppPreferences].audioUploadQueue addOperation:nextOperation];
-//                
-//                [[AppPreferences sharedAppPreferences].nextToBeUploadedPoolArray  removeObjectAtIndex:0];
-//            }
-        }
-        
-//        if (self.firstUploadingFile == nil)
-//        {
-//            self.firstUploadingFile = self.audioFileName;
-        
-            [AppPreferences sharedAppPreferences].currentUploadingFileName = self.audioFileObject.fileName;
-
+    if ([self.downLoadEntityJobName  isEqual: FILE_UPLOAD_API])
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            float progress = (double)totalBytesSent / (double)totalBytesExpectedToSend;
+            //NSLog(@"progress %f",progress);
+            
+            NSString* progressPercent= [NSString stringWithFormat:@"%f",progress*100];
+            
+            int progressPercentInInt = [progressPercent intValue];
+            
+            progressPercent = [NSString stringWithFormat:@"%d",progressPercentInInt];
+            
+            NSString* progressShow= [NSString stringWithFormat:@"%@%%",progressPercent];
+            
+            NSString* fileName = self.audioFileObject.fileName;
+            
+            NSString* totalBytesSentInString = [NSString stringWithFormat:@"%lld",totalBytesSent];
+            
+            
+            
+            // for progress bar
             [AppPreferences sharedAppPreferences].currentUploadingPercentage = progressPercentInInt;
             
-            [[AppPreferences sharedAppPreferences].progressCountFileNameDict setObject:progressPercent forKey:self.audioFileObject.fileName];
-
-//        }
-//        else if ([[[AppPreferences sharedAppPreferences].progressCountFileNameDict objectForKey:self.firstUploadingFile] isEqualToString:@"100"])
-//        {
-//            self.firstUploadingFile = nil;
-//        }
-//        else if ([self.audioFileName isEqualToString:self.firstUploadingFile])
-//        {
-//            NSLog(@"self.audioFileName = %@", self.audioFileName);
-//            NSLog(@"self.firstUploadingFile = %@", self.firstUploadingFile);
-//
-//
-//            [AppPreferences sharedAppPreferences].currentUploadingPercentage = progressPercentInInt;
-//
-//        }
-
+            // for tableview bytesSent column
+            [AppPreferences sharedAppPreferences].currentUploadingTableViewRow = self.audioFileObject.rowNumber;
+            [[AppPreferences sharedAppPreferences].progressCountFileNameDict setObject:totalBytesSentInString forKey:self.audioFileObject.fileName];
+            
+            
+            NSLog(@"%@ = %@", fileName,progressShow);
+            
+            NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu",(unsigned long)task.taskIdentifier]];
+            
+        });
         
-      
-        [[AppPreferences sharedAppPreferences].progressCountFileNameDict setObject:progressPercent forKey:self.audioFileObject.fileName];
-//        NSLog(@"out 100= %ld", [AppPreferences sharedAppPreferences].totalUploadedCount);
-
-        NSLog(@"%@ = %@", fileName,progressShow);
-        
-        NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu",(unsigned long)task.taskIdentifier]];
-        
-    });
+    }
+//    else
+//    {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//
+//            float progress = (double)totalBytesSent / (double)totalBytesExpectedToSend;
+//            //NSLog(@"progress %f",progress);
+//
+//            NSString* progressPercent= [NSString stringWithFormat:@"%f",progress*100];
+//
+//            int progressPercentInInt = [progressPercent intValue];
+//
+//            progressPercent = [NSString stringWithFormat:@"%d",progressPercentInInt];
+//
+//            NSLog(@"%@", progressPercent);
+//        });
+//    }
+    
     
 }
 -(void)uploadFileAfterGettingdatabaseValues:(ViewTCIdList*)tcList vcList:(VCIdList*)vcList audioFile:(AudioFile*)audioFile
@@ -735,10 +734,10 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     
     NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu", (unsigned long)uploadTask.taskIdentifier]];
     
-    if([AppPreferences sharedAppPreferences].progressCountFileNameDict)
-    {
-        [AppPreferences sharedAppPreferences].progressCountFileNameDict = [NSMutableDictionary new];
-    }
+//    if([AppPreferences sharedAppPreferences].progressCountFileNameDict)
+//    {
+//        [AppPreferences sharedAppPreferences].progressCountFileNameDict = [NSMutableDictionary new];
+//    }
     
     [uploadTask resume];
     
@@ -830,6 +829,62 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     return [NSString stringWithFormat:@"*%@", [[NSUUID UUID] UUIDString]];
     //return [NSString stringWithFormat:@"*"];
     
+}
+
+
+#pragma mark: NSURLSession Download Delegate
+
+
+-(void)downloadFilesUsingNSUrlSession:(NSURLRequest*) request
+{
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:nil];
+   
+    NSURLSessionDownloadTask* dowloadTask = [session downloadTaskWithRequest:request];
+    
+    [dowloadTask resume];
+
+}
+
+
+-(void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location
+{
+    if ([self.downLoadEntityJobName isEqualToString:GET_BROWSER_AUDIO_FILES_DOWNLOAD_API])
+    {
+        NSDictionary* dict = [[NSDictionary alloc] initWithObjectsAndKeys:location, @"downloadLocationUrl", @"Downloaded", @"downloadStatus", nil];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GET_BROWSER_AUDIO_FILES_DOWNLOAD_API object:dict];
+
+    }
+    else if ([self.downLoadEntityJobName isEqualToString:DOWNLOAD_FILE_API])
+    {
+        NSDictionary* dict = [[NSDictionary alloc] initWithObjectsAndKeys:location, @"downloadLocationUrl", @"Downloaded", @"downloadStatus", nil];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DOWNLOAD_FILE_API object:dict];
+    }
+    NSLog(@"location = %@", location.path);
+
+   
+    NSLog(@"downloadTask");
+}
+
+-(void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didResumeAtOffset:(int64_t)fileOffset expectedTotalBytes:(int64_t)expectedTotalBytes
+{
+    NSLog(@"fileOffset = %lld", fileOffset);
+
+    NSLog(@"downloadTask");
+
+}
+
+-(void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
+{
+    NSLog(@"bytesWritten = %lld", bytesWritten);
+
+    NSLog(@"totalBytesWritten = %lld", totalBytesWritten);
+
+    NSLog(@"totalBytesExpectedToWrite = %lld", totalBytesExpectedToWrite);
+
+    NSLog(@"downloadTask");
 }
 
 @end

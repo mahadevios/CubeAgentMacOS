@@ -48,8 +48,12 @@
 @property (nonatomic) int currentUploadingPercentage;
 @property (nonatomic) long totalUploadedCount;
 @property (nonatomic) NSUInteger     uploadFilesQueueCount;
-@property(nonatomic, strong) NSMutableArray* nextToBeUploadedPoolArray;
+@property(nonatomic, strong) NSMutableArray* nextBlockToBeUploadPoolArray;
+@property(nonatomic, strong) NSMutableArray* nextBlockToBeDownloadPoolArray;
 @property(nonatomic, strong) NSOperationQueue *audioUploadQueue;
+@property(nonatomic, strong) NSOperationQueue *docDownloadQueue;
+
+@property (nonatomic) long currentUploadingTableViewRow;
 
 -(void) startReachabilityNotifier;
 -(void)createDatabaseReplica;
