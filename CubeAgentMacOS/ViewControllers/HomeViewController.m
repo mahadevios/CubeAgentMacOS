@@ -83,9 +83,9 @@
 
     [self checkForFilesFirstTimeAfterLoginRapidTimer];
 //    [[APIManager sharedManager] getEncryptDecryptString];
-    [[APIManager sharedManager] getDictatorsFolder:[NSString stringWithFormat:@"%ld",[AppPreferences sharedAppPreferences].loggedInUser.userId]];
+//    [[APIManager sharedManager] getDictatorsFolder:[NSString stringWithFormat:@"%ld",[AppPreferences sharedAppPreferences].loggedInUser.userId]];
     
-    [self getDictationIds];
+//    [self getDictationIds];
     
 }
 
@@ -111,18 +111,20 @@
     
     NSString* dictationIdsString = [responseDict valueForKey:@"Id"];
     
-    NSMutableArray* dictationIdsArray = [dictationIdsString componentsSeparatedByString:@","];
+    [self.dictationIdsArrayForDownload removeAllObjects];
+    
+    self.dictationIdsArrayForDownload = [dictationIdsString componentsSeparatedByString:@","];
     
 //    [[APIManager sharedManager] getDictatorsFolder:[NSString stringWithFormat:@"%ld",[AppPreferences sharedAppPreferences].loggedInUser.userId]];
     
-    [dictationIdsArray removeObject:@"652543"];
+    [self.dictationIdsArrayForDownload removeObject:@"652543"];
     
-    for (int i =0 ; i < dictationIdsArray.count; i++)
+    for (int i =0 ; i < self.dictationIdsArrayForDownload.count; i++)
     {
         
         NSOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
             
-            [[APIManager sharedManager] downloadFile:[dictationIdsArray objectAtIndex:0]];
+            [[APIManager sharedManager] downloadFile:[self.dictationIdsArrayForDownload objectAtIndex:0]];
             
 //            [self.dictationIdsArrayForDownload removeObjectAtIndex:0];
         }];
@@ -217,15 +219,26 @@
             audioFile.rowNumber = tableViewRowCount;
             
             audioFile.fileType = @"DocDownload";
-            
-            ++totalFilesToBeAddedInTableView;
-            
+        
             [self.uploadedAudioFilesArrayForTableView addObject:audioFile];
-            
+
+            NSIndexSet* rowIndexSet = [[NSIndexSet alloc] initWithIndex:totalFilesToBeAddedInTableView];
+        
+            ++totalFilesToBeAddedInTableView;
+
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
-            
+                
+                self.progressIndicator.doubleValue = 100;
+                
+                self.uploadingCountLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
+                
+                self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Downloaded %ld of %ld",self.uploadedAudioFilesArrayForTableView.count, self.dictationIdsArrayForDownload.count];
+
+            [self.tableView insertRowsAtIndexes:rowIndexSet withAnimation:NSTableViewAnimationEffectNone];
+
+                
+                        });
+        
             NSLog(@"");
 
     }
@@ -238,10 +251,35 @@
         
         [[AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray removeObjectAtIndex:0];
     }
-//
-    
+    else
+    {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+         
+            [self performSelector:@selector(cleanUpTableViewAfterDocDownload) withObject:nil afterDelay:3.0];
+
+        });
+       
+    }
 
 }
+
+-(void)cleanUpTableViewAfterDocDownload
+{
+    self.progressIndicator.doubleValue = 0;
+    
+    self.uploadingCountLabel.stringValue = @"";
+    
+    [self.uploadedAudioFilesArrayForTableView removeAllObjects];
+    
+    self->totalFilesToBeAddedInTableView = 0;
+    
+    [self.tableView reloadData];
+    
+    [self checkForNewFilesSubSequentTimer];
+
+}
+
 -(void)validateAudioFileDownloadReponse:(NSNotification*)notification
 {
 
@@ -325,17 +363,36 @@
                 [self.uploadedAudioFilesArrayForTableView addObject:audioFile];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    
                     [self.tableView reloadData];
+
                 });
                 
                 
                 NSLog(@"");
             }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if (responseArray.count != 0)
+            {
+                [self.progressIndicator setDoubleValue:100];
+                
+                self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Downloaded %ld of %ld",responseArray.count, responseArray.count];
+            }
+            [self performSelector:@selector(cleanUpTableViewAfterAudioDownload) withObject:nil afterDelay:3.0];
+            
+            
+        });
             
     }
             else
             {
-                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [self performSelector:@selector(cleanUpTableViewAfterAudioDownload) withObject:nil afterDelay:3.0];
+
+                });
             }
            
         }
@@ -344,6 +401,16 @@
 
 }
 
+-(void)cleanUpTableViewAfterAudioDownload
+{
+    [self.uploadedAudioFilesArrayForTableView removeAllObjects];
+    
+    self->totalFilesToBeAddedInTableView = 0;
+    
+    [self.tableView reloadData];
+    
+    [self getDictationIds];
+}
 //- (NSString *)mimeTypeForPath:(NSString *)path
 //{
 //    // get a mime type for an extension using MobileCoreServices.framework
@@ -490,17 +557,11 @@
             }
            
         }
-       
-        
-        
-        
-        
-        
+     
         [[AppPreferences sharedAppPreferences].audioUploadQueue addOperation:nextOperation];
         
         [[AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray  removeObjectAtIndex:0];
         
-//        [self.queueAudioFilesArrayForTableView removeObjectAtIndex:0];
     }
     else
     {
@@ -511,34 +572,42 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
             
+                self.uploadingCountLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
+
                  self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Uploaded %lu of %lu", (unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount,(unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount];
                 
-                [self performSelector:@selector(updateUploadedFileAndQueueCount:) withObject:nil afterDelay:3.0];
+                [self performSelector:@selector(updateUploadedFileAndQueueCount:) withObject:nil afterDelay:1.0];
                 
-                
-//                self.uploadingCountLabel.stringValue = @"";
-
-                
+                [self performSelector:@selector(cleanUpTableViewAfterAudioUpload) withObject:nil afterDelay:3.0];
             });
+      
             
-           
-            
-            [self checkForNewFilesSubSequentTimer];
+//            [self checkForNewFilesSubSequentTimer];
         }
     }
-    
-//    [self.uploadedAudioFilesArrayForTableView addObject:audioFileObject];
-
+   
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
     });
     
-   
-    
-   
 }
 
+-(void)cleanUpTableViewAfterAudioUpload
+{
+    [self.uploadedAudioFilesArrayForTableView removeAllObjects];
+    
+    self->totalFilesToBeAddedInTableView = 0;
+    
+    [self.tableView reloadData];
+    
+    [self checkBrowserAudioFilesForDownload];
+    
+    [self.progressIndicator setDoubleValue:0];
+    
+    self.uploadingCountLabel.stringValue = @"";
+    
+}
 -(void)updateUploadedFileAndQueueCount:(id)obj
 {
     [AppPreferences sharedAppPreferences].totalUploadedCount = 1;
@@ -610,48 +679,22 @@
         
         audioFile.rowNumber = tableViewRowCount;
         
-        ++totalFilesToBeAddedInTableView;
         
         [self.uploadedAudioFilesArrayForTableView addObject:audioFile];
         
-        [self.tableView reloadData];
+        NSIndexSet* rowIndexSet = [[NSIndexSet alloc] initWithIndex:totalFilesToBeAddedInTableView];
         
-        [[AppPreferences sharedAppPreferences].audioUploadQueue addOperation:blockOperation];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.tableView insertRowsAtIndexes:rowIndexSet withAnimation:NSTableViewAnimationEffectNone];
+            
+        });
+//        [self.tableView reloadData];
         
-        [self checkBrowserAudioFilesForDownload];
+        ++totalFilesToBeAddedInTableView;
 
-//        for (int i=0; i<3; i++)
-//        {
-//            AudioFile* audioFile = [AudioFile new];
-//
-//            audioFile.status = @"Downloaded";
-//
-//            audioFile.fileName = @"demo";
-//
-//            audioFile.fileSize = 123;
-//
-//            audioFile.originalFileName = @"ewr";
-//
-//            NSString* backupDirectoryPath = [[AppPreferences sharedAppPreferences] getUsernameBacupAudioDirectoryPath];
-//
-//            NSString* newFilePath = [backupDirectoryPath stringByAppendingPathComponent:audioFile.fileName];
-//
-//            audioFile.originalFileNamePath = newFilePath;
-//            
-//            int tableViewRowCount1 = totalFilesToBeAddedInTableView;
-//
-//            audioFile.rowNumber = tableViewRowCount1;
-//
-//            audioFile.fileType = @"AudioDownload";
-//
-//            ++totalFilesToBeAddedInTableView;
-//
-//            [self.uploadedAudioFilesArrayForTableView addObject:audioFile];
-//
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [self.tableView reloadData];
-//            });
-//        }
+        [[AppPreferences sharedAppPreferences].audioUploadQueue addOperation:blockOperation];
+
         
     }
     else
@@ -663,14 +706,19 @@
         
         audioFile.status = @"In Queue";
 
-        ++totalFilesToBeAddedInTableView;
 
         [self.uploadedAudioFilesArrayForTableView addObject:audioFile];
 //
-        [self.tableView reloadData];
+        NSIndexSet* rowIndexSet = [[NSIndexSet alloc] initWithIndex:totalFilesToBeAddedInTableView];
         
-//        [self.queueAudioFilesArrayForTableView addObject:audioFile];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.tableView insertRowsAtIndexes:rowIndexSet withAnimation:NSTableViewAnimationEffectNone];
+            
+        });
         
+        ++totalFilesToBeAddedInTableView;
+
         [[AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray addObject:blockOperation];
     }
     
@@ -756,6 +804,8 @@
 {
     self.checkingFilesLabel.stringValue = @"Checking Files...";
 
+    self.checkingFilesLabel.textColor = [NSColor orangeColor];
+
     [self getFilesToBeUploadFromUploadFilesFolder];
 }
 
@@ -774,11 +824,15 @@
 
         [self.tableView reloadDataForRowIndexes:rowIndexSet columnIndexes:columnIndexSet];
         
+        self.uploadingCountLabel.textColor = [NSColor orangeColor];
+
         self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Uploading %ld of %lu", [AppPreferences sharedAppPreferences].totalUploadedCount,(unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount];
     }
     else
         if (([AppPreferences sharedAppPreferences].totalUploadedCount >= [AppPreferences sharedAppPreferences].uploadFilesQueueCount))
         {
+            self.uploadingCountLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
+
             self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Uploaded %lu of %lu", (unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount,(unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount];
         
         }
@@ -911,10 +965,10 @@
             
             self.checkingFilesLabel.stringValue = @"Finished Checking Files.";
             
+            self.checkingFilesLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
+            
             [checkForNewFilesTimer invalidate];
-            
-            
-            
+          
             NSString* fileSubPath = [listOfAudioFilesToUploadDict objectForKey:filename];
             
             
@@ -926,6 +980,9 @@
     {
         self.checkingFilesLabel.stringValue = @"Finished Checking Files.";
 
+        self.checkingFilesLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
+
+        [self checkBrowserAudioFilesForDownload];
     }
    
     NSLog(@"directoryContents ====== %@",@"ds");
