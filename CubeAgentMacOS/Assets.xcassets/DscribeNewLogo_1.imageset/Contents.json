@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "DscribeNewLogo_1.jpg",
+      "filename" : "xanadutec_logo_final_S-1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "xanadutec_logo_final_S copy-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "xanadutec_logo_final_S copy 2-1.png",
       "scale" : "3x"
     }
   ],
