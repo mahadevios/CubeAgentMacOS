@@ -71,7 +71,9 @@
                                              selector:@selector(validateDocFileDownloadReponse:) name:NOTIFICATION_DOWNLOAD_FILE_API
                                                object:nil];
     
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(validateUpdateDictationIdReponse:) name:NOTIFICATION_UPDATE_DOWNLOAD_FILE_STATUS_API
+                                               object:nil];
 //    NSString* StrSQL = [NSString stringWithFormat:@"Select d.DictatorFirstName  + ' ' + d.DictatorLastName as DictatorFullName from Users a inner join Clinics b on a.ParentCompanyID=b.ClinicID INNER JOIN Dictators d on d.DictatorID=a.UserID WHERE a.UserID=%ld",[AppPreferences sharedAppPreferences].loggedInUser.userId];
   
     [[APIManager sharedManager] setVCID:[NSString stringWithFormat:@"%ld",[AppPreferences sharedAppPreferences].loggedInUser.userId]];
@@ -119,6 +121,37 @@
     
 }
 #pragma mark : Notification Callback Methods
+
+-(void)validateUpdateDictationIdReponse:(NSNotification*)notification
+{
+    if ([AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count > 0)
+    {
+        if ([AppPreferences sharedAppPreferences].isReachable)
+        {
+            NSBlockOperation* operation = [[AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray objectAtIndex:0];
+            
+            [[AppPreferences sharedAppPreferences].docDownloadQueue addOperation:operation];
+            
+            [[AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray removeObjectAtIndex:0];
+        }
+        else
+        {
+            [self checkForNewFilesSubSequentTimer];
+        }
+        
+    }
+    else
+    {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self performSelector:@selector(cleanUpTableViewAfterDocDownload) withObject:nil afterDelay:3.0];
+            
+        });
+        
+    }
+
+}
 
 -(void)validateDictatorsFolderReponse:(NSNotification*)notification
 {
@@ -692,8 +725,11 @@
         
             ++totalFilesToBeAddedInTableView;
 
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 
+                [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
+
                 self.progressIndicator.doubleValue = 100;
                 
                 self.uploadingCountLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
@@ -702,40 +738,13 @@
 
             [self.tableView insertRowsAtIndexes:rowIndexSet withAnimation:NSTableViewAnimationEffectNone];
 
-                  [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
                         });
         
       
 
     }
     
-    if ([AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count > 0)
-    {
-        if ([AppPreferences sharedAppPreferences].isReachable)
-        {
-            NSBlockOperation* operation = [[AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray objectAtIndex:0];
-            
-            [[AppPreferences sharedAppPreferences].docDownloadQueue addOperation:operation];
-            
-            [[AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray removeObjectAtIndex:0];
-        }
-        else
-        {
-            [self checkForNewFilesSubSequentTimer];
-        }
-       
-    }
-    else
-    {
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-         
-            [self performSelector:@selector(cleanUpTableViewAfterDocDownload) withObject:nil afterDelay:3.0];
-
-        });
-       
-    }
-
+    
 }
 
 
