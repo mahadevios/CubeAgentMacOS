@@ -127,6 +127,8 @@
 
 -(void)validateMacIDResponse:(NSNotification*)dictObj
 {
+    DDLogInfo(@"Finished Updating Mac Id");
+    
     NSDictionary* responseDict = dictObj.object;
     
     NSString* responseCodeString =  [responseDict valueForKey:RESPONSE_CODE];
@@ -328,11 +330,13 @@
 {
     if ([sender state] == NSOnState)
     {
-        
+        [[NSUserDefaults standardUserDefaults] setBool:true forKey:REMEMBER_ME];
+
     }
     else
     {
-        
+        [[NSUserDefaults standardUserDefaults] setBool:false forKey:REMEMBER_ME];
+
     }
 }
 - (IBAction)submitButtonClicked:(id)sender
