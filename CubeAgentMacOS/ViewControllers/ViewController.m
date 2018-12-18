@@ -86,12 +86,17 @@
         
         self.paswordTextField.stringValue = password;
         
+        [self.rememberMeCheckBox setState:NSOnState];
+
     }
     else
     {
         self.loginTextField.stringValue = @"";
         
         self.paswordTextField.stringValue = @"";
+        
+        [self.rememberMeCheckBox setState:NSOffState];
+        
     }
     
 
@@ -327,7 +332,7 @@
     }
     else
     {
-        NSLog(@"not selected");
+        
     }
 }
 - (IBAction)submitButtonClicked:(id)sender
