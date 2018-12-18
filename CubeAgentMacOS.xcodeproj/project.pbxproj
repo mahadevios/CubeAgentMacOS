@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0744FA10F0217153FA78CCFC /* libPods-CubeAgentMacOSUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E9D5CA9ED6CECC454AAAB6 /* libPods-CubeAgentMacOSUITests.a */; };
 		50E3B6DD21AFF5F8002F904A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E3B6DC21AFF5F8002F904A /* HomeViewController.m */; };
+		841DEFF221C13E5600AF99BE /* BaseLogFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 841DEFEE21C13E5600AF99BE /* BaseLogFileManager.m */; };
+		841DEFF321C13E5600AF99BE /* UITextViewLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 841DEFF121C13E5600AF99BE /* UITextViewLogger.m */; };
 		841E1B4521A80BCB006F5C63 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 841E1B4421A80BCB006F5C63 /* AppDelegate.m */; };
 		841E1B4821A80BCB006F5C63 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 841E1B4721A80BCB006F5C63 /* ViewController.m */; };
 		841E1B4A21A80BCE006F5C63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 841E1B4921A80BCE006F5C63 /* Assets.xcassets */; };
@@ -31,11 +34,14 @@
 		841E1CD521A82691006F5C63 /* SBJson4.h in Sources */ = {isa = PBXBuildFile; fileRef = 841E1CC621A82670006F5C63 /* SBJson4.h */; };
 		841E1CD921A84415006F5C63 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841E1CD821A84415006F5C63 /* IOKit.framework */; };
 		8438169221BD44E800465805 /* AudioFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 8438169121BD44E800465805 /* AudioFile.m */; };
+		844FCEAD21C5111600711F3F /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 844FCEAB21C5111600711F3F /* MBProgressHUD.m */; };
 		846EB11621B1568D006EA4FF /* AppPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 846EB11521B1568D006EA4FF /* AppPreferences.m */; };
 		846EB11A21B15974006EA4FF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 846EB11921B15974006EA4FF /* User.m */; };
 		846EB11D21B16FCA006EA4FF /* CubeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 846EB11C21B16FCA006EA4FF /* CubeConfig.m */; };
 		84CB517121B7C98100E868A0 /* ViewTCIdList.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CB517021B7C98100E868A0 /* ViewTCIdList.m */; };
 		84CB517421B7F30A00E868A0 /* VCIdList.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CB517321B7F30A00E868A0 /* VCIdList.m */; };
+		8EC800D192C310E15C0F317C /* libPods-CubeAgentMacOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FBE6D1D50AB902C84FDBE0C /* libPods-CubeAgentMacOS.a */; };
+		AC7D0A3F3A62599510C2570A /* libPods-CubeAgentMacOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A9CF563AD685F08279D34FE /* libPods-CubeAgentMacOSTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,8 +62,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C2420EF1B5864FD0C5433F5 /* Pods-CubeAgentMacOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOSUITests/Pods-CubeAgentMacOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		50E3B6DB21AFF5F8002F904A /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		50E3B6DC21AFF5F8002F904A /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		50E9D5CA9ED6CECC454AAAB6 /* libPods-CubeAgentMacOSUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CubeAgentMacOSUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		58966E2468DA07209F27720A /* Pods-CubeAgentMacOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOSUITests/Pods-CubeAgentMacOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		5A9CF563AD685F08279D34FE /* libPods-CubeAgentMacOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CubeAgentMacOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5FBE6D1D50AB902C84FDBE0C /* libPods-CubeAgentMacOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CubeAgentMacOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DDAD96E9F360FCA5E3FA86C /* Pods-CubeAgentMacOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOSTests/Pods-CubeAgentMacOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		841DEFEC21C13C6F00AF99BE /* CubeAgentMacOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CubeAgentMacOS-Prefix.pch"; sourceTree = "<group>"; };
+		841DEFEE21C13E5600AF99BE /* BaseLogFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseLogFileManager.m; sourceTree = "<group>"; };
+		841DEFEF21C13E5600AF99BE /* UITextViewLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextViewLogger.h; sourceTree = "<group>"; };
+		841DEFF021C13E5600AF99BE /* BaseLogFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLogFileManager.h; sourceTree = "<group>"; };
+		841DEFF121C13E5600AF99BE /* UITextViewLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextViewLogger.m; sourceTree = "<group>"; };
 		841E1B4021A80BCB006F5C63 /* CubeAgentMacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CubeAgentMacOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		841E1B4321A80BCB006F5C63 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		841E1B4421A80BCB006F5C63 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -105,6 +122,8 @@
 		841E1CD821A84415006F5C63 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		8438169021BD44E800465805 /* AudioFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioFile.h; sourceTree = "<group>"; };
 		8438169121BD44E800465805 /* AudioFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioFile.m; sourceTree = "<group>"; };
+		844FCEAB21C5111600711F3F /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		844FCEAC21C5111600711F3F /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		846EB11421B1568D006EA4FF /* AppPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppPreferences.h; sourceTree = "<group>"; };
 		846EB11521B1568D006EA4FF /* AppPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppPreferences.m; sourceTree = "<group>"; };
 		846EB11821B15974006EA4FF /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -115,6 +134,9 @@
 		84CB517021B7C98100E868A0 /* ViewTCIdList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewTCIdList.m; sourceTree = "<group>"; };
 		84CB517221B7F30A00E868A0 /* VCIdList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCIdList.h; sourceTree = "<group>"; };
 		84CB517321B7F30A00E868A0 /* VCIdList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCIdList.m; sourceTree = "<group>"; };
+		931A61521D389367883BE561 /* Pods-CubeAgentMacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOS/Pods-CubeAgentMacOS.debug.xcconfig"; sourceTree = "<group>"; };
+		C6BE607961B63C261F82915F /* Pods-CubeAgentMacOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOSTests/Pods-CubeAgentMacOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EDCD7C5F62E4B1FA10C5C222 /* Pods-CubeAgentMacOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOS/Pods-CubeAgentMacOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				841E1CD921A84415006F5C63 /* IOKit.framework in Frameworks */,
+				8EC800D192C310E15C0F317C /* libPods-CubeAgentMacOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC7D0A3F3A62599510C2570A /* libPods-CubeAgentMacOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,12 +161,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0744FA10F0217153FA78CCFC /* libPods-CubeAgentMacOSUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7E18C9067D9D5C8B59157A49 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				931A61521D389367883BE561 /* Pods-CubeAgentMacOS.debug.xcconfig */,
+				EDCD7C5F62E4B1FA10C5C222 /* Pods-CubeAgentMacOS.release.xcconfig */,
+				C6BE607961B63C261F82915F /* Pods-CubeAgentMacOSTests.debug.xcconfig */,
+				7DDAD96E9F360FCA5E3FA86C /* Pods-CubeAgentMacOSTests.release.xcconfig */,
+				58966E2468DA07209F27720A /* Pods-CubeAgentMacOSUITests.debug.xcconfig */,
+				0C2420EF1B5864FD0C5433F5 /* Pods-CubeAgentMacOSUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		841DEFED21C13E5600AF99BE /* LoggerSupport */ = {
+			isa = PBXGroup;
+			children = (
+				841DEFEE21C13E5600AF99BE /* BaseLogFileManager.m */,
+				841DEFEF21C13E5600AF99BE /* UITextViewLogger.h */,
+				841DEFF021C13E5600AF99BE /* BaseLogFileManager.h */,
+				841DEFF121C13E5600AF99BE /* UITextViewLogger.m */,
+			);
+			path = LoggerSupport;
+			sourceTree = "<group>";
+		};
 		841E1B3721A80BCB006F5C63 = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +200,7 @@
 				841E1B6421A80BCF006F5C63 /* CubeAgentMacOSUITests */,
 				841E1B4121A80BCB006F5C63 /* Products */,
 				841E1CD721A84414006F5C63 /* Frameworks */,
+				7E18C9067D9D5C8B59157A49 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -167,6 +217,7 @@
 		841E1B4221A80BCB006F5C63 /* CubeAgentMacOS */ = {
 			isa = PBXGroup;
 			children = (
+				841DEFEC21C13C6F00AF99BE /* CubeAgentMacOS-Prefix.pch */,
 				841E1B4321A80BCB006F5C63 /* AppDelegate.h */,
 				841E1B4421A80BCB006F5C63 /* AppDelegate.m */,
 				846EB11721B158FB006EA4FF /* Models */,
@@ -205,6 +256,8 @@
 		841E1B7321A80CA6006F5C63 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				844FCEAA21C5111600711F3F /* MBProgressHUD */,
+				841DEFED21C13E5600AF99BE /* LoggerSupport */,
 				841E1CBE21A82670006F5C63 /* SBJSONNew */,
 				841E1BAB21A80CA6006F5C63 /* Rechability */,
 				841E1BB821A80CA6006F5C63 /* KeyChain */,
@@ -299,8 +352,20 @@
 			isa = PBXGroup;
 			children = (
 				841E1CD821A84415006F5C63 /* IOKit.framework */,
+				5FBE6D1D50AB902C84FDBE0C /* libPods-CubeAgentMacOS.a */,
+				5A9CF563AD685F08279D34FE /* libPods-CubeAgentMacOSTests.a */,
+				50E9D5CA9ED6CECC454AAAB6 /* libPods-CubeAgentMacOSUITests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		844FCEAA21C5111600711F3F /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				844FCEAB21C5111600711F3F /* MBProgressHUD.m */,
+				844FCEAC21C5111600711F3F /* MBProgressHUD.h */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		846EB11721B158FB006EA4FF /* Models */ = {
@@ -327,6 +392,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 841E1B6A21A80BCF006F5C63 /* Build configuration list for PBXNativeTarget "CubeAgentMacOS" */;
 			buildPhases = (
+				8F6B32A56B7867F7BBE77CD0 /* [CP] Check Pods Manifest.lock */,
 				841E1B3C21A80BCB006F5C63 /* Sources */,
 				841E1B3D21A80BCB006F5C63 /* Frameworks */,
 				841E1B3E21A80BCB006F5C63 /* Resources */,
@@ -344,6 +410,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 841E1B6D21A80BCF006F5C63 /* Build configuration list for PBXNativeTarget "CubeAgentMacOSTests" */;
 			buildPhases = (
+				F43CF4C34C01CE09BBABA609 /* [CP] Check Pods Manifest.lock */,
 				841E1B5221A80BCF006F5C63 /* Sources */,
 				841E1B5321A80BCF006F5C63 /* Frameworks */,
 				841E1B5421A80BCF006F5C63 /* Resources */,
@@ -362,6 +429,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 841E1B7021A80BCF006F5C63 /* Build configuration list for PBXNativeTarget "CubeAgentMacOSUITests" */;
 			buildPhases = (
+				F42A4712F32A2E087E8883BF /* [CP] Check Pods Manifest.lock */,
 				841E1B5D21A80BCF006F5C63 /* Sources */,
 				841E1B5E21A80BCF006F5C63 /* Frameworks */,
 				841E1B5F21A80BCF006F5C63 /* Resources */,
@@ -449,12 +517,82 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8F6B32A56B7867F7BBE77CD0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CubeAgentMacOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F42A4712F32A2E087E8883BF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CubeAgentMacOSUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F43CF4C34C01CE09BBABA609 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CubeAgentMacOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		841E1B3C21A80BCB006F5C63 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8438169221BD44E800465805 /* AudioFile.m in Sources */,
+				841DEFF321C13E5600AF99BE /* UITextViewLogger.m in Sources */,
 				846EB11A21B15974006EA4FF /* User.m in Sources */,
 				841E1CD521A82691006F5C63 /* SBJson4.h in Sources */,
 				841E1CCE21A82670006F5C63 /* SBJson4StreamParser.m in Sources */,
@@ -466,6 +604,7 @@
 				841E1BF421A80CA7006F5C63 /* Keychain.m in Sources */,
 				841E1CD221A82670006F5C63 /* SBJson4Writer.m in Sources */,
 				841E1BF621A80CA7006F5C63 /* NSData+AES256.m in Sources */,
+				844FCEAD21C5111600711F3F /* MBProgressHUD.m in Sources */,
 				841E1BF921A80CA7006F5C63 /* DownloadMetaDataJob.m in Sources */,
 				841E1B5021A80BCE006F5C63 /* main.m in Sources */,
 				841E1BF021A80CA7006F5C63 /* Reachability.m in Sources */,
@@ -478,6 +617,7 @@
 				841E1CD121A82670006F5C63 /* SBJson4StreamWriterState.m in Sources */,
 				841E1BF821A80CA7006F5C63 /* SharedSession.m in Sources */,
 				841E1BFA21A80CA7006F5C63 /* APIManager.m in Sources */,
+				841DEFF221C13E5600AF99BE /* BaseLogFileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,12 +777,15 @@
 		};
 		841E1B6B21A80BCF006F5C63 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 931A61521D389367883BE561 /* Pods-CubeAgentMacOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CubeAgentMacOS/CubeAgentMacOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = Y56BAH343T;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CubeAgentMacOS/CubeAgentMacOS-Prefix.pch";
 				INFOPLIST_FILE = CubeAgentMacOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -656,12 +799,15 @@
 		};
 		841E1B6C21A80BCF006F5C63 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EDCD7C5F62E4B1FA10C5C222 /* Pods-CubeAgentMacOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CubeAgentMacOS/CubeAgentMacOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = Y56BAH343T;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CubeAgentMacOS/CubeAgentMacOS-Prefix.pch";
 				INFOPLIST_FILE = CubeAgentMacOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -675,6 +821,7 @@
 		};
 		841E1B6E21A80BCF006F5C63 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C6BE607961B63C261F82915F /* Pods-CubeAgentMacOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -694,6 +841,7 @@
 		};
 		841E1B6F21A80BCF006F5C63 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7DDAD96E9F360FCA5E3FA86C /* Pods-CubeAgentMacOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -713,6 +861,7 @@
 		};
 		841E1B7121A80BCF006F5C63 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 58966E2468DA07209F27720A /* Pods-CubeAgentMacOSUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -731,6 +880,7 @@
 		};
 		841E1B7221A80BCF006F5C63 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C2420EF1B5864FD0C5433F5 /* Pods-CubeAgentMacOSUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;

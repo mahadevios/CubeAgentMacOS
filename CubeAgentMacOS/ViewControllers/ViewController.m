@@ -10,6 +10,7 @@
 #import "Keychain.h"
 #import "Constants.h"
 #import "HomeViewController.h"
+#import "BaseLogFileManager.h"
 
 @implementation ViewController
 
@@ -18,9 +19,7 @@
     //changes from martina
     [super viewDidLoad];
  
-   
-    
-
+    [[AppPreferences sharedAppPreferences] startReachabilityNotifier];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(validateMacIDResponse:) name:NOTIFICATION_UPDATE_MAC_ID_API
@@ -46,6 +45,16 @@
     CGSize size =  CGSizeMake(580, 269);
     self.preferredContentSize = size;
     
+    NSString* logDirectoryPath = [[AppPreferences sharedAppPreferences] getCubeLogDirectoryPath];
+    
+    DDLogFileManagerDefault *logManager = [[BaseLogFileManager alloc] initWithLogsDirectory:logDirectoryPath];
+    
+    DDFileLogger * file = [[DDFileLogger alloc] initWithLogFileManager:logManager];
+    
+    [DDLog addLogger:file];
+    
+    DDLogInfo(@"In LoginView");
+    
 //    NSError* error;
 //
 //    NSString *pathToDesktop = [NSString stringWithFormat:@"/Users/%@/Documents/UploadFiles", NSUserName()];
@@ -59,29 +68,27 @@
     
   
 
-//    [workSpace openURL: folderURL];
-//    NSLog(@"home directory = %@", )
-//    [self getDirectory];
+
     // Do any additional setup after loading the view.
-    [self redirectConsoleLogToDocumentFolder];
+//    [self redirectConsoleLogToDocumentFolder];
 }
 
-- (void) redirectConsoleLogToDocumentFolder
-{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                         NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"console.txt"];
-    
-    NSError* error;
-    if(![[NSFileManager defaultManager] fileExistsAtPath:logPath])
-    {
-        BOOL created = [[NSFileManager defaultManager] createFileAtPath:logPath contents:nil attributes:nil];
-        
-        NSLog(@"");
-    }
-    freopen([logPath fileSystemRepresentation],"a+",stderr);
-}
+//- (void) redirectConsoleLogToDocumentFolder
+//{
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+//                                                         NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"console.txt"];
+//
+//    NSError* error;
+//    if(![[NSFileManager defaultManager] fileExistsAtPath:logPath])
+//    {
+//        BOOL created = [[NSFileManager defaultManager] createFileAtPath:logPath contents:nil attributes:nil];
+//
+//        NSLog(@"");
+//    }
+//    freopen([logPath fileSystemRepresentation],"a+",stderr);
+//}
 
 - (void)setRepresentedObject:(id)representedObject
 {
@@ -189,7 +196,7 @@
     
     HomeViewController* hvc = [self.storyboard instantiateControllerWithIdentifier:@"HomeViewController"];
     
-    
+    [hud removeFromSuperview];
 //    [self.view.window setContentView:hvc.view];
     
 //    NSWindowController* wc = [self.storyboard instantiateControllerWithIdentifier:@"MainWindow"];
@@ -253,51 +260,69 @@
 }
 
 
-- (IBAction)autoModeCheckBoxClicked:(id)sender {
+- (IBAction)autoModeCheckBoxClicked:(id)sender
+{
+    
 }
-- (IBAction)rememberMeCheckBoxClicked:(id)sender {
+- (IBAction)rememberMeCheckBoxClicked:(id)sender
+{
+    
 }
 - (IBAction)submitButtonClicked:(id)sender
 {
-    NSString* macId = [self getFinalMacId];
     
-    [[APIManager sharedManager] updateDeviceMacID:macId password:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
+    
+        NSString* macId = [self getFinalMacId];
+        
+        [[APIManager sharedManager] updateDeviceMacID:macId password:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
+//
+        hud = [MBProgressHUD showHUDAddedTo:self.view animated:true];
+
+
+        [hud setDetailsLabelText:@"Logging In, please wait"];
+    
+
+//    NSAlert *alert = [[NSAlert alloc] init];
+//    [alert setAlertStyle:NSInformationalAlertStyle];
+//    [alert setMessageText:@"Gesture Notification"];
+//    [alert setInformativeText:@"Alert"];
+//    [alert runModal];
 
 }
 
--(void)getDirectory
-{
-    NSOpenPanel *panel = [NSOpenPanel openPanel];
-    
-    // changes promt to Select
-    [panel setPrompt:@"Select"];
-    
-    // Enable the selection of files in the dialog.
-    [panel setCanChooseFiles:YES];
-    
-    // Enable the selection of directories in the dialog.
-    [panel setCanChooseDirectories:YES];
-    
-    //allows multi select
-    [panel setAllowsMultipleSelection:NO];
-    
-    NSString *pathToDownloads = [NSString stringWithFormat:@"/Users/%@/Documents", NSUserName()];
-    
-    //    if(exists){
-    [panel setDirectoryURL:[NSURL fileURLWithPath:pathToDownloads]];
-    //    }
-    
-    [panel beginSheetModalForWindow:[NSApplication sharedApplication].mainWindow
-                  completionHandler:^(NSInteger returnCode) {
-                      if (returnCode == NSModalResponseOK)
-                      {
-                          NSURL *theURL = [[panel URLs] objectAtIndex:0];
-                          
-                          NSData* data  = [NSData dataWithContentsOfURL:theURL];
-                          
-                          //                          NSLog(@"%@",data);
-                      }}];
-}
+//-(void)getDirectory
+//{
+//    NSOpenPanel *panel = [NSOpenPanel openPanel];
+//    
+//    // changes promt to Select
+//    [panel setPrompt:@"Select"];
+//    
+//    // Enable the selection of files in the dialog.
+//    [panel setCanChooseFiles:YES];
+//    
+//    // Enable the selection of directories in the dialog.
+//    [panel setCanChooseDirectories:YES];
+//    
+//    //allows multi select
+//    [panel setAllowsMultipleSelection:NO];
+//    
+//    NSString *pathToDownloads = [NSString stringWithFormat:@"/Users/%@/Documents", NSUserName()];
+//    
+//    //    if(exists){
+//    [panel setDirectoryURL:[NSURL fileURLWithPath:pathToDownloads]];
+//    //    }
+//    
+//    [panel beginSheetModalForWindow:[NSApplication sharedApplication].mainWindow
+//                  completionHandler:^(NSInteger returnCode) {
+//                      if (returnCode == NSModalResponseOK)
+//                      {
+//                          NSURL *theURL = [[panel URLs] objectAtIndex:0];
+//                          
+//                          NSData* data  = [NSData dataWithContentsOfURL:theURL];
+//                          
+//                          //                          NSLog(@"%@",data);
+//                      }}];
+//}
 
 
 - (void)saveFile:(NSString *)path extension:(NSString *)extension

@@ -661,7 +661,7 @@
                         <outlet property="directoryOutline" destination="q6o-eG-7ah" id="LnX-i9-fQF"/>
                         <outlet property="fileListing" destination="2cI-Sa-kfW" id="8Tl-73-V9I"/>
                         <outlet property="getDownloadFileButton" destination="pS2-0P-Ig7" id="zRP-t8-RdQ"/>
-                        <outlet property="logTextView" destination="C0b-TJ-RoM" id="NIQ-No-3dR"/>
+                        <outlet property="logTextView" destination="oqD-7I-PO3" id="DDP-GK-n8v"/>
                         <outlet property="pasteAudioFileButton" destination="8Pt-Q2-Qmi" id="K6S-48-8ic"/>
                         <outlet property="progressIndicator" destination="tCN-dc-qkT" id="bYI-ao-IoS"/>
                         <outlet property="tableView" destination="KwQ-bT-N8G" id="dee-TQ-qUd"/>
@@ -674,7 +674,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="DscribeNewLogo_1" width="147" height="36.75"/>
+        <image name="DscribeNewLogo_1" width="520" height="299"/>
         <image name="bg" width="580" height="269"/>
         <image name="home_logo" width="36" height="33.75"/>
     </resources>
