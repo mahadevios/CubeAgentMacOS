@@ -104,7 +104,7 @@
 //    NSError* error;
 //    NSData *requestData = [NSJSONSerialization dataWithJSONObject:array options:kNilOptions error:&error];
 
-    NSURLConnection *urlConnection;
+   
     
     if ([self.downLoadEntityJobName  isEqual: GET_BROWSER_AUDIO_FILES_DOWNLOAD_API] || [self.downLoadEntityJobName  isEqual: DOWNLOAD_FILE_API])
     {
@@ -116,6 +116,7 @@
 
     }
     
+//    [urlConnection start];
 //    NSLog(@"%@",urlConnection);
     DDLogInfo(@"%@",urlConnection);
 
