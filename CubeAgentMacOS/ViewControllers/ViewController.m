@@ -132,6 +132,12 @@
         
         [[APIManager sharedManager] getCubeConfig:userIdString];
         
+        [[NSUserDefaults standardUserDefaults] setBool:true forKey:REMEMBER_ME];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:self.loginTextField.stringValue forKey:@"username"];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:self.paswordTextField.stringValue forKey:@"password"];
+
     }
 }
 

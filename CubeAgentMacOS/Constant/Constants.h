@@ -82,6 +82,7 @@
 #define  REQUEST_PARAMETER              @"requestParameter"
 #define  SUCCESS                        @"1000"
 #define  FAILURE                        @"1001"
+#define  REMEMBER_ME                    @"rememberMer"
 
 
 
