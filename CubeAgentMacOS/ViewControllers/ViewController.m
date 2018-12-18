@@ -11,6 +11,7 @@
 #import "Constants.h"
 #import "HomeViewController.h"
 #import "BaseLogFileManager.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation ViewController
 
@@ -107,7 +108,7 @@
 
     if ([responseCodeString  isEqualToString: @"200"] && [macIdValidString isEqualToString:SUCCESS])
     {
-        [[APIManager sharedManager] authenticateUser:@"d" username:@"SAN"];
+        [[APIManager sharedManager] authenticateUser:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
 
     }
 }
@@ -282,7 +283,19 @@
     
         if([self.loginTextField.stringValue length] == 0 || whiteSpaceInUsername.location != NSNotFound)
         {
-            NSLog(@"Please enter Username");
+//            [CATransaction begin];
+//            [CATransaction setAnimationDuration:0.5];
+//            [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
+//            [[self.errorMessageTextField animator] setFrameOrigin:NSMakePoint(10,10)];
+//            [CATransaction commit];
+            [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+                context.duration = 1;
+                self.errorMessageTextField.animator.alphaValue = 0;
+            }
+                                completionHandler:^{
+                                     self.errorMessageTextField.hidden = NO;
+                                     self.errorMessageTextField.alphaValue = 1;
+                                }];
         }
         else if([self.paswordTextField.stringValue length] == 0 || whiteSpaceInPassword.location != NSNotFound)
         {
