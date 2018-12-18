@@ -9,9 +9,12 @@
 #import <Cocoa/Cocoa.h>
 #import "APIManager.h"
 #import "AppPreferences.h"
+#import "MBProgressHUD.h"
 
 @interface ViewController : NSViewController
-
+{
+    MBProgressHUD* hud;
+}
 @property (weak) IBOutlet NSButton *autoModeCheckBox;
 - (IBAction)autoModeCheckBoxClicked:(id)sender;
 @property (weak) IBOutlet NSButton *rememberMeCheckBox;

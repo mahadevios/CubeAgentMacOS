@@ -24,7 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
     int totalFilesToBeAddedInTableView;
 }
 @property (weak) IBOutlet NSTableView *tableView;
-@property (weak) IBOutlet NSScrollView *logTextView;
+@property (unsafe_unretained) IBOutlet NSTextView *logTextView;
+
 @property (weak) IBOutlet NSScrollView *fileListingTableView;
 @property (weak) IBOutlet NSScrollView *directoryOutline;
 - (IBAction)pasteAudioFilesButtonClicked:(id)sender;

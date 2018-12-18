@@ -116,7 +116,9 @@
 
     }
     
-    NSLog(@"%@",urlConnection);
+//    NSLog(@"%@",urlConnection);
+    DDLogInfo(@"%@",urlConnection);
+
 }
 
 
@@ -133,7 +135,11 @@
 	[responseData setLength:0];
     
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
+    
     statusCode = (int)[httpResponse statusCode];
+    
+    DDLogInfo(@"API Name %@, Status Code = %d",self.downLoadEntityJobName, statusCode);
+    
     ////NSLog(@"Status code: %d",statusCode);
 }
 
@@ -141,8 +147,11 @@
 {
     
 //    NSLog(@"%@",data);
-    
+
 	[responseData appendData:data];
+    
+    DDLogInfo(@"API Name %@, Receive Data", self.downLoadEntityJobName);
+
 }
 
 
@@ -154,42 +163,26 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    NSLog(@"Failed %@",error.description);
-    NSLog(@"%@ Entity Job -",self.downLoadEntityJobName);
+//    NSLog(@"Failed %@",error.description);
+//    NSLog(@"%@ Entity Job -",self.downLoadEntityJobName);
     
-    
+    DDLogInfo(@"API Name %@, Complete with Error = %@", self.downLoadEntityJobName, [self shortErrorFromError:error]);
+
     if ([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
     {
-     
-        
-//        [[AppPreferences sharedAppPreferences] showAlertViewWithTitle:@"Error" withMessage:[self shortErrorFromError:error] withCancelText:nil withOkText:@"Ok" withAlertTag:1000];
         
     }
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    ////NSLog(@"Success");
-    
     NSError *error;
-//    NSDictionary *response1 = [NSJSONSerialization JSONObjectWithData:responseData
-//                                                                 options:NSUTF8StringEncoding
-//                                                                   error:&error];
-    
-    
+
     NSString *response = [NSJSONSerialization JSONObjectWithData:responseData
                                                              options:NSUTF8StringEncoding
                                                                error:&error];
     
     
-//    if ([encryptedResponse containsString:@"ExceptionMessage"] || [encryptedResponse containsString:@"ExceptionType"] || [encryptedResponse containsString:@"Message"] || [encryptedResponse containsString:@"StackTrace"])
-//    {
-////         [[AppPreferences sharedAppPreferences] showAlertViewWithTitle:@"Error" withMessage:@"Something went wrong, please try again" withCancelText:nil withOkText:@"OK" withAlertTag:1000];
-//
-//        return;
-//    }
-
-
     if([self.downLoadEntityJobName isEqualToString:UPDATE_MAC_ID_API])
         
     {
@@ -213,6 +206,7 @@
         }
         else
         {
+            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
             return;
         }
         
@@ -239,7 +233,9 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
         else
         {
-            
+            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+
+            return;
         }
     }
 }
@@ -266,6 +262,11 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
 //
 //            }
         }
+        else
+        {
+            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+            return;
+        }
     }
 
 
@@ -282,6 +283,10 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
                 return;
            
         }
+        else
+        {
+             DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+        }
     }
 
 
@@ -291,12 +296,14 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         if (statusCode == 200)
         {
             
-            
-                
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_TC_NAME_API object:response];
                 
                 return;
            
+        }
+        else
+        {
+             DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
 
@@ -327,6 +334,10 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
             return;
             
         }
+        else
+        {
+             DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+        }
     }
     
     if([self.downLoadEntityJobName isEqualToString:GET_SINGLE_QEURY_EXECUTE_QUERY_API])
@@ -340,6 +351,10 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
             
             return;
             
+        }
+        else
+        {
+             DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
     
@@ -374,6 +389,8 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
         else
         {
+             DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+            
             NSString* audioFileName = self.audioFileName;
 
             NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"duplicate",@"response",audioFileName,@"audioFileName", nil];
@@ -388,12 +405,14 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         if (statusCode == 200)
         {
             
-            
-
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_UPDATE_DOWNLOAD_FILE_STATUS_API object:response];
             
             return;
             
+        }
+        else
+        {
+            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
     
@@ -411,6 +430,10 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
             return;
             
         }
+        else
+        {
+            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+        }
     }
     
     if([self.downLoadEntityJobName isEqualToString:FILE_UPLOAD_API])
@@ -424,6 +447,10 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
             return;
             
         }
+        else
+        {
+            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+        }
     }
     
     if([self.downLoadEntityJobName isEqualToString:GET_BROWSER_AUDIO_FILES_DOWNLOAD_API])
@@ -435,6 +462,10 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
             
             return;
             
+        }
+        else
+        {
+            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
     
@@ -451,6 +482,10 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
             return;
             
         }
+        else
+        {
+            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+        }
     }
     
     if([self.downLoadEntityJobName isEqualToString:DOWNLOAD_FILE_API])
@@ -465,6 +500,10 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
             
             return;
             
+        }
+        else
+        {
+            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
     
@@ -481,6 +520,10 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
             return;
             
         }
+        else
+        {
+            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+        }
     }
     
     if([self.downLoadEntityJobName isEqualToString:GENERATE_FILENAME_API])
@@ -495,6 +538,10 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
             
             return;
             
+        }
+        else
+        {
+            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
 }
@@ -571,6 +618,10 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         //        NSString* returnCode= [result valueForKey:@"code"];
         
     }
+    else
+    {
+        DDLogInfo(@"API Name = %@, Data = %@, Status Code = %d", self.downLoadEntityJobName, data, statusCode);
+    }
     
 }
 
@@ -579,20 +630,20 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
     //[dataTask resume];
     NSLog(@"error code:%ld",(long)error.code);
     
-    NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu",(unsigned long)dataTask.taskIdentifier]];
+//    NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu",(unsigned long)dataTask.taskIdentifier]];
     
     if (error)
     {
         if (error.code == -999)
         {
-            NSLog(@"cancelled from app delegate");
+            DDLogInfo(@"cancelled from app delegate");
             
-            NSLog(@"%@",error.localizedDescription);
-            
+            DDLogInfo(@"Upload Audio FIle Data Task Error = %@",error.localizedDescription);
+
         }
         else
         {
-            
+            DDLogInfo(@"Upload Audio FIle Data Task Error = %@",error.localizedDescription);
         }
         
     }
@@ -640,7 +691,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
             
             NSLog(@"%@ = %@", fileName,progressShow);
             
-            NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu",(unsigned long)task.taskIdentifier]];
+//            NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu",(unsigned long)task.taskIdentifier]];
             
         });
         
@@ -862,29 +913,24 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DOWNLOAD_FILE_API object:dict];
     }
-    NSLog(@"location = %@", location.path);
-
-   
-    NSLog(@"downloadTask");
+    
 }
 
 -(void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didResumeAtOffset:(int64_t)fileOffset expectedTotalBytes:(int64_t)expectedTotalBytes
 {
-    NSLog(@"fileOffset = %lld", fileOffset);
-
-    NSLog(@"downloadTask");
 
 }
 
 -(void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
 {
-    NSLog(@"bytesWritten = %lld", bytesWritten);
+//    NSLog(@"bytesWritten = %lld", bytesWritten);
 
-    NSLog(@"totalBytesWritten = %lld", totalBytesWritten);
+    
+    DDLogInfo(@"totalBytesWritten = %lld", totalBytesWritten);
 
-    NSLog(@"totalBytesExpectedToWrite = %lld", totalBytesExpectedToWrite);
+//    NSLog(@"totalBytesExpectedToWrite = %lld", totalBytesExpectedToWrite);
 
-    NSLog(@"downloadTask");
+//    NSLog(@"downloadTask");
 }
 
 @end
