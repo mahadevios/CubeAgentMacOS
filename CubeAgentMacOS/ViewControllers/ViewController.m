@@ -67,13 +67,35 @@
 //    }
 //
     
-  
-
-
+   
     // Do any additional setup after loading the view.
 //    [self redirectConsoleLogToDocumentFolder];
 }
 
+-(void)viewWillAppear
+{
+    bool isRemember = [[NSUserDefaults standardUserDefaults] boolForKey:REMEMBER_ME];
+    
+    if (isRemember)
+    {
+        NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+        
+        NSString* password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+        
+        self.loginTextField.stringValue = username;
+        
+        self.paswordTextField.stringValue = password;
+        
+    }
+    else
+    {
+        self.loginTextField.stringValue = @"";
+        
+        self.paswordTextField.stringValue = @"";
+    }
+    
+
+}
 //- (void) redirectConsoleLogToDocumentFolder
 //{
 //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
@@ -140,11 +162,23 @@
         
         [[APIManager sharedManager] getCubeConfig:userIdString];
         
-        [[NSUserDefaults standardUserDefaults] setBool:true forKey:REMEMBER_ME];
-        
-        [[NSUserDefaults standardUserDefaults] setObject:self.loginTextField.stringValue forKey:@"username"];
-        
-        [[NSUserDefaults standardUserDefaults] setObject:self.paswordTextField.stringValue forKey:@"password"];
+        if (self.rememberMeCheckBox.state == NSOnState)
+        {
+            [[NSUserDefaults standardUserDefaults] setBool:true forKey:REMEMBER_ME];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:self.loginTextField.stringValue forKey:@"username"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:self.paswordTextField.stringValue forKey:@"password"];
+        }
+        else
+        {
+            [[NSUserDefaults standardUserDefaults] setBool:false forKey:REMEMBER_ME];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"username"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"password"];
+        }
+       
 
     }
     else
@@ -287,7 +321,14 @@
 }
 - (IBAction)rememberMeCheckBoxClicked:(NSButton*)sender
 {
-//    sender.st
+    if ([sender state] == NSOnState)
+    {
+        
+    }
+    else
+    {
+        NSLog(@"not selected");
+    }
 }
 - (IBAction)submitButtonClicked:(id)sender
 {
@@ -297,28 +338,12 @@
         if([self.loginTextField.stringValue length] == 0 || whiteSpaceInUsername.location != NSNotFound)
         {
             [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please enter Username."];
-//            alert   = [[NSAlert alloc] init];
-//            [alert setInformativeText:@"Please enter Username."];
-//            [alert addButtonWithTitle:@"OK"];
-//            [alert setAlertStyle:NSWarningAlertStyle];
-//            [alert beginSheetModalForWindow:[NSApplication sharedApplication].keyWindow completionHandler:^(NSModalResponse returnCode) {
-//                if (returnCode == NSAlertSecondButtonReturn) {
-//                    return;
-//                }
-//                }];
+
         }
         else if([self.paswordTextField.stringValue length] == 0 || whiteSpaceInPassword.location != NSNotFound)
         {
             [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please enter Password."];
-//            alert   = [[NSAlert alloc] init];
-//            [alert setInformativeText:@"Please enter Password."];
-//            [alert addButtonWithTitle:@"OK"];
-//            [alert setAlertStyle:NSWarningAlertStyle];
-//            [alert beginSheetModalForWindow:[NSApplication sharedApplication].keyWindow completionHandler:^(NSModalResponse returnCode) {
-//                if (returnCode == NSAlertSecondButtonReturn) {
-//                    return;
-//                }
-//            }];
+
             
         }
         else
