@@ -78,6 +78,10 @@
 
 -(uint64_t)getFileSize:(NSString*)filePath;
 
+-(NSString*)getDateWiseBackUpAudioFolderPath;
+
+-(NSString*)getDateWiseTranscriptionFolderPath;
+
 @end
 
 

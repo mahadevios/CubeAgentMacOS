@@ -653,7 +653,7 @@
         
             audioFile.originalFileName = [audioFile.originalFileName stringByAppendingPathExtension:@"doc"];
         
-            NSString* transDirectoryPath = [[AppPreferences sharedAppPreferences] getUsernameTranscriptionDirectoryPath];
+            NSString* transDirectoryPath = [[AppPreferences sharedAppPreferences] getDateWiseTranscriptionFolderPath];
             
             NSString* newFilePath = [transDirectoryPath stringByAppendingPathComponent:audioFile.originalFileName];
             

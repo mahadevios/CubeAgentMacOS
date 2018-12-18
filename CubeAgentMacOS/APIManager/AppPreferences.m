@@ -374,7 +374,7 @@ static AppPreferences *singleton = nil;
     
     NSString* fileName = [filePath lastPathComponent];
 
-    NSString *pathToBackUpFiles = [self getUsernameBacupAudioDirectoryPath];
+    NSString *pathToBackUpFiles = [self getDateWiseBackUpAudioFolderPath];
     
      NSString *pathToCubeFiles = [self getUsernameUploadAudioDirectoryPath];
     
@@ -419,54 +419,58 @@ static AppPreferences *singleton = nil;
     return totalSpace;
 }
 
-
-/*=================================================================================================================================================*/
-
--(void) showHudWithTitle:(NSString*)title detailText:(NSString*)detailText
+-(NSString *)getTimestamp
 {
-//    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:true];
-//
-//    hud.tag = 789;
-//
-//    hud.minSize = CGSizeMake(150.0, 100.0);
-//
-//    hud.label.text = title;
-//
-//    hud.detailsLabel.text = detailText;
+    static dispatch_once_t onceToken;
+    static NSDateFormatter *dateFormatter;
+    dispatch_once(&onceToken, ^{
+        dateFormatter = [NSDateFormatter new];
+        [dateFormatter setDateFormat:@"YYYY.MM.dd"];
+        
+        //        [dateFormatter setDateFormat:@"YYYY.MM.dd-HH.mm.ss"];
+    });
+    
+    return [dateFormatter stringFromDate:NSDate.date];
 }
 
+-(NSString*)getDateWiseBackUpAudioFolderPath
+{
+    NSString* todaysDate = [self getTimestamp];
+    
+    NSString* backDirectoryPath = [self getUsernameBacupAudioDirectoryPath];
+    
+    NSString* backUpDatewiseFolderPath = [backDirectoryPath stringByAppendingPathComponent:todaysDate];
+    
+    NSError* error;
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:backUpDatewiseFolderPath])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:backUpDatewiseFolderPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+        NSLog(@"");
+    }
+    
+    return backUpDatewiseFolderPath;
+}
 
-//-(void) showAlertViewWithTitle:(NSString *) title withMessage:(NSString *) message withCancelText:(NSString *) cancelText withOkText:(NSString *) okText withAlertTag:(int) tag
-//{
-//    
-//    dispatch_queue_t currentQueue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-//    dispatch_async(currentQueue, ^
-//                   {
-//                       __block UIAlertView *alertView  = nil;
-//                       
-//                       dispatch_sync(currentQueue, ^
-//                                     {
-//                                         dispatch_async(dispatch_get_main_queue(), ^{
-//                                             alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelText otherButtonTitles:okText, nil];
-//                                             alertView.tag = tag;
-//                                         });
-//                                        
-//                                         
-//                                     });
-//                       
-//                       dispatch_sync(dispatch_get_main_queue(), ^
-//                                     {
-//                                         [alertView show];
-//
-//                                     });
-//                   });
-//}
-//
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    [self.alertDelegate appPreferencesAlertButtonWithIndex:(int)buttonIndex withAlertTag:alertView.tag];
-//}
-
+-(NSString*)getDateWiseTranscriptionFolderPath
+{
+    NSString* todaysDate = [self getTimestamp];
+    
+    NSString* transDirectoryPath = [self getUsernameTranscriptionDirectoryPath];
+    
+    NSString* transDatewiseFolderPath = [transDirectoryPath stringByAppendingPathComponent:todaysDate];
+    
+    NSError* error;
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:transDatewiseFolderPath])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:transDatewiseFolderPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+        NSLog(@"");
+    }
+    
+    return transDatewiseFolderPath;
+}
+/*=================================================================================================================================================*/
 
 
 - (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
