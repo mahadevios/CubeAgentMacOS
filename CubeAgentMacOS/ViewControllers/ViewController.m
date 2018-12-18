@@ -19,7 +19,7 @@
 {
     //changes from martina
     [super viewDidLoad];
- 
+
     [[AppPreferences sharedAppPreferences] startReachabilityNotifier];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -111,6 +111,13 @@
         [[APIManager sharedManager] authenticateUser:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
 
     }
+    else
+    if ([responseCodeString  isEqualToString: @"200"] && [macIdValidString isEqualToString:FAILURE])
+    {
+        [hud removeFromSuperview];
+        
+        [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Username or Password is invalid"];
+    }
 }
 
 -(void)validateAuthenticateUserResponse:(NSNotification*)dictObj
@@ -140,6 +147,13 @@
         [[NSUserDefaults standardUserDefaults] setObject:self.paswordTextField.stringValue forKey:@"password"];
 
     }
+    else
+        
+        {
+            [hud removeFromSuperview];
+            
+            [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Username or Password is invalid"];
+        }
 }
 
 -(void)validateCubeConfigResponse:(NSNotification*)dictObj
@@ -280,44 +294,43 @@
     NSRange whiteSpaceInUsername = [self.loginTextField.stringValue rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
     
      NSRange whiteSpaceInPassword = [self.paswordTextField.stringValue rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
-    
         if([self.loginTextField.stringValue length] == 0 || whiteSpaceInUsername.location != NSNotFound)
         {
-//            [CATransaction begin];
-//            [CATransaction setAnimationDuration:0.5];
-//            [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut]];
-//            [[self.errorMessageTextField animator] setFrameOrigin:NSMakePoint(10,10)];
-//            [CATransaction commit];
-            [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
-                context.duration = 1;
-                self.errorMessageTextField.animator.alphaValue = 0;
-            }
-                                completionHandler:^{
-                                     self.errorMessageTextField.hidden = NO;
-                                     self.errorMessageTextField.alphaValue = 1;
-                                }];
+            [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please enter Username."];
+//            alert   = [[NSAlert alloc] init];
+//            [alert setInformativeText:@"Please enter Username."];
+//            [alert addButtonWithTitle:@"OK"];
+//            [alert setAlertStyle:NSWarningAlertStyle];
+//            [alert beginSheetModalForWindow:[NSApplication sharedApplication].keyWindow completionHandler:^(NSModalResponse returnCode) {
+//                if (returnCode == NSAlertSecondButtonReturn) {
+//                    return;
+//                }
+//                }];
         }
         else if([self.paswordTextField.stringValue length] == 0 || whiteSpaceInPassword.location != NSNotFound)
         {
-            NSLog(@"Please enter Password");
+            [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please enter Password."];
+//            alert   = [[NSAlert alloc] init];
+//            [alert setInformativeText:@"Please enter Password."];
+//            [alert addButtonWithTitle:@"OK"];
+//            [alert setAlertStyle:NSWarningAlertStyle];
+//            [alert beginSheetModalForWindow:[NSApplication sharedApplication].keyWindow completionHandler:^(NSModalResponse returnCode) {
+//                if (returnCode == NSAlertSecondButtonReturn) {
+//                    return;
+//                }
+//            }];
+            
         }
         else
         {
             NSString* macId = [self getFinalMacId];
         
             [[APIManager sharedManager] updateDeviceMacID:macId password:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
-//
             hud = [MBProgressHUD showHUDAddedTo:self.view animated:true];
-
-
             [hud setDetailsLabelText:@"Logging In, please wait"];
         }
 
-//    NSAlert *alert = [[NSAlert alloc] init];
-//    [alert setAlertStyle:NSInformationalAlertStyle];
-//    [alert setMessageText:@"Gesture Notification"];
-//    [alert setInformativeText:@"Alert"];
-//    [alert runModal];
+
 
 }
 
@@ -403,6 +416,30 @@
     // Cleanup
     self.savePanel = nil;
 }
+
+-(void)changeStatusOfDocFiles
+{
+//    653052
+//    653051
+//    653050
+//    653049
+//    653048
+//    653047
+//    653046
+    NSArray * array = [[NSArray alloc] initWithObjects:@"653052",@"653051",@"653050",@"653049",@"653048",@"653047",@"653046", nil];
+    
+    for (int i = 0; i < array.count; i++)
+    {
+        [[APIManager sharedManager] updateDownloadFileStatus:@"9" dictationId:[array objectAtIndex:i]];
+    }
+//    [APIManager sharedManager] updateDownloadFileStatus:@"9" dictationId:<#(NSString *)#>
+}
+
+- (IBAction)changeStatusButtonClicked:(id)sender
+{
+    [self changeStatusOfDocFiles];
+}
+
 @end
 //setting background color for submit button
 //    self.submitButton.layer.backgroundColor = NSColor.redColor.CGColor;
