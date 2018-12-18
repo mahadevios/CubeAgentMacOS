@@ -57,7 +57,8 @@ static APIManager *singleton = nil;
 {
     if ([[AppPreferences sharedAppPreferences] isReachable])
     {
-        
+        DDLogInfo(@"Updating Device Mac Id");
+
         NSError* error;
         NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:macID,@"macid",password,@"pwd",username,@"username", nil];
         
