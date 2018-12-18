@@ -155,6 +155,15 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pjz-ZW-y3y">
+                                        <rect key="frame" x="37" y="123" width="37" height="17"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="qk6-ia-2E2">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="jvN-LJ-wgQ" firstAttribute="leading" secondItem="4Cr-nC-BtT" secondAttribute="trailing" constant="-153" id="0Zt-FJ-gwX"/>
@@ -200,6 +209,7 @@
                     </view>
                     <connections>
                         <outlet property="autoModeCheckBox" destination="ewt-re-1aG" id="qxi-di-EN5"/>
+                        <outlet property="errorMessageTextField" destination="Pjz-ZW-y3y" id="JF0-4s-9Is"/>
                         <outlet property="loginTextField" destination="qbL-DN-F1P" id="HYC-fk-ADj"/>
                         <outlet property="macIdLable" destination="2Q9-ba-kqc" id="G8h-ie-w5p"/>
                         <outlet property="paswordTextField" destination="21T-Sr-8gk" id="DOz-TD-qWr"/>

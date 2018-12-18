@@ -25,6 +25,7 @@
 @property (weak) IBOutlet NSSecureTextField *paswordTextField;
 @property (weak) IBOutlet NSTextField *macIdLabel;
 @property (weak) IBOutlet NSTextField *versionLabel;
+@property (weak) IBOutlet NSTextField *errorMessageTextField;
 @property(nonatomic, strong)NSSavePanel* savePanel;
 @end
 
