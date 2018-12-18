@@ -285,9 +285,9 @@
 {
     
 }
-- (IBAction)rememberMeCheckBoxClicked:(id)sender
+- (IBAction)rememberMeCheckBoxClicked:(NSButton*)sender
 {
-    
+//    sender.st
 }
 - (IBAction)submitButtonClicked:(id)sender
 {
