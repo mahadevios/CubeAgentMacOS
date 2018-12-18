@@ -206,6 +206,8 @@
         }
         else
         {
+            [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Something went wrong, please try again."];
+
             DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
             return;
         }

@@ -484,8 +484,22 @@ static AppPreferences *singleton = nil;
     return result == 0;
 }
 
-
-
+-(void)showAlertWithTitle:(NSString*)title subTitle:(NSString*)subTitle
+{
+   
+    alert   = [[NSAlert alloc] init];
+    [alert setMessageText:title];
+    [alert setInformativeText:subTitle];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    [alert beginSheetModalForWindow:[NSApplication sharedApplication].keyWindow completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSAlertSecondButtonReturn) {
+            return;
+        }
+    }];
+    
+    
+}
 
 
 

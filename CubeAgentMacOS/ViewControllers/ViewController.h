@@ -14,6 +14,7 @@
 @interface ViewController : NSViewController
 {
     MBProgressHUD* hud;
+    NSAlert *alert;
 }
 @property (weak) IBOutlet NSButton *autoModeCheckBox;
 - (IBAction)autoModeCheckBoxClicked:(id)sender;
@@ -25,7 +26,8 @@
 @property (weak) IBOutlet NSSecureTextField *paswordTextField;
 @property (weak) IBOutlet NSTextField *macIdLabel;
 @property (weak) IBOutlet NSTextField *versionLabel;
-@property (weak) IBOutlet NSTextField *errorMessageTextField;
 @property(nonatomic, strong)NSSavePanel* savePanel;
+- (IBAction)changeStatusButtonClicked:(id)sender;
+
 @end
 

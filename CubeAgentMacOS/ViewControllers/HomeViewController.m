@@ -575,13 +575,14 @@
     
     if([dictationIdsString isEqualToString:@""])
     {
-        [self.dictationIdsArrayForDownload removeAllObjects];
-
+//        [self.dictationIdsArrayForDownload removeAllObjects];
+        self.dictationIdsArrayForDownload = [@[] mutableCopy];
         [self checkForNewFilesSubSequentTimer];
     }
     else
     {
-        [self.dictationIdsArrayForDownload removeAllObjects];
+        self.dictationIdsArrayForDownload = [@[] mutableCopy];
+
         
         self.dictationIdsArrayForDownload = [dictationIdsString componentsSeparatedByString:@","];
         
@@ -701,10 +702,10 @@
 
             [self.tableView insertRowsAtIndexes:rowIndexSet withAnimation:NSTableViewAnimationEffectNone];
 
-                
+                  [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
                         });
         
-        [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
+      
 
     }
     

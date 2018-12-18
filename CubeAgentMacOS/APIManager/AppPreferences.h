@@ -11,6 +11,7 @@
 #import "Reachability.h"
 #import "CubeConfig.h"
 #import "User.h"
+#import <Cocoa/Cocoa.h>
 
 
 @protocol AppPreferencesDelegate;
@@ -19,6 +20,8 @@
 {
     id<AppPreferencesDelegate> alertDelegate;
     
+    NSAlert *alert;
+
     
 }
 
@@ -56,7 +59,6 @@
 @property (nonatomic) long currentUploadingTableViewRow;
 
 -(void) startReachabilityNotifier;
--(void)createDatabaseReplica;
 
 -(NSString*)getUsernameInregrationDirectoryPath;
 
@@ -82,6 +84,7 @@
 
 -(NSString*)getDateWiseTranscriptionFolderPath;
 
+-(void)showAlertWithTitle:(NSString*)title subTitle:(NSString*)subTitle;
 @end
 
 
