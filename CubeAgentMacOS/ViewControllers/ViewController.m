@@ -270,17 +270,29 @@
 }
 - (IBAction)submitButtonClicked:(id)sender
 {
+    NSRange whiteSpaceInUsername = [self.loginTextField.stringValue rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
     
+     NSRange whiteSpaceInPassword = [self.paswordTextField.stringValue rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
     
-        NSString* macId = [self getFinalMacId];
+        if([self.loginTextField.stringValue length] == 0 || whiteSpaceInUsername.location != NSNotFound)
+        {
+            NSLog(@"Please enter Username");
+        }
+        else if([self.paswordTextField.stringValue length] == 0 || whiteSpaceInPassword.location != NSNotFound)
+        {
+            NSLog(@"Please enter Password");
+        }
+        else
+        {
+            NSString* macId = [self getFinalMacId];
         
-        [[APIManager sharedManager] updateDeviceMacID:macId password:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
+            [[APIManager sharedManager] updateDeviceMacID:macId password:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
 //
-        hud = [MBProgressHUD showHUDAddedTo:self.view animated:true];
+            hud = [MBProgressHUD showHUDAddedTo:self.view animated:true];
 
 
-        [hud setDetailsLabelText:@"Logging In, please wait"];
-    
+            [hud setDetailsLabelText:@"Logging In, please wait"];
+        }
 
 //    NSAlert *alert = [[NSAlert alloc] init];
 //    [alert setAlertStyle:NSInformationalAlertStyle];
