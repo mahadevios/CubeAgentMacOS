@@ -610,7 +610,7 @@
     else
     {
         self.dictationIdsArrayForDownload = [@[] mutableCopy];
-
+//
         
         self.dictationIdsArrayForDownload = [dictationIdsString componentsSeparatedByString:@","];
         
