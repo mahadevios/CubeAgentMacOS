@@ -59,6 +59,8 @@
     
     self.dictationIdsArrayForDownload = [NSMutableArray new];
 
+    self.audioFileAddedInQueueArray = [NSMutableArray new];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(validateDuplicateFileReponse:) name:NOTIFICATION_CHECK_DUPLICATE_AUDIO_FOR_DAY_API
                                                object:nil];
@@ -357,7 +359,7 @@
         }];
         
         
-        if ([AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1)
+        if (self.uploadedAudioFilesArrayForTableView.count < 1)
         {
             DDLogInfo(@"Uploading audio file %@", audioFile.fileName);
             
@@ -366,6 +368,7 @@
             
             audioFile.rowNumber = tableViewRowCount;
             
+//            [self.audioFileAddedInQueueArray addObject:audioFile];
             
             [self.uploadedAudioFilesArrayForTableView addObject:audioFile];
             
@@ -460,29 +463,34 @@
     {
         NSBlockOperation* nextOperation = [[AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray objectAtIndex:0];
         
-        //       [self.uploadedAudioFilesArrayForTableView addObject:[self.queueAudioFilesArrayForTableView objectAtIndex:0]];
-        
         // to update the status "uploaded" in tableview
-        for (int i = audioFileObject.rowNumber+1; i < self.uploadedAudioFilesArrayForTableView.count; i++)
-        {
-            AudioFile* tempFileObj = [self.uploadedAudioFilesArrayForTableView objectAtIndex:i];
+//        for (int i = audioFileObject.rowNumber+1; i < self.uploadedAudioFilesArrayForTableView.count; i++)
+//        {
+            AudioFile* tempFileObj = [self.uploadedAudioFilesArrayForTableView objectAtIndex:audioFileObject.rowNumber+1];
             
-            if ([tempFileObj.fileType isEqualToString:@"AudioUpload"])
-            {
-                //                AudioFile* fileObj =  [self.uploadedAudioFilesArrayForTableView objectAtIndex:i];
-                
+//            if ([tempFileObj.fileType isEqualToString:@"AudioUpload"])
+//            {
+        
                 tempFileObj.status = @"Uploading";
                 
-                [self.uploadedAudioFilesArrayForTableView replaceObjectAtIndex:i withObject:tempFileObj];
-                
+                [self.uploadedAudioFilesArrayForTableView replaceObjectAtIndex:audioFileObject.rowNumber+1 withObject:tempFileObj];
+        
+                NSIndexSet* rowIndexSet = [[NSIndexSet alloc] initWithIndex:audioFileObject.rowNumber+1];
+                                   
+                NSIndexSet* columnIndexSet = [[NSIndexSet alloc] initWithIndex:3];
+        
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.tableView reloadData];
+                   
+                    
+                    [self.tableView reloadDataForRowIndexes:rowIndexSet columnIndexes:columnIndexSet];
+                    
+//                    [self.tableView reloadData];
                 });
                 
-                break;
-            }
-            
-        }
+//                break;
+//            }
+        
+//        }
         
         DDLogInfo(@"Uploading next audio file");
 

@@ -139,7 +139,7 @@
     
     statusCode = (int)[httpResponse statusCode];
     
-    DDLogInfo(@"API Name %@, Status Code = %d",self.downLoadEntityJobName, statusCode);
+//    DDLogInfo(@"API Name %@, Status Code = %d",self.downLoadEntityJobName, statusCode);
     
     ////NSLog(@"Status code: %d",statusCode);
 }
@@ -151,7 +151,7 @@
 
 	[responseData appendData:data];
     
-    DDLogInfo(@"API Name %@, Receive Data", self.downLoadEntityJobName);
+//    DDLogInfo(@"API Name %@, Receive Data", self.downLoadEntityJobName);
 
 }
 
@@ -169,6 +169,7 @@
     
     DDLogInfo(@"API Name %@, Complete with Error = %@", self.downLoadEntityJobName, [self shortErrorFromError:error]);
 
+   
     if ([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
     {
         
@@ -216,7 +217,7 @@
     }
 
 
-
+else
 if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
 
 {
@@ -242,7 +243,7 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
     }
 }
-    
+    else
     if([self.downLoadEntityJobName isEqualToString:ACCESS_CUBE_CONFIG_API])
         
     {
@@ -272,15 +273,13 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
     }
 
-
+else
     if([self.downLoadEntityJobName isEqualToString:AUDIO_FILE_EXTENSIONS_API])
         
     {
         if (statusCode == 200)
         {
-            
-            
-                
+           
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_AUDIO_FILE_EXTENSIONS_API object:response];
                 
                 return;
@@ -292,7 +291,7 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
     }
 
-
+else
     if([self.downLoadEntityJobName isEqualToString:GET_TC_NAME_API])
         
     {
@@ -324,7 +323,7 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
 //            
 //        }
 //    }
-
+else
     if([self.downLoadEntityJobName isEqualToString:FTP_SET_VC_ID_VERIFY_API])
         
     {
@@ -343,6 +342,7 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
     }
     
+    else
     if([self.downLoadEntityJobName isEqualToString:GET_SINGLE_QEURY_EXECUTE_QUERY_API])
         
     {
@@ -361,6 +361,7 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
     }
     
+    else
     if([self.downLoadEntityJobName isEqualToString:CHECK_DUPLICATE_AUDIO_FOR_DAY_API])
         
     {
@@ -402,6 +403,7 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
     }
     
+    else
     if([self.downLoadEntityJobName isEqualToString:UPDATE_DOWNLOAD_FILE_STATUS_API])
         
     {
@@ -419,6 +421,7 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
     }
     
+    else
     if([self.downLoadEntityJobName isEqualToString:FTP_GET_TC_ID_VIEW_API])
         
     {
@@ -439,6 +442,7 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
     }
     
+    else
     if([self.downLoadEntityJobName isEqualToString:FILE_UPLOAD_API])
         
     {
@@ -456,6 +460,7 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
     }
     
+    else
     if([self.downLoadEntityJobName isEqualToString:GET_BROWSER_AUDIO_FILES_DOWNLOAD_API])
         
     {
@@ -472,6 +477,7 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
     }
     
+    else
     if([self.downLoadEntityJobName isEqualToString:GET_DICTATION_IDS_API])
         
     {
@@ -491,6 +497,7 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
     }
     
+    else
     if([self.downLoadEntityJobName isEqualToString:DOWNLOAD_FILE_API])
         
     {
@@ -510,6 +517,7 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
     }
     
+    else
     if([self.downLoadEntityJobName isEqualToString:GET_DICTATORS_FOLDER_API])
         
     {
@@ -529,6 +537,7 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
     }
     
+    else
     if([self.downLoadEntityJobName isEqualToString:GENERATE_FILENAME_API])
         
     {
