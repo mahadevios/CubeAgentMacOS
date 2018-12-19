@@ -137,6 +137,8 @@
 
     if ([responseCodeString  isEqualToString: @"200"] && [macIdValidString isEqualToString:SUCCESS])
     {
+        DDLogInfo(@"Authenticating User");
+
         [[APIManager sharedManager] authenticateUser:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
 
     }
@@ -159,6 +161,8 @@
     
     if ([responseCodeString  isEqualToString: @"200"] && ![userIdString isEqualToString:@"0"])
     {
+        DDLogInfo(@"User authenticated successfully");
+
         User* user = [[User alloc] init];
         
         user.userId = [userIdString longLongValue];
@@ -167,6 +171,8 @@
         
         [AppPreferences sharedAppPreferences].loggedInUser = user;
         
+        DDLogInfo(@"Getting configuration info.");
+
         [[APIManager sharedManager] getCubeConfig:userIdString];
         
         if (self.rememberMeCheckBox.state == NSOnState)
@@ -207,7 +213,8 @@
     
 //    if ([responseCodeString  isEqualToString: @"200"])
 //    {
-    
+        DDLogInfo(@"Configuration info received");
+
         CubeConfig* cubeConfig = [[CubeConfig alloc] init];
         
         cubeConfig.hashAlgorithm =  [responseDict valueForKey:@"Alg"];
@@ -226,7 +233,9 @@
         cubeConfig.ServerCubeDirectory =  [responseDict valueForKey:@"ServerCubeDirectory"];
         
         [AppPreferences sharedAppPreferences].cubeConfig = cubeConfig;
-        
+    
+        DDLogInfo(@"Getting supported audio file extensions");
+
         [[APIManager sharedManager] getAudioFileExtensions];
         
 //    }
@@ -234,6 +243,8 @@
 
 -(void)validateAudioFileExtResponse:(NSNotification*)dictObj
 {
+    DDLogInfo(@"Audio file extensions received");
+
     NSString* responseString = dictObj.object;
     
     NSMutableArray* supportedAudioFormatArray = [responseString componentsSeparatedByString:@","];
@@ -244,6 +255,8 @@
     
     int parentCompanyId = [AppPreferences sharedAppPreferences].cubeConfig.ParentCompanyID;
     
+    DDLogInfo(@"Getting Trans company info.");
+
     [[APIManager sharedManager] getTransCompanyName:[NSString stringWithFormat:@"%d",parentCompanyId]];
     
         
@@ -252,6 +265,10 @@
 
 -(void)validateTransCompName:(NSNotification*)dictObj
 {
+    DDLogInfo(@"Trans company info received");
+
+    DDLogInfo(@"Login process completed");
+
     NSString* transCompanyName = dictObj.object;
     
     [AppPreferences sharedAppPreferences].transCompanyName = transCompanyName;

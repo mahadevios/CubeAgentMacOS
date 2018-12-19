@@ -28,13 +28,8 @@
     
     self.uploadedAudioFilesArrayForTableView = [NSMutableArray new];
     
-//    self.queueAudioFilesArrayForTableView = [NSMutableArray new];
-    
     self.dictationIdsArrayForDownload = [NSMutableArray new];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(validateSingleQueryReponse:) name:NOTIFICATION_GET_SINGLE_QEURY_EXECUTE_QUERY_API
-//                                               object:nil];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(validateDuplicateFileReponse:) name:NOTIFICATION_CHECK_DUPLICATE_AUDIO_FOR_DAY_API
                                                object:nil];
@@ -605,7 +600,7 @@
     NSDictionary* responseDict = notification.object;
     
     NSString* dictationIdsString = [responseDict valueForKey:@"Id"];
-    
+    //653047,653048,653049,653050,653051,653052
     if([dictationIdsString isEqualToString:@""])
     {
 //        [self.dictationIdsArrayForDownload removeAllObjects];
@@ -630,7 +625,7 @@
             
             NSOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
                 
-                [[APIManager sharedManager] downloadFile:[self.dictationIdsArrayForDownload objectAtIndex:0]];
+                [[APIManager sharedManager] downloadFile:[self.dictationIdsArrayForDownload objectAtIndex:i]];
                 
                 //            [self.dictationIdsArrayForDownload removeObjectAtIndex:0];
             }];
@@ -655,38 +650,44 @@
 
 -(void)validateDocFileDownloadReponse:(NSNotification*)notification
 {
+    
+        
     NSDictionary* dict = notification.object;
     
     NSString* downloadStatus = [dict valueForKey:@"downloadStatus"];
     
+    NSURL* downloadLocation = [dict valueForKey:@"downloadLocationUrl"];
+    
+    NSData* data = [NSData dataWithContentsOfURL:downloadLocation];
+    
+    
     if ([downloadStatus isEqualToString:@"Downloaded"])
     {
-        NSURL* downloadLocation = [dict valueForKey:@"downloadLocationUrl"];
+        dispatch_async(dispatch_get_main_queue(), ^{
         
-        NSData* data = [NSData dataWithContentsOfURL:downloadLocation];
-        
-        NSError* error, *error1;
-        
-        NSDictionary *response = [NSJSONSerialization JSONObjectWithData:data
-                                                                 options:NSUTF8StringEncoding
-                                                                   error:&error];
-        
+            NSError* error, *error1;
+
+            
+            NSDictionary *response = [NSJSONSerialization JSONObjectWithData:data
+                                                                     options:NSUTF8StringEncoding
+                                                                       error:&error];
+            
             AudioFile* audioFile = [AudioFile new];
             
             audioFile.status = @"Downloaded";
-        
+            
             long dictationID = [[response valueForKey:@"Id"] longLongValue];
-
+            
             audioFile.fileName = [response valueForKey:@"FileName"];
             
             audioFile.fileSize = [[response valueForKey:@"FileSize"] longLongValue];
             
             audioFile.originalFileName = [response valueForKey:@"OriginalFileName"] ;
-        
+            
             audioFile.originalFileName = [audioFile.originalFileName stringByDeletingPathExtension];
-        
+            
             audioFile.originalFileName = [audioFile.originalFileName stringByAppendingPathExtension:@"doc"];
-        
+            
             NSString* transDirectoryPath = [[AppPreferences sharedAppPreferences] getDateWiseTranscriptionFolderPath];
             
             NSString* newFilePath = [transDirectoryPath stringByAppendingPathComponent:audioFile.originalFileName];
@@ -704,47 +705,46 @@
             {
                 [[NSFileManager defaultManager] removeItemAtPath:newFilePath error:&error1];
             }
-        
+            
             BOOL isWritten = [decryptedData writeToFile:newFilePath options:NSDataWritingAtomic error:nil];
             
             bool isDeleted = [[NSFileManager defaultManager] removeItemAtURL:downloadLocation error:&error1];
             
             long fileSize = [[AppPreferences sharedAppPreferences] getFileSize:newFilePath];
-        
+            
             audioFile.fileSize = fileSize;
-        
+            
             int tableViewRowCount = totalFilesToBeAddedInTableView;
             
             audioFile.rowNumber = tableViewRowCount;
             
             audioFile.fileType = @"DocDownload";
-        
+            
             [self.uploadedAudioFilesArrayForTableView addObject:audioFile];
-
+            
             NSIndexSet* rowIndexSet = [[NSIndexSet alloc] initWithIndex:totalFilesToBeAddedInTableView];
-        
+            
+            
             ++totalFilesToBeAddedInTableView;
 
+            [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
 
-            dispatch_async(dispatch_get_main_queue(), ^{
+        
                 
-                [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
-
+                
                 self.progressIndicator.doubleValue = 100;
                 
                 self.uploadingCountLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
                 
                 self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Downloaded %ld of %ld",self.uploadedAudioFilesArrayForTableView.count, self.dictationIdsArrayForDownload.count];
-
-            [self.tableView insertRowsAtIndexes:rowIndexSet withAnimation:NSTableViewAnimationEffectNone];
-
-                        });
-        
-      
+                
+                [self.tableView insertRowsAtIndexes:rowIndexSet withAnimation:NSTableViewAnimationEffectNone];
+                
+            });
 
     }
     
-    
+     
 }
 
 
@@ -827,7 +827,7 @@
 
 -(void)checkForFilesFirstTimeAfterLoginRapidTimer
 {
-    checkForNewFilesTimer =  [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(checkForNewFilesForFirstTime) userInfo:nil repeats:YES];
+    checkForNewFilesTimer =  [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(checkForNewFilesForFirstTime) userInfo:nil repeats:YES];
     
     
 }
@@ -848,7 +848,7 @@
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        self->checkForNewFilesTimer =  [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(checkForNewFilesForSubSequentTime) userInfo:nil repeats:YES];
+        self->checkForNewFilesTimer =  [NSTimer scheduledTimerWithTimeInterval:20.0 target:self selector:@selector(checkForNewFilesForSubSequentTime) userInfo:nil repeats:YES];
     });
     
     

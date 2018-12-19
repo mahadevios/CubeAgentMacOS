@@ -41,7 +41,7 @@
     
     NSURLSessionUploadTask* uploadTask;
     NSURLSession* session;
-
+    NSURLConnection *urlConnection;
 }
 
 /*================================================================================================================================================*/

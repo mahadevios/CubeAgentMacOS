@@ -10,12 +10,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CubeAgentMacOS/ViewControllers/HomeViewController.m"
-            timestampString = "566833065.604988"
+            timestampString = "566839563.435932"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "890"
             endingLineNumber = "890"
             landmarkName = "-updateFileUploadProgresCount"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CubeAgentMacOS/APIManager/DownloadMetaDataJob.m"
+            timestampString = "566839563.436957"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "-connection:didFailWithError:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
