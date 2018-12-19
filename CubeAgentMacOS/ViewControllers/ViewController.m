@@ -19,7 +19,18 @@
 {
     //changes from martina
     [super viewDidLoad];
-
+    
+    [self.submitButton setBordered:NO];
+    
+    [self.submitButton setWantsLayer:YES];
+    
+    self.submitButton.layer.backgroundColor = [NSColor colorWithCalibratedRed:0.220f green:0.514f blue:0.827f alpha:1.0f].CGColor;
+    
+    [self.backgroundView setWantsLayer:YES];
+    
+    //    self.submitButton.layer.cornerRadius = 8;
+    self.backgroundView.layer.backgroundColor = [NSColor colorWithCalibratedRed:255.0f green:255.0f blue:255.0f alpha:1.0f].CGColor;
+    
     [[AppPreferences sharedAppPreferences] startReachabilityNotifier];
     
     [[NSNotificationCenter defaultCenter] addObserver:self

@@ -26,6 +26,35 @@
 {
     [super viewDidLoad];
     
+    [self.pasteAudioFileButton setBordered:NO];
+    
+    [self.pasteAudioFileButton setWantsLayer:YES];
+    
+    self.pasteAudioFileButton.layer.cornerRadius = 5;
+    
+    self.pasteAudioFileButton.layer.backgroundColor = [NSColor colorWithCalibratedRed:0.220f green:0.514f blue:0.827f alpha:1.0f].CGColor;
+    
+    [self.getDownloadFileButton setBordered:NO];
+    
+    [self.getDownloadFileButton setWantsLayer:YES];
+    
+    self.getDownloadFileButton.layer.cornerRadius = 5;
+
+    self.getDownloadFileButton.layer.backgroundColor = [NSColor colorWithCalibratedRed:0.220f green:0.514f blue:0.827f alpha:1.0f].CGColor;
+    
+    [self.backupFileButton setBordered:NO];
+    
+    [self.backupFileButton setWantsLayer:YES];
+    
+    self.backupFileButton.layer.cornerRadius = 5;
+    
+    self.backupFileButton.layer.backgroundColor = [NSColor colorWithCalibratedRed:0.220f green:0.514f blue:0.827f alpha:1.0f].CGColor;
+    
+    [self.homeBackgroundView setWantsLayer:YES];
+    
+    //    self.submitButton.layer.cornerRadius = 8;
+    self.homeBackgroundView.layer.backgroundColor = [NSColor colorWithCalibratedRed:255.0f green:255.0f blue:255.0f alpha:1.0f].CGColor;
+    
     self.uploadedAudioFilesArrayForTableView = [NSMutableArray new];
     
     self.dictationIdsArrayForDownload = [NSMutableArray new];
