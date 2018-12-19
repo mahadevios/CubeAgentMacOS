@@ -164,7 +164,7 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-//    NSLog(@"Failed %@",error.description);
+//    NSLog(@"Failed %@",error.description);5
 //    NSLog(@"%@ Entity Job -",self.downLoadEntityJobName);
     
 
@@ -571,18 +571,22 @@ else
     }
 }
 
-
+-(void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler
+{
+    NSLog(@"challenge received");
+}
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
 {
    
     if (!(data == nil))
     {
-        NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu",(unsigned long)dataTask.taskIdentifier]];
+//        NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu",(unsigned long)dataTask.taskIdentifier]];
         
         NSError* error1;
         NSMutableDictionary* encryptedDict = [NSJSONSerialization JSONObjectWithData:data
                                                                              options:NSJSONReadingAllowFragments
                                                                                error:&error1];
+        NSLog(@"test dict resp = %@", encryptedDict);
         
         if ([self.downLoadEntityJobName  isEqual: FILE_UPLOAD_API])
         {
@@ -645,8 +649,12 @@ else
     }
     else
     {
+        NSLog(@"nil data");
+        
+        DDLogInfo(@"Something went wrong, file not uploaded status code = %d",statusCode);
 //        DDLogInfo(@"API Name = %@, Data = %@, Status Code = %d", self.downLoadEntityJobName, data, statusCode);
     }
+    
     
 }
 
@@ -674,7 +682,8 @@ else
     }
     else
     {
-        
+        NSLog(@"error id = %@",error.localizedDescription);
+
     }
     
 }
@@ -704,13 +713,12 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
             
             NSString* totalBytesSentInString = [NSString stringWithFormat:@"%lld",totalBytesSent];
             
-            
-            
             // for progress bar
             [AppPreferences sharedAppPreferences].currentUploadingPercentage = progressPercentInInt;
             
             // for tableview bytesSent column
             [AppPreferences sharedAppPreferences].currentUploadingTableViewRow = self.audioFileObject.rowNumber;
+            
             [[AppPreferences sharedAppPreferences].progressCountFileNameDict setObject:totalBytesSentInString forKey:self.audioFileObject.fileName];
             
             
@@ -803,12 +811,14 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     
 //    NSURLSessionConfiguration * backgroundConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"Xanadutec1"];
 
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:nil];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:[NSOperationQueue mainQueue]];
+
+//     NSURLSession *session = [NSURLSession sharedSession];
     
-    NSURLSessionUploadTask* uploadTask = [session uploadTaskWithRequest:request fromData:nil];
+   NSURLSessionUploadTask* uploadTask = [session uploadTaskWithRequest:request fromData:nil];
     
     
-    NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu", (unsigned long)uploadTask.taskIdentifier]];
+//    NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu", (unsigned long)uploadTask.taskIdentifier]];
     
 //    if([AppPreferences sharedAppPreferences].progressCountFileNameDict)
 //    {

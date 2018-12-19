@@ -55,7 +55,7 @@
 @property(nonatomic, strong) NSMutableArray* nextBlockToBeDownloadPoolArray;
 @property(nonatomic, strong) NSOperationQueue *audioUploadQueue;
 @property(nonatomic, strong) NSOperationQueue *docDownloadQueue;
-
+@property (nonatomic) long totalFilesToBeAddedInTableView;
 @property (nonatomic) long currentUploadingTableViewRow;
 
 -(void) startReachabilityNotifier;
