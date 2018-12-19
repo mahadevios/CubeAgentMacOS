@@ -342,6 +342,7 @@
 - (IBAction)autoModeCheckBoxClicked:(id)sender
 {
     
+    
 }
 - (IBAction)rememberMeCheckBoxClicked:(NSButton*)sender
 {
