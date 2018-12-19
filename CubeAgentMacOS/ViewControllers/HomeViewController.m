@@ -187,14 +187,14 @@
 {
     NSDictionary* responseDict = notification.object;
     
-     DDLogInfo(@"%@",responseDict);
+//     DDLogInfo(@"%@",responseDict);
 }
 
 -(void)validateGenerateFileNameReponse:(NSNotification*)notification
 {
     NSDictionary* responseDict = notification.object;
 
-    DDLogInfo(@"%@",responseDict);
+//    DDLogInfo(@"%@",responseDict);
 
 }
 
@@ -241,16 +241,20 @@
     {
         DDLogInfo(@"Duplicate file found, file name = %@",audioFileName);
 
-        DDLogInfo(@"Moving duplicate audio file to backup folder");
+        DDLogInfo(@"Moving duplicate audio file to BackupAudio folder");
 
         [self performCleanUp:audioFileName];
         
         [listOfAudioFilesToUploadDict removeObjectForKey:[[audioFileName lastPathComponent] lastPathComponent]];
        
         // if internet not reachable and no file is in queue to upload or download queue then start the cycle again
-        if (![AppPreferences sharedAppPreferences].isReachable && ([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1))
+        if (![AppPreferences sharedAppPreferences].isReachable)
         {
             [self checkForNewFilesSubSequentTimer];
+        }
+        else if (([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1))
+        {
+             [self checkForNewFilesSubSequentTimer];
         }
 //        DDLogInfo(@"Checking next file to upload");
 
@@ -295,9 +299,14 @@
 
 -(void)validateTCIDViewReponse:(NSNotification*)notification
 {
-    // if internet not reachable and no file is in queue to upload or download queue then start the cycle again
-    DDLogInfo(@"Finished checking TC ID View");
     
+    // we have started the timer in duplicate, if we got this reposnse then we have file to upload hence  invalidate the timer
+    if ([checkForNewFilesTimer isValid])
+    {
+        [checkForNewFilesTimer invalidate];
+    }
+    DDLogInfo(@"Finished checking TC ID View");
+    // if internet not reachable and no file is in queue to upload or download queue then start the cycle again
      if (![AppPreferences sharedAppPreferences].isReachable && ([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1))
      {
          [self checkForNewFilesSubSequentTimer];
@@ -534,7 +543,7 @@
 
 -(void)validateAudioFileDownloadReponse:(NSNotification*)notification
 {
-    DDLogInfo(@"Finished checking audio files download");
+    DDLogInfo(@"Finished checking audio files for download");
 
     NSDictionary* dict = notification.object;
     
@@ -651,7 +660,7 @@
         }
         else
         {
-            DDLogInfo(@"No Audio file to download");
+            DDLogInfo(@"No Audio file available for download");
 
             dispatch_async(dispatch_get_main_queue(), ^{
                 
@@ -857,7 +866,7 @@
     // remove object from dictionary
     //    [listOfAudioFilesToUploadDict removeObjectForKey:audioFileName];
     
-    DDLogInfo(@"Audio file moved to backup folder");
+    DDLogInfo(@"Audio file moved to BackupAudio folder");
 
     // move file to backup
     [[AppPreferences sharedAppPreferences] moveAudioFileToBackup:audioFilePath];
@@ -991,7 +1000,7 @@
 
 -(void)getFilesToBeUploadFromUploadFilesFolder
 {
-    DDLogInfo(@"Checking audio files to be upload");
+    DDLogInfo(@"Checking audio files for upload");
     
     NSString* filePath =  [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
     
@@ -1021,7 +1030,7 @@
 
 -(void) checkBrowserAudioFilesForDownload
 {
-    DDLogInfo(@"Checking audio files to be download");
+    DDLogInfo(@"Checking audio files for download");
 
     [[APIManager sharedManager] getBrowserAudioFilesForDownload:[NSString stringWithFormat:@"%ld", [AppPreferences sharedAppPreferences].loggedInUser.userId]];
 }
@@ -1148,7 +1157,7 @@
 
         self.checkingFilesLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
 
-        DDLogInfo(@"Finished checking audio file(s), no file avaliable to upload");
+        DDLogInfo(@"Finished checking audio file(s), no file avaliable for upload");
 
         DDLogInfo(@"Checked folder path = %@", [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath]);
 

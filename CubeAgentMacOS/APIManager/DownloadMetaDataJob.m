@@ -118,7 +118,7 @@
     
 //    [urlConnection start];
 //    NSLog(@"%@",urlConnection);
-    DDLogInfo(@"%@",urlConnection);
+//    DDLogInfo(@"%@",urlConnection);
 
 }
 
@@ -167,13 +167,26 @@
 //    NSLog(@"Failed %@",error.description);
 //    NSLog(@"%@ Entity Job -",self.downLoadEntityJobName);
     
-    DDLogInfo(@"API Name %@, Complete with Error = %@", self.downLoadEntityJobName, [self shortErrorFromError:error]);
 
-   
-    if ([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
+    if (error.code != 0)
+
     {
+        NSArray* arr = [self.downLoadEntityJobName componentsSeparatedByString:@"_"];
         
+        if (arr.count > 1)
+        {
+            NSString* apiSubName = [arr objectAtIndex:1];
+            
+            DDLogInfo(@"%@ Complete with Error = %@", apiSubName, [self shortErrorFromError:error]);
+        }
+        
+
     }
+   
+//    if ([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
+//    {
+//
+//    }
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -210,7 +223,7 @@
         {
             [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Something went wrong, please try again."];
 
-            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+//            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
             return;
         }
         
@@ -237,7 +250,7 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
         else
         {
-            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+//            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
 
             return;
         }
@@ -268,7 +281,7 @@ if([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
         }
         else
         {
-            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+//            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
             return;
         }
     }
@@ -287,7 +300,7 @@ else
         }
         else
         {
-             DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+//             DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
 
@@ -305,7 +318,7 @@ else
         }
         else
         {
-             DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+//             DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
 
@@ -338,7 +351,7 @@ else
         }
         else
         {
-             DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+//             DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
     
@@ -357,7 +370,7 @@ else
         }
         else
         {
-             DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+//             DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
     
@@ -393,7 +406,7 @@ else
         }
         else
         {
-             DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+//             DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
             
             NSString* audioFileName = self.audioFileName;
 
@@ -417,7 +430,7 @@ else
         }
         else
         {
-            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+//            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
     
@@ -438,7 +451,7 @@ else
         }
         else
         {
-            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+//            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
     
@@ -456,7 +469,7 @@ else
         }
         else
         {
-            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+//            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
     
@@ -473,7 +486,7 @@ else
         }
         else
         {
-            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+//            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
     
@@ -493,7 +506,7 @@ else
         }
         else
         {
-            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+//            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
     
@@ -513,7 +526,7 @@ else
         }
         else
         {
-            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+//            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
     
@@ -533,7 +546,7 @@ else
         }
         else
         {
-            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+//            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
     
@@ -553,7 +566,7 @@ else
         }
         else
         {
-            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+//            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
         }
     }
 }
@@ -632,7 +645,7 @@ else
     }
     else
     {
-        DDLogInfo(@"API Name = %@, Data = %@, Status Code = %d", self.downLoadEntityJobName, data, statusCode);
+//        DDLogInfo(@"API Name = %@, Data = %@, Status Code = %d", self.downLoadEntityJobName, data, statusCode);
     }
     
 }
@@ -938,7 +951,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 //    NSLog(@"bytesWritten = %lld", bytesWritten);
 
     
-    DDLogInfo(@"totalBytesWritten = %lld", totalBytesWritten);
+    DDLogInfo(@"Total bytes written in the file = %lld", totalBytesWritten);
 
 //    NSLog(@"totalBytesExpectedToWrite = %lld", totalBytesExpectedToWrite);
 
