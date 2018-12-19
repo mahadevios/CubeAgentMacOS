@@ -239,7 +239,7 @@
     {
         DDLogInfo(@"Duplicate file found, file name = %@",audioFileName);
 
-        DDLogInfo(@"Moving duplicate audio file to backup folder");
+        DDLogInfo(@"Moving duplicate audio file to BackupAudio folder");
 
         [self performCleanUp:audioFileName];
         
@@ -535,7 +535,7 @@
 
 -(void)validateAudioFileDownloadReponse:(NSNotification*)notification
 {
-    DDLogInfo(@"Finished checking audio files download");
+    DDLogInfo(@"Finished checking audio files for download");
 
     NSDictionary* dict = notification.object;
     
@@ -652,7 +652,7 @@
         }
         else
         {
-            DDLogInfo(@"No Audio file to download");
+            DDLogInfo(@"No Audio file available for download");
 
             dispatch_async(dispatch_get_main_queue(), ^{
                 
@@ -858,7 +858,7 @@
     // remove object from dictionary
     //    [listOfAudioFilesToUploadDict removeObjectForKey:audioFileName];
     
-    DDLogInfo(@"Audio file moved to backup folder");
+    DDLogInfo(@"Audio file moved to BackupAudio folder");
 
     // move file to backup
     [[AppPreferences sharedAppPreferences] moveAudioFileToBackup:audioFilePath];
@@ -992,7 +992,7 @@
 
 -(void)getFilesToBeUploadFromUploadFilesFolder
 {
-    DDLogInfo(@"Checking audio files to be upload");
+    DDLogInfo(@"Checking audio files for upload");
     
     NSString* filePath =  [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
     
@@ -1022,7 +1022,7 @@
 
 -(void) checkBrowserAudioFilesForDownload
 {
-    DDLogInfo(@"Checking audio files to be download");
+    DDLogInfo(@"Checking audio files for download");
 
     [[APIManager sharedManager] getBrowserAudioFilesForDownload:[NSString stringWithFormat:@"%ld", [AppPreferences sharedAppPreferences].loggedInUser.userId]];
 }
@@ -1149,7 +1149,7 @@
 
         self.checkingFilesLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
 
-        DDLogInfo(@"Finished checking audio file(s), no file avaliable to upload");
+        DDLogInfo(@"Finished checking audio file(s), no file avaliable for upload");
 
         DDLogInfo(@"Checked folder path = %@", [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath]);
 

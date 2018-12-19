@@ -288,7 +288,7 @@ static APIManager *singleton = nil;
 {
     if ([[AppPreferences sharedAppPreferences] isReachable])
     {
-        DDLogInfo(@"Checking duplicate audio files");
+        DDLogInfo(@"Checking for duplicate audio files");
         
         NSError* error;
         NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:userid,@"userid",filename,@"OriginalFileName", nil];
@@ -470,7 +470,7 @@ static APIManager *singleton = nil;
     if ([[AppPreferences sharedAppPreferences] isReachable])
     {
         
-        DDLogInfo(@"Getting completed files dictation ids");
+        DDLogInfo(@"Getting dictation ids of completed files");
         
         NSError* error;
         NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userid", nil];

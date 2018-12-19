@@ -617,7 +617,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="417" height="211"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="oqD-7I-PO3">
+                                                <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="oqD-7I-PO3">
                                                     <rect key="frame" x="0.0" y="0.0" width="417" height="211"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -694,7 +694,7 @@
                 </viewController>
                 <customObject id="Lve-wz-UFv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="645.5" y="624"/>
+            <point key="canvasLocation" x="645" y="624"/>
         </scene>
     </scenes>
     <resources>
