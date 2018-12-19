@@ -198,7 +198,7 @@ static APIManager *singleton = nil;
     }
     else
     {
-        
+         [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please check your internet connection."];
     }
     
 }
@@ -244,7 +244,7 @@ static APIManager *singleton = nil;
     }
     else
     {
-        
+         [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please check your internet connection."];
     }
 
 }
@@ -278,7 +278,7 @@ static APIManager *singleton = nil;
     }
     else
     {
-        
+         [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please check your internet connection."];
     }
 
 }
@@ -318,7 +318,7 @@ static APIManager *singleton = nil;
     }
     else
     {
-        
+         [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please check your internet connection."];
     }
 }
 
@@ -353,7 +353,7 @@ static APIManager *singleton = nil;
     }
     else
     {
-        
+         [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please check your internet connection."];
     }
 }
 
@@ -392,7 +392,7 @@ static APIManager *singleton = nil;
     }
     else
     {
-        
+         [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please check your internet connection."];
     }
 
 }
@@ -426,7 +426,7 @@ static APIManager *singleton = nil;
     }
     else
     {
-        
+         [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please check your internet connection."];
     }
 
 }
@@ -460,7 +460,7 @@ static APIManager *singleton = nil;
     }
     else
     {
-        
+         [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please check your internet connection."];
     }
 
 }
@@ -496,7 +496,7 @@ static APIManager *singleton = nil;
     }
     else
     {
-        
+         [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please check your internet connection."];
     }
     
 }
