@@ -185,14 +185,14 @@
 {
     NSDictionary* responseDict = notification.object;
     
-     DDLogInfo(@"%@",responseDict);
+//     DDLogInfo(@"%@",responseDict);
 }
 
 -(void)validateGenerateFileNameReponse:(NSNotification*)notification
 {
     NSDictionary* responseDict = notification.object;
 
-    DDLogInfo(@"%@",responseDict);
+//    DDLogInfo(@"%@",responseDict);
 
 }
 
@@ -246,9 +246,13 @@
         [listOfAudioFilesToUploadDict removeObjectForKey:[[audioFileName lastPathComponent] lastPathComponent]];
        
         // if internet not reachable and no file is in queue to upload or download queue then start the cycle again
-        if (![AppPreferences sharedAppPreferences].isReachable && ([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1))
+        if (![AppPreferences sharedAppPreferences].isReachable)
         {
             [self checkForNewFilesSubSequentTimer];
+        }
+        else if (([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1))
+        {
+             [self checkForNewFilesSubSequentTimer];
         }
 //        DDLogInfo(@"Checking next file to upload");
 
@@ -293,9 +297,14 @@
 
 -(void)validateTCIDViewReponse:(NSNotification*)notification
 {
-    // if internet not reachable and no file is in queue to upload or download queue then start the cycle again
-    DDLogInfo(@"Finished checking TC ID View");
     
+    // we have started the timer in duplicate, if we got this reposnse then we have file to upload hence  invalidate the timer
+    if ([checkForNewFilesTimer isValid])
+    {
+        [checkForNewFilesTimer invalidate];
+    }
+    DDLogInfo(@"Finished checking TC ID View");
+    // if internet not reachable and no file is in queue to upload or download queue then start the cycle again
      if (![AppPreferences sharedAppPreferences].isReachable && ([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1))
      {
          [self checkForNewFilesSubSequentTimer];

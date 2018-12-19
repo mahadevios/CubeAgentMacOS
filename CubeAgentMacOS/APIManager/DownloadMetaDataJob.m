@@ -118,7 +118,7 @@
     
 //    [urlConnection start];
 //    NSLog(@"%@",urlConnection);
-    DDLogInfo(@"%@",urlConnection);
+//    DDLogInfo(@"%@",urlConnection);
 
 }
 
@@ -139,7 +139,7 @@
     
     statusCode = (int)[httpResponse statusCode];
     
-    DDLogInfo(@"API Name %@, Status Code = %d",self.downLoadEntityJobName, statusCode);
+//    DDLogInfo(@"API Name %@, Status Code = %d",self.downLoadEntityJobName, statusCode);
     
     ////NSLog(@"Status code: %d",statusCode);
 }
@@ -151,7 +151,7 @@
 
 	[responseData appendData:data];
     
-    DDLogInfo(@"API Name %@, Receive Data", self.downLoadEntityJobName);
+//    DDLogInfo(@"API Name %@, Receive Data", self.downLoadEntityJobName);
 
 }
 
@@ -167,12 +167,24 @@
 //    NSLog(@"Failed %@",error.description);
 //    NSLog(@"%@ Entity Job -",self.downLoadEntityJobName);
     
-    DDLogInfo(@"API Name %@, Complete with Error = %@", self.downLoadEntityJobName, [self shortErrorFromError:error]);
-
-    if ([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
+    if (error.code != 0)
     {
+        NSArray* arr = [self.downLoadEntityJobName componentsSeparatedByString:@"_"];
         
+        if (arr.count > 1)
+        {
+            NSString* apiSubName = [arr objectAtIndex:1];
+            
+            DDLogInfo(@"%@ Complete with Error = %@", apiSubName, [self shortErrorFromError:error]);
+        }
+        
+
     }
+   
+//    if ([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
+//    {
+//
+//    }
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
