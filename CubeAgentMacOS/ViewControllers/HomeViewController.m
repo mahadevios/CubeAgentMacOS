@@ -119,10 +119,14 @@
 
 -(void)validateUpdateDictationIdReponse:(NSNotification*)notification
 {
+    DDLogInfo(@"Doc file status updated successfully");
+    
     if ([AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count > 0)
     {
         if ([AppPreferences sharedAppPreferences].isReachable)
         {
+            DDLogInfo(@"Downloading next doc file");
+            
             NSBlockOperation* operation = [[AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray objectAtIndex:0];
             
             [[AppPreferences sharedAppPreferences].docDownloadQueue addOperation:operation];
@@ -165,6 +169,7 @@
 
 -(void)validateDuplicateFileReponse:(NSNotification*)notification
 {
+    
     NSDictionary* responseString = notification.object;
     
     NSString* response = [responseString objectForKey:@"response"];
@@ -260,7 +265,8 @@
 -(void)validateTCIDViewReponse:(NSNotification*)notification
 {
     // if internet not reachable and no file is in queue to upload or download queue then start the cycle again
-
+    DDLogInfo(@"Finished checking TC ID View");
+    
      if (![AppPreferences sharedAppPreferences].isReachable && ([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1))
      {
          [self checkForNewFilesSubSequentTimer];
@@ -324,6 +330,8 @@
         
         if ([AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1)
         {
+            DDLogInfo(@"Uploading audio file %@", audioFile.fileName);
+            
             // set row count of audio file so that we can reload bytes sent column later
             int tableViewRowCount = totalFilesToBeAddedInTableView;
             
@@ -401,6 +409,8 @@
     
     if ([isUploaded  isEqual: @"Uploaded"])
     {
+        DDLogInfo(@"Finished Uploading audio file %@", audioFileObject.fileName);
+
         [self performCleanUp:audioFileObject.originalFileNamePath];
         
         // remove object from dictionary
@@ -409,6 +419,8 @@
     }
     else
     {
+        DDLogInfo(@"Uploading failed filename %@", audioFileObject.fileName);
+
         [self performCleanUp:audioFileObject.originalFileNamePath];
         
         [listOfAudioFilesToUploadDict removeObjectForKey:audioFileObject.fileName];
@@ -443,6 +455,8 @@
             
         }
         
+        DDLogInfo(@"Uploading next audio file");
+
         [[AppPreferences sharedAppPreferences].audioUploadQueue addOperation:nextOperation];
         
         [[AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray  removeObjectAtIndex:0];
@@ -457,6 +471,8 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
+                DDLogInfo(@"Finished Uploading all audio files");
+
                 self.uploadingCountLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
                 
                 self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Uploaded %lu of %lu", (unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount,(unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount];
@@ -481,7 +497,8 @@
 
 -(void)validateAudioFileDownloadReponse:(NSNotification*)notification
 {
-    
+    DDLogInfo(@"Finished checking audio files download");
+
     NSDictionary* dict = notification.object;
     
     NSString* downloadStatus = [dict valueForKey:@"downloadStatus"];
@@ -507,6 +524,8 @@
         {
             NSArray* responseArray = response;
             
+            DDLogInfo(@"%ld audio files downloaded successfully", responseArray.count);
+
             for (int i =0; i < responseArray.count; i++)
             {
                 NSDictionary* response = [responseArray objectAtIndex:0];
@@ -538,18 +557,29 @@
                 
                 NSData* decryptedData = [encodedData AES256DecryptWithKey:SECRET_KEY];
                 //
-                
+
                 if ([[NSFileManager defaultManager] fileExistsAtPath:newFilePath])
                 {
                     [[NSFileManager defaultManager] removeItemAtPath:newFilePath error:&error1];
                 }
                 //            BOOL isWritten = [decryptedData writeToFile:newFilePath atomically:YES];
                 
-                BOOL isWritten = [decryptedData writeToFile:newFilePath options:NSDataWritingAtomic error:nil];
+                BOOL isWritten = [decryptedData writeToFile:newFilePath options:NSDataWritingAtomic error:&error];
                 
                 bool isDeleted = [[NSFileManager defaultManager] removeItemAtURL:downloadLocation error:&error1];
                 
-                
+                if (isWritten)
+                {
+                    DDLogInfo(@"Downloaded audio file name = %@", audioFile.fileName);
+
+                    DDLogInfo(@"Downloaded audio file %@ moved to backup folder", audioFile.fileName);
+
+                }
+                else
+                {
+                    DDLogInfo(@"Failed to write audio file %@, error occured = %@", audioFile.fileName, error.localizedDescription);
+
+                }
                 int tableViewRowCount = totalFilesToBeAddedInTableView;
                 
                 audioFile.rowNumber = tableViewRowCount;
@@ -584,6 +614,8 @@
         }
         else
         {
+            DDLogInfo(@"No Audio file to download");
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [self performSelector:@selector(cleanUpTableViewAfterAudioDownload) withObject:nil afterDelay:3.0];
@@ -600,20 +632,29 @@
     NSDictionary* responseDict = notification.object;
     
     NSString* dictationIdsString = [responseDict valueForKey:@"Id"];
+    
+    DDLogInfo(@"Finished checking dictation ids");
+    
     //653047,653048,653049,653050,653051,653052
     if([dictationIdsString isEqualToString:@""])
     {
 //        [self.dictationIdsArrayForDownload removeAllObjects];
         self.dictationIdsArrayForDownload = [@[] mutableCopy];
+        
         [self checkForNewFilesSubSequentTimer];
+        
+        DDLogInfo(@"No Doc file available for download");
+
     }
     else
     {
         self.dictationIdsArrayForDownload = [@[] mutableCopy];
 //
         
-        self.dictationIdsArrayForDownload = [dictationIdsString componentsSeparatedByString:@","];
+        self.dictationIdsArrayForDownload = [[dictationIdsString componentsSeparatedByString:@","] mutableCopy];
         
+        DDLogInfo(@"%ld Doc file(s) available for download", self.dictationIdsArrayForDownload.count);
+
         if (self.dictationIdsArrayForDownload.count < 1 || ![AppPreferences sharedAppPreferences].isReachable)
         {
             [self checkForNewFilesSubSequentTimer];
@@ -622,7 +663,8 @@
         }
         for (int i =0 ; i < self.dictationIdsArrayForDownload.count; i++)
         {
-            
+            DDLogInfo(@"Downloading Doc file");
+
             NSOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
                 
                 [[APIManager sharedManager] downloadFile:[self.dictationIdsArrayForDownload objectAtIndex:i]];
@@ -710,6 +752,16 @@
             
             bool isDeleted = [[NSFileManager defaultManager] removeItemAtURL:downloadLocation error:&error1];
             
+            if (isWritten)
+            {
+                DDLogInfo(@"Finished downloading Doc file, name = %@", audioFile.fileName);
+
+            }
+            else
+            {
+                DDLogInfo(@"Failed to write downloaded doc file, name = %@", audioFile.fileName);
+
+            }
             long fileSize = [[AppPreferences sharedAppPreferences] getFileSize:newFilePath];
             
             audioFile.fileSize = fileSize;
@@ -727,6 +779,8 @@
             
             ++totalFilesToBeAddedInTableView;
 
+            DDLogInfo(@"Updating downloade doc file status, name = %@", audioFile.fileName);
+            
             [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
 
         
@@ -827,13 +881,13 @@
 
 -(void)checkForFilesFirstTimeAfterLoginRapidTimer
 {
-    checkForNewFilesTimer =  [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(checkForNewFilesForFirstTime) userInfo:nil repeats:YES];
-    
+    checkForNewFilesTimer =  [NSTimer scheduledTimerWithTimeInterval:20.0 target:self selector:@selector(checkForNewFilesForFirstTime) userInfo:nil repeats:YES];
     
 }
 
 -(void)checkForNewFilesForFirstTime
 {
+    
     [self getFilesToBeUploadFromUploadFilesFolder];
     
      [checkForNewFilesTimer invalidate];
@@ -848,7 +902,7 @@
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        self->checkForNewFilesTimer =  [NSTimer scheduledTimerWithTimeInterval:20.0 target:self selector:@selector(checkForNewFilesForSubSequentTime) userInfo:nil repeats:YES];
+        self->checkForNewFilesTimer =  [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(checkForNewFilesForSubSequentTime) userInfo:nil repeats:YES];
     });
     
     
@@ -900,7 +954,7 @@
 
 -(void)getFilesToBeUploadFromUploadFilesFolder
 {
-    DDLogInfo(@"Checking audio files to be upload from directory");
+    DDLogInfo(@"Checking audio files to be upload");
     
     NSString* filePath =  [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
     
@@ -1064,7 +1118,7 @@
         [self checkBrowserAudioFilesForDownload];
     }
    
-    NSLog(@"directoryContents ====== %@",@"ds");
+//    NSLog(@"directoryContents ====== %@",@"ds");
 
 }
 

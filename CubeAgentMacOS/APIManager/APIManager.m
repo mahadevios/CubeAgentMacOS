@@ -171,35 +171,35 @@ static APIManager *singleton = nil;
 
 -(void) getTransCompanyName:(NSString*) tcId
 {
-    //    if ([[AppPreferences sharedAppPreferences] isReachable])
-    //    {
-    
-    NSError* error;
-    NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:tcId,@"TCID", nil];
-    
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
-                                                       options:0 // Pass 0 if you don't care about the readability of the generated string
-                                                         error:&error];
-    
-    
-    NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
-    
-    
-    
-    NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
-    
-    NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
-    
-    NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
-    
-    DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:GET_TC_NAME_API withRequestParameter:array withResourcePath:GET_TC_NAME_API withHttpMethd:POST];
-    [downloadmetadatajob startMetaDataDownLoad];
-    //    }
-    //    else
-    //    {
-    //
-    //    }
+    if ([[AppPreferences sharedAppPreferences] isReachable])
+    {
+        
+        NSError* error;
+        NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:tcId,@"TCID", nil];
+        
+        
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
+                                                           options:0 // Pass 0 if you don't care about the readability of the generated string
+                                                             error:&error];
+        
+        
+        NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
+        
+        
+        
+        NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
+        
+        NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
+        
+        NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
+        
+        DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:GET_TC_NAME_API withRequestParameter:array withResourcePath:GET_TC_NAME_API withHttpMethd:POST];
+        [downloadmetadatajob startMetaDataDownLoad];
+    }
+    else
+    {
+        
+    }
     
 }
 
@@ -215,274 +215,289 @@ static APIManager *singleton = nil;
 
 -(void) setVCID:(NSString*) userId
 {
-    //    if ([[AppPreferences sharedAppPreferences] isReachable])
-    //    {
-    DDLogInfo(@"Getting VC Info");
+    if ([[AppPreferences sharedAppPreferences] isReachable])
+    {
+        DDLogInfo(@"Getting VC Info");
+        
+        NSError* error;
+        NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userid", nil];
+        
+        
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
+                                                           options:0 // Pass 0 if you don't care about the readability of the generated string
+                                                             error:&error];
+        
+        
+        NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
+        
+        
+        
+        NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
+        
+        NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
+        
+        NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
+        
+        DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:FTP_SET_VC_ID_VERIFY_API withRequestParameter:array withResourcePath:FTP_SET_VC_ID_VERIFY_API withHttpMethd:POST];
+        
+        [downloadmetadatajob startMetaDataDownLoad];
+    }
+    else
+    {
+        
+    }
 
-    NSError* error;
-    NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userid", nil];
-    
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
-                                                       options:0 // Pass 0 if you don't care about the readability of the generated string
-                                                         error:&error];
-    
-    
-    NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
-    
-    
-    
-    NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
-    
-    NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
-    
-    NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
-    
-    DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:FTP_SET_VC_ID_VERIFY_API withRequestParameter:array withResourcePath:FTP_SET_VC_ID_VERIFY_API withHttpMethd:POST];
-    
-    [downloadmetadatajob startMetaDataDownLoad];
-    //    }
-    //    else
-    //    {
-    //
-    //    }
-    
 }
 
 -(void) getSingleQueryValueComment:(NSString*) comment
 {
-    //    if ([[AppPreferences sharedAppPreferences] isReachable])
-    //    {
-    
-    NSError* error;
-    NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:comment,@"strComment", nil];
-    
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
-                                                       options:0 // Pass 0 if you don't care about the readability of the generated string
-                                                         error:&error];
-    
-    
-    NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
-    
-    
+    if ([[AppPreferences sharedAppPreferences] isReachable])
+    {
+        
+        NSError* error;
+        NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:comment,@"strComment", nil];
+        
+        
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
+                                                           options:0 // Pass 0 if you don't care about the readability of the generated string
+                                                             error:&error];
+        
+        
+        NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
+        
+        
+        
+        NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
+        
+        NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
+        
+        NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
+        
+        DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:GET_SINGLE_QEURY_EXECUTE_QUERY_API withRequestParameter:array withResourcePath:GET_SINGLE_QEURY_EXECUTE_QUERY_API withHttpMethd:POST];
+        [downloadmetadatajob startMetaDataDownLoad];
+    }
+    else
+    {
+        
+    }
 
-    NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
-    
-    NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
-    
-    NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
-    
-    DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:GET_SINGLE_QEURY_EXECUTE_QUERY_API withRequestParameter:array withResourcePath:GET_SINGLE_QEURY_EXECUTE_QUERY_API withHttpMethd:POST];
-    [downloadmetadatajob startMetaDataDownLoad];
-    //    }
-    //    else
-    //    {
-    //
-    //    }
-    
 }
 
 
 -(void) checkDuplicateAudioForDay:(NSString*) userid originalFileName:(NSString* )filename
 {
-    
-    DDLogInfo(@"Checking duplicate audio files");
-
-    NSError* error;
-    NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:userid,@"userid",filename,@"OriginalFileName", nil];
-    
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
-                                                       options:0 // Pass 0 if you don't care about the readability of the generated string
-                                                         error:&error];
-    
-    
-    NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
-    
-    
-    
-    NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
-    
-    NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
-    
-    NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
-    
-    DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:CHECK_DUPLICATE_AUDIO_FOR_DAY_API withRequestParameter:array withResourcePath:CHECK_DUPLICATE_AUDIO_FOR_DAY_API withHttpMethd:POST];
-    
-    downloadmetadatajob.audioFileName = filename;
-    
-    [downloadmetadatajob startMetaDataDownLoad];
-    
+    if ([[AppPreferences sharedAppPreferences] isReachable])
+    {
+        DDLogInfo(@"Checking duplicate audio files");
+        
+        NSError* error;
+        NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:userid,@"userid",filename,@"OriginalFileName", nil];
+        
+        
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
+                                                           options:0 // Pass 0 if you don't care about the readability of the generated string
+                                                             error:&error];
+        
+        
+        NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
+        
+        
+        
+        NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
+        
+        NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
+        
+        NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
+        
+        DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:CHECK_DUPLICATE_AUDIO_FOR_DAY_API withRequestParameter:array withResourcePath:CHECK_DUPLICATE_AUDIO_FOR_DAY_API withHttpMethd:POST];
+        
+        downloadmetadatajob.audioFileName = filename;
+        
+        [downloadmetadatajob startMetaDataDownLoad];
+        
+    }
+    else
+    {
+        
+    }
 }
 
 -(void) updateDownloadFileStatus:(NSString*) status dictationId:(NSString* )dictationId
 {
-    
-    NSError* error;
-    NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:dictationId,@"DictationID",status,@"FileStatus", nil];
-    
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
-                                                       options:0 // Pass 0 if you don't care about the readability of the generated string
-                                                         error:&error];
-    
-    
-    NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
-    
-    
-    
-    NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
-    
-    NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
-    
-    NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
-    
-    DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:UPDATE_DOWNLOAD_FILE_STATUS_API withRequestParameter:array withResourcePath:UPDATE_DOWNLOAD_FILE_STATUS_API withHttpMethd:POST];
-    
-    [downloadmetadatajob startMetaDataDownLoad];
-    
+    if ([[AppPreferences sharedAppPreferences] isReachable])
+    {
+        
+        NSError* error;
+        NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:dictationId,@"DictationID",status,@"FileStatus", nil];
+        
+        
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
+                                                           options:0 // Pass 0 if you don't care about the readability of the generated string
+                                                             error:&error];
+        
+        
+        NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
+        
+        
+        
+        NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
+        
+        NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
+        
+        NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
+        
+        DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:UPDATE_DOWNLOAD_FILE_STATUS_API withRequestParameter:array withResourcePath:UPDATE_DOWNLOAD_FILE_STATUS_API withHttpMethd:POST];
+        
+        [downloadmetadatajob startMetaDataDownLoad];
+        
+    }
+    else
+    {
+        
+    }
 }
 
 
 -(void) FTPGetTCIdView:(NSString*) userId originalFileName:(NSString* )filename
 {
-    //    if ([[AppPreferences sharedAppPreferences] isReachable])
-    //    {
-    
-    DDLogInfo(@"Getting File Info using TC Id");
+    if ([[AppPreferences sharedAppPreferences] isReachable])
+    {
+        
+        DDLogInfo(@"Getting File Info using TC Id");
+        
+        NSError* error;
+        NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userid", nil];
+        
+        
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
+                                                           options:0 // Pass 0 if you don't care about the readability of the generated string
+                                                             error:&error];
+        
+        
+        NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
+        
+        
+        
+        NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
+        
+        NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
+        
+        NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
+        
+        DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:FTP_GET_TC_ID_VIEW_API withRequestParameter:array withResourcePath:FTP_GET_TC_ID_VIEW_API withHttpMethd:POST];
+        
+        downloadmetadatajob.audioFileName = filename;
+        
+        [downloadmetadatajob startMetaDataDownLoad];
+    }
+    else
+    {
+        
+    }
 
-    NSError* error;
-    NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userid", nil];
-    
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
-                                                       options:0 // Pass 0 if you don't care about the readability of the generated string
-                                                         error:&error];
-    
-    
-    NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
-    
-    
-    
-    NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
-    
-    NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
-    
-    NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
-    
-    DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:FTP_GET_TC_ID_VIEW_API withRequestParameter:array withResourcePath:FTP_GET_TC_ID_VIEW_API withHttpMethd:POST];
-    
-    downloadmetadatajob.audioFileName = filename;
-    
-    [downloadmetadatajob startMetaDataDownLoad];
-    //    }
-    //    else
-    //    {
-    //
-    //    }
-    
 }
 
 -(void) uploadFile:(NSString*) data
 {
-    //    if ([[AppPreferences sharedAppPreferences] isReachable])
-    //    {
-    
-    NSError* error;
-    NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:data,@"FileNameStar", nil];
-    
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
-                                                       options:0 // Pass 0 if you don't care about the readability of the generated string
-                                                         error:&error];
-    
-    
-    NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
-    
-    
-    
-    NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
-    
-    NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
-    
-    NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
-    
-    DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:FILE_UPLOAD_API withRequestParameter:array withResourcePath:FILE_UPLOAD_API withHttpMethd:POST];
-    [downloadmetadatajob startMetaDataDownLoad];
-    //    }
-    //    else
-    //    {
-    //
-    //    }
-    
+    if ([[AppPreferences sharedAppPreferences] isReachable])
+    {
+        
+        NSError* error;
+        NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:data,@"FileNameStar", nil];
+        
+        
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
+                                                           options:0 // Pass 0 if you don't care about the readability of the generated string
+                                                             error:&error];
+        
+        
+        NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
+        
+        
+        
+        NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
+        
+        NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
+        
+        NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
+        
+        DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:FILE_UPLOAD_API withRequestParameter:array withResourcePath:FILE_UPLOAD_API withHttpMethd:POST];
+        [downloadmetadatajob startMetaDataDownLoad];
+    }
+    else
+    {
+        
+    }
+
 }
 
 -(void) getBrowserAudioFilesForDownload:(NSString*) userId
 {
-    //    if ([[AppPreferences sharedAppPreferences] isReachable])
-    //    {
-    
-    NSError* error;
-    NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userid", nil];
-    
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
-                                                       options:0 // Pass 0 if you don't care about the readability of the generated string
-                                                         error:&error];
-    
-    
-    NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
-    
-    
-    
-    NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
-    
-    NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
-    
-    NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
-    
-    DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:GET_BROWSER_AUDIO_FILES_DOWNLOAD_API withRequestParameter:array withResourcePath:GET_BROWSER_AUDIO_FILES_DOWNLOAD_API withHttpMethd:POST];
-    [downloadmetadatajob startMetaDataDownLoad];
-    //    }
-    //    else
-    //    {
-    //
-    //    }
-    
+    if ([[AppPreferences sharedAppPreferences] isReachable])
+    {
+        
+        NSError* error;
+        NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userid", nil];
+        
+        
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
+                                                           options:0 // Pass 0 if you don't care about the readability of the generated string
+                                                             error:&error];
+        
+        
+        NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
+        
+        
+        
+        NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
+        
+        NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
+        
+        NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
+        
+        DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:GET_BROWSER_AUDIO_FILES_DOWNLOAD_API withRequestParameter:array withResourcePath:GET_BROWSER_AUDIO_FILES_DOWNLOAD_API withHttpMethd:POST];
+        [downloadmetadatajob startMetaDataDownLoad];
+    }
+    else
+    {
+        
+    }
+
 }
 
 -(void) getDicatationIds:(NSString*) userId
 {
-    //    if ([[AppPreferences sharedAppPreferences] isReachable])
-    //    {
-    
-    NSError* error;
-    NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userid", nil];
-    
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
-                                                       options:0 // Pass 0 if you don't care about the readability of the generated string
-                                                         error:&error];
-    
-    
-    NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
-    
-    
-    
-    NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
-    
-    NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
-    
-    NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
-    
-    DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:GET_DICTATION_IDS_API withRequestParameter:array withResourcePath:GET_DICTATION_IDS_API withHttpMethd:POST];
-    [downloadmetadatajob startMetaDataDownLoad];
-    //    }
-    //    else
-    //    {
-    //
-    //    }
+    if ([[AppPreferences sharedAppPreferences] isReachable])
+    {
+        
+        DDLogInfo(@"Getting completed files dictation ids");
+        
+        NSError* error;
+        NSDictionary *dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:userId,@"userid", nil];
+        
+        
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary1
+                                                           options:0 // Pass 0 if you don't care about the readability of the generated string
+                                                             error:&error];
+        
+        
+        NSData *dataDesc = [jsonData AES256EncryptWithKey:SECRET_KEY];
+        
+        
+        
+        NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
+        
+        NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
+        
+        NSMutableArray* array=[NSMutableArray arrayWithObjects:dictionary2, nil];
+        
+        DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:GET_DICTATION_IDS_API withRequestParameter:array withResourcePath:GET_DICTATION_IDS_API withHttpMethd:POST];
+        [downloadmetadatajob startMetaDataDownLoad];
+    }
+    else
+    {
+        
+    }
     
 }
 
