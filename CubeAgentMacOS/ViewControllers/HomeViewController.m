@@ -229,7 +229,7 @@
             else
             {
                 // if internet not reachable and no file is in queue to upload or download queue then start the cycle again
-                if ([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1)
+                if (!([AppPreferences sharedAppPreferences].isReachable) && ([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1))
                 {
                     [self checkForNewFilesSubSequentTimer];
                 }
@@ -287,13 +287,13 @@
     NSDictionary* verifyDict = [verifyArray objectAtIndex:0];
     
     
-    vcIdList = [[VCIdList alloc] init];
+    vcIdList1 = [[VCIdList alloc] init];
     
     //    vcIdList.AutoOutsourceTime =  [[verifyDict valueForKey:@"AutoOutsourceTime"] intValue];
-    vcIdList.Inhouse =  [[verifyDict valueForKey:@"Inhouse"] intValue];
-    vcIdList.TCID =  [[verifyDict valueForKey:@"TCID"] intValue];
-    vcIdList.VCID =  [[verifyDict valueForKey:@"VCID"] intValue];
-    vcIdList.verify =  [[verifyDict valueForKey:@"Verify"] boolValue];
+    vcIdList1.Inhouse =  [[verifyDict valueForKey:@"Inhouse"] intValue];
+    vcIdList1.TCID =  [[verifyDict valueForKey:@"TCID"] intValue];
+    vcIdList1.VCID =  [[verifyDict valueForKey:@"VCID"] intValue];
+    vcIdList1.verify =  [[verifyDict valueForKey:@"Verify"] boolValue];
     
 }
 
@@ -324,9 +324,11 @@
         NSString* audioFileName = [responseString objectForKey:@"audioFileName"];
         
         [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
-        tcIdList = nil;
+//        tcIdList = nil;
         
-        tcIdList = [ViewTCIdList new];
+        VCIdList* vcIdList = vcIdList1;
+        
+        ViewTCIdList *tcIdList = [ViewTCIdList new];
         
         tcIdList.ClientName = [tcIdListDict valueForKey:@"ClientName"];
         tcIdList.ClinicName = [[tcIdListDict valueForKey:@"ClinicName"] stringByReplacingOccurrencesOfString:@" " withString:@"-"];
@@ -363,7 +365,7 @@
             
             job.audioFileObject = audioFile;
             
-            [job uploadFileAfterGettingdatabaseValues:self->tcIdList vcList:self->vcIdList audioFile:audioFile];
+            [job uploadFileAfterGettingdatabaseValues:tcIdList vcList:vcIdList audioFile:audioFile];
             
         }];
         
@@ -373,7 +375,7 @@
             DDLogInfo(@"Uploading audio file %@", audioFile.fileName);
             
             // set row count of audio file so that we can reload bytes sent column later
-            int tableViewRowCount = totalFilesToBeAddedInTableView;
+            int tableViewRowCount = [AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView;
             
             audioFile.rowNumber = tableViewRowCount;
             
@@ -381,41 +383,44 @@
             
             [self.uploadedAudioFilesArrayForTableView addObject:audioFile];
             
-            NSIndexSet* rowIndexSet = [[NSIndexSet alloc] initWithIndex:totalFilesToBeAddedInTableView];
+            NSIndexSet* rowIndexSet = [[NSIndexSet alloc] initWithIndex:[AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [self.tableView insertRowsAtIndexes:rowIndexSet withAnimation:NSTableViewAnimationEffectNone];
                 
+                ++[AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView;
+                
+                [[AppPreferences sharedAppPreferences].audioUploadQueue addOperation:blockOperation];
+                
             });
             //        [self.tableView reloadData];
             
-            ++totalFilesToBeAddedInTableView;
-            
-            [[AppPreferences sharedAppPreferences].audioUploadQueue addOperation:blockOperation];
+           
             
             
         }
         else
         {
-            // set row count (to queued + 1) of audio file so that we can reload bytes sent column later
-            int tableViewRowCount = totalFilesToBeAddedInTableView;
-            
-            audioFile.rowNumber = tableViewRowCount;
-            
-            audioFile.status = @"In Queue";
-            
-            
-            [self.uploadedAudioFilesArrayForTableView addObject:audioFile];
-            //
-            NSIndexSet* rowIndexSet = [[NSIndexSet alloc] initWithIndex:totalFilesToBeAddedInTableView];
-            
+           
             dispatch_async(dispatch_get_main_queue(), ^{
+                
+                // set row count (to queued + 1) of audio file so that we can reload bytes sent column later
+                int tableViewRowCount = [AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView;
+;
+                audioFile.rowNumber = tableViewRowCount;
+                
+                audioFile.status = @"In Queue";
+                
+                
+                [self.uploadedAudioFilesArrayForTableView addObject:audioFile];
+                //
+                NSIndexSet* rowIndexSet = [[NSIndexSet alloc] initWithIndex:[AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView];
                 
                 [self.tableView insertRowsAtIndexes:rowIndexSet withAnimation:NSTableViewAnimationEffectNone];
                 
-                ++self->totalFilesToBeAddedInTableView;
-                
+                ++[AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView;
+
                 [[AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray addObject:blockOperation];
                 
             });
@@ -470,16 +475,22 @@
     
     if ([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count > 0)
     {
-        NSBlockOperation* nextOperation = [[AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray objectAtIndex:0];
+       
         
         // to update the status "uploaded" in tableview
 //        for (int i = audioFileObject.rowNumber+1; i < self.uploadedAudioFilesArrayForTableView.count; i++)
 //        {
-            AudioFile* tempFileObj = [self.uploadedAudioFilesArrayForTableView objectAtIndex:audioFileObject.rowNumber+1];
+        
             
 //            if ([tempFileObj.fileType isEqualToString:@"AudioUpload"])
 //            {
-        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+             NSBlockOperation* nextOperation = [[AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray objectAtIndex:0];
+            
+              AudioFile* tempFileObj = [self.uploadedAudioFilesArrayForTableView objectAtIndex:audioFileObject.rowNumber+1];
+            
+               
                 tempFileObj.status = @"Uploading";
                 
                 [self.uploadedAudioFilesArrayForTableView replaceObjectAtIndex:audioFileObject.rowNumber+1 withObject:tempFileObj];
@@ -488,12 +499,14 @@
                                    
                 NSIndexSet* columnIndexSet = [[NSIndexSet alloc] initWithIndex:3];
         
-                dispatch_async(dispatch_get_main_queue(), ^{
-                   
-                    
-                    [self.tableView reloadDataForRowIndexes:rowIndexSet columnIndexes:columnIndexSet];
-                    
-//                    [self.tableView reloadData];
+//                    [self.tableView reloadDataForRowIndexes:rowIndexSet columnIndexes:columnIndexSet];
+            
+                    [self.tableView reloadData];
+            DDLogInfo(@"Uploading next audio file");
+            
+            [[AppPreferences sharedAppPreferences].audioUploadQueue addOperation:nextOperation];
+            
+            [[AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray  removeObjectAtIndex:0];
                 });
                 
 //                break;
@@ -501,11 +514,7 @@
         
 //        }
         
-        DDLogInfo(@"Uploading next audio file");
-
-        [[AppPreferences sharedAppPreferences].audioUploadQueue addOperation:nextOperation];
-        
-        [[AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray  removeObjectAtIndex:0];
+      
         
     }
     else
@@ -626,13 +635,13 @@
                     DDLogInfo(@"Failed to write audio file %@, error occured = %@", audioFile.fileName, error.localizedDescription);
 
                 }
-                int tableViewRowCount = totalFilesToBeAddedInTableView;
+                int tableViewRowCount = [AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView;
                 
                 audioFile.rowNumber = tableViewRowCount;
                 
                 audioFile.fileType = @"AudioDownload";
                 
-                ++totalFilesToBeAddedInTableView;
+                ++[AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView;
                 
                 [self.uploadedAudioFilesArrayForTableView addObject:audioFile];
                 
@@ -812,7 +821,7 @@
             
             audioFile.fileSize = fileSize;
             
-            int tableViewRowCount = totalFilesToBeAddedInTableView;
+            int tableViewRowCount = [AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView;
             
             audioFile.rowNumber = tableViewRowCount;
             
@@ -820,10 +829,10 @@
             
             [self.uploadedAudioFilesArrayForTableView addObject:audioFile];
             
-            NSIndexSet* rowIndexSet = [[NSIndexSet alloc] initWithIndex:totalFilesToBeAddedInTableView];
+            NSIndexSet* rowIndexSet = [[NSIndexSet alloc] initWithIndex:[AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView];
             
             
-            ++totalFilesToBeAddedInTableView;
+            ++[AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView;
 
             DDLogInfo(@"Updating downloade doc file status, name = %@", audioFile.fileName);
             
@@ -888,7 +897,7 @@
     
     [self.uploadedAudioFilesArrayForTableView removeAllObjects];
     
-    self->totalFilesToBeAddedInTableView = 0;
+    [AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView = 0;
     
     [self.tableView reloadData];
     
@@ -900,7 +909,7 @@
 {
     [self.uploadedAudioFilesArrayForTableView removeAllObjects];
     
-    self->totalFilesToBeAddedInTableView = 0;
+    [AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView = 0;
     
     [self.tableView reloadData];
     
@@ -912,7 +921,7 @@
 {
     [self.uploadedAudioFilesArrayForTableView removeAllObjects];
     
-    self->totalFilesToBeAddedInTableView = 0;
+    [AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView = 0;
     
     [self.tableView reloadData];
     
@@ -946,7 +955,13 @@
     {
         [checkForNewFilesTimer invalidate];
     }
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if ([self->checkForNewFilesTimer isValid])
+        {
+            [self->checkForNewFilesTimer invalidate];
+        }
+    });
     dispatch_async(dispatch_get_main_queue(), ^{
         self->checkForNewFilesTimer =  [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(checkForNewFilesForSubSequentTime) userInfo:nil repeats:YES];
     });
@@ -1095,7 +1110,7 @@
     {
         if (![[AppPreferences sharedAppPreferences].supportedAudioFileExtensions containsObject:[audioNameAsKey pathExtension]])
         {
-            // Found Image File
+            DDLogInfo(@"%@ File extension not supported",audioNameAsKey);
             [listOfAudioFilesToUploadDict removeObjectForKey:audioNameAsKey];
         }
     }

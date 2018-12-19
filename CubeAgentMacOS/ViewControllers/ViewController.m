@@ -258,7 +258,7 @@
 
     NSString* responseString = dictObj.object;
     
-    NSMutableArray* supportedAudioFormatArray = [responseString componentsSeparatedByString:@","];
+    NSMutableArray* supportedAudioFormatArray = [[responseString componentsSeparatedByString:@","] mutableCopy];
     
     [supportedAudioFormatArray removeObject:@""];
     

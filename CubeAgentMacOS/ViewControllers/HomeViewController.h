@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSMutableDictionary *listOfAudioFilesToUploadDict;
 
     ViewTCIdList* tcIdList;
-    VCIdList* vcIdList;
+    VCIdList* vcIdList1;
     NSTimer* progressTimer;
     NSTimer* checkForNewFilesTimer;
     int totalFilesToBeAddedInTableView;
