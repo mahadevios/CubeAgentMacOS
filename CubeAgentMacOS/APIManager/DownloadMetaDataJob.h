@@ -44,6 +44,8 @@
     NSURLSessionUploadTask* uploadTask;
     NSURLSession* session;
     NSURLConnection *urlConnection;
+    NSURLSessionConfiguration * backgroundConfig;
+   
 }
 
 /*================================================================================================================================================*/
@@ -64,6 +66,8 @@
 @property (nonatomic,assign)  NSNumber              *isNewMatchFound;
 
 @property (nonatomic,strong)  NSString* firstUploadingFile;
+ @property (nonatomic,strong)  NSString* taskIdentifier;
+@property (nonatomic)  BOOL isDidReceiveDataCalled;
 
 -(id) initWithdownLoadEntityJobName:(NSString *) jobName withRequestParameter:(id) localRequestParameter withResourcePath:(NSString *) resourcePath withHttpMethd:(NSString *) httpMethodParameter;
 -(void) startMetaDataDownLoad;

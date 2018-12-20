@@ -360,12 +360,17 @@
             
             
             DownloadMetaDataJob* job = [DownloadMetaDataJob new];
-            
+
             job.downLoadEntityJobName = FILE_UPLOAD_API;
-            
+
             job.audioFileObject = audioFile;
-            
+
             [job uploadFileAfterGettingdatabaseValues:tcIdList vcList:vcIdList audioFile:audioFile];
+//            APIManager* apiManager = [APIManager sharedManager];
+//
+//            apiManager.audioFileObject = audioFile;
+//
+//            [apiManager uploadFileAfterGettingdatabaseValues:tcIdList vcList:vcIdList audioFile:audioFile];
             
         }];
         
@@ -451,10 +456,11 @@
     
     NSString* isUploaded = audioFileObject.status;
     
-    [AppPreferences sharedAppPreferences].totalUploadedCount = [AppPreferences sharedAppPreferences].totalUploadedCount + 1;
     
     if ([isUploaded  isEqual: @"Uploaded"])
     {
+        [AppPreferences sharedAppPreferences].totalUploadedCount = [AppPreferences sharedAppPreferences].totalUploadedCount + 1;
+
         DDLogInfo(@"Finished Uploading audio file %@", audioFileObject.fileName);
 
         [self performCleanUp:audioFileObject.originalFileNamePath];
@@ -465,11 +471,25 @@
     }
     else
     {
-        DDLogInfo(@"Uploading failed filename %@", audioFileObject.fileName);
+        DDLogInfo(@"File uploading failed filename %@", audioFileObject.fileName);
 
-        [self performCleanUp:audioFileObject.originalFileNamePath];
+//        [self performCleanUp:audioFileObject.originalFileNamePath];
         
-        [listOfAudioFilesToUploadDict removeObjectForKey:audioFileObject.fileName];
+//        [listOfAudioFilesToUploadDict removeObjectForKey:audioFileObject.fileName];
+        AudioFile* tempFileObj = [self.uploadedAudioFilesArrayForTableView objectAtIndex:audioFileObject.rowNumber];
+        
+        
+        tempFileObj.status = @"Not Uploaded";
+        
+        [self.uploadedAudioFilesArrayForTableView replaceObjectAtIndex:audioFileObject.rowNumber withObject:tempFileObj];
+        
+        NSIndexSet* rowIndexSet = [[NSIndexSet alloc] initWithIndex:audioFileObject.rowNumber];
+        
+        NSIndexSet* columnIndexSet = [[NSIndexSet alloc] initWithIndex:3];
+        
+        [self.tableView reloadDataForRowIndexes:rowIndexSet columnIndexes:columnIndexSet];
+        
+//        [self.tableView reloadData];
         
     }
     
@@ -530,7 +550,7 @@
 
                 self.uploadingCountLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
                 
-                self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Uploaded %lu of %lu", (unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount,(unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount];
+                self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Uploaded %lu of %lu", (unsigned long)[AppPreferences sharedAppPreferences].totalUploadedCount,(unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount];
                 
                 [self performSelector:@selector(updateUploadedFileAndQueueCount:) withObject:nil afterDelay:1.0];
                 
@@ -999,14 +1019,14 @@
         
         self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Uploading %ld of %lu", [AppPreferences sharedAppPreferences].totalUploadedCount,(unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount];
     }
-    else
-        if (([AppPreferences sharedAppPreferences].totalUploadedCount >= [AppPreferences sharedAppPreferences].uploadFilesQueueCount))
-        {
-            self.uploadingCountLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
-            
-            self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Uploaded %lu of %lu", (unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount,(unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount];
-            
-        }
+//    else
+//        if (([AppPreferences sharedAppPreferences].totalUploadedCount >= [AppPreferences sharedAppPreferences].uploadFilesQueueCount))
+//        {
+//            self.uploadingCountLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
+//
+//            self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Uploaded %lu of %lu", (unsigned long)[AppPreferences sharedAppPreferences].totalUploadedCount,(unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount];
+//
+//        }
     
     [self.progressIndicator setDoubleValue:[AppPreferences sharedAppPreferences].currentUploadingPercentage];
 }
