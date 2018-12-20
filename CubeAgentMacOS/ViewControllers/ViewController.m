@@ -387,10 +387,19 @@
         else
         {
             NSString* macId = [self getFinalMacId];
-        
-            [[APIManager sharedManager] updateDeviceMacID:macId password:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
-            hud = [MBProgressHUD showHUDAddedTo:self.view animated:true];
-            [hud setDetailsLabelText:@"Logging In, please wait"];
+            if ([[AppPreferences sharedAppPreferences] isReachable])
+            {
+                [[APIManager sharedManager] updateDeviceMacID:macId password:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
+                
+                hud = [MBProgressHUD showHUDAddedTo:self.view animated:true];
+                
+                [hud setDetailsLabelText:@"Logging In, please wait"];
+            }
+            else
+            {
+                [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please check your internet connection."];
+            }
+           
         }
 
 
