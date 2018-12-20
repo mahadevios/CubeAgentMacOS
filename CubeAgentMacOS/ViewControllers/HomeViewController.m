@@ -475,7 +475,7 @@
         // to update the status "uploaded" in tableview
 //        for (int i = audioFileObject.rowNumber+1; i < self.uploadedAudioFilesArrayForTableView.count; i++)
 //        {
-            AudioFile* tempFileObj = [self.uploadedAudioFilesArrayForTableView objectAtIndex:audioFileObject.rowNumber+1];
+                AudioFile* tempFileObj = [self.uploadedAudioFilesArrayForTableView objectAtIndex:audioFileObject.rowNumber+1];
             
 //            if ([tempFileObj.fileType isEqualToString:@"AudioUpload"])
 //            {
