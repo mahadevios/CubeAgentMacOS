@@ -477,6 +477,9 @@
     {
         DDLogInfo(@"File uploading failed filename %@", audioFileObject.fileName);
 
+        long errorCode = [[dict objectForKey:@"errorCode"] longLongValue];
+
+       
 //        [self performCleanUp:audioFileObject.originalFileNamePath];
         
 //        [listOfAudioFilesToUploadDict removeObjectForKey:audioFileObject.fileName];
@@ -493,6 +496,12 @@
         
         [self.tableView reloadDataForRowIndexes:rowIndexSet columnIndexes:columnIndexSet];
         
+        if (errorCode == -1009)// no internet
+        {
+            [self checkForNewFilesSubSequentTimer];
+        }
+        
+//        return;
 //        [self.tableView reloadData];
         
     }
