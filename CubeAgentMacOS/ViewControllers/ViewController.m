@@ -25,7 +25,9 @@
     [self.submitButton setWantsLayer:YES];
     
     self.submitButton.layer.backgroundColor = [NSColor colorWithCalibratedRed:0.220f green:0.514f blue:0.827f alpha:1.0f].CGColor;
-    
+
+    self.submitButton.layer.cornerRadius = 5;
+
     [self.backgroundView setWantsLayer:YES];
     
     //    self.submitButton.layer.cornerRadius = 8;
@@ -85,6 +87,10 @@
 
 -(void)viewWillAppear
 {
+    NSString* macId = [self getFinalMacId];
+    
+    [self.macIdLabel setStringValue:[@"MACID : "stringByAppendingString:macId]];
+    
     bool isRemember = [[NSUserDefaults standardUserDefaults] boolForKey:REMEMBER_ME];
     
     if (isRemember)
@@ -159,6 +165,13 @@
         [hud removeFromSuperview];
         
         [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Username or Password is invalid"];
+        
+        [self.loginTextField setStringValue:@""];
+        
+        [self.paswordTextField setStringValue:@""];
+        
+        [self.loginTextField becomeFirstResponder];
+        
     }
 }
 
@@ -211,6 +224,12 @@
             [hud removeFromSuperview];
             
             [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Username or Password is invalid"];
+            
+            [self.loginTextField setStringValue:@""];
+            
+            [self.paswordTextField setStringValue:@""];
+            
+            [self.loginTextField becomeFirstResponder];
         }
 }
 
@@ -314,7 +333,6 @@
     {
         uuidOfMac = macId;
     }
-    
     return uuidOfMac;
 }
 
@@ -376,17 +394,24 @@
         if([self.loginTextField.stringValue length] == 0 || whiteSpaceInUsername.location != NSNotFound)
         {
             [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please enter Username."];
+            
+            [self.loginTextField setStringValue:@""];
+            
+            [self.loginTextField becomeFirstResponder];
 
         }
         else if([self.paswordTextField.stringValue length] == 0 || whiteSpaceInPassword.location != NSNotFound)
         {
             [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please enter Password."];
-
             
+            [self.paswordTextField setStringValue:@""];
+            
+            [self.paswordTextField becomeFirstResponder];
         }
         else
         {
             NSString* macId = [self getFinalMacId];
+            NSLog(@"macId is %@",macId);
             if ([[AppPreferences sharedAppPreferences] isReachable])
             {
                 [[APIManager sharedManager] updateDeviceMacID:macId password:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
