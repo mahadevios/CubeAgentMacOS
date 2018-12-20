@@ -386,15 +386,17 @@ else
             
             if ([response isEqualToString:@"No Records"])
             {
-                NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:response,@"response",audioFileName,@"audioFileName", nil];
+                NSString* audioFilePath = self.audioFilePath;
+
+                NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:response,@"response",audioFileName,@"audioFileName",audioFilePath,@"audioFilePath", nil];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CHECK_DUPLICATE_AUDIO_FOR_DAY_API object:responseDict];
             }
             else
-            {
-                NSString* audioFileName = self.audioFileName;
-                
-                NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"duplicate",@"response",audioFileName,@"audioFileName", nil];
+            {                
+                NSString* audioFilePath = self.audioFilePath;
+
+                NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"duplicate",@"response",audioFileName,@"audioFileName",audioFilePath,@"audioFilePath", nil];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CHECK_DUPLICATE_AUDIO_FOR_DAY_API object:responseDict];
             }
@@ -410,7 +412,9 @@ else
             
             NSString* audioFileName = self.audioFileName;
 
-            NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"duplicate",@"response",audioFileName,@"audioFileName", nil];
+            NSString* audioFilePath = self.audioFilePath;
+
+            NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"duplicate",@"response",audioFileName,@"audioFileName",audioFilePath,@"audioFilePath", nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CHECK_DUPLICATE_AUDIO_FOR_DAY_API object:responseDict];
         }
@@ -441,7 +445,7 @@ else
         if (statusCode == 200)
         {
             
-            NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:response,@"response",self.audioFileName,@"audioFileName", nil];
+            NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:response,@"response",self.audioFileName,@"audioFileName",self.audioFilePath,@"audioFilePath", nil];
 
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FTP_GET_TC_ID_VIEW_API object:responseDict];

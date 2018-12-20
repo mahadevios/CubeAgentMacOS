@@ -207,11 +207,13 @@
     
     NSString* audioFileName = [responseString objectForKey:@"audioFileName"];
     
+    NSString* audioFilePath = [responseString objectForKey:@"audioFilePath"];
+
     if ([response isEqualToString:@"No Records"])
     {
-        NSString* audioUploadFolderPath = [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
+//        NSString* audioUploadFolderPath = [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
         
-        NSString* audioFilePath = [audioUploadFolderPath stringByAppendingPathComponent:audioFileName];
+//        NSString* audioFilePath = [audioUploadFolderPath stringByAppendingPathComponent:audioFileName];
         
         uint64_t fileSize = [[AppPreferences sharedAppPreferences] getFileSize:audioFilePath];
         
@@ -224,7 +226,7 @@
         {
             if ([AppPreferences sharedAppPreferences].isReachable)
             {
-                 [[APIManager sharedManager] FTPGetTCIdView:[NSString stringWithFormat:@"%ld",[AppPreferences sharedAppPreferences].loggedInUser.userId] originalFileName:audioFileName];
+                 [[APIManager sharedManager] FTPGetTCIdView:[NSString stringWithFormat:@"%ld",[AppPreferences sharedAppPreferences].loggedInUser.userId] originalFileName:audioFileName filePath:audioFilePath];
             }
             else
             {
@@ -243,9 +245,9 @@
 
         DDLogInfo(@"Moving duplicate audio file to BackupAudio folder");
 
-        [self performCleanUp:audioFileName];
+        [self performCleanUp:audioFilePath];
         
-        [listOfAudioFilesToUploadDict removeObjectForKey:[[audioFileName lastPathComponent] lastPathComponent]];
+        [listOfAudioFilesToUploadDict removeObjectForKey:audioFileName];
        
         // if internet not reachable and no file is in queue to upload or download queue then start the cycle again
         if (![AppPreferences sharedAppPreferences].isReachable)
@@ -323,6 +325,8 @@
         
         NSString* audioFileName = [responseString objectForKey:@"audioFileName"];
         
+        NSString* filePath = [responseString objectForKey:@"audioFilePath"];
+        
         [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
 //        tcIdList = nil;
         
@@ -341,9 +345,9 @@
         tcIdList.UserName = [tcIdListDict valueForKey:@"UserName"];
         tcIdList.Verify = [tcIdListDict valueForKey:@"Verify"];
         
-        NSString* folderPath = [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
+//        NSString* folderPath = [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
         
-        NSString* filePath = [folderPath stringByAppendingPathComponent:audioFileName];
+//        NSString* filePath = [folderPath stringByAppendingPathComponent:audioFileName];
         
         uint64_t fileSize = [[AppPreferences sharedAppPreferences] getFileSize:filePath];
         
@@ -1115,7 +1119,7 @@
     // Enumerator for docs directory
     enumerator = [fileMgr enumeratorAtPath:documentsDir];
     
-    NSMutableArray *contents = [NSMutableArray new] ;
+//    NSMutableArray *contents = [NSMutableArray new] ;
 
     listOfAudioFilesToUploadDict = [NSMutableDictionary new];
     
@@ -1132,9 +1136,21 @@
         else
         {
             
-            [contents addObject:entry.lastPathComponent];
+//            [contents addObject:entry.lastPathComponent];
             
-            [listOfAudioFilesToUploadDict setObject:entry forKey:entry.lastPathComponent];
+            if ([listOfAudioFilesToUploadDict objectForKey: entry.lastPathComponent] == nil)
+            {
+                [listOfAudioFilesToUploadDict setObject:entry forKey:entry.lastPathComponent];
+            }
+            else
+            {
+                NSString* uploadDirePath = [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
+                
+                uploadDirePath = [uploadDirePath stringByAppendingPathComponent:entry];
+                
+                [[NSFileManager defaultManager] removeItemAtPath:uploadDirePath error:nil];
+            }
+            
         }
     }
     
@@ -1187,8 +1203,11 @@
                 
                 NSString* fileSubPath = [listOfAudioFilesToUploadDict objectForKey:filename];
                 
+                NSString* audioDirecPath = [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
                 
-                [[APIManager sharedManager] checkDuplicateAudioForDay:[NSString stringWithFormat:@"%ld", [AppPreferences sharedAppPreferences].loggedInUser.userId] originalFileName:fileSubPath];
+                NSString* fullPath = [audioDirecPath stringByAppendingPathComponent:fileSubPath];
+                
+                [[APIManager sharedManager] checkDuplicateAudioForDay:[NSString stringWithFormat:@"%ld", [AppPreferences sharedAppPreferences].loggedInUser.userId] originalFileName:filename filePath:fullPath];
             }
             
         }

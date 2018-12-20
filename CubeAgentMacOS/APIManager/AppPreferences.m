@@ -370,17 +370,17 @@ static AppPreferences *singleton = nil;
 -(void)moveAudioFileToBackup:(NSString*)filePath
 {
     
-    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+//    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     
-    NSString* fileName = [filePath lastPathComponent];
+//    NSString* fileName = [filePath lastPathComponent];
 
     NSString *pathToBackUpFiles = [self getDateWiseBackUpAudioFolderPath];
     
-     NSString *pathToCubeFiles = [self getUsernameUploadAudioDirectoryPath];
+//     NSString *pathToCubeFiles = [self getUsernameUploadAudioDirectoryPath];
     
-    pathToCubeFiles = [pathToCubeFiles stringByAppendingPathComponent:fileName];
+//    pathToCubeFiles = [pathToCubeFiles stringByAppendingPathComponent:fileName];
     
-    pathToBackUpFiles = [pathToBackUpFiles stringByAppendingPathComponent:fileName];
+    pathToBackUpFiles = [pathToBackUpFiles stringByAppendingPathComponent:[filePath lastPathComponent]];
 
     NSError* error;
 
@@ -390,7 +390,7 @@ static AppPreferences *singleton = nil;
 
     }
 
-   bool isMoved = [[NSFileManager defaultManager] moveItemAtPath:pathToCubeFiles toPath:pathToBackUpFiles error:&error];
+   bool isMoved = [[NSFileManager defaultManager] moveItemAtPath:filePath toPath:pathToBackUpFiles error:&error];
     
     NSLog(@"ismoved"); 
     
