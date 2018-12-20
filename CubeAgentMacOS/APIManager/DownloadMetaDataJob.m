@@ -577,7 +577,8 @@ else
 }
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
 {
-   
+    self.isDidReceiveDataCalled = true;
+    
     if (!(data == nil))
     {
 
@@ -610,7 +611,7 @@ else
                 
                 self.audioFileObject.status = @"Not Uploaded";
                 
-                [encryptedDict setObject:audioFileName forKey:@"audioFileObject"];
+                [encryptedDict setObject:self.audioFileObject forKey:@"audioFileObject"];
                 
             }
             
@@ -657,10 +658,29 @@ else
     
     
 }
-
+-(void)URLSession:(NSURLSession *)session didBecomeInvalidWithError:(NSError *)error
+{
+    NSLog(@"invalid error = %@", error.localizedDescription);
+     NSLog(@"invalid");
+}
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)dataTask didCompleteWithError:(NSError *)error
 {
     //[dataTask resume];
+    
+    if (!self.isDidReceiveDataCalled && [self.downLoadEntityJobName  isEqual: FILE_UPLOAD_API])
+    {
+        NSMutableDictionary* encryptedDict = [NSMutableDictionary new];
+        
+        self.audioFileObject.status = @"Not Uploaded";
+        
+        NSString* audioFileName = self.audioFileObject.originalFileNamePath;
+        
+        [encryptedDict setObject:self.audioFileObject forKey:@"audioFileObject"];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FILE_UPLOAD_API object:encryptedDict];
+    }
+    
+
     NSLog(@"error code:%ld",(long)error.code);
     
 //    NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu",(unsigned long)dataTask.taskIdentifier]];
@@ -809,18 +829,22 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     
 //    session = [SharedSession getSharedSession:self];
     
-    
-//    NSURLSessionConfiguration * backgroundConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"Xanadutec1"];
+//    if (backgroundConfig == nil)
+//    {
+//        backgroundConfig = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"Xanadutec1"];
+//
+//    }
 
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:[NSOperationQueue mainQueue]];
+    session = [NSURLSession sessionWithConfiguration:backgroundConfig delegate:self delegateQueue:[NSOperationQueue mainQueue]];
 
 //     NSURLSession *session = [NSURLSession sharedSession];
     
    NSURLSessionUploadTask* uploadTask = [session uploadTaskWithRequest:request fromData:nil];
     
     
-//    NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu", (unsigned long)uploadTask.taskIdentifier]];
+    NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu", (unsigned long)uploadTask.taskIdentifier]];
     
+    self.taskIdentifier = taskIdentifier;
 //    if([AppPreferences sharedAppPreferences].progressCountFileNameDict)
 //    {
 //        [AppPreferences sharedAppPreferences].progressCountFileNameDict = [NSMutableDictionary new];

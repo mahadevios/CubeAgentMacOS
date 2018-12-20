@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "NSData+AES256.h"
+#import "AudioFile.h"
+#import "VCIdList.h"
+#import "ViewTCIdList.h"
+
 @interface APIManager : NSObject<NSURLSessionDelegate,NSURLSessionTaskDelegate,NSURLSessionDataDelegate>
 {
     NSDictionary* result;
@@ -17,7 +21,9 @@
 }
 
 +(APIManager *) sharedManager;
-
+@property (nonatomic,strong)  NSString* taskIdentifier;
+@property (nonatomic,strong)  AudioFile              *audioFileObject;
+@property (nonatomic,strong)  NSString              *audioFileName;
 //@property(nonatomic,strong) NSMutableArray* inCompleteFileTransferNamesArray;
 //@property(nonatomic,strong) NSMutableArray* awaitingFileTransferNamesArray;
 //@property(nonatomic,strong) NSMutableArray* todaysFileTransferNamesArray;
@@ -81,7 +87,7 @@
 
 -(void)uploadFileAfterGettingdatabaseValues:(NSString*)filename dictatorId:(long)dictatorId FTPAudioPath:(NSString*)FTPAudioPath strInHouse:(int)strInHouse clinicName:(NSString*)clinicName userId:(long)userId dictatorFirstName:(NSString*)dictatorFirstName tcId:(long)tcId vcId:(long)vcId filePath:(NSString*)filePath;
 
-
+-(void)uploadFileAfterGettingdatabaseValues:(ViewTCIdList*)tcList vcList:(VCIdList*)vcList audioFile:(AudioFile*)audioFile;
 
 
 
