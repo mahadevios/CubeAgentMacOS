@@ -580,7 +580,7 @@ else
    
     if (!(data == nil))
     {
-//        NSString* taskIdentifier = [[NSString stringWithFormat:@"%@",session.configuration.identifier] stringByAppendingString:[NSString stringWithFormat:@"%lu",(unsigned long)dataTask.taskIdentifier]];
+
         
         NSError* error1;
         NSMutableDictionary* encryptedDict = [NSJSONSerialization JSONObjectWithData:data
@@ -772,6 +772,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     
     //    NSString* filePath = [NSHomeDirectory() stringByAppendingPathComponent:
     //                          [NSString stringWithFormat:@"Documents/%@/%@.wav",AUDIO_FILES_FOLDER_NAME,filename] ];
+    NSLog(@"parameters = %@", parameterString);
     
     NSURL* url=[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", BASE_URL_PATH, FILE_UPLOAD_API]];
     
@@ -828,6 +829,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     [uploadTask resume];
     
 }
+
 
 
 - (void)URLSession:(NSURLSession *)session

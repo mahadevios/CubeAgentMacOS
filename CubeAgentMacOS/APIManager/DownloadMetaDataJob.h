@@ -18,7 +18,9 @@
 
 @protocol DownloadMetaDataJobDelegate;
 
-@interface DownloadMetaDataJob : NSObject<NSURLSessionDataDelegate,NSURLSessionDownloadDelegate>
+
+
+@interface DownloadMetaDataJob : NSObject<NSURLSessionDelegate,NSURLSessionTaskDelegate,NSURLSessionDataDelegate,NSURLSessionDownloadDelegate>
 {
     NSString        *downLoadEntityJobName;
     NSString        *downLoadResourcePath;
