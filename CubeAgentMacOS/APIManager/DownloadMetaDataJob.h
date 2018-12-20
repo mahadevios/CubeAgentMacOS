@@ -56,6 +56,7 @@
 @property (nonatomic,strong)  NSMutableArray        *dataArray;
 @property (nonatomic,strong)  AudioFile              *audioFileObject;
 @property (nonatomic,strong)  NSString              *audioFileName;
+@property (nonatomic,strong)  NSString              *audioFilePath;
 
 @property (nonatomic,strong)  NSString              *httpMethod;
 @property (nonatomic,strong)  id<DownloadMetaDataJobDelegate> downLoadJobDelegate;

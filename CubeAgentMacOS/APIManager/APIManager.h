@@ -61,11 +61,11 @@
 
 -(void) getSingleQueryValueComment:(NSString*) comment;
 
--(void) checkDuplicateAudioForDay:(NSString*) userid originalFileName:(NSString* )filename;
+-(void) checkDuplicateAudioForDay:(NSString*) userid originalFileName:(NSString* )filename filePath:(NSString*)filePath;
 
 -(void) updateDownloadFileStatus:(NSString*) status dictationId:(NSString* )dictationId;
 
--(void) FTPGetTCIdView:(NSString*) userId  originalFileName:(NSString* )filename;
+-(void) FTPGetTCIdView:(NSString*) userId  originalFileName:(NSString* )filename filePath:(NSString*)filePath;
 
 
 -(void) uploadFile:(NSString*) data;

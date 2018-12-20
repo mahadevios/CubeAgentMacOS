@@ -284,7 +284,7 @@ static APIManager *singleton = nil;
 }
 
 
--(void) checkDuplicateAudioForDay:(NSString*) userid originalFileName:(NSString* )filename
+-(void) checkDuplicateAudioForDay:(NSString*) userid originalFileName:(NSString* )filename filePath:(NSString*)filePath
 {
     if ([[AppPreferences sharedAppPreferences] isReachable])
     {
@@ -312,7 +312,7 @@ static APIManager *singleton = nil;
         DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:CHECK_DUPLICATE_AUDIO_FOR_DAY_API withRequestParameter:array withResourcePath:CHECK_DUPLICATE_AUDIO_FOR_DAY_API withHttpMethd:POST];
         
         downloadmetadatajob.audioFileName = filename;
-        
+        downloadmetadatajob.audioFilePath = filePath;
         [downloadmetadatajob startMetaDataDownLoad];
         
     }
@@ -358,7 +358,7 @@ static APIManager *singleton = nil;
 }
 
 
--(void) FTPGetTCIdView:(NSString*) userId originalFileName:(NSString* )filename
+-(void) FTPGetTCIdView:(NSString*) userId  originalFileName:(NSString* )filename filePath:(NSString*)filePath
 {
     if ([[AppPreferences sharedAppPreferences] isReachable])
     {
@@ -387,6 +387,8 @@ static APIManager *singleton = nil;
         DownloadMetaDataJob *downloadmetadatajob=[[DownloadMetaDataJob alloc]initWithdownLoadEntityJobName:FTP_GET_TC_ID_VIEW_API withRequestParameter:array withResourcePath:FTP_GET_TC_ID_VIEW_API withHttpMethd:POST];
         
         downloadmetadatajob.audioFileName = filename;
+        
+        downloadmetadatajob.audioFilePath = filePath;
         
         [downloadmetadatajob startMetaDataDownLoad];
     }
