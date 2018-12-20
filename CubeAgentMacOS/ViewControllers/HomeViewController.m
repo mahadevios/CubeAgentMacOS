@@ -459,7 +459,11 @@
     
     if ([isUploaded  isEqual: @"Uploaded"])
     {
-        [AppPreferences sharedAppPreferences].totalUploadedCount = [AppPreferences sharedAppPreferences].totalUploadedCount + 1;
+        if([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count > 0)
+        {
+            [AppPreferences sharedAppPreferences].totalUploadedCount = [AppPreferences sharedAppPreferences].totalUploadedCount + 1;
+
+        }
 
         DDLogInfo(@"Finished Uploading audio file %@", audioFileObject.fileName);
 
