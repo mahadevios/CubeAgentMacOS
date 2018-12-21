@@ -7,9 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "ViewController.h"
+#import "HomeViewController.h"
+#import "User.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
+@property (nonatomic,strong) ViewController *viewController;
+@property (nonatomic,strong) HomeViewController *homeViewController;
 
+@property (nonatomic,strong) NSWindowController *windowController;
 
 @end
 

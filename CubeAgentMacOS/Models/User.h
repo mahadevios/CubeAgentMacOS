@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) long  userId;
 @property (nonatomic, strong) NSString*  userName;
+@property (nonatomic, strong) NSString*  macId;
+@property (nonatomic, strong) NSString*  password;
 
 //+(User*)getLoggedInUser;
 

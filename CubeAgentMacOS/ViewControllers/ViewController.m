@@ -195,6 +195,8 @@
         
         user.userName = self.loginTextField.stringValue;
         
+        user.macId = [self getFinalMacId];
+        
         [AppPreferences sharedAppPreferences].loggedInUser = user;
         
         DDLogInfo(@"Getting configuration info.");
@@ -309,7 +311,28 @@
     
     [hud removeFromSuperview];
 //    [self.view.window setContentView:hvc.view];
-    
+    if (self.autoModeCheckBox.state == NSOnState)
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:true forKey:AUTOMODE];
+
+        [[NSUserDefaults standardUserDefaults] setObject:self.loginTextField.stringValue forKey:@"username"];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:self.paswordTextField.stringValue forKey:@"password"];
+        
+        long userId = [AppPreferences sharedAppPreferences].loggedInUser.userId;
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%ld",userId] forKey:@"userId"];
+
+        NSString* macId = [self getFinalMacId];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:macId forKey:@"macId"];
+
+    }
+    else
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:false forKey:AUTOMODE];
+
+    }
 //    NSWindowController* wc = [self.storyboard instantiateControllerWithIdentifier:@"MainWindow"];
     NSWindowController* wc = [[NSWindowController alloc] initWithWindow:self.view.window];
     
@@ -372,7 +395,16 @@
 
 - (IBAction)autoModeCheckBoxClicked:(id)sender
 {
-    
+    if ([sender state] == NSOnState)
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:true forKey:AUTOMODE];
+        
+    }
+    else
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:false forKey:AUTOMODE];
+        
+    }
     
 }
 - (IBAction)rememberMeCheckBoxClicked:(NSButton*)sender
@@ -413,6 +445,7 @@
         else
         {
             NSString* macId = [self getFinalMacId];
+            
             NSLog(@"macId is %@",macId);
             if ([[AppPreferences sharedAppPreferences] isReachable])
             {
