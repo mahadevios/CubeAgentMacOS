@@ -68,6 +68,7 @@
 #define NOTIFICATION_DOWNLOAD_FILE_API                           @"notificationDownloadFile"
 #define NOTIFICATION_GET_DICTATORS_FOLDER_API                    @"notificationDictatorsFolder"
 #define NOTIFICATION_GENERATE_FILENAME_API                       @"notificationGenerateFileName"
+#define NOTIFICATION_NO_INTERNET                       @"notificationNoInternet"
 
 //DDCF3B2D-362B-4C81-8AB3-DD56D49E5365
 //#define  AUTHENTICATE_API                     @"UpdateMACID"

@@ -487,16 +487,16 @@ static AppPreferences *singleton = nil;
 -(void)showAlertWithTitle:(NSString*)title subTitle:(NSString*)subTitle
 {
    
-//    NSAlert* alert   = [[NSAlert alloc] init];
-//    [alert setMessageText:title];
-//    [alert setInformativeText:subTitle];
-//    [alert addButtonWithTitle:@"OK"];
-//    [alert setAlertStyle:NSWarningAlertStyle];
-//    [alert beginSheetModalForWindow:[NSApplication sharedApplication].keyWindow completionHandler:^(NSModalResponse returnCode) {
-//        if (returnCode == NSAlertSecondButtonReturn) {
-//            return;
-//        }
-//    }];
+    NSAlert* alert   = [[NSAlert alloc] init];
+    [alert setMessageText:title];
+    [alert setInformativeText:subTitle];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setAlertStyle:NSWarningAlertStyle];
+    [alert beginSheetModalForWindow:[NSApplication sharedApplication].keyWindow completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSAlertSecondButtonReturn) {
+            return;
+        }
+    }];
 //
 //    [alert runModal];
 }

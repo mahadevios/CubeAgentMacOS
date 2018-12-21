@@ -178,6 +178,14 @@
             NSString* apiSubName = [arr objectAtIndex:1];
             
             DDLogInfo(@"%@ Complete with Error = %@", apiSubName, [self shortErrorFromError:error]);
+            
+            if ([self.downLoadEntityJobName isEqualToString:UPDATE_MAC_ID_API])
+            {
+                 NSDictionary* reponseDict = [[NSDictionary alloc] initWithObjectsAndKeys:error.localizedDescription,RESPONSE_IS_MAC_ID_VALID,[NSString stringWithFormat:@"%ld", error.code],RESPONSE_CODE, nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_UPDATE_MAC_ID_API object:reponseDict];
+
+            }
         }
         
 
@@ -702,9 +710,9 @@ else
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FILE_UPLOAD_API object:encryptedDict];
             
-            DDLogInfo(@"%@, Audio file not uploaded",error.localizedDescription);
+            DDLogInfo(@"%@ Audio file not uploaded",error.localizedDescription);
             
-            DDLogInfo(@"File will be uploaded when internet conection availbale.");
+            DDLogInfo(@"File will be uploaded when internet connection is available.");
 
 //            dispatch_async(dispatch_get_main_queue(), ^{
 //                [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:[NSString stringWithFormat:@"%@, Audio file(s) not uploaded",error.localizedDescription]];

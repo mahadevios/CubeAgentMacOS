@@ -62,6 +62,10 @@
     self.audioFileAddedInQueueArray = [NSMutableArray new];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(validateNoInternet:) name:NOTIFICATION_NO_INTERNET
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(validateDuplicateFileReponse:) name:NOTIFICATION_CHECK_DUPLICATE_AUDIO_FOR_DAY_API
                                                object:nil];
     
@@ -121,6 +125,11 @@
     [self testLogs];
 }
 
+-(void)validateNoInternet:(NSNotification*)noti
+{
+//    [hud removeFromSuperview];
+    
+}
 -(void)testLogs
 {
 //    setenv("XcodeColors", "YES", 0);
