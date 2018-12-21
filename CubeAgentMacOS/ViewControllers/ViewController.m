@@ -20,6 +20,8 @@
     //changes from martina
     [super viewDidLoad];
     
+   // [[NSApplication sharedApplication].keyWindow setRepresentedFilename:<#(NSString * _Nonnull)#>];
+    
     [self.submitButton setBordered:NO];
     
     [self.submitButton setWantsLayer:YES];
@@ -59,13 +61,13 @@
     CGSize size =  CGSizeMake(580, 269);
     self.preferredContentSize = size;
     
-    NSString* logDirectoryPath = [[AppPreferences sharedAppPreferences] getCubeLogDirectoryPath];
-    
-    DDLogFileManagerDefault *logManager = [[BaseLogFileManager alloc] initWithLogsDirectory:logDirectoryPath];
-    
-    DDFileLogger * file = [[DDFileLogger alloc] initWithLogFileManager:logManager];
-    
-    [DDLog addLogger:file];
+//    NSString* logDirectoryPath = [[AppPreferences sharedAppPreferences] getCubeLogDirectoryPath];
+//    
+//    DDLogFileManagerDefault *logManager = [[BaseLogFileManager alloc] initWithLogsDirectory:logDirectoryPath];
+//    
+//    DDFileLogger * file = [[DDFileLogger alloc] initWithLogFileManager:logManager];
+//    
+//    [DDLog addLogger:file];
     
     DDLogInfo(@"In LoginView");
     
