@@ -125,15 +125,8 @@
 {
 //    setenv("XcodeColors", "YES", 0);
 //
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    
-    NSString* logDirectoryPath = [[AppPreferences sharedAppPreferences] getCubeLogDirectoryPath];
-    
-    DDLogFileManagerDefault *logManager = [[BaseLogFileManager alloc] initWithLogsDirectory:logDirectoryPath];
-    
-    DDFileLogger * file = [[DDFileLogger alloc] initWithLogFileManager:logManager];
-    
-    [DDLog addLogger:file];
+    [[AppPreferences sharedAppPreferences] addLoggerOnce];
+
     // And we also enable colors
     [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
     // setup the text view logger
@@ -463,11 +456,8 @@
     
     if ([isUploaded  isEqual: @"Uploaded"])
     {
-        if([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count > 0)
-        {
-            [AppPreferences sharedAppPreferences].totalUploadedCount = [AppPreferences sharedAppPreferences].totalUploadedCount + 1;
-
-        }
+        
+        [AppPreferences sharedAppPreferences].totalUploadedCount = [AppPreferences sharedAppPreferences].totalUploadedCount + 1;
 
         DDLogInfo(@"Finished Uploading audio file %@", audioFileObject.fileName);
 
@@ -479,7 +469,7 @@
     }
     else
     {
-        DDLogInfo(@"File uploading failed filename %@", audioFileObject.fileName);
+//        DDLogInfo(@"File uploading failed filename %@", audioFileObject.fileName);
 
         long errorCode = [[dict objectForKey:@"errorCode"] longLongValue];
 
@@ -563,7 +553,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                DDLogInfo(@"Finished Uploading all audio files");
+//                DDLogInfo(@"Finished Uploading all audio files");
 
                 self.uploadingCountLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
                 
@@ -898,7 +888,7 @@
 
 -(void)updateUploadedFileAndQueueCount:(id)obj
 {
-    [AppPreferences sharedAppPreferences].totalUploadedCount = 1;
+    [AppPreferences sharedAppPreferences].totalUploadedCount = 0;
     
     [AppPreferences sharedAppPreferences].uploadFilesQueueCount = 0;
 }
@@ -1034,7 +1024,7 @@
         
         self.uploadingCountLabel.textColor = [NSColor orangeColor];
         
-        self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Uploading %ld of %lu", [AppPreferences sharedAppPreferences].totalUploadedCount,(unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount];
+        self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Uploading %ld of %lu", [AppPreferences sharedAppPreferences].totalUploadedCount+1,(unsigned long)[AppPreferences sharedAppPreferences].uploadFilesQueueCount];
     }
 //    else
 //        if (([AppPreferences sharedAppPreferences].totalUploadedCount >= [AppPreferences sharedAppPreferences].uploadFilesQueueCount))
@@ -1213,9 +1203,13 @@
         }
         else
         {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"The Internet connection appears to be offline. Operations could not be processed."];
+
+            });
+           
             [self checkForNewFilesSubSequentTimer];
-            
-            
+          
         }
     }
     else

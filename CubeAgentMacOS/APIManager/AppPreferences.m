@@ -38,7 +38,7 @@ static AppPreferences *singleton = nil;
     if (self)
     {
         self.currentSelectedItem = 0;
-        self.totalUploadedCount = 1;
+        self.totalUploadedCount = 0;
         self.audioUploadQueue = [[NSOperationQueue alloc] init];
         self.docDownloadQueue = [[NSOperationQueue alloc] init];
 
@@ -487,22 +487,39 @@ static AppPreferences *singleton = nil;
 -(void)showAlertWithTitle:(NSString*)title subTitle:(NSString*)subTitle
 {
    
-    alert   = [[NSAlert alloc] init];
-    [alert setMessageText:title];
-    [alert setInformativeText:subTitle];
-    [alert addButtonWithTitle:@"OK"];
-    [alert setAlertStyle:NSWarningAlertStyle];
-    [alert beginSheetModalForWindow:[NSApplication sharedApplication].keyWindow completionHandler:^(NSModalResponse returnCode) {
-        if (returnCode == NSAlertSecondButtonReturn) {
-            return;
-        }
-    }];
-    
-    
+//    NSAlert* alert   = [[NSAlert alloc] init];
+//    [alert setMessageText:title];
+//    [alert setInformativeText:subTitle];
+//    [alert addButtonWithTitle:@"OK"];
+//    [alert setAlertStyle:NSWarningAlertStyle];
+//    [alert beginSheetModalForWindow:[NSApplication sharedApplication].keyWindow completionHandler:^(NSModalResponse returnCode) {
+//        if (returnCode == NSAlertSecondButtonReturn) {
+//            return;
+//        }
+//    }];
+//
+//    [alert runModal];
 }
 
 
-
+-(void)addLoggerOnce
+{
+    if (!self.isLoggerAdded)
+    {
+        [DDLog addLogger:[DDTTYLogger sharedInstance]];
+        
+        NSString* logDirectoryPath = [[AppPreferences sharedAppPreferences] getCubeLogDirectoryPath];
+        
+        DDLogFileManagerDefault *logManager = [[BaseLogFileManager alloc] initWithLogsDirectory:logDirectoryPath];
+        
+        DDFileLogger * file = [[DDFileLogger alloc] initWithLogFileManager:logManager];
+        
+        [DDLog addLogger:file];
+        
+        self.isLoggerAdded = true;
+    }
+  
+}
 
 
 @end

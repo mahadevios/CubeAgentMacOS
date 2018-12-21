@@ -12,6 +12,7 @@
 #import "CubeConfig.h"
 #import "User.h"
 #import <Cocoa/Cocoa.h>
+#import "BaseLogFileManager.h"
 
 
 @protocol AppPreferencesDelegate;
@@ -31,7 +32,7 @@
 
 @property (nonatomic,assign)    BOOL                        isReachable;
 
-
+@property(nonatomic) BOOL isLoggerAdded;
 
 
 
@@ -85,6 +86,9 @@
 -(NSString*)getDateWiseTranscriptionFolderPath;
 
 -(void)showAlertWithTitle:(NSString*)title subTitle:(NSString*)subTitle;
+
+-(void)addLoggerOnce;
+
 @end
 
 

@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSTimer* progressTimer;
     NSTimer* checkForNewFilesTimer;
     int totalFilesToBeAddedInTableView;
+    
 }
 @property (weak) IBOutlet NSTableView *tableView;
 @property (unsafe_unretained) IBOutlet NSTextView *logTextView;

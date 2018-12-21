@@ -68,7 +68,7 @@
 //    DDFileLogger * file = [[DDFileLogger alloc] initWithLogFileManager:logManager];
 //    
 //    [DDLog addLogger:file];
-    
+    [[AppPreferences sharedAppPreferences] addLoggerOnce];
     DDLogInfo(@"In LoginView");
     
 //    NSError* error;
