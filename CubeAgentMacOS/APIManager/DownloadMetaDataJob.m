@@ -665,6 +665,15 @@ else
         NSLog(@"nil data");
         
         DDLogInfo(@"Something went wrong, file not uploaded status code = %d",statusCode);
+        
+        NSMutableDictionary* encryptedDict = [NSMutableDictionary new];
+        
+        self.audioFileObject.status = @"Not Uploaded";
+        
+        [encryptedDict setObject:self.audioFileObject forKey:@"audioFileObject"];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FILE_UPLOAD_API object:encryptedDict];
+
 //        DDLogInfo(@"API Name = %@, Data = %@, Status Code = %d", self.downLoadEntityJobName, data, statusCode);
     }
     
@@ -695,7 +704,7 @@ else
         
     }
     else // if internet is offline
-        if (error.code == -1009 && !self.isDidReceiveDataCalled && [self.downLoadEntityJobName  isEqual: FILE_UPLOAD_API])
+        if ((error.code == -1009 || error.code == -1005) && !self.isDidReceiveDataCalled && [self.downLoadEntityJobName  isEqual: FILE_UPLOAD_API])
         {
             
             NSMutableDictionary* encryptedDict = [NSMutableDictionary new];
@@ -710,7 +719,7 @@ else
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FILE_UPLOAD_API object:encryptedDict];
             
-            DDLogInfo(@"%@ Audio file not uploaded",error.localizedDescription);
+            DDLogInfo(@"%@ Audio file not uploaded filename = %@",error.localizedDescription, self.audioFileObject.fileName);
             
             DDLogInfo(@"File will be uploaded when internet connection is available.");
 
@@ -726,12 +735,30 @@ else
                 self.audioFileObject.status = @"Not Uploaded";
                 
                 //        NSString* audioFileName = self.audioFileObject.originalFileNamePath;
-                DDLogInfo(@"Audio file not uploaded");
+                DDLogInfo(@"Audio file not uploaded file name = %@", self.audioFileObject.fileName);
 
                 [encryptedDict setObject:self.audioFileObject forKey:@"audioFileObject"];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FILE_UPLOAD_API object:encryptedDict];
             }
+    else
+        if (error.code != 0 && !self.isDidReceiveDataCalled && [self.downLoadEntityJobName  isEqual: FILE_UPLOAD_API])
+        {
+            NSMutableDictionary* encryptedDict = [NSMutableDictionary new];
+            
+            self.audioFileObject.status = @"Not Uploaded";
+            
+            //            NSString* audioFileName = self.audioFileObject.originalFileNamePath;
+            
+            [encryptedDict setObject:self.audioFileObject forKey:@"audioFileObject"];
+            
+            [encryptedDict setObject:[NSString stringWithFormat:@"%ld",error.code] forKey:@"errorCode"];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FILE_UPLOAD_API object:encryptedDict];
+            
+            DDLogInfo(@"%@ Audio file not uploaded filename = %@",error.localizedDescription, self.audioFileObject.fileName);
+        }
+    
     
 }
 - (void)URLSession:(NSURLSession *)session

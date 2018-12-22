@@ -91,7 +91,7 @@
 
     bool isRemember = [[NSUserDefaults standardUserDefaults] boolForKey:REMEMBER_ME];
 
-    
+//    isAutoMode = true;
     if (isAutoMode)
     {
         NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
