@@ -24,6 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
     int totalFilesToBeAddedInTableView;
     
     NSArray* dataSource;
+    NSDictionary *firstParent;
+    
+    NSDictionary *secondParent;
+    
+    NSArray *list;
 }
 @property (weak) IBOutlet NSTableView *tableView;
 @property (unsafe_unretained) IBOutlet NSTextView *logTextView;

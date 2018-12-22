@@ -28,7 +28,18 @@
     
 //    dataSource = [NSArray arrayWithObjects:@"John", @"Mary", @"George", nil];
 
-    dataSource = [NSArray arrayWithObjects:[[NSDictionary alloc] initWithObjectsAndKeys:@"obj1",@"children", nil], nil];
+//    dataSource = [NSArray arrayWithObjects:[[NSDictionary alloc] initWithObjectsAndKeys:[[NSDictionary alloc] initWithObjectsAndKeys:@"obj1",@"children", nil],@"children", nil], nil];
+
+    // something nice for your family
+   
+
+//    firstParent = [[NSDictionary alloc] initWithObjectsAndKeys:[NSArray arrayWithObjects:[[NSDictionary alloc] initWithObjectsAndKeys:[NSArray arrayWithObjects:[[NSDictionary alloc] initWithObjectsAndKeys:[NSArray arrayWithObjects:@"Mary", nil],@"children", nil], nil],@"children", nil], nil],@"children", nil];
+    
+    firstParent = [[NSDictionary alloc] initWithObjectsAndKeys:[NSArray arrayWithObjects:@"app", nil], @"children", nil];
+    
+//    secondParent = [[NSDictionary alloc] initWithObjectsAndKeys:@"Elisabeth",@"parent",[NSArray arrayWithObjects:@"Jimmie",@"Kate", nil],@"children", nil];
+   
+    list = [NSArray arrayWithObjects:firstParent, nil];
 
     [self.pasteAudioFileButton setBordered:NO];
     
@@ -1384,58 +1395,180 @@
     [self openFolderInFinder:backupFolderPath];
 }
 
-- (id)outlineView:(NSOutlineView *)outlineView
-            child:(NSInteger)index
-           ofItem:(id)item// returns the data to be display
-{
-    // 2 child of item to acces sequentially, first time item will be null hence return the first object of root array
-    if(item == nil) {
-        return [dataSource objectAtIndex:index];
-    }
-    else {
-        return [item valueForKey:@"children"] ;
-    }
-    return nil;
+- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 
+{
+   
+    if ([item isKindOfClass:[NSDictionary class]] || [item isKindOfClass:[NSArray class]]) {
+       
+        return YES;
+       
+    }else {
+       
+        return NO;
+       
+    }
+   
 }
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView
-   isItemExpandable:(id)item
-{
-    // 3 check accessed item is collapsable or not
-    if([item valueForKey:@"children"] ) return YES;
-    return NO;
+- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 
+{
+   
+    if (item == nil) { //item is nil when the outline view wants to inquire for root level items
+       
+        return [list count];
+       
+    }
+  
+    if ([item isKindOfClass:[NSDictionary class]]) {
+       
+        return [[item objectForKey:@"children"] count];
+    
+    }
+    
+    return 0;
+    
 }
 
-- (NSInteger)outlineView:(NSOutlineView *)outlineView
-  numberOfChildrenOfItem:(id)item
+
+- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
-    // 1 number of children of item, first time it will return 1 in our case
-    if (item == nil)
-    {
-         return [dataSource count];
+   
+    if (item == nil) { //item is nil when the outline view wants to inquire for root level items
+  
+        return [list objectAtIndex:index];
+ 
     }
-    else
-        if ([item valueForKey:@"children"])
-        {
-             return 1;
-        }
-    else
-        return 0;
-//        return [[item valueForKey:@"children"] count];
 
     
-   
 
+    if ([item isKindOfClass:[NSDictionary class]]) {
+      
+        return [[item objectForKey:@"children"] objectAtIndex:index];
+ 
+    }
+ 
+    
+
+    return nil;
 }
 
-- (id)outlineView:(NSOutlineView *)outlineView
-objectValueForTableColumn:(NSTableColumn *)tableColumn
-           byItem:(id)item
+-(NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
 {
-    return item;
+    NSTableCellView* view;
+    if ([tableColumn.identifier isEqualToString:@"name"])
+    {
+        view = [outlineView makeViewWithIdentifier:@"children" owner:self];
 
+//        view.frame = NSRectFromCGRect(CGRectMake(0, 0, 100, 10));
+        if ([item isKindOfClass:[NSDictionary class]])
+        {
+            view.textField.stringValue = @"Application Directory";
+        }
+        else
+        {
+            view.textField.stringValue = [AppPreferences sharedAppPreferences].loggedInUser.userName;
+        }
+        
+        
+    }
+    return view;
 }
+-(NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
+{
+    NSTableRowView* view;
+   
+    view = [outlineView makeViewWithIdentifier:@"row" owner:self];
+    
+     view.frame = NSRectFromCGRect(CGRectMake(0, 0, 100, 10));
+    
+    return view;
+}
+
+//-(NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
+//{
+//    
+//    NSTableCellView* row = [outlineView makeViewWithIdentifier:@"children" owner:self];
+//    
+//    return row;
+//}
+//- (id)outlineView:(NSOutlineView *)outlineView
+//            child:(NSInteger)index
+//           ofItem:(id)item// returns the data to be display
+//{
+//    // 2 child of item to acces sequentially, first time item will be null hence return the first object of root array
+//    if(item == nil) {
+//        return [dataSource objectAtIndex:index];
+//    }
+//    else {
+//        return [[item valueForKey:@"children"] objectAtIndex:index];
+//    }
+//    return nil;
+//
+//}
+//
+//- (BOOL)outlineView:(NSOutlineView *)outlineView
+//   isItemExpandable:(id)item
+//{
+//    // 3 check accessed item is collapsable or not
+//    if([[item valueForKey:@"children"] count]>0) return YES;
+//
+//    return NO;
+//
+//}
+//
+//- (NSInteger)outlineView:(NSOutlineView *)outlineView
+//  numberOfChildrenOfItem:(id)item
+//{
+//    // 1 number of children of item, first time it will return 1 in our case
+//    if (item == nil)
+//    {
+//         return [dataSource count];
+//    }
+//   long count = [[item valueForKey:@"children"] count];
+//    return [[item valueForKey:@"children"] count];
+////        return [[item valueForKey:@"children"] count];
+//
+//}
+
+//1. numberOfChildrenOfItem will be called wit item = nil and when it is nill return our main datasurce items count
+//2. now we have the count of numberofchildren of our main datasource item(since item was nil count = datasource count itself), now we will
+//   find the children of that item but since item was first time nil, we will return the first item of datatsource.
+// 3. now check if item is expandable, if yes again numberofchildrenOfItem will be called and process will be repeat
+
+//- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)theColumn byItem:(id)item
+//{
+//
+//
+//
+//    if ([[theColumn identifier] isEqualToString:@"name"]) { // in the column "children"...
+//
+//        if ([item isKindOfClass:[NSDictionary class]]) { // if we have a dictionary...
+//
+//            // ... then write something informative in the header (number of kids + "kids")...
+//
+//            return [NSString stringWithFormat:@"%li kids",[[item objectForKey:@"children"] count]];
+//
+//        }
+//
+//        return item; // ...and, if we actually have a value, return the value
+//
+//    } else {
+//
+//        if ([item isKindOfClass:[NSDictionary class]]) { // in the "parent" column
+//
+//            return [item objectForKey:@"parent"]; // just write the value for the @parent keys
+//
+//        }
+//
+//    }
+//
+//
+//
+//    return nil; // if shit happens, don't blame it on me !
+//
+//}
+
 @end
 

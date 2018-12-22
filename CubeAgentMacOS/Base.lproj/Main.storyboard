@@ -549,20 +549,20 @@
                                     <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="tCN-dc-qkT">
                                         <rect key="frame" x="10" y="619" width="844" height="20"/>
                                     </progressIndicator>
-                                    <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6o-eG-7ah">
+                                    <scrollView autohidesScrollers="YES" horizontalLineScroll="18" horizontalPageScroll="10" verticalLineScroll="18" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6o-eG-7ah">
                                         <rect key="frame" x="447" y="10" width="407" height="211"/>
                                         <clipView key="contentView" id="tSj-5T-qVD">
                                             <rect key="frame" x="1" y="0.0" width="405" height="210"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="jqK-Xa-jMm" viewBased="YES" indentationPerLevel="16" outlineTableColumn="f2s-6X-abW" id="Fms-5L-sn9">
+                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="16" rowSizeStyle="automatic" headerView="jqK-Xa-jMm" viewBased="YES" indentationPerLevel="16" outlineTableColumn="f2s-6X-abW" id="Fms-5L-sn9">
                                                     <rect key="frame" x="0.0" y="0.0" width="405" height="185"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
-                                                        <tableColumn width="402" minWidth="40" maxWidth="1000" id="f2s-6X-abW">
+                                                        <tableColumn identifier="name" width="402" minWidth="40" maxWidth="1000" id="f2s-6X-abW">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Files">
                                                                 <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -575,12 +575,12 @@
                                                             </textFieldCell>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
-                                                                <tableCellView id="Wao-Qi-OKm">
-                                                                    <rect key="frame" x="1" y="1" width="402" height="17"/>
+                                                                <tableCellView identifier="children" id="Wao-Qi-OKm">
+                                                                    <rect key="frame" x="1" y="1" width="402" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G1E-Qj-xtv">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="402" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="-1" width="402" height="17"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="SAN" id="YEi-gv-bfi">
                                                                                 <font key="font" metaFont="system"/>
