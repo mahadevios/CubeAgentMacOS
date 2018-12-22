@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeViewController : NSViewController<NSTableViewDataSource,NSTableViewDelegate>
+@interface HomeViewController : NSViewController<NSTableViewDataSource,NSTableViewDelegate,NSOutlineViewDataSource,NSOutlineViewDelegate>
 {
     NSMutableArray *listOfAudioToUploadFiles;
     NSMutableDictionary *listOfAudioFilesToUploadDict;
@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSTimer* checkForNewFilesTimer;
     int totalFilesToBeAddedInTableView;
     
+    NSArray* dataSource;
 }
 @property (weak) IBOutlet NSTableView *tableView;
 @property (unsafe_unretained) IBOutlet NSTextView *logTextView;
@@ -44,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray*  audioFileAddedInQueueArray;
 
 @property (weak) IBOutlet NSView *homeBackgroundView;
+@property (weak) IBOutlet NSOutlineView *outlineView;
 
 @end
 
