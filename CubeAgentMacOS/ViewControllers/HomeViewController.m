@@ -516,7 +516,7 @@
         
         [self.tableView reloadDataForRowIndexes:rowIndexSet columnIndexes:columnIndexSet];
         
-        if (errorCode == -1009 && [AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count == 0)// no internet and no file to upload
+        if ((errorCode == -1009 || errorCode == -1005) && [AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count == 0)// no internet and no file to upload
         {
             
             [self checkForNewFilesSubSequentTimer];
