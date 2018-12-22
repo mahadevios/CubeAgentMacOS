@@ -26,6 +26,10 @@
 {
     [super viewDidLoad];
     
+//    dataSource = [NSArray arrayWithObjects:@"John", @"Mary", @"George", nil];
+
+    dataSource = [NSArray arrayWithObjects:[[NSDictionary alloc] initWithObjectsAndKeys:@"obj1",@"children", nil], nil];
+
     [self.pasteAudioFileButton setBordered:NO];
     
     [self.pasteAudioFileButton setWantsLayer:YES];
@@ -123,6 +127,8 @@
 //    [self getDictationIds];
     
     [self testLogs];
+    
+    [self.outlineView reloadData];
 }
 
 -(void)validateNoInternet:(NSNotification*)noti
@@ -499,8 +505,9 @@
         
         [self.tableView reloadDataForRowIndexes:rowIndexSet columnIndexes:columnIndexSet];
         
-        if (errorCode == -1009)// no internet
+        if (errorCode == -1009 && [AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count == 0)// no internet and no file to upload
         {
+            
             [self checkForNewFilesSubSequentTimer];
         }
         
@@ -1375,6 +1382,60 @@
     NSString* backupFolderPath = [[AppPreferences sharedAppPreferences] getUsernameBacupAudioDirectoryPath];
     
     [self openFolderInFinder:backupFolderPath];
+}
+
+- (id)outlineView:(NSOutlineView *)outlineView
+            child:(NSInteger)index
+           ofItem:(id)item// returns the data to be display
+{
+    // 2 child of item to acces sequentially, first time item will be null hence return the first object of root array
+    if(item == nil) {
+        return [dataSource objectAtIndex:index];
+    }
+    else {
+        return [item valueForKey:@"children"] ;
+    }
+    return nil;
+
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView
+   isItemExpandable:(id)item
+{
+    // 3 check accessed item is collapsable or not
+    if([item valueForKey:@"children"] ) return YES;
+    return NO;
+
+}
+
+- (NSInteger)outlineView:(NSOutlineView *)outlineView
+  numberOfChildrenOfItem:(id)item
+{
+    // 1 number of children of item, first time it will return 1 in our case
+    if (item == nil)
+    {
+         return [dataSource count];
+    }
+    else
+        if ([item valueForKey:@"children"])
+        {
+             return 1;
+        }
+    else
+        return 0;
+//        return [[item valueForKey:@"children"] count];
+
+    
+   
+
+}
+
+- (id)outlineView:(NSOutlineView *)outlineView
+objectValueForTableColumn:(NSTableColumn *)tableColumn
+           byItem:(id)item
+{
+    return item;
+
 }
 @end
 
