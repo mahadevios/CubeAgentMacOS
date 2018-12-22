@@ -12,6 +12,7 @@
 #import "HomeViewController.h"
 #import "BaseLogFileManager.h"
 #import <QuartzCore/QuartzCore.h>
+#import "AppDelegate.h"
 
 @implementation ViewController
 
@@ -20,6 +21,8 @@
     //changes from martina
     [super viewDidLoad];
     
+    [[AppPreferences sharedAppPreferences] startReachabilityNotifier];
+
    // [[NSApplication sharedApplication].keyWindow setRepresentedFilename:<#(NSString * _Nonnull)#>];
     
     [self.submitButton setBordered:NO];
@@ -35,8 +38,9 @@
     //    self.submitButton.layer.cornerRadius = 8;
     self.backgroundView.layer.backgroundColor = [NSColor colorWithCalibratedRed:255.0f green:255.0f blue:255.0f alpha:1.0f].CGColor;
     
-    [[AppPreferences sharedAppPreferences] startReachabilityNotifier];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(validateNoInternet:) name:NOTIFICATION_NO_INTERNET
+                                               object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(validateMacIDResponse:) name:NOTIFICATION_UPDATE_MAC_ID_API
                                                object:nil];
@@ -60,41 +64,50 @@
     
     CGSize size =  CGSizeMake(580, 269);
     self.preferredContentSize = size;
-    
-//    NSString* logDirectoryPath = [[AppPreferences sharedAppPreferences] getCubeLogDirectoryPath];
-//    
-//    DDLogFileManagerDefault *logManager = [[BaseLogFileManager alloc] initWithLogsDirectory:logDirectoryPath];
-//    
-//    DDFileLogger * file = [[DDFileLogger alloc] initWithLogFileManager:logManager];
-//    
-//    [DDLog addLogger:file];
+
     [[AppPreferences sharedAppPreferences] addLoggerOnce];
+    
     DDLogInfo(@"In LoginView");
     
-//    NSError* error;
-//
-//    NSString *pathToDesktop = [NSString stringWithFormat:@"/Users/%@/Documents/UploadFiles", NSUserName()];
-//
-//    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToDesktop])
-//    {
-//        [[NSFileManager defaultManager] createDirectoryAtPath:pathToDesktop withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
-//        NSLog(@"");
-//    }
-//
-    
-   
-    // Do any additional setup after loading the view.
-//    [self redirectConsoleLogToDocumentFolder];
+
 }
 
+-(void)validateNoInternet:(NSNotification*)noti
+{
+    if (hud != nil)
+    {
+        [hud removeFromSuperview];
+
+    }
+    
+}
 -(void)viewWillAppear
 {
     NSString* macId = [self getFinalMacId];
     
     [self.macIdLabel setStringValue:[@"MACID : "stringByAppendingString:macId]];
     
+    BOOL isAutoMode = [[NSUserDefaults standardUserDefaults] boolForKey:AUTOMODE];
+
     bool isRemember = [[NSUserDefaults standardUserDefaults] boolForKey:REMEMBER_ME];
+
     
+    if (isAutoMode)
+    {
+        NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+        
+        NSString* password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+        
+        self.loginTextField.stringValue = username;
+        
+        self.paswordTextField.stringValue = password;
+        
+        [self.autoModeCheckBox setState:NSOnState];
+        
+//        [self performSelector:@selector(submitUserValidate) withObject:nil afterDelay:2.0];
+        [self submitUserValidate];
+    }
+    else
     if (isRemember)
     {
         NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
@@ -120,6 +133,8 @@
     
 
 }
+
+
 //- (void) redirectConsoleLogToDocumentFolder
 //{
 //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
@@ -154,6 +169,14 @@
     
     NSString* macIdValidString =  [responseDict valueForKey:RESPONSE_IS_MAC_ID_VALID];
 
+    if ([responseCodeString  isEqualToString: @"-1009"])
+    {
+        [hud removeFromSuperview];
+        
+        [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:macIdValidString];
+        
+        return;
+    }
     if ([responseCodeString  isEqualToString: @"200"] && [macIdValidString isEqualToString:SUCCESS])
     {
         DDLogInfo(@"Authenticating User");
@@ -334,12 +357,20 @@
 
     }
 //    NSWindowController* wc = [self.storyboard instantiateControllerWithIdentifier:@"MainWindow"];
+    
     NSWindowController* wc = [[NSWindowController alloc] initWithWindow:self.view.window];
     
-    wc.contentViewController = hvc;
     
-    [wc showWindow:[NSApplication sharedApplication].keyWindow];
+    
+//    AppDelegate* appDelegate = (AppDelegate*)[NSApplication sharedApplication].delegate;
 
+//    NSWindowController* wc = appDelegate.windowController;
+
+    wc.contentViewController = hvc;
+
+//    [wc.window makeKeyAndOrderFront:hvc];
+
+//    [wc showWindow:[NSApplication sharedApplication].keyWindow];
 }
 
 -(NSString*)getFinalMacId
@@ -422,50 +453,59 @@
 }
 - (IBAction)submitButtonClicked:(id)sender
 {
-    NSRange whiteSpaceInUsername = [self.loginTextField.stringValue rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-     NSRange whiteSpaceInPassword = [self.paswordTextField.stringValue rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
-        if([self.loginTextField.stringValue length] == 0 || whiteSpaceInUsername.location != NSNotFound)
-        {
-            [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please enter Username."];
-            
-            [self.loginTextField setStringValue:@""];
-            
-            [self.loginTextField becomeFirstResponder];
-
-        }
-        else if([self.paswordTextField.stringValue length] == 0 || whiteSpaceInPassword.location != NSNotFound)
-        {
-            [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please enter Password."];
-            
-            [self.paswordTextField setStringValue:@""];
-            
-            [self.paswordTextField becomeFirstResponder];
-        }
-        else
-        {
-            NSString* macId = [self getFinalMacId];
-            
-            NSLog(@"macId is %@",macId);
-            if ([[AppPreferences sharedAppPreferences] isReachable])
-            {
-                [[APIManager sharedManager] updateDeviceMacID:macId password:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
-                
-                hud = [MBProgressHUD showHUDAddedTo:self.view animated:true];
-                
-                [hud setDetailsLabelText:@"Logging In, please wait"];
-            }
-            else
-            {
-                [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please check your internet connection."];
-            }
-           
-        }
-
-
+    [self submitUserValidate];
 
 }
 
+-(void)submitUserValidate
+{
+    NSRange whiteSpaceInUsername = [self.loginTextField.stringValue rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSRange whiteSpaceInPassword = [self.paswordTextField.stringValue rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
+    if([self.loginTextField.stringValue length] == 0 || whiteSpaceInUsername.location != NSNotFound)
+    {
+        [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please enter Username."];
+        
+        [self.loginTextField setStringValue:@""];
+        
+        [self.loginTextField becomeFirstResponder];
+        
+    }
+    else if([self.paswordTextField.stringValue length] == 0 || whiteSpaceInPassword.location != NSNotFound)
+    {
+        [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please enter Password."];
+        
+        [self.paswordTextField setStringValue:@""];
+        
+        [self.paswordTextField becomeFirstResponder];
+    }
+    else
+    {
+        NSString* macId = [self getFinalMacId];
+        
+//        NSLog(@"macId is %@",macId);
+        if ([[AppPreferences sharedAppPreferences] isReachable])
+        {
+            hud = [MBProgressHUD showHUDAddedTo:self.view animated:true];
+            
+            [hud setDetailsLabelText:@"Logging In, please wait"];
+            
+            [[APIManager sharedManager] updateDeviceMacID:macId password:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
+            
+           
+        }
+        else
+        {
+            [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please check your internet connection."];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NO_INTERNET object:nil];
+
+        }
+        
+    }
+    
+
+}
 //-(void)getDirectory
 //{
 //    NSOpenPanel *panel = [NSOpenPanel openPanel];

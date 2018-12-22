@@ -11,6 +11,7 @@
 #import "AppPreferences.h"
 #import "MBProgressHUD.h"
 
+
 @interface ViewController : NSViewController
 {
     MBProgressHUD* hud;
