@@ -259,6 +259,7 @@
         }
     }
     else
+    if ([response isEqualToString:@"duplicate"])
     {
         DDLogInfo(@"Duplicate file found, file name = %@",audioFileName);
 
@@ -294,6 +295,13 @@
 //
 //        }
         
+    }
+    else
+    {
+        if (([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1))
+        {
+            [self checkForNewFilesSubSequentTimer];
+        }
     }
 }
 

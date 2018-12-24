@@ -186,6 +186,14 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_UPDATE_MAC_ID_API object:reponseDict];
 
             }
+            
+            if ([self.downLoadEntityJobName isEqualToString:CHECK_DUPLICATE_AUDIO_FOR_DAY_API])
+            {
+                NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:error.localizedDescription,@"response", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CHECK_DUPLICATE_AUDIO_FOR_DAY_API object:responseDict];
+              
+            }
         }
         
 
