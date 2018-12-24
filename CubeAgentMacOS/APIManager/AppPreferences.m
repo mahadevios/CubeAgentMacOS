@@ -487,7 +487,13 @@ static AppPreferences *singleton = nil;
 -(void)showAlertWithTitle:(NSString*)title subTitle:(NSString*)subTitle
 {
    
-    NSAlert* alert   = [[NSAlert alloc] init];
+    if (alert != nil)
+    {
+        [NSApp endSheet:[alert window]];
+
+    }
+    
+    alert   = [[NSAlert alloc] init];
     [alert setMessageText:title];
     [alert setInformativeText:subTitle];
     [alert addButtonWithTitle:@"OK"];
