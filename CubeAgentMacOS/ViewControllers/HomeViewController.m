@@ -1241,15 +1241,29 @@
     }
     else
     {
-        self.checkingFilesLabel.stringValue = @"Finished Checking Files.";
-
-        self.checkingFilesLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
-
-        DDLogInfo(@"Finished checking audio file(s), no file avaliable for upload");
-
-        DDLogInfo(@"Checked folder path = %@", [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath]);
-
-        [self checkBrowserAudioFilesForDownload];
+        if ([AppPreferences sharedAppPreferences].isReachable)
+        {
+            
+            self.checkingFilesLabel.stringValue = @"Finished Checking Files.";
+            
+            self.checkingFilesLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
+            
+            DDLogInfo(@"Finished checking audio file(s), no file avaliable for upload");
+            
+            DDLogInfo(@"Checked folder path = %@", [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath]);
+            
+            [self checkBrowserAudioFilesForDownload];
+        }
+        else
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"The Internet connection appears to be offline. Operations could not be processed."];
+                
+            });
+            
+            [self checkForNewFilesSubSequentTimer];
+        }
+        
     }
    
 //    NSLog(@"directoryContents ====== %@",@"ds");
