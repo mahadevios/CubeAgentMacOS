@@ -206,7 +206,7 @@
     {
         [hud removeFromSuperview];
         
-        [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Username or Password is invalid"];
+        [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Login Id or Password is invalid"];
         
         [self.loginTextField setStringValue:@""];
         
@@ -481,7 +481,7 @@
     NSRange whiteSpaceInPassword = [self.paswordTextField.stringValue rangeOfCharacterFromSet:[NSCharacterSet whitespaceCharacterSet]];
     if([self.loginTextField.stringValue length] == 0 || whiteSpaceInUsername.location != NSNotFound)
     {
-        [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please enter Username."];
+        [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please enter Login Id."];
         
         [self.loginTextField setStringValue:@""];
         
