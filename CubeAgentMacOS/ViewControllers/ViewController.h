@@ -12,7 +12,7 @@
 #import "MBProgressHUD.h"
 
 
-@interface ViewController : NSViewController
+@interface ViewController : NSViewController<NSWindowDelegate>
 {
     MBProgressHUD* hud;
     NSAlert *alert;
