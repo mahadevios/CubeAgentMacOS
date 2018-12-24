@@ -1256,7 +1256,7 @@
             
             self.checkingFilesLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
             
-            DDLogInfo(@"Finished checking audio file(s), no file avaliable for upload");
+            DDLogInfo(@"Finished checking audio file(s), no file available for upload");
             
             DDLogInfo(@"Checked folder path = %@", [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath]);
             
