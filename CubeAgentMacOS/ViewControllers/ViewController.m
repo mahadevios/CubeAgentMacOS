@@ -23,7 +23,24 @@
     
     [[AppPreferences sharedAppPreferences] startReachabilityNotifier];
 
-   // [[NSApplication sharedApplication].keyWindow setRepresentedFilename:<#(NSString * _Nonnull)#>];
+//    [[NSApplication sharedApplication].keyWindow setRepresentedFilename:(NSString * _Nonnull)];
+    
+//    [[[NSApplication sharedApplication].keyWindow standardWindowButton:NSWindowDocumentIconButton]
+//     setImage:[NSApp applicationIconImage]];
+    // Add the custom button to the title bar.
+  //  NSTitlebarAccessoryViewController * access = [[NSTitlebarAccessoryViewController alloc] init];
+//
+//    access.view = self.view;
+//
+//    access.layoutAttribute = NSLayoutAttributeRight;
+//
+  // [[NSApplication sharedApplication].keyWindow addTitlebarAccessoryViewController:access];
+//    [[NSApplication sharedApplication].keyWindow  setTitleWithRepresentedFilename:[NSURL URLWithString:@"16x16.png"].absoluteString];
+//    // Set out custom icon
+//    [[[NSApplication sharedApplication].keyWindow  standardWindowButton:NSWindowDocumentIconButton] setImage:[NSImage imageNamed:@"16x16.png"]];
+    [[NSApplication sharedApplication].keyWindow  setRepresentedURL:[NSURL URLWithString:@"WindowTitle"]];
+    // Set our custom icon
+    [[[NSApplication sharedApplication].keyWindow  standardWindowButton:NSWindowDocumentIconButton] setImage:[NSImage imageNamed:@"Home_logo"]];
     
     [self.submitButton setBordered:NO];
     
@@ -91,7 +108,7 @@
 
     bool isRemember = [[NSUserDefaults standardUserDefaults] boolForKey:REMEMBER_ME];
 
-//    isAutoMode = true;
+    isAutoMode = false;
     if (isAutoMode)
     {
         NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
@@ -610,6 +627,10 @@
 - (IBAction)changeStatusButtonClicked:(id)sender
 {
     [self changeStatusOfDocFiles];
+}
+- (BOOL)window:(NSWindow *)window shouldPopUpDocumentPathMenu:(NSMenu *)menu
+{
+    return NO;
 }
 
 @end
