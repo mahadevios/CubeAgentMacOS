@@ -164,7 +164,7 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-//    NSLog(@"Failed %@",error.description);5
+    NSLog(@"Failed %@",error.description);
 //    NSLog(@"%@ Entity Job -",self.downLoadEntityJobName);
     
 
@@ -593,6 +593,9 @@ else
 
 -(void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler
 {
+    NSLog(@"%@", challenge.error);
+    
+    completionHandler(NSURLSessionAuthChallengeUseCredential, [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust]);
     NSLog(@"challenge received");
 }
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
@@ -613,7 +616,7 @@ else
         {
             NSLog(@"");
             
-            NSString* audioFileName = self.audioFileObject.originalFileNamePath;
+//            NSString* audioFileName = self.audioFileObject.originalFileNamePath;
             
             
             if (encryptedDict != nil)
@@ -642,12 +645,12 @@ else
 
         {
             NSError* error1;
-            NSDictionary* encryptedDict = [NSJSONSerialization JSONObjectWithData:data
-                                                                                 options:NSJSONReadingAllowFragments
-                                                                                   error:&error1];
+//            NSDictionary* encryptedDict = [NSJSONSerialization JSONObjectWithData:data
+//                                                                                 options:NSJSONReadingAllowFragments
+//                                                                                   error:&error1];
 
 
-             NSLog(@"jobname = %@", self.downLoadEntityJobName);
+//             NSLog(@"jobname = %@", self.downLoadEntityJobName);
         }
         
 
@@ -837,7 +840,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     //    -DictId,FTPAudioPath,strInhouse,ClinicName,UserID,DictatorFirstName,intTCID,intVCID
     parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%ld,", tcList.UserID]];
     
-    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%@,", tcList.TCName]];
+    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"\\%@,", tcList.TCName]];
     
     parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%d,", vcList.Inhouse]];
     
@@ -872,6 +875,9 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     
     // NSString* authorisation=[NSString stringWithFormat:@"%@*%d*%ld*%d*%d",macId,filesizeint,deptObj.Id,1,0];
     //    NSString* authorisation=[NSString stringWithFormat:@"%ld*%@*%d*%@*%ld*%@*%ld,%ld",dictatorId,FTPAudioPath,strInHouse,clinicName,userId,dictatorFirstName,tcId,vcId];
+//    NSString* encodedUrl = [parameterString
+//                            stringByAddingPercentEscapesUsingEncoding:
+//                            NSUTF8StringEncoding];
     
     NSData* jsonData=[parameterString dataUsingEncoding:NSUTF8StringEncoding];
     

@@ -425,7 +425,7 @@ static AppPreferences *singleton = nil;
     static NSDateFormatter *dateFormatter;
     dispatch_once(&onceToken, ^{
         dateFormatter = [NSDateFormatter new];
-        [dateFormatter setDateFormat:@"YYYY.MM.dd"];
+        [dateFormatter setDateFormat:@"ddMMYYYY"];
         
         //        [dateFormatter setDateFormat:@"YYYY.MM.dd-HH.mm.ss"];
     });
@@ -452,13 +452,32 @@ static AppPreferences *singleton = nil;
     return backUpDatewiseFolderPath;
 }
 
--(NSString*)getDateWiseTranscriptionFolderPath
+-(NSString*)getGivenDateBackUpAudioFolderPath:(NSString*)uploadedAudioDate
 {
-    NSString* todaysDate = [self getTimestamp];
+//    NSString* todaysDate = [self getTimestamp];
+    
+    NSString* backDirectoryPath = [self getUsernameBacupAudioDirectoryPath];
+    
+    NSString* backUpDatewiseFolderPath = [backDirectoryPath stringByAppendingPathComponent:uploadedAudioDate];
+    
+    NSError* error;
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:backUpDatewiseFolderPath])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:backUpDatewiseFolderPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+        NSLog(@"");
+    }
+    
+    return backUpDatewiseFolderPath;
+}
+
+-(NSString*)getGivenDateTranscriptionFolderPath:(NSString*)uploadedAudioDate
+{
+//    NSString* todaysDate = [self getTimestamp];
     
     NSString* transDirectoryPath = [self getUsernameTranscriptionDirectoryPath];
     
-    NSString* transDatewiseFolderPath = [transDirectoryPath stringByAppendingPathComponent:todaysDate];
+    NSString* transDatewiseFolderPath = [transDirectoryPath stringByAppendingPathComponent:uploadedAudioDate];
     
     NSError* error;
     

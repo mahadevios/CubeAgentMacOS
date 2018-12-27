@@ -657,15 +657,21 @@
                 
                 audioFile.originalFileName = [response valueForKey:@"OriginalFileName"];
                 
-                NSString* backupDirectoryPath = [[AppPreferences sharedAppPreferences] getUsernameBacupAudioDirectoryPath];
+                NSString* FileServerPath = [response valueForKey:@"FileServerPath"];
                 
-                NSString* newFilePath = [backupDirectoryPath stringByAppendingPathComponent:audioFile.fileName];
+                NSArray* arr = [FileServerPath componentsSeparatedByString:@"\\"];
+                
+                NSString* dateFolderName = [arr lastObject];
+                
+                NSString *pathToBackUpFiles = [[AppPreferences sharedAppPreferences] getGivenDateBackUpAudioFolderPath:dateFolderName];
+
+//                NSString* backupDirectoryPath = [[AppPreferences sharedAppPreferences] getUsernameBacupAudioDirectoryPath];
+                
+                NSString* newFilePath = [pathToBackUpFiles stringByAppendingPathComponent:audioFile.originalFileName];
                 
                 audioFile.originalFileNamePath = newFilePath;
                 
-                long fileSize = [[AppPreferences sharedAppPreferences] getFileSize:newFilePath];
                 
-                audioFile.fileSize = fileSize;
                 
                 //                audioFile.file
                 NSString* base64EncryptedString = [response valueForKey:@"FileData"];
@@ -690,7 +696,12 @@
                     DDLogInfo(@"Downloaded audio file name = %@", audioFile.fileName);
 
                     DDLogInfo(@"Downloaded audio file %@ moved to backup folder", audioFile.fileName);
-
+                    
+                    
+                    long fileSize = [[AppPreferences sharedAppPreferences] getFileSize:newFilePath];
+                    
+                    audioFile.fileSize = fileSize;
+                    
                 }
                 else
                 {
@@ -847,13 +858,19 @@
             
             audioFile.originalFileName = [audioFile.originalFileName stringByAppendingPathExtension:@"doc"];
             
-            NSString* transDirectoryPath = [[AppPreferences sharedAppPreferences] getDateWiseTranscriptionFolderPath];
+            NSString* FileServerPath = [response valueForKey:@"FileServerPath"];
+
+            NSArray* arr = [FileServerPath componentsSeparatedByString:@"\\"];
+            
+            NSString* dateFolderName = [arr lastObject];
+
+            NSString* transDirectoryPath = [[AppPreferences sharedAppPreferences] getGivenDateTranscriptionFolderPath:dateFolderName];
+            
+            NSString* base64EncryptedString = [response valueForKey:@"FileData"];
             
             NSString* newFilePath = [transDirectoryPath stringByAppendingPathComponent:audioFile.originalFileName];
             
             audioFile.originalFileNamePath = newFilePath;
-            
-            NSString* base64EncryptedString = [response valueForKey:@"FileData"];
             
             NSData *encodedData = [[NSData alloc] initWithBase64EncodedString:base64EncryptedString options:0];
             
@@ -898,7 +915,7 @@
 
             DDLogInfo(@"Updating downloade doc file status, name = %@", audioFile.fileName);
             
-            [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
+//            [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
 
         
                 
@@ -973,6 +990,8 @@
     
     [AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView = 0;
     
+    self.uploadingCountLabel.stringValue = @"";
+
     [self.tableView reloadData];
     
     [self getDictationIds];
