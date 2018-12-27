@@ -896,7 +896,7 @@
             
             ++[AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView;
 
-            DDLogInfo(@"Updating downloade doc file status, name = %@", audioFile.fileName);
+            DDLogInfo(@"Updating downloaded doc file status, name = %@", audioFile.fileName);
             
             [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
 
