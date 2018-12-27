@@ -83,7 +83,9 @@
 
 -(NSString*)getDateWiseBackUpAudioFolderPath;
 
--(NSString*)getDateWiseTranscriptionFolderPath;
+-(NSString*)getGivenDateTranscriptionFolderPath:(NSString*)uploadedAudioDate;
+
+-(NSString*)getGivenDateBackUpAudioFolderPath:(NSString*)uploadedAudioDate;
 
 -(void)showAlertWithTitle:(NSString*)title subTitle:(NSString*)subTitle;
 

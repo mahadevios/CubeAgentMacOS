@@ -21,7 +21,10 @@
 //#define  FILE_UPLOAD_API                      @"MobileFileUpload"
 //#define  PIN_CANGE_API                        @"MobilePINChange"
 
-#define  BASE_URL_PATH                        @"http://192.168.3.156/CubeAPI/api"
+//#define  BASE_URL_PATH                        @"http://192.168.3.156/CubeAPI/api"
+#define  BASE_URL_PATH                        @"https://www.cubescribe.com/Cubeagent_webAPI/api"
+
+
 //#define  BASE_URL_PATH                        @"https://www.cubescribe.com/cubeagent_webapi/api"
 
 //#define  BASE_URL_PATH                        @"http://192.168.3.150:8081/CubeAPI/api"

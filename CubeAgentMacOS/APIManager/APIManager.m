@@ -798,7 +798,7 @@ static APIManager *singleton = nil;
     //    -DictId,FTPAudioPath,strInhouse,ClinicName,UserID,DictatorFirstName,intTCID,intVCID
     parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%ld,", tcList.UserID]];
     
-    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%@,", tcList.TCName]];
+    parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"\%@,", tcList.TCName]];
     
     parameterString = [parameterString stringByAppendingString:[NSString stringWithFormat:@"%d,", vcList.Inhouse]];
     
