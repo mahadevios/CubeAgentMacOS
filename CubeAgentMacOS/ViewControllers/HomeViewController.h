@@ -48,6 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray*  queueAudioFilesArrayForTableView;
 @property (nonatomic, strong) NSMutableArray*  dictationIdsArrayForDownload;
 @property (nonatomic, strong) NSMutableArray*  audioFileAddedInQueueArray;
+@property (nonatomic, strong) NSMutableArray*  duplicateFileCheckArray;
 
 @property (weak) IBOutlet NSView *homeBackgroundView;
 @property (weak) IBOutlet NSOutlineView *outlineView;

@@ -28,7 +28,6 @@
 @property (weak) IBOutlet NSTextField *macIdLabel;
 @property (weak) IBOutlet NSTextField *versionLabel;
 @property(nonatomic, strong)NSSavePanel* savePanel;
-- (IBAction)changeStatusButtonClicked:(id)sender;
 @property (weak) IBOutlet NSView *backgroundView;
 
 @end
