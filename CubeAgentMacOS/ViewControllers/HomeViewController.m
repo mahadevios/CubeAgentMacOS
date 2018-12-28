@@ -916,7 +916,7 @@
             DDLogInfo(@"Updating downloaded doc file status, name = %@", audioFile.fileName);
             
 //            [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
-
+            [self demoDOwnload];
         
                 
                 
@@ -935,6 +935,40 @@
      
 }
 
+-(void)demoDOwnload
+{
+    DDLogInfo(@"Doc file status updated successfully");
+    
+    if ([AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count > 0)
+    {
+        if ([AppPreferences sharedAppPreferences].isReachable)
+        {
+            DDLogInfo(@"Downloading next doc file");
+            
+            NSBlockOperation* operation = [[AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray objectAtIndex:0];
+            
+            [[AppPreferences sharedAppPreferences].docDownloadQueue addOperation:operation];
+            
+            [[AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray removeObjectAtIndex:0];
+        }
+        else
+        {
+            [self checkForNewFilesSubSequentTimer];
+        }
+        
+    }
+    else
+    {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self performSelector:@selector(cleanUpTableViewAfterDocDownload) withObject:nil afterDelay:3.0];
+            
+        });
+        
+    }
+
+}
 
 #pragma mark: Reset Tableview
 
