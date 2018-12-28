@@ -400,14 +400,18 @@ else
             
             NSString* audioFileName = self.audioFileName;
             
-            if ([response isEqualToString:@"No Records"])
+            if (![response isKindOfClass:[NSDictionary class]])
             {
-                NSString* audioFilePath = self.audioFilePath;
-
-                NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:response,@"response",audioFileName,@"audioFileName",audioFilePath,@"audioFilePath", nil];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CHECK_DUPLICATE_AUDIO_FOR_DAY_API object:responseDict];
+                if ([response isEqualToString:@"No Records"])
+                {
+                    NSString* audioFilePath = self.audioFilePath;
+                    
+                    NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:response,@"response",audioFileName,@"audioFileName",audioFilePath,@"audioFilePath", nil];
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CHECK_DUPLICATE_AUDIO_FOR_DAY_API object:responseDict];
+                }
             }
+           
             else
             {                
                 NSString* audioFilePath = self.audioFilePath;
@@ -593,10 +597,11 @@ else
 
 -(void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler
 {
-    NSLog(@"%@", challenge.error);
+//    NSLog(@"%@", challenge.error);
+    DDLogInfo(@"Challenge Received");
     
     completionHandler(NSURLSessionAuthChallengeUseCredential, [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust]);
-    NSLog(@"challenge received");
+//    NSLog(@"challenge received");
 }
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
 {

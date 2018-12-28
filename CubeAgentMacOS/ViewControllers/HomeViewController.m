@@ -76,6 +76,8 @@
 
     self.audioFileAddedInQueueArray = [NSMutableArray new];
     
+    self.duplicateFileCheckArray = [NSMutableArray new];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(validateNoInternet:) name:NOTIFICATION_NO_INTERNET
                                                object:nil];
@@ -228,6 +230,8 @@
     
     NSString* audioFilePath = [responseString objectForKey:@"audioFilePath"];
 
+    [self.duplicateFileCheckArray removeObject:audioFileName];
+    
     if ([response isEqualToString:@"No Records"])
     {
 //        NSString* audioUploadFolderPath = [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
@@ -274,7 +278,7 @@
         {
             [self checkForNewFilesSubSequentTimer];
         }
-        else if (([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1))
+        else if (self.duplicateFileCheckArray.count > 0 && (([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1)))
         {
              [self checkForNewFilesSubSequentTimer];
         }
@@ -915,7 +919,7 @@
 
             DDLogInfo(@"Updating downloaded doc file status, name = %@", audioFile.fileName);
             
-//            [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
+          //  [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
             [self demoDOwnload];
         
                 
@@ -1076,10 +1080,11 @@
         {
             [self->checkForNewFilesTimer invalidate];
         }
+          self->checkForNewFilesTimer =  [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(checkForNewFilesForSubSequentTime) userInfo:nil repeats:YES];
     });
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self->checkForNewFilesTimer =  [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(checkForNewFilesForSubSequentTime) userInfo:nil repeats:YES];
-    });
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//
+//    });
     
     
     
@@ -1284,6 +1289,8 @@
                 NSString* audioDirecPath = [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
                 
                 NSString* fullPath = [audioDirecPath stringByAppendingPathComponent:fileSubPath];
+                
+                [self.duplicateFileCheckArray addObject:filename];
                 
                 [[APIManager sharedManager] checkDuplicateAudioForDay:[NSString stringWithFormat:@"%ld", [AppPreferences sharedAppPreferences].loggedInUser.userId] originalFileName:filename filePath:fullPath];
             }
