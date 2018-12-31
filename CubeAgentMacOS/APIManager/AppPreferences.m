@@ -392,6 +392,10 @@ static AppPreferences *singleton = nil;
 
    bool isMoved = [[NSFileManager defaultManager] moveItemAtPath:filePath toPath:pathToBackUpFiles error:&error];
     
+    if(isMoved)
+    {
+        DDLogInfo(@"Audio file moved to BackupAudio folder");
+    }
     NSLog(@"ismoved"); 
     
 }
@@ -425,7 +429,8 @@ static AppPreferences *singleton = nil;
     static NSDateFormatter *dateFormatter;
     dispatch_once(&onceToken, ^{
         dateFormatter = [NSDateFormatter new];
-        [dateFormatter setDateFormat:@"ddMMYYYY"];
+        // ---> setting date format as ddmmyy for BackupAudio date folder.
+        [dateFormatter setDateFormat:@"ddMMYY"];
         
         //        [dateFormatter setDateFormat:@"YYYY.MM.dd-HH.mm.ss"];
     });

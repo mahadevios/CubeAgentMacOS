@@ -43,7 +43,7 @@
     static NSDateFormatter *dateFormatter;
     dispatch_once(&onceToken, ^{
         dateFormatter = [NSDateFormatter new];
-        [dateFormatter setDateFormat:@"YYYY.MM.dd"];
+        [dateFormatter setDateFormat:@"ddMMYY"];
 
 //        [dateFormatter setDateFormat:@"YYYY.MM.dd-HH.mm.ss"];
     });

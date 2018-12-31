@@ -107,7 +107,7 @@
     BOOL isAutoMode = [[NSUserDefaults standardUserDefaults] boolForKey:AUTOMODE];
 
     bool isRemember = [[NSUserDefaults standardUserDefaults] boolForKey:REMEMBER_ME];
-   // isAutoMode = false;
+    //isAutoMode = false;
     
     if (isAutoMode)
     {
@@ -513,6 +513,7 @@
         }
         else
         {
+                
             [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please check your internet connection."];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NO_INTERNET object:nil];
