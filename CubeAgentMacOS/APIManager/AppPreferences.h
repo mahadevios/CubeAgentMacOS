@@ -91,6 +91,8 @@
 
 -(void)addLoggerOnce;
 
+-(void)moveDuplicateAudioFileToGivenDateBackup:(NSString*)dateFolderName filePath:(NSString*)filePath;
+
 @end
 
 
