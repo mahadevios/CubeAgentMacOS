@@ -233,6 +233,16 @@
                  return;
               
             }
+            
+            if ([self.downLoadEntityJobName isEqualToString:GET_DICTATION_IDS_API])
+            {
+                NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:error.localizedDescription,@"error", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GET_DICTATION_IDS_API object:responseDict];
+                
+                return;
+                
+            }
         }
         
 

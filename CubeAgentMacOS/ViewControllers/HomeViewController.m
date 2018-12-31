@@ -765,6 +765,14 @@
 {
     NSDictionary* responseDict = notification.object;
     
+    NSString* error = [responseDict valueForKey:@"error"];
+
+    if (error != nil || [error isEqualToString:@""])
+    {
+         [self checkForNewFilesSubSequentTimer];
+        
+        return;
+    }
     NSString* dictationIdsString = [responseDict valueForKey:@"Id"];
     
     DDLogInfo(@"Finished checking dictation ids");
