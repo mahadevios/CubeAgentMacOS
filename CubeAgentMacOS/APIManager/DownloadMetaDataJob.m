@@ -183,8 +183,45 @@
             {
                  NSDictionary* reponseDict = [[NSDictionary alloc] initWithObjectsAndKeys:error.localizedDescription,RESPONSE_IS_MAC_ID_VALID,[NSString stringWithFormat:@"%ld", error.code],RESPONSE_CODE, nil];
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_UPDATE_MAC_ID_API object:reponseDict];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NO_INTERNET object:reponseDict];
 
+                return;
+            }
+            
+            if ([self.downLoadEntityJobName isEqualToString:AUTHENTICATE_API])
+            {
+                NSDictionary* reponseDict = [[NSDictionary alloc] initWithObjectsAndKeys:error.localizedDescription,RESPONSE_IS_MAC_ID_VALID,[NSString stringWithFormat:@"%ld", error.code],RESPONSE_CODE, nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NO_INTERNET object:reponseDict];
+                
+                return;
+            }
+            
+            if ([self.downLoadEntityJobName isEqualToString:ACCESS_CUBE_CONFIG_API])
+            {
+                NSDictionary* reponseDict = [[NSDictionary alloc] initWithObjectsAndKeys:error.localizedDescription,RESPONSE_IS_MAC_ID_VALID,[NSString stringWithFormat:@"%ld", error.code],RESPONSE_CODE, nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NO_INTERNET object:reponseDict];
+                
+                return;
+            }
+            
+            if ([self.downLoadEntityJobName isEqualToString:AUDIO_FILE_EXTENSIONS_API])
+            {
+                NSDictionary* reponseDict = [[NSDictionary alloc] initWithObjectsAndKeys:error.localizedDescription,RESPONSE_IS_MAC_ID_VALID,[NSString stringWithFormat:@"%ld", error.code],RESPONSE_CODE, nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NO_INTERNET object:reponseDict];
+                
+                return;
+            }
+            
+            if ([self.downLoadEntityJobName isEqualToString:GET_TC_NAME_API])
+            {
+                NSDictionary* reponseDict = [[NSDictionary alloc] initWithObjectsAndKeys:error.localizedDescription,RESPONSE_IS_MAC_ID_VALID,[NSString stringWithFormat:@"%ld", error.code],RESPONSE_CODE, nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NO_INTERNET object:reponseDict];
+                
+                return;
             }
             
             if ([self.downLoadEntityJobName isEqualToString:CHECK_DUPLICATE_AUDIO_FOR_DAY_API])
@@ -192,6 +229,8 @@
                 NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:error.localizedDescription,@"response", nil];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CHECK_DUPLICATE_AUDIO_FOR_DAY_API object:responseDict];
+                
+                 return;
               
             }
         }
