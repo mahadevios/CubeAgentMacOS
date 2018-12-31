@@ -177,7 +177,7 @@
     {
         if ([AppPreferences sharedAppPreferences].isReachable)
         {
-            DDLogInfo(@"Downloading next doc file");
+            DDLogInfo(@"Downloading next Doc file");
             
             NSBlockOperation* operation = [[AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray objectAtIndex:0];
             
@@ -645,7 +645,7 @@
         {
             NSArray* responseArray = response;
             
-            DDLogInfo(@"%ld audio files downloaded successfully", responseArray.count);
+            DDLogInfo(@"%ld audio file(s) downloaded successfully", responseArray.count);
 
             for (int i =0; i < responseArray.count; i++)
             {
@@ -697,10 +697,11 @@
                 
                 if (isWritten)
                 {
-                    DDLogInfo(@"Downloaded audio file name = %@", audioFile.fileName);
+                    // ---> printing original downloaded file name
+                    DDLogInfo(@"Downloaded audio file name = %@", audioFile.originalFileName);
 
-                    DDLogInfo(@"Downloaded audio file %@ moved to backup folder", audioFile.fileName);
-                    
+                    // ---> printing original downloaded file name
+                    DDLogInfo(@"Downloaded audio file %@ moved to backup folder", audioFile.originalFileName);
                     
                     long fileSize = [[AppPreferences sharedAppPreferences] getFileSize:newFilePath];
                     
@@ -892,12 +893,12 @@
             
             if (isWritten)
             {
-                DDLogInfo(@"Finished downloading Doc file, name = %@", audioFile.fileName);
+                DDLogInfo(@"Finished downloading Doc file, name = %@", audioFile.originalFileName);
 
             }
             else
             {
-                DDLogInfo(@"Failed to write downloaded doc file, name = %@", audioFile.fileName);
+                DDLogInfo(@"Failed to write downloaded doc file, name = %@", audioFile.originalFileName);
 
             }
             long fileSize = [[AppPreferences sharedAppPreferences] getFileSize:newFilePath];
@@ -917,10 +918,10 @@
             
             ++[AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView;
 
-            DDLogInfo(@"Updating downloaded doc file status, name = %@", audioFile.fileName);
+            DDLogInfo(@"Updating downloaded Doc file status, name = %@", audioFile.originalFileName);
             
-          //  [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
-            [self demoDOwnload];
+            //[[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
+          [self demoDOwnload];
         
                 
                 
@@ -947,7 +948,7 @@
     {
         if ([AppPreferences sharedAppPreferences].isReachable)
         {
-            DDLogInfo(@"Downloading next doc file");
+            DDLogInfo(@"Downloading next Doc file");
             
             NSBlockOperation* operation = [[AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray objectAtIndex:0];
             
@@ -992,7 +993,6 @@
     // remove object from dictionary
     //    [listOfAudioFilesToUploadDict removeObjectForKey:audioFileName];
     
-    DDLogInfo(@"Audio file moved to BackupAudio folder");
 
     // move file to backup
     [[AppPreferences sharedAppPreferences] moveAudioFileToBackup:audioFilePath];
@@ -1371,7 +1371,7 @@
         
         AudioFile* audioFile = [self.uploadedAudioFilesArrayForTableView objectAtIndex:row];
         
-        cell.textField.stringValue = audioFile.fileName;
+        cell.textField.stringValue = audioFile.originalFileName;
     }
     else
         if (tableColumn == self.tableView.tableColumns[1])
