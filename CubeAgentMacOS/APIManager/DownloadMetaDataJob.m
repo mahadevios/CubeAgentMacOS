@@ -60,7 +60,7 @@
     
 //    NSArray *params = [self.requestParameter objectForKey:REQUEST_PARAMETER];
     
-    NSMutableString *parameter = [[NSMutableString alloc] init];
+//    NSMutableString *parameter = [[NSMutableString alloc] init];
 //    for(NSString *strng in array)
 //    {
 //        if([[array objectAtIndex:0] isEqualToString:strng]) {
@@ -465,7 +465,9 @@ else
             {                
                 NSString* audioFilePath = self.audioFilePath;
 
-                NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"duplicate",@"response",audioFileName,@"audioFileName",audioFilePath,@"audioFilePath", nil];
+                NSString* FileServerPath = [response valueForKey:@"FileServerPath"];
+
+                NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"duplicate",@"response",audioFileName,@"audioFileName",audioFilePath,@"audioFilePath",FileServerPath,@"FileServerPath", nil];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CHECK_DUPLICATE_AUDIO_FOR_DAY_API object:responseDict];
             }

@@ -400,6 +400,30 @@ static AppPreferences *singleton = nil;
     
 }
 
+-(void)moveDuplicateAudioFileToGivenDateBackup:(NSString*)dateFolderName filePath:(NSString*)filePath
+{
+    
+    NSString *pathToBackUpFiles = [self getGivenDateBackUpAudioFolderPath:dateFolderName];
+   
+    pathToBackUpFiles = [pathToBackUpFiles stringByAppendingPathComponent:[filePath lastPathComponent]];
+    
+    NSError* error;
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:pathToBackUpFiles])
+    {
+        bool isRemoved = [[NSFileManager defaultManager] removeItemAtPath:pathToBackUpFiles error:&error];
+        
+    }
+    
+    bool isMoved = [[NSFileManager defaultManager] moveItemAtPath:filePath toPath:pathToBackUpFiles error:&error];
+    
+    if(isMoved)
+    {
+        DDLogInfo(@"Audio file moved to BackupAudio folder");
+    }
+    NSLog(@"ismoved");
+    
+}
 -(uint64_t)getFileSize:(NSString*)filePath
 {
     uint64_t totalSpace = 0;

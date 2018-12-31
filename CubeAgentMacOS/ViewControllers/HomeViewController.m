@@ -269,7 +269,13 @@
 
         DDLogInfo(@"Moving duplicate audio file to BackupAudio folder");
 
-        [self performCleanUp:audioFilePath];
+        NSString* FileServerPath = [responseString valueForKey:@"FileServerPath"];
+        
+        NSArray* arr = [FileServerPath componentsSeparatedByString:@"\\"];
+        
+        NSString* dateFolderName = [arr lastObject];
+        
+        [self performCleanUpForDuplicate:dateFolderName filePath:audioFilePath];
         
         [listOfAudioFilesToUploadDict removeObjectForKey:audioFileName];
        
@@ -999,10 +1005,6 @@
     // delete the encypted file
     [[AppPreferences sharedAppPreferences] deleteFileAtPath:audioFilePath];
     
-    // remove object from dictionary
-    //    [listOfAudioFilesToUploadDict removeObjectForKey:audioFileName];
-    
-
     // move file to backup
     [[AppPreferences sharedAppPreferences] moveAudioFileToBackup:audioFilePath];
     
@@ -1011,7 +1013,23 @@
     {
         // retsart the timer to upload audio
     }
+   
+}
+
+-(void)performCleanUpForDuplicate:(NSString*)dateFolderName filePath:(NSString*)filePath
+{
     
+    // delete the encypted file
+//    [[AppPreferences sharedAppPreferences] deleteFileAtPath:audioFilePath];
+    
+    // move file to backup
+    [[AppPreferences sharedAppPreferences] moveDuplicateAudioFileToGivenDateBackup:dateFolderName filePath:filePath];
+    
+    // if dict.count value is 0 start the upload timer
+    if (listOfAudioFilesToUploadDict.count == 0)
+    {
+        // retsart the timer to upload audio
+    }
     
 }
 

@@ -96,6 +96,7 @@
         [hud removeFromSuperview];
 
     }
+    [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Unable to reach the server. Please try again."];
     
 }
 -(void)viewWillAppear
