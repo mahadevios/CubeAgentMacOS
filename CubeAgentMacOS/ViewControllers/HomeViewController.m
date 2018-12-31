@@ -278,9 +278,10 @@
         {
             [self checkForNewFilesSubSequentTimer];
         }
-        else if (self.duplicateFileCheckArray.count > 0 && (([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1)))
+        else if (self.duplicateFileCheckArray.count < 1 && (([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1)))
         {
-             [self checkForNewFilesSubSequentTimer];
+//             [self checkForNewFilesSubSequentTimer];
+            [self checkBrowserAudioFilesForDownload];
         }
 //        DDLogInfo(@"Checking next file to upload");
 
