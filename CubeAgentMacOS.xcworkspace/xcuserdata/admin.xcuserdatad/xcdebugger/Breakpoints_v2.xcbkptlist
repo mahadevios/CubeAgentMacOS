@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1015"
             endingLineNumber = "1015"
-            landmarkName = "-cleanUpTableViewAfterAudioUpload"
+            landmarkName = "-cleanUpTableViewAfterDocDownload"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CubeAgentMacOS/APIManager/DownloadMetaDataJob.m"
-            timestampString = "567613330.317556"
+            timestampString = "567932557.889048"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "171"
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CubeAgentMacOS/APIManager/DownloadMetaDataJob.m"
-            timestampString = "567613330.317651"
+            timestampString = "567932557.889135"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "882"
-            endingLineNumber = "882"
+            startingLineNumber = "921"
+            endingLineNumber = "921"
             landmarkName = "-uploadFileAfterGettingdatabaseValues:vcList:audioFile:"
             landmarkType = "7">
          </BreakpointContent>
