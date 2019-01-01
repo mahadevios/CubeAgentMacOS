@@ -230,6 +230,7 @@
     
     NSString* audioFilePath = [responseString objectForKey:@"audioFilePath"];
 
+    // remove added audio file obj from array and later check if more obj exists, if no and intenet not aviable then start timer
     [self.duplicateFileCheckArray removeObject:audioFileName];
     
     if ([response isEqualToString:@"No Records"])
@@ -252,12 +253,10 @@
                  [[APIManager sharedManager] FTPGetTCIdView:[NSString stringWithFormat:@"%ld",[AppPreferences sharedAppPreferences].loggedInUser.userId] originalFileName:audioFileName filePath:audioFilePath];
             }
             else
+                if (self.duplicateFileCheckArray.count < 1 && self.uploadedAudioFilesArrayForTableView.count < 1)
             {
-                // if internet not reachable and no file is in queue to upload or download queue then start the cycle again
-                if (!([AppPreferences sharedAppPreferences].isReachable) && ([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1))
-                {
+
                     [self checkForNewFilesSubSequentTimer];
-                }
             }
            
         }
@@ -279,15 +278,14 @@
         
         [listOfAudioFilesToUploadDict removeObjectForKey:audioFileName];
        
-        // if internet not reachable and no file is in queue to upload or download queue then start the cycle again
-        if (![AppPreferences sharedAppPreferences].isReachable)
+        // if internet not reachable and no file in tableview then start the cycle again
+        if (![AppPreferences sharedAppPreferences].isReachable && self.duplicateFileCheckArray.count < 1 && self.uploadedAudioFilesArrayForTableView.count < 1)
         {
             [self checkForNewFilesSubSequentTimer];
         }
-//        else if (self.duplicateFileCheckArray.count < 1 && [AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 && [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 && [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 && [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1)
- else if (self.duplicateFileCheckArray.count < 1 && self.uploadedAudioFilesArrayForTableView.count < 1)
+        // if internet available and last file checked and no file in tableview then start browser file download
+        else if (self.duplicateFileCheckArray.count < 1 && self.uploadedAudioFilesArrayForTableView.count < 1)
         {
-//             [self checkForNewFilesSubSequentTimer];
             [self checkBrowserAudioFilesForDownload];
         }
 //        DDLogInfo(@"Checking next file to upload");
@@ -342,6 +340,10 @@
 -(void)validateTCIDViewReponse:(NSNotification*)notification
 {
     
+    NSDictionary* responseString = notification.object;
+
+    NSString* error = [responseString objectForKey:@"error"];
+
     // we have started the timer in duplicate, if we got this reposnse then we have file to upload hence  invalidate the timer
     if ([checkForNewFilesTimer isValid])
     {
@@ -349,13 +351,16 @@
     }
     DDLogInfo(@"Finished checking TC ID View");
     // if internet not reachable and no file is in queue to upload or download queue then start the cycle again
-     if (![AppPreferences sharedAppPreferences].isReachable && ([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1))
+     if (![AppPreferences sharedAppPreferences].isReachable && self.uploadedAudioFilesArrayForTableView.count < 1)
      {
          [self checkForNewFilesSubSequentTimer];
      }
+    else if (error != nil)
+    {
+        
+    }
     else
     {
-        NSDictionary* responseString = notification.object;
         
         NSDictionary* responseDict = [responseString objectForKey:@"response"];
         
@@ -461,7 +466,6 @@
                 
                 audioFile.status = @"In Queue";
                 
-                
                 [self.uploadedAudioFilesArrayForTableView addObject:audioFile];
                 //
                 NSIndexSet* rowIndexSet = [[NSIndexSet alloc] initWithIndex:[AppPreferences sharedAppPreferences].totalFilesToBeAddedInTableView];
@@ -552,29 +556,20 @@
     
     if ([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count > 0)
     {
-       
-        
-        // to update the status "uploaded" in tableview
-//        for (int i = audioFileObject.rowNumber+1; i < self.uploadedAudioFilesArrayForTableView.count; i++)
-//        {
-
-            
-//            if ([tempFileObj.fileType isEqualToString:@"AudioUpload"])
-//            {
+     
         dispatch_async(dispatch_get_main_queue(), ^{
             
              NSBlockOperation* nextOperation = [[AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray objectAtIndex:0];
             
               AudioFile* tempFileObj = [self.uploadedAudioFilesArrayForTableView objectAtIndex:audioFileObject.rowNumber+1];
             
-               
                 tempFileObj.status = @"Uploading";
                 
                 [self.uploadedAudioFilesArrayForTableView replaceObjectAtIndex:audioFileObject.rowNumber+1 withObject:tempFileObj];
         
-                NSIndexSet* rowIndexSet = [[NSIndexSet alloc] initWithIndex:audioFileObject.rowNumber+1];
-                                   
-                NSIndexSet* columnIndexSet = [[NSIndexSet alloc] initWithIndex:3];
+//                NSIndexSet* rowIndexSet = [[NSIndexSet alloc] initWithIndex:audioFileObject.rowNumber+1];
+            
+//                NSIndexSet* columnIndexSet = [[NSIndexSet alloc] initWithIndex:3];
         
 //                    [self.tableView reloadDataForRowIndexes:rowIndexSet columnIndexes:columnIndexSet];
             
@@ -584,12 +579,8 @@
             [[AppPreferences sharedAppPreferences].audioUploadQueue addOperation:nextOperation];
             
             [[AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray  removeObjectAtIndex:0];
-                });
-                
-//                break;
-//            }
-        
-//        }
+            
+        });
         
       
         
@@ -870,7 +861,7 @@
             
             audioFile.status = @"Downloaded";
             
-            long dictationID = [[response valueForKey:@"Id"] longLongValue];
+//            long dictationID = [[response valueForKey:@"Id"] longLongValue];
             
             audioFile.fileName = [response valueForKey:@"FileName"];
             
@@ -1323,6 +1314,7 @@
                 
                 NSString* fullPath = [audioDirecPath stringByAppendingPathComponent:fileSubPath];
                 
+                // add file in duplicate file check array, so that when duplicate response received remove this file from array and check if this array contains more object, if yes then dont start the timer
                 [self.duplicateFileCheckArray addObject:filename];
                 
                 [[APIManager sharedManager] checkDuplicateAudioForDay:[NSString stringWithFormat:@"%ld", [AppPreferences sharedAppPreferences].loggedInUser.userId] originalFileName:filename filePath:fullPath];

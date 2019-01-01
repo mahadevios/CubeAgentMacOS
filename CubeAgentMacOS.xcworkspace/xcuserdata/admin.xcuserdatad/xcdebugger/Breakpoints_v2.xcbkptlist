@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CubeAgentMacOS/ViewControllers/HomeViewController.m"
-            timestampString = "567613330.316175"
+            timestampString = "568030737.766355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1015"
-            endingLineNumber = "1015"
-            landmarkName = "-performCleanUp:"
+            startingLineNumber = "1014"
+            endingLineNumber = "1014"
+            landmarkName = "-performCleanUpForDuplicate:filePath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,27 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CubeAgentMacOS/ViewControllers/HomeViewController.m"
-            timestampString = "567613330.316612"
+            timestampString = "568030737.7669801"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
-            landmarkName = "-validateDuplicateFileReponse:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CubeAgentMacOS/ViewControllers/HomeViewController.m"
-            timestampString = "567613330.3168941"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1195"
-            endingLineNumber = "1195"
+            startingLineNumber = "1194"
+            endingLineNumber = "1194"
             landmarkName = "-checkBrowserAudioFilesForDownload"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CubeAgentMacOS/APIManager/DownloadMetaDataJob.m"
-            timestampString = "567932557.889048"
+            timestampString = "568030737.7672319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "171"
@@ -74,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CubeAgentMacOS/APIManager/APIManager.m"
-            timestampString = "567613330.317608"
+            timestampString = "568030737.76728"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "820"
@@ -90,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CubeAgentMacOS/APIManager/DownloadMetaDataJob.m"
-            timestampString = "567932557.889135"
+            timestampString = "568030737.7673219"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "921"
@@ -106,12 +90,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CubeAgentMacOS/ViewControllers/HomeViewController.m"
-            timestampString = "567613383.9148279"
+            timestampString = "568030737.767363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "670"
-            endingLineNumber = "670"
+            startingLineNumber = "669"
+            endingLineNumber = "669"
             landmarkName = "-validateAudioFileDownloadReponse:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CubeAgentMacOS/ViewControllers/HomeViewController.m"
+            timestampString = "568030737.76793"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "332"
+            endingLineNumber = "332"
+            landmarkName = "-validateVCIDViewReponse:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CubeAgentMacOS/ViewControllers/HomeViewController.m"
+            timestampString = "568030755.742947"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
+            landmarkName = "-validateTCIDViewReponse:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

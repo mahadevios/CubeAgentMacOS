@@ -166,7 +166,6 @@
 {
     NSLog(@"Failed %@",error.description);
 //    NSLog(@"%@ Entity Job -",self.downLoadEntityJobName);
-    
 
     if (error.code != 0)
 
@@ -232,6 +231,18 @@
                 
                  return;
               
+            }
+            
+            if ([self.downLoadEntityJobName isEqualToString:FTP_GET_TC_ID_VIEW_API])
+            {
+                NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:error.localizedDescription,@"error", nil];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FTP_GET_TC_ID_VIEW_API object:responseDict];
+                
+                DDLogInfo(@"Error occurred!, file will be uploaded later.");
+                
+                return;
+                
             }
             
             if ([self.downLoadEntityJobName isEqualToString:GET_DICTATION_IDS_API])
@@ -585,25 +596,25 @@ else
         }
     }
     
-    else
-    if([self.downLoadEntityJobName isEqualToString:DOWNLOAD_FILE_API])
-        
-    {
-        if (statusCode == 200)
-        {
-            
-            
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DOWNLOAD_FILE_API object:response];
-            
-            return;
-            
-        }
-        else
-        {
-//            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
-        }
-    }
+//    else
+//    if([self.downLoadEntityJobName isEqualToString:DOWNLOAD_FILE_API])
+//
+//    {
+//        if (statusCode == 200)
+//        {
+//
+//
+//
+//            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DOWNLOAD_FILE_API object:response];
+//
+//            return;
+//
+//        }
+//        else
+//        {
+////            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
+//        }
+//    }
     
     else
     if([self.downLoadEntityJobName isEqualToString:GET_DICTATORS_FOLDER_API])
@@ -696,18 +707,18 @@ else
             
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FILE_UPLOAD_API object:encryptedDict];
         }
-        else
-        if ([self.downLoadEntityJobName  isEqual: GET_BROWSER_AUDIO_FILES_DOWNLOAD_API])
-
-        {
-            NSError* error1;
+//        else
+//        if ([self.downLoadEntityJobName  isEqual: GET_BROWSER_AUDIO_FILES_DOWNLOAD_API])
+//
+//        {
+//            NSError* error1;
 //            NSDictionary* encryptedDict = [NSJSONSerialization JSONObjectWithData:data
 //                                                                                 options:NSJSONReadingAllowFragments
 //                                                                                   error:&error1];
 
 
 //             NSLog(@"jobname = %@", self.downLoadEntityJobName);
-        }
+//        }
         
 
         //        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_FILE_UPLOAD_API object:encryptedString];
