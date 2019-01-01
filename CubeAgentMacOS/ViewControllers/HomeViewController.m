@@ -284,7 +284,8 @@
         {
             [self checkForNewFilesSubSequentTimer];
         }
-        else if (self.duplicateFileCheckArray.count < 1 && (([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1)))
+//        else if (self.duplicateFileCheckArray.count < 1 && [AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 && [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 && [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 && [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1)
+ else if (self.duplicateFileCheckArray.count < 1 && self.uploadedAudioFilesArrayForTableView.count < 1)
         {
 //             [self checkForNewFilesSubSequentTimer];
             [self checkBrowserAudioFilesForDownload];
@@ -309,7 +310,8 @@
     }
     else
     {
-        if (([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1))
+        if (self.duplicateFileCheckArray.count < 1 && self.uploadedAudioFilesArrayForTableView.count < 1)
+//        if (([AppPreferences sharedAppPreferences].nextBlockToBeUploadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count < 1 || [AppPreferences sharedAppPreferences].audioUploadQueue.operationCount < 1 || [AppPreferences sharedAppPreferences].docDownloadQueue.operationCount < 1))
         {
             [self checkForNewFilesSubSequentTimer];
         }
@@ -522,6 +524,8 @@
 //        [self performCleanUp:audioFileObject.originalFileNamePath];
         
 //        [listOfAudioFilesToUploadDict removeObjectForKey:audioFileObject.fileName];
+        NSLog(@"array name =uploadedAudioFilesArrayForTableView");
+        
         AudioFile* tempFileObj = [self.uploadedAudioFilesArrayForTableView objectAtIndex:audioFileObject.rowNumber];
         
         
