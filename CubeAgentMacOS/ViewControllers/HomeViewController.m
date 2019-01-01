@@ -1057,6 +1057,8 @@
     
     self.uploadingCountLabel.stringValue = @"";
 
+    [self.progressIndicator setDoubleValue:0];
+
     [self.tableView reloadData];
     
     [self getDictationIds];

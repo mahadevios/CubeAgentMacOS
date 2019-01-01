@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1015"
             endingLineNumber = "1015"
-            landmarkName = "-cleanUpTableViewAfterDocDownload"
+            landmarkName = "-performCleanUp:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1195"
             endingLineNumber = "1195"
-            landmarkName = "-getAllFiles:"
+            landmarkName = "-checkBrowserAudioFilesForDownload"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
