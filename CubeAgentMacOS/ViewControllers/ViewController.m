@@ -108,7 +108,7 @@
     BOOL isAutoMode = [[NSUserDefaults standardUserDefaults] boolForKey:AUTOMODE];
 
     bool isRemember = [[NSUserDefaults standardUserDefaults] boolForKey:REMEMBER_ME];
-    //isAutoMode = false;
+//    isAutoMode = false;
     
     if (isAutoMode)
     {
@@ -126,6 +126,11 @@
         [self submitUserValidate];
     }
     else
+    {
+        [self.autoModeCheckBox setState:NSOffState];
+
+    }
+    
     if (isRemember)
     {
         NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
@@ -141,13 +146,18 @@
     }
     else
     {
-        self.loginTextField.stringValue = @"";
-        
-        self.paswordTextField.stringValue = @"";
-        
         [self.rememberMeCheckBox setState:NSOffState];
         
     }
+//    else
+//    {
+//        self.loginTextField.stringValue = @"";
+//
+//        self.paswordTextField.stringValue = @"";
+//
+//        [self.rememberMeCheckBox setState:NSOffState];
+//
+//    }
     
 
 }
@@ -374,6 +384,29 @@
         [[NSUserDefaults standardUserDefaults] setBool:false forKey:AUTOMODE];
 
     }
+    
+    if (self.rememberMeCheckBox.state == NSOnState)
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:true forKey:REMEMBER_ME];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:self.loginTextField.stringValue forKey:@"username"];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:self.paswordTextField.stringValue forKey:@"password"];
+        
+        long userId = [AppPreferences sharedAppPreferences].loggedInUser.userId;
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%ld",userId] forKey:@"userId"];
+        
+        NSString* macId = [self getFinalMacId];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:macId forKey:@"macId"];
+        
+    }
+    else
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:false forKey:REMEMBER_ME];
+        
+    }
 //    NSWindowController* wc = [self.storyboard instantiateControllerWithIdentifier:@"MainWindow"];
     
     NSWindowController* wc = [[NSWindowController alloc] initWithWindow:self.view.window];
@@ -517,7 +550,7 @@
                 
             [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please check your internet connection."];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NO_INTERNET object:nil];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NO_INTERNET object:nil];
 
         }
         

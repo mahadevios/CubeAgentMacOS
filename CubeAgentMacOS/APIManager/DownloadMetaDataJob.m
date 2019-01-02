@@ -225,7 +225,13 @@
             
             if ([self.downLoadEntityJobName isEqualToString:CHECK_DUPLICATE_AUDIO_FOR_DAY_API])
             {
-                NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:error.localizedDescription,@"response", nil];
+                NSString* audioFileName = self.audioFileName;
+        
+                NSString* audioFilePath = self.audioFilePath;
+                        
+                NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:error.localizedDescription,@"response",audioFileName,@"audioFileName",audioFilePath,@"audioFilePath", nil];
+                
+//                NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:error.localizedDescription,@"response", nil];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CHECK_DUPLICATE_AUDIO_FOR_DAY_API object:responseDict];
                 
