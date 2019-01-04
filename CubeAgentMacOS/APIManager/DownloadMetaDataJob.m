@@ -844,7 +844,7 @@ else
         }
     
     
-    if ((error.code == -1009 || error.code == -1005) && [self.downLoadEntityJobName  isEqual: DOWNLOAD_FILE_API])
+    if ((error.code == -1009 || error.code == -1005 || error.code == -1001) && [self.downLoadEntityJobName  isEqual: DOWNLOAD_FILE_API])
     {
         
         NSMutableDictionary* encryptedDict = [NSMutableDictionary new];
