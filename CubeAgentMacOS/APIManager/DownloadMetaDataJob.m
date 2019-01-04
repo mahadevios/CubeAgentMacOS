@@ -844,6 +844,32 @@ else
         }
     
     
+    if ((error.code == -1009 || error.code == -1005) && [self.downLoadEntityJobName  isEqual: DOWNLOAD_FILE_API])
+    {
+        
+        NSMutableDictionary* encryptedDict = [NSMutableDictionary new];
+        
+//        self.audioFileObject.status = @"Not Uploaded";
+        
+        //            NSString* audioFileName = self.audioFileObject.originalFileNamePath;
+        
+//        [encryptedDict setObject:self.audioFileObject forKey:@"audioFileObject"];
+        
+        [encryptedDict setObject:[NSString stringWithFormat:@"%ld",error.code] forKey:@"errorCode"];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_DOWNLOAD_FILE_API object:encryptedDict];
+        
+//        DDLogInfo(@"%@ Audio file not uploaded filename = %@",error.localizedDescription, self.audioFileObject.fileName);
+        
+        DDLogInfo(@"Doc file not downloaded");
+
+        DDLogInfo(@"File will be downloaded when internet connection is available.");
+        
+        //            dispatch_async(dispatch_get_main_queue(), ^{
+        //                [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:[NSString stringWithFormat:@"%@, Audio file(s) not uploaded",error.localizedDescription]];
+        //            });
+    }
+    
 }
 - (void)URLSession:(NSURLSession *)session
               task:(NSURLSessionTask *)task

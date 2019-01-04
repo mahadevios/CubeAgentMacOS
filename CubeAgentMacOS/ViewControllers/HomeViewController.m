@@ -778,6 +778,11 @@
     
     DDLogInfo(@"Finished checking dictation ids");
     
+    if ([AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count > 0)
+    {
+        [[AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray removeAllObjects];
+    }
+    
     //653047,653048,653049,653050,653051,653052
     if([dictationIdsString isEqualToString:@""])
     {
@@ -839,6 +844,26 @@
         
     NSDictionary* dict = notification.object;
     
+    NSString* errorCode = [dict valueForKey:@"errorCode"];
+
+    if (errorCode != nil)
+    {
+        if ([AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count > 0)
+        {
+            [[AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray removeAllObjects];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self performSelector:@selector(cleanUpTableViewAfterDocDownload) withObject:nil afterDelay:3.0];
+            
+            [self checkForNewFilesSubSequentTimer];
+
+            return;
+
+        });
+        
+    }
     NSString* downloadStatus = [dict valueForKey:@"downloadStatus"];
     
     NSURL* downloadLocation = [dict valueForKey:@"downloadLocationUrl"];
