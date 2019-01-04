@@ -117,7 +117,7 @@
     }
     
 //    [urlConnection start];
-//    NSLog(@"%@",urlConnection);
+    NSLog(@"%@",urlConnection);
 //    DDLogInfo(@"%@",urlConnection);
 
 }
