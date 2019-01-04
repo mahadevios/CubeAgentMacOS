@@ -956,7 +956,7 @@
             DDLogInfo(@"Updating downloaded Doc file status, name = %@", audioFile.originalFileName);
             
             //[[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
-          [self demoDOwnload];
+            [self demoDOwnload];
         
                 
                 
