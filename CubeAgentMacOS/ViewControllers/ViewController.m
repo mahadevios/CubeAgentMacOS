@@ -123,7 +123,8 @@
         [self.autoModeCheckBox setState:NSOnState];
         
 //        [self performSelector:@selector(submitUserValidate) withObject:nil afterDelay:2.0];
-        [self submitUserValidate];
+       [self submitUserValidate];
+
     }
     else
     {
@@ -537,10 +538,14 @@
 //        NSLog(@"macId is %@",macId);
         if ([[AppPreferences sharedAppPreferences] isReachable])
         {
-            hud = [MBProgressHUD showHUDAddedTo:self.view animated:true];
+      
+            hud =  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            
+            // ---> hud text is shown
+            hud.frame = CGRectMake(0, 0, 120, 143);
             
             [hud setDetailsLabelText:@"Logging In, please wait"];
-            
+
             [[APIManager sharedManager] updateDeviceMacID:macId password:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
             
            

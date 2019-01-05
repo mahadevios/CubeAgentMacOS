@@ -666,7 +666,8 @@ else
 -(void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler
 {
 //    NSLog(@"%@", challenge.error);
-    DDLogInfo(@"Challenge Received");
+    // --->commenting challenge received
+ //   DDLogInfo(@"Challenge Received");
     
     completionHandler(NSURLSessionAuthChallengeUseCredential, [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust]);
 //    NSLog(@"challenge received");

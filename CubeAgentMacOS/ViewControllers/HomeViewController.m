@@ -264,9 +264,13 @@
     else
     if ([response isEqualToString:@"duplicate"])
     {
-        DDLogInfo(@"Duplicate file found, file name = %@",audioFileName);
+       // DDLogInfo(@"Duplicate file found, file name = %@",audioFileName);
 
-        DDLogInfo(@"Moving duplicate audio file to BackupAudio folder");
+     //   DDLogInfo(@"Moving duplicate audio file to BackupAudio folder");
+        
+        // ---> Removing logs for duplicate file
+        
+        DDLogInfo(@"Moving %@ audio file to BackupAudio folder", audioFileName);
 
         NSString* FileServerPath = [responseString valueForKey:@"FileServerPath"];
         
@@ -1617,6 +1621,7 @@
     
     return view;
 }
+
 
 //-(NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item
 //{
