@@ -89,6 +89,10 @@
 
 }
 
+-(void)viewWillDisappear
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 -(void)validateNoInternet:(NSNotification*)noti
 {
     if (hud != nil)
