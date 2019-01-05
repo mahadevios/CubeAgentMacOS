@@ -149,8 +149,8 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2Q9-ba-kqc">
-                                        <rect key="frame" x="0.0" y="21" width="136" height="14"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="MACID : C03FD5AC28B6" id="L1a-wX-rmi">
+                                        <rect key="frame" x="0.0" y="21" width="126" height="14"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="MACID : ABCDEFGHIJK" id="L1a-wX-rmi">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

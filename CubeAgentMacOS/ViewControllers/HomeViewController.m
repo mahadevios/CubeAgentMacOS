@@ -888,7 +888,7 @@
             
             audioFile.status = @"Downloaded";
             
-//            long dictationID = [[response valueForKey:@"Id"] longLongValue];
+            long dictationID = [[response valueForKey:@"Id"] longLongValue];
             
             audioFile.fileName = [response valueForKey:@"FileName"];
             
@@ -957,8 +957,8 @@
 
             DDLogInfo(@"Updating downloaded Doc file status, name = %@", audioFile.originalFileName);
             
-            //[[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
-            [self demoDOwnload];
+            [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
+           // [self demoDOwnload];
         
                 
                 
