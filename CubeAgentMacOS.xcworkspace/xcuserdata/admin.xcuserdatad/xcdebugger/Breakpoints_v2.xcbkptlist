@@ -15,8 +15,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1014"
             endingLineNumber = "1014"
-            landmarkName = "-updateUploadedFileAndQueueCount:"
-            landmarkType = "7">
+            landmarkName = "HomeViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -128,6 +128,22 @@
             startingLineNumber = "346"
             endingLineNumber = "346"
             landmarkName = "-validateTCIDViewReponse:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CubeAgentMacOS/ViewControllers/ViewController.m"
+            timestampString = "568366936.29053"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "-viewWillAppear"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
