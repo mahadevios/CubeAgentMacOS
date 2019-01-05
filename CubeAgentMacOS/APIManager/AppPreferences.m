@@ -407,15 +407,23 @@ static AppPreferences *singleton = nil;
    
     pathToBackUpFiles = [pathToBackUpFiles stringByAppendingPathComponent:[filePath lastPathComponent]];
     
+   
     NSError* error;
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:pathToBackUpFiles])
     {
-        NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
-        // NSTimeInterval is defined as double
-        NSNumber *timeStampObj = [NSNumber numberWithDouble: timeStamp];
+        NSString* pathExtension = [pathToBackUpFiles pathExtension];
         
-        pathToBackUpFiles = [pathToBackUpFiles stringByAppendingString:[NSString stringWithFormat:@"%@",timeStampObj]];
+        pathToBackUpFiles = [pathToBackUpFiles stringByDeletingPathExtension];
+        
+//        NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
+        // NSTimeInterval is defined as double
+//        NSNumber *timeStampObj = [NSNumber numberWithDouble: timeStamp];
+       NSString* timeStampObj = [self getTimestampForFileName];
+        
+        pathToBackUpFiles = [pathToBackUpFiles stringByAppendingString:[NSString stringWithFormat:@"_CopiedOn_%@",timeStampObj]];
+        
+        pathToBackUpFiles = [pathToBackUpFiles stringByAppendingPathExtension:pathExtension];
 //        bool isRemoved = [[NSFileManager defaultManager] removeItemAtPath:pathToBackUpFiles error:&error];
         
     }
@@ -580,5 +588,18 @@ static AppPreferences *singleton = nil;
   
 }
 
-
+-(NSString *)getTimestampForFileName
+{
+//    static dispatch_once_t onceToken;
+    static NSDateFormatter *dateFormatter;
+//    dispatch_once(&onceToken, ^{
+        dateFormatter = [NSDateFormatter new];
+        // ---> setting date format as ddmmyy for BackupAudio date folder.
+        [dateFormatter setDateFormat:@"dd-MM-yy HH-mm-ss"];
+        
+        //        [dateFormatter setDateFormat:@"YYYY.MM.dd-HH.mm.ss"];
+//    });
+    
+    return [dateFormatter stringFromDate:NSDate.date];
+}
 @end
