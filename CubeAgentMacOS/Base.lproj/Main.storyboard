@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,7 +15,7 @@
                     <window key="window" title="Login-04" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="contentRect" x="196" y="240" width="495" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
@@ -25,7 +26,7 @@
                     </connections>
                 </windowController>
             </objects>
-            <point key="canvasLocation" x="75" y="-89"/>
+            <point key="canvasLocation" x="82.5" y="-89"/>
         </scene>
         <!--Login-04-->
         <scene sceneID="hIz-AP-VOD">
@@ -62,7 +63,7 @@
                                         <rect key="frame" x="0.0" y="2" width="85" height="14"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Ver. 2018.05.01" id="vAm-g4-Mpt">
                                             <font key="font" metaFont="smallSystem"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="labelColor"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -72,6 +73,7 @@
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                         </buttonCell>
+                                        <color key="contentTintColor" name="labelColor"/>
                                         <connections>
                                             <action selector="autoModeCheckBoxClicked:" target="XfG-lQ-9wD" id="UJd-Qb-dFr"/>
                                         </connections>
@@ -80,7 +82,7 @@
                                         <rect key="frame" x="331" y="124" width="64" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Password" id="wMb-uz-B9f">
                                             <font key="font" metaFont="systemBold" size="12"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="labelColor"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -88,7 +90,7 @@
                                         <rect key="frame" x="331" y="165" width="53" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Login ID" id="ixL-t5-meX">
                                             <font key="font" metaFont="systemBold" size="12"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="labelColor"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -100,24 +102,32 @@
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="LCK-4x-yPd">
                                             <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="labelColor"/>
+                                            <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </textFieldCell>
                                     </textField>
                                     <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="21T-Sr-8gk" userLabel="passwordTextField">
                                         <rect key="frame" x="402" y="124" width="165" height="22"/>
                                         <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="VUl-pw-9ZN">
                                             <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="labelColor"/>
+                                            <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <allowedInputSourceLocales>
                                                 <string>NSAllRomanInputSourcesLocaleIdentifier</string>
                                             </allowedInputSourceLocales>
                                         </secureTextFieldCell>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                <color key="value" name="labelColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                <integer key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </secureTextField>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GTn-tC-A74">
                                         <rect key="frame" x="458" y="88" width="98" height="18"/>
-                                        <buttonCell key="cell" type="check" title="Remember Me" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="CSL-qy-GDy">
+                                        <buttonCell key="cell" type="check" title="Remember Me" bezelStyle="regularSquare" imagePosition="left" inset="2" id="CSL-qy-GDy">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="smallSystem"/>
                                         </buttonCell>
@@ -144,7 +154,7 @@
                                         <rect key="frame" x="425" y="6" width="144" height="17"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Powered by Xanadutec" id="a5U-RQ-C7B">
                                             <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="labelColor"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -152,7 +162,7 @@
                                         <rect key="frame" x="0.0" y="21" width="126" height="14"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="MACID : ABCDEFGHIJK" id="L1a-wX-rmi">
                                             <font key="font" metaFont="smallSystem"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="textColor" name="labelColor"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
@@ -717,5 +727,8 @@
         <image name="DscribeNewLogo_1" width="150" height="86"/>
         <image name="bg" width="580" height="269"/>
         <image name="home_logo" width="36" height="33.75"/>
+        <namedColor name="labelColor">
+            <color red="0.15299999713897705" green="0.13600000739097595" blue="0.081000000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

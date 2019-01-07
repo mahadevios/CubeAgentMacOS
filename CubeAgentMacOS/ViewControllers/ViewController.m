@@ -42,18 +42,13 @@
     // Set our custom icon
     [[[NSApplication sharedApplication].keyWindow  standardWindowButton:NSWindowDocumentIconButton] setImage:[NSImage imageNamed:@"Home_logo"]];
     
-    [self.submitButton setBordered:NO];
-    
-    [self.submitButton setWantsLayer:YES];
-    
-    self.submitButton.layer.backgroundColor = [NSColor colorWithCalibratedRed:0.220f green:0.514f blue:0.827f alpha:1.0f].CGColor;
+    [self adjustViewAppearance];
+//    [self.rememberMeCheckBox setWantsLayer:YES];
+//    [self.rememberMeCheckBox.layer setShadowOffset:CGSizeMake(5, 5)];
+//    [self.rememberMeCheckBox.layer setShadowColor:[[NSColor blackColor] CGColor]];
 
-    self.submitButton.layer.cornerRadius = 5;
-
-    [self.backgroundView setWantsLayer:YES];
-    
-    //    self.submitButton.layer.cornerRadius = 8;
-    self.backgroundView.layer.backgroundColor = [NSColor colorWithCalibratedRed:255.0f green:255.0f blue:255.0f alpha:1.0f].CGColor;
+//
+//    [self.rememberMeCheckBox.layer setBackgroundColor:[NSColor clearColor].CGColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(validateNoInternet:) name:NOTIFICATION_NO_INTERNET
@@ -89,6 +84,56 @@
 
 }
 
+-(void)adjustViewAppearance
+{
+    [self.loginTextField setWantsLayer:YES];
+    
+    [self.loginTextField.layer setBorderWidth:1.0];
+    
+    [self.loginTextField.layer setBorderColor:[NSColor lightGrayColor].CGColor];
+    
+    [self.loginTextField.layer setCornerRadius:4.0];
+    
+    [self.paswordTextField setWantsLayer:YES];
+    
+    [self.paswordTextField.layer setBorderWidth:1.0];
+    
+    [self.paswordTextField.layer setBorderColor:[NSColor lightGrayColor].CGColor];
+    
+    [self.paswordTextField.layer setCornerRadius:4.0];
+    
+    [self.submitButton setBordered:NO];
+    
+    [self.submitButton setWantsLayer:YES];
+    
+    self.submitButton.layer.backgroundColor = [NSColor colorWithCalibratedRed:0.220f green:0.514f blue:0.827f alpha:1.0f].CGColor;
+    
+    self.submitButton.layer.cornerRadius = 5;
+    
+    [self.backgroundView setWantsLayer:YES];
+    
+    //    self.submitButton.layer.cornerRadius = 8;
+    self.backgroundView.layer.backgroundColor = [NSColor colorWithCalibratedRed:255.0f green:255.0f blue:255.0f alpha:1.0f].CGColor;
+    
+    
+    NSMutableAttributedString *attrTitle =
+    [[NSMutableAttributedString alloc] initWithString:@"Remember Me"];
+    NSUInteger len = [attrTitle length];
+    NSRange range = NSMakeRange(0, len);
+    [attrTitle addAttribute:NSForegroundColorAttributeName value:[NSColor darkGrayColor] range:range];
+    [attrTitle fixAttributesInRange:range];
+    [self.rememberMeCheckBox setAttributedTitle:attrTitle];
+    
+    NSMutableAttributedString *attrTitle1 =
+    [[NSMutableAttributedString alloc] initWithString:@"Auto-Mode"];
+    NSUInteger len1 = [attrTitle1 length];
+    NSRange range1 = NSMakeRange(0, len1);
+    [attrTitle1 addAttribute:NSForegroundColorAttributeName value:[NSColor darkGrayColor] range:range1];
+    
+    [attrTitle1 fixAttributesInRange:range1];
+    [self.autoModeCheckBox setAttributedTitle:attrTitle1];
+    
+}
 -(void)viewWillDisappear
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -113,7 +158,7 @@
 
     bool isRemember = [[NSUserDefaults standardUserDefaults] boolForKey:REMEMBER_ME];
   // isAutoMode = false;
-    
+   
     if (isAutoMode)
     {
         NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
