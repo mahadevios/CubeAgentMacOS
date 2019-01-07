@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9373ADBD2E66C6B686A9BA33D9E61EA2"
+               BlueprintIdentifier = "A5D89302F8E3C21D57736EE511E5E21A"
                BlueprintName = "Pods-CubeAgentMacOSTests"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "libPods-CubeAgentMacOSTests.a">

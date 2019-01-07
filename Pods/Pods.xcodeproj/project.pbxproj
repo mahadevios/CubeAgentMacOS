@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		00F2C35DDD27875CB06AD99030B5EEEF /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A82163C1EFFC8455E69ADB804A86457 /* DDASLLogCapture.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		1A1AAA0824AA8F5FB6480E1258AD7BD0 /* Pods-CubeAgentMacOSTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B7CC1DF70E6EFC0092FA3CBD734296B /* Pods-CubeAgentMacOSTests-dummy.m */; };
+		011070DCB42E7E9C20B8A0343B95C9F4 /* Pods-CubeAgentMacOSUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0778213EDEC1A08EC0188B5CEE9BFB30 /* Pods-CubeAgentMacOSUITests-dummy.m */; };
 		290E933B757AFD5974F10FF166936539 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BB5CC643821FB1A7E0B5AEE2C2AB21 /* DDASLLogger.m */; };
-		2E70037AD72D83E2109D09D1FA704A62 /* Pods-CubeAgentMacOSUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C262E5AB2F02D6AF85307088655F6304 /* Pods-CubeAgentMacOSUITests-dummy.m */; };
+		4021A2C144FF96FD6D8C7B7FC96F49C0 /* Pods-Cube Agent-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D2018492D2542FFBA12421B416A051 /* Pods-Cube Agent-dummy.m */; };
 		40B7938062FFDAAD3AFEB92A54CC146A /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A0473A9618300243DBD1915AA474B852 /* DDContextFilterLogFormatter.m */; };
 		47156FA49A7082CC0BCFB700A2389B4A /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 369912D787113581E6CB0421D532AC50 /* DDDispatchQueueLogFormatter.m */; };
+		471D46A0867622A50E390AAC977F7C4E /* Pods-CubeAgentMacOSTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 723144983C6EF7A6E3CE207E761494A2 /* Pods-CubeAgentMacOSTests-dummy.m */; };
 		52D71738D319E3C281C73C374F3A4B2E /* DDOSLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 67661F3D99B45319E55AA25AC42CCA1A /* DDOSLogger.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		5F6C9E1E6269820CB6545FDA031DE06C /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8DA4FA30E0C3609678754FA3E97A31 /* DDLogMacros.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		63446163908062C111DEB18B597F37A2 /* DDContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = DAABD522870F5F511418942105AEE1D1 /* DDContextFilterLogFormatter.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -24,7 +25,6 @@
 		948E6C14F71C36CAE86B5FB0ED478BBA /* DDDispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 80CE86771D8B720374C644C5D51AF114 /* DDDispatchQueueLogFormatter.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		9847AFDE401C16AF51D2D69386EB386D /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1E66E08157718AA0EA883BAF66666D /* DDLog.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		A260CEDA9C048C0BBE939B2C3D5F42ED /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = DA7C9D825D39B36382A7C16A28613A57 /* DDLog+LOGV.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A2C45DBEBFE2958B02C892FF19CBE45A /* Pods-CubeAgentMacOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E012A8F4139BFEA9DB032BCD95844821 /* Pods-CubeAgentMacOS-dummy.m */; };
 		A5345695ACB7E6AE8864638F1BB47285 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC99B0369663FA95419777EED334E4D /* DDAbstractDatabaseLogger.m */; };
 		AECA28C01EB93A9216AF89448A43E627 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CFFE3E79694B6A95BCBFBDC6CDF827 /* DDLog.m */; };
 		B806CE6CFFF7BF1D8D782342FAB2CB60 /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 7000FBD7DC3D9C832B107D88CEA9721C /* CocoaLumberjack.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -39,95 +39,102 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		00926A4A57284504657FDE10B1E9310E /* PBXContainerItemProxy */ = {
+		38F6AB8F056B2358EF924F8F48D5D597 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 160822FD4D40AF503A4F916DF2130AB9;
 			remoteInfo = CocoaLumberjack;
 		};
-		10A2299D46C81DD2C83605B8344AE15E /* PBXContainerItemProxy */ = {
+		943478D1AF50A1FEDCA4417B409883BC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BEB111D3A908C07E223D2071B2462D68;
-			remoteInfo = "Pods-CubeAgentMacOS";
+			remoteGlobalIDString = 303F15C210FE8FBE50E134D8315293DF;
+			remoteInfo = "Pods-Cube Agent";
 		};
-		1D71A7EC0EE25E939320FD95454C471C /* PBXContainerItemProxy */ = {
+		986505763BD0A0D0E2F3ED4C16243A46 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BEB111D3A908C07E223D2071B2462D68;
-			remoteInfo = "Pods-CubeAgentMacOS";
+			remoteGlobalIDString = 303F15C210FE8FBE50E134D8315293DF;
+			remoteInfo = "Pods-Cube Agent";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01FE2C51E4886EFB5C2AA5DFC0BBA9C0 /* Pods-CubeAgentMacOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CubeAgentMacOS.release.xcconfig"; sourceTree = "<group>"; };
+		000783D71E0A9E8088D7DF8FB19B948E /* Pods-Cube Agent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Cube Agent.debug.xcconfig"; sourceTree = "<group>"; };
 		037938A7D03CC90ADBF78E686C78E0B4 /* DDMultiFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDMultiFormatter.h; path = Classes/Extensions/DDMultiFormatter.h; sourceTree = "<group>"; };
+		0778213EDEC1A08EC0188B5CEE9BFB30 /* Pods-CubeAgentMacOSUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CubeAgentMacOSUITests-dummy.m"; sourceTree = "<group>"; };
 		08C24D48133F0E0A065BECB2E0E90DA9 /* DDASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogger.h; path = Classes/DDASLLogger.h; sourceTree = "<group>"; };
-		0C7D1201923965FF55234CC9067B676C /* libPods-CubeAgentMacOSUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-CubeAgentMacOSUITests.a"; path = "libPods-CubeAgentMacOSUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1B7CC1DF70E6EFC0092FA3CBD734296B /* Pods-CubeAgentMacOSTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CubeAgentMacOSTests-dummy.m"; sourceTree = "<group>"; };
-		1B8A22F958F143BC7E7CD99F537AEC29 /* libCocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libCocoaLumberjack.a; path = libCocoaLumberjack.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0CBB4BDA236460DB4217CBC52D4F3EDD /* Pods-CubeAgentMacOSUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CubeAgentMacOSUITests-frameworks.sh"; sourceTree = "<group>"; };
+		12AA16CAAACDD06955926C15E4D5C920 /* libPods-CubeAgentMacOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-CubeAgentMacOSTests.a"; path = "libPods-CubeAgentMacOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F1F2CE2423FDF7C41ECAC8057C13848 /* DDOSLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDOSLogger.m; path = Classes/DDOSLogger.m; sourceTree = "<group>"; };
+		1F55094143DCEED5D56C29F60DBA374B /* Pods-Cube Agent-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Cube Agent-acknowledgements.plist"; sourceTree = "<group>"; };
+		1F7160A08720EB3F328CDD168DB8D8E4 /* libCocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libCocoaLumberjack.a; path = libCocoaLumberjack.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2531D4C03336C648545AD09A2519EC94 /* Pods-CubeAgentMacOSTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CubeAgentMacOSTests-resources.sh"; sourceTree = "<group>"; };
 		369912D787113581E6CB0421D532AC50 /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDDispatchQueueLogFormatter.m; path = Classes/Extensions/DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
-		37B0C5BA79A41FEC30F7384D6A286EE8 /* libPods-CubeAgentMacOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-CubeAgentMacOS.a"; path = "libPods-CubeAgentMacOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BC99B0369663FA95419777EED334E4D /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = Classes/DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
 		4320B60F7BF50F312FD27D272B927A9E /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAbstractDatabaseLogger.h; path = Classes/DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
-		58C8B7AD32F3F43D1E4C8556BA8D1125 /* Pods-CubeAgentMacOSUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CubeAgentMacOSUITests-frameworks.sh"; sourceTree = "<group>"; };
-		60BB29DD5E7B6032DF418A046B45AAEC /* Pods-CubeAgentMacOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CubeAgentMacOS-acknowledgements.markdown"; sourceTree = "<group>"; };
-		664401B84DEB39913398D79898CCB08D /* Pods-CubeAgentMacOSUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CubeAgentMacOSUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		45285678F11E38363EF326E9201CB012 /* Pods-CubeAgentMacOSTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CubeAgentMacOSTests-frameworks.sh"; sourceTree = "<group>"; };
+		46677A935038538D2EE77976932E0541 /* Pods-CubeAgentMacOSUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CubeAgentMacOSUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		4AABF56C46F3EEF44BF5903B090EC380 /* Pods-Cube Agent-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Cube Agent-frameworks.sh"; sourceTree = "<group>"; };
+		4ED553D113FBC69A095B2A7F615B837C /* Pods-CubeAgentMacOSTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CubeAgentMacOSTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		51D56304D74C6BAFBB6FB1D2F44D24D0 /* Pods-CubeAgentMacOSTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CubeAgentMacOSTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		614392D7196F4964473D8381A01D5280 /* Pods-CubeAgentMacOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CubeAgentMacOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		67661F3D99B45319E55AA25AC42CCA1A /* DDOSLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDOSLogger.h; path = Classes/DDOSLogger.h; sourceTree = "<group>"; };
-		69F26C9E1E33D66CBF2826E2038C75AE /* Pods-CubeAgentMacOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CubeAgentMacOS.debug.xcconfig"; sourceTree = "<group>"; };
 		6A82163C1EFFC8455E69ADB804A86457 /* DDASLLogCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogCapture.h; path = Classes/DDASLLogCapture.h; sourceTree = "<group>"; };
-		6B0635AAF1ECEE7B334F8F636FC161F1 /* Pods-CubeAgentMacOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CubeAgentMacOS-resources.sh"; sourceTree = "<group>"; };
-		6CD20813268CF1790A0A164272854D14 /* Pods-CubeAgentMacOSTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CubeAgentMacOSTests-resources.sh"; sourceTree = "<group>"; };
-		6EF13BAA625F664D1C26F1A0187BCA0E /* Pods-CubeAgentMacOSUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CubeAgentMacOSUITests-acknowledgements.plist"; sourceTree = "<group>"; };
 		7000FBD7DC3D9C832B107D88CEA9721C /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = Classes/CocoaLumberjack.h; sourceTree = "<group>"; };
+		723144983C6EF7A6E3CE207E761494A2 /* Pods-CubeAgentMacOSTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CubeAgentMacOSTests-dummy.m"; sourceTree = "<group>"; };
+		7287BB2BE9386D9A4C9E561A1DB031EB /* Pods-Cube Agent-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Cube Agent-acknowledgements.markdown"; sourceTree = "<group>"; };
 		76A7F5A9AD274EBD69279168AC3E19B7 /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDFileLogger.m; path = Classes/DDFileLogger.m; sourceTree = "<group>"; };
-		7AB5EACA7BB30D9E51561C13DF1D9C76 /* Pods-CubeAgentMacOSTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CubeAgentMacOSTests-frameworks.sh"; sourceTree = "<group>"; };
 		7B3D4EDB63A7CED7B3A8B432A58D3BA7 /* CocoaLumberjack.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaLumberjack.xcconfig; sourceTree = "<group>"; };
 		7E8DA4FA30E0C3609678754FA3E97A31 /* DDLogMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Classes/DDLogMacros.h; sourceTree = "<group>"; };
 		7ED3D4DDE1E76FD19268825B8EE50CA3 /* DDTTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = Classes/DDTTYLogger.m; sourceTree = "<group>"; };
 		7F9D7B6516EF6A7D585E91C9066AACCD /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDFileLogger.h; path = Classes/DDFileLogger.h; sourceTree = "<group>"; };
-		80514CA87822BF05CAB56C73375661A6 /* Pods-CubeAgentMacOSTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CubeAgentMacOSTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		80CE86771D8B720374C644C5D51AF114 /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDDispatchQueueLogFormatter.h; path = Classes/Extensions/DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
 		834BD0823563A17D0B67F4BAE321D21B /* DDLegacyMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLegacyMacros.h; path = Classes/DDLegacyMacros.h; sourceTree = "<group>"; };
+		918994157D6A3F7116A64B6C42DFBDE1 /* Pods-CubeAgentMacOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CubeAgentMacOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		94A67AABF3D1AF6A7E243E576DFC735F /* libPods-CubeAgentMacOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-CubeAgentMacOSTests.a"; path = "libPods-CubeAgentMacOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94BB5CC643821FB1A7E0B5AEE2C2AB21 /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = Classes/DDASLLogger.m; sourceTree = "<group>"; };
 		97C72336B74F95C1D61BDE29452A20DC /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = Classes/DDTTYLogger.h; sourceTree = "<group>"; };
 		97CFFE3E79694B6A95BCBFBDC6CDF827 /* DDLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLog.m; path = Classes/DDLog.m; sourceTree = "<group>"; };
+		9803B754C6AB5F9B7AA9AD2C3C22A2D8 /* Pods-CubeAgentMacOSUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CubeAgentMacOSUITests-acknowledgements.plist"; sourceTree = "<group>"; };
 		A0473A9618300243DBD1915AA474B852 /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDContextFilterLogFormatter.m; path = Classes/Extensions/DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
 		A632B73152DB7AB8CCF88DE455727561 /* CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
-		A76909571F79ED8222E8B9CEC119650C /* Pods-CubeAgentMacOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CubeAgentMacOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		BCA6AB991D8A0D16B180882395CBFFDF /* Pods-CubeAgentMacOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CubeAgentMacOS-frameworks.sh"; sourceTree = "<group>"; };
-		C262E5AB2F02D6AF85307088655F6304 /* Pods-CubeAgentMacOSUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CubeAgentMacOSUITests-dummy.m"; sourceTree = "<group>"; };
-		D3A52C1A1F59F5A1A0128181E8022434 /* Pods-CubeAgentMacOSTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CubeAgentMacOSTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		D9B9AAE392C4CD8B00B3B2C8B2EAC29D /* Pods-CubeAgentMacOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CubeAgentMacOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		D9DF387D9A97D019E1E8CE3A8E09C757 /* Pods-CubeAgentMacOSUITests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CubeAgentMacOSUITests-resources.sh"; sourceTree = "<group>"; };
+		AC98797A4A60E06E7BCFB7A5F1C1E4ED /* Pods-Cube Agent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Cube Agent.release.xcconfig"; sourceTree = "<group>"; };
+		B4D151847D5E91D3066EFFC18A028A2E /* Pods-CubeAgentMacOSUITests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CubeAgentMacOSUITests-resources.sh"; sourceTree = "<group>"; };
+		D373B04FECE79FDF3CC31895816D92DA /* Pods-CubeAgentMacOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CubeAgentMacOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D48B4DE8EFB4DBD2A777A0C38453DD82 /* Pods-CubeAgentMacOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CubeAgentMacOSUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D9F27285A3DC6DEEFC5C1180323CB354 /* libPods-CubeAgentMacOSUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-CubeAgentMacOSUITests.a"; path = "libPods-CubeAgentMacOSUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA7C9D825D39B36382A7C16A28613A57 /* DDLog+LOGV.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDLog+LOGV.h"; path = "Classes/DDLog+LOGV.h"; sourceTree = "<group>"; };
 		DA9E49DB8C460CE165887140A0F21F8E /* DDASLLogCapture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogCapture.m; path = Classes/DDASLLogCapture.m; sourceTree = "<group>"; };
 		DAABD522870F5F511418942105AEE1D1 /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDContextFilterLogFormatter.h; path = Classes/Extensions/DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
-		E012A8F4139BFEA9DB032BCD95844821 /* Pods-CubeAgentMacOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CubeAgentMacOS-dummy.m"; sourceTree = "<group>"; };
 		E7B43D556DD436920548F45C61F82312 /* DDAssertMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAssertMacros.h; path = Classes/DDAssertMacros.h; sourceTree = "<group>"; };
-		E8389329C4D79FA9719C7199391E1520 /* Pods-CubeAgentMacOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CubeAgentMacOS-acknowledgements.plist"; sourceTree = "<group>"; };
+		E7D2018492D2542FFBA12421B416A051 /* Pods-Cube Agent-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Cube Agent-dummy.m"; sourceTree = "<group>"; };
 		EB5AEF398EB21735EA466A2CCBA6FD85 /* CocoaLumberjack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CocoaLumberjack-prefix.pch"; sourceTree = "<group>"; };
-		F31292D59AF460B1D76A1D42527DB9A8 /* Pods-CubeAgentMacOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CubeAgentMacOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		F2F8045517AB5B1DD181284B112B25B2 /* libPods-Cube Agent.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Cube Agent.a"; path = "libPods-Cube Agent.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F383949D9723FC5932C516AA6B99E4F3 /* DDMultiFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDMultiFormatter.m; path = Classes/Extensions/DDMultiFormatter.m; sourceTree = "<group>"; };
+		F50A1C7BDEF3DF3607A10C8193A511D7 /* Pods-Cube Agent-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Cube Agent-resources.sh"; sourceTree = "<group>"; };
 		FC1E66E08157718AA0EA883BAF66666D /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = Classes/DDLog.h; sourceTree = "<group>"; };
-		FCE1EDC7AE96CFA2A0E9DAE879425A6F /* Pods-CubeAgentMacOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CubeAgentMacOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		60D7AF152947170921B1BCC4BDFEEB54 /* Frameworks */ = {
+		77C11271477D0D96DAB0129A99399EE9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AA9C4EFD84B68C6179963EBF71C2237D /* Frameworks */ = {
+		9A04D30C7D885A20BA50B0F5850962DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B257C1F65CCA91BE06986430198998B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -141,25 +148,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CFBCA6ECB35B8B10A4DD65FB7E43C451 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		001E12D986B355CDEA775E3AF0D47671 /* Products */ = {
+		04861DF2F72501E30C92CFD0EE72E753 /* Pods-CubeAgentMacOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				1B8A22F958F143BC7E7CD99F537AEC29 /* libCocoaLumberjack.a */,
-				37B0C5BA79A41FEC30F7384D6A286EE8 /* libPods-CubeAgentMacOS.a */,
-				94A67AABF3D1AF6A7E243E576DFC735F /* libPods-CubeAgentMacOSTests.a */,
-				0C7D1201923965FF55234CC9067B676C /* libPods-CubeAgentMacOSUITests.a */,
+				51D56304D74C6BAFBB6FB1D2F44D24D0 /* Pods-CubeAgentMacOSTests-acknowledgements.markdown */,
+				4ED553D113FBC69A095B2A7F615B837C /* Pods-CubeAgentMacOSTests-acknowledgements.plist */,
+				723144983C6EF7A6E3CE207E761494A2 /* Pods-CubeAgentMacOSTests-dummy.m */,
+				45285678F11E38363EF326E9201CB012 /* Pods-CubeAgentMacOSTests-frameworks.sh */,
+				2531D4C03336C648545AD09A2519EC94 /* Pods-CubeAgentMacOSTests-resources.sh */,
+				918994157D6A3F7116A64B6C42DFBDE1 /* Pods-CubeAgentMacOSTests.debug.xcconfig */,
+				614392D7196F4964473D8381A01D5280 /* Pods-CubeAgentMacOSTests.release.xcconfig */,
 			);
-			name = Products;
+			name = "Pods-CubeAgentMacOSTests";
+			path = "Target Support Files/Pods-CubeAgentMacOSTests";
+			sourceTree = "<group>";
+		};
+		0675B32A94DA2966574DB7358F239D47 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9B44F646B8BF75FCB210AA56C9A9FCFD /* Pods-Cube Agent */,
+				04861DF2F72501E30C92CFD0EE72E753 /* Pods-CubeAgentMacOSTests */,
+				E14D139E9255D7E13C85A55731061DDC /* Pods-CubeAgentMacOSUITests */,
+			);
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		0F8D2E47FE03D3B91B51069F7C273AF4 /* Frameworks */ = {
@@ -180,29 +194,14 @@
 			path = "../Target Support Files/CocoaLumberjack";
 			sourceTree = "<group>";
 		};
-		52FA14CAC3677D532EF3B93461AD13EF /* Pods-CubeAgentMacOSUITests */ = {
-			isa = PBXGroup;
-			children = (
-				664401B84DEB39913398D79898CCB08D /* Pods-CubeAgentMacOSUITests-acknowledgements.markdown */,
-				6EF13BAA625F664D1C26F1A0187BCA0E /* Pods-CubeAgentMacOSUITests-acknowledgements.plist */,
-				C262E5AB2F02D6AF85307088655F6304 /* Pods-CubeAgentMacOSUITests-dummy.m */,
-				58C8B7AD32F3F43D1E4C8556BA8D1125 /* Pods-CubeAgentMacOSUITests-frameworks.sh */,
-				D9DF387D9A97D019E1E8CE3A8E09C757 /* Pods-CubeAgentMacOSUITests-resources.sh */,
-				F31292D59AF460B1D76A1D42527DB9A8 /* Pods-CubeAgentMacOSUITests.debug.xcconfig */,
-				FCE1EDC7AE96CFA2A0E9DAE879425A6F /* Pods-CubeAgentMacOSUITests.release.xcconfig */,
-			);
-			name = "Pods-CubeAgentMacOSUITests";
-			path = "Target Support Files/Pods-CubeAgentMacOSUITests";
-			sourceTree = "<group>";
-		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				0F8D2E47FE03D3B91B51069F7C273AF4 /* Frameworks */,
 				8D6CD60BD8231A56EE007CAAF998EFBE /* Pods */,
-				001E12D986B355CDEA775E3AF0D47671 /* Products */,
-				9E500A469AF70F0EE9EF9FBA1111581E /* Targets Support Files */,
+				C0A671AAB2215097FBC05C99E3EE29B1 /* Products */,
+				0675B32A94DA2966574DB7358F239D47 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -227,14 +226,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		9E500A469AF70F0EE9EF9FBA1111581E /* Targets Support Files */ = {
+		9B44F646B8BF75FCB210AA56C9A9FCFD /* Pods-Cube Agent */ = {
 			isa = PBXGroup;
 			children = (
-				E36243880F4DC0BA8751899B5C5D3FC7 /* Pods-CubeAgentMacOS */,
-				B1B7621D7FCF95B7C219F5D9FEBD3DB8 /* Pods-CubeAgentMacOSTests */,
-				52FA14CAC3677D532EF3B93461AD13EF /* Pods-CubeAgentMacOSUITests */,
+				7287BB2BE9386D9A4C9E561A1DB031EB /* Pods-Cube Agent-acknowledgements.markdown */,
+				1F55094143DCEED5D56C29F60DBA374B /* Pods-Cube Agent-acknowledgements.plist */,
+				E7D2018492D2542FFBA12421B416A051 /* Pods-Cube Agent-dummy.m */,
+				4AABF56C46F3EEF44BF5903B090EC380 /* Pods-Cube Agent-frameworks.sh */,
+				F50A1C7BDEF3DF3607A10C8193A511D7 /* Pods-Cube Agent-resources.sh */,
+				000783D71E0A9E8088D7DF8FB19B948E /* Pods-Cube Agent.debug.xcconfig */,
+				AC98797A4A60E06E7BCFB7A5F1C1E4ED /* Pods-Cube Agent.release.xcconfig */,
 			);
-			name = "Targets Support Files";
+			name = "Pods-Cube Agent";
+			path = "Target Support Files/Pods-Cube Agent";
 			sourceTree = "<group>";
 		};
 		A66446DF151F1A258D6CBDCEFC2961FF /* CocoaLumberjack */ = {
@@ -274,46 +278,35 @@
 			name = Default;
 			sourceTree = "<group>";
 		};
-		B1B7621D7FCF95B7C219F5D9FEBD3DB8 /* Pods-CubeAgentMacOSTests */ = {
+		C0A671AAB2215097FBC05C99E3EE29B1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D3A52C1A1F59F5A1A0128181E8022434 /* Pods-CubeAgentMacOSTests-acknowledgements.markdown */,
-				80514CA87822BF05CAB56C73375661A6 /* Pods-CubeAgentMacOSTests-acknowledgements.plist */,
-				1B7CC1DF70E6EFC0092FA3CBD734296B /* Pods-CubeAgentMacOSTests-dummy.m */,
-				7AB5EACA7BB30D9E51561C13DF1D9C76 /* Pods-CubeAgentMacOSTests-frameworks.sh */,
-				6CD20813268CF1790A0A164272854D14 /* Pods-CubeAgentMacOSTests-resources.sh */,
-				D9B9AAE392C4CD8B00B3B2C8B2EAC29D /* Pods-CubeAgentMacOSTests.debug.xcconfig */,
-				A76909571F79ED8222E8B9CEC119650C /* Pods-CubeAgentMacOSTests.release.xcconfig */,
+				1F7160A08720EB3F328CDD168DB8D8E4 /* libCocoaLumberjack.a */,
+				F2F8045517AB5B1DD181284B112B25B2 /* libPods-Cube Agent.a */,
+				12AA16CAAACDD06955926C15E4D5C920 /* libPods-CubeAgentMacOSTests.a */,
+				D9F27285A3DC6DEEFC5C1180323CB354 /* libPods-CubeAgentMacOSUITests.a */,
 			);
-			name = "Pods-CubeAgentMacOSTests";
-			path = "Target Support Files/Pods-CubeAgentMacOSTests";
+			name = Products;
 			sourceTree = "<group>";
 		};
-		E36243880F4DC0BA8751899B5C5D3FC7 /* Pods-CubeAgentMacOS */ = {
+		E14D139E9255D7E13C85A55731061DDC /* Pods-CubeAgentMacOSUITests */ = {
 			isa = PBXGroup;
 			children = (
-				60BB29DD5E7B6032DF418A046B45AAEC /* Pods-CubeAgentMacOS-acknowledgements.markdown */,
-				E8389329C4D79FA9719C7199391E1520 /* Pods-CubeAgentMacOS-acknowledgements.plist */,
-				E012A8F4139BFEA9DB032BCD95844821 /* Pods-CubeAgentMacOS-dummy.m */,
-				BCA6AB991D8A0D16B180882395CBFFDF /* Pods-CubeAgentMacOS-frameworks.sh */,
-				6B0635AAF1ECEE7B334F8F636FC161F1 /* Pods-CubeAgentMacOS-resources.sh */,
-				69F26C9E1E33D66CBF2826E2038C75AE /* Pods-CubeAgentMacOS.debug.xcconfig */,
-				01FE2C51E4886EFB5C2AA5DFC0BBA9C0 /* Pods-CubeAgentMacOS.release.xcconfig */,
+				46677A935038538D2EE77976932E0541 /* Pods-CubeAgentMacOSUITests-acknowledgements.markdown */,
+				9803B754C6AB5F9B7AA9AD2C3C22A2D8 /* Pods-CubeAgentMacOSUITests-acknowledgements.plist */,
+				0778213EDEC1A08EC0188B5CEE9BFB30 /* Pods-CubeAgentMacOSUITests-dummy.m */,
+				0CBB4BDA236460DB4217CBC52D4F3EDD /* Pods-CubeAgentMacOSUITests-frameworks.sh */,
+				B4D151847D5E91D3066EFFC18A028A2E /* Pods-CubeAgentMacOSUITests-resources.sh */,
+				D373B04FECE79FDF3CC31895816D92DA /* Pods-CubeAgentMacOSUITests.debug.xcconfig */,
+				D48B4DE8EFB4DBD2A777A0C38453DD82 /* Pods-CubeAgentMacOSUITests.release.xcconfig */,
 			);
-			name = "Pods-CubeAgentMacOS";
-			path = "Target Support Files/Pods-CubeAgentMacOS";
+			name = "Pods-CubeAgentMacOSUITests";
+			path = "Target Support Files/Pods-CubeAgentMacOSUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		46A01B3EDD29B33BF189725E1D61F5C9 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		84EC386F76738274E52E169D7DD6D8B2 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -336,14 +329,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9F3411C214DF0B80C0B88CB560222D38 /* Headers */ = {
+		923A74285244667F64918D1411ABA3B2 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E63DBFF3E39FCBA7BC86DDB8A3FC060E /* Headers */ = {
+		DACCC3A51DA2A7EC990E27F087DEA911 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF5DCDAF1448C7A70B3B1A3341AE5097 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -367,61 +367,61 @@
 			);
 			name = CocoaLumberjack;
 			productName = CocoaLumberjack;
-			productReference = 1B8A22F958F143BC7E7CD99F537AEC29 /* libCocoaLumberjack.a */;
+			productReference = 1F7160A08720EB3F328CDD168DB8D8E4 /* libCocoaLumberjack.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		3599054C57DD64E03E020DD83667FF42 /* Pods-CubeAgentMacOSUITests */ = {
+		303F15C210FE8FBE50E134D8315293DF /* Pods-Cube Agent */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8A63A4926B4474F7E85344937445A156 /* Build configuration list for PBXNativeTarget "Pods-CubeAgentMacOSUITests" */;
+			buildConfigurationList = 0F56B6C702FDDAE8EBD8BA197DD1A57A /* Build configuration list for PBXNativeTarget "Pods-Cube Agent" */;
 			buildPhases = (
-				E63DBFF3E39FCBA7BC86DDB8A3FC060E /* Headers */,
-				DF5D217F593C6C609FD0A5089DB01B57 /* Sources */,
-				60D7AF152947170921B1BCC4BDFEEB54 /* Frameworks */,
+				FF5DCDAF1448C7A70B3B1A3341AE5097 /* Headers */,
+				D62C71FAC99FE5E7E8F590A272EDA892 /* Sources */,
+				9A04D30C7D885A20BA50B0F5850962DF /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				68E40D009A0063CBC2AA02E041DA72FB /* PBXTargetDependency */,
+				65750F51B878886B620CE147BCAE56C6 /* PBXTargetDependency */,
 			);
-			name = "Pods-CubeAgentMacOSUITests";
-			productName = "Pods-CubeAgentMacOSUITests";
-			productReference = 0C7D1201923965FF55234CC9067B676C /* libPods-CubeAgentMacOSUITests.a */;
+			name = "Pods-Cube Agent";
+			productName = "Pods-Cube Agent";
+			productReference = F2F8045517AB5B1DD181284B112B25B2 /* libPods-Cube Agent.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		9373ADBD2E66C6B686A9BA33D9E61EA2 /* Pods-CubeAgentMacOSTests */ = {
+		A5D89302F8E3C21D57736EE511E5E21A /* Pods-CubeAgentMacOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8F06986786DBA5782BD3B8021310FE90 /* Build configuration list for PBXNativeTarget "Pods-CubeAgentMacOSTests" */;
+			buildConfigurationList = 1BD31CB33585C7E0FE27789B24FF325B /* Build configuration list for PBXNativeTarget "Pods-CubeAgentMacOSTests" */;
 			buildPhases = (
-				9F3411C214DF0B80C0B88CB560222D38 /* Headers */,
-				D19B853953859EBF26A02A3E0E998A89 /* Sources */,
-				AA9C4EFD84B68C6179963EBF71C2237D /* Frameworks */,
+				DACCC3A51DA2A7EC990E27F087DEA911 /* Headers */,
+				A0D044518E89897857EE6FFB68899DD4 /* Sources */,
+				9B257C1F65CCA91BE06986430198998B /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D435B0668AFBFB51ECEE125BB0039BD4 /* PBXTargetDependency */,
+				7F131252246C914B890BF2F206FD37F9 /* PBXTargetDependency */,
 			);
 			name = "Pods-CubeAgentMacOSTests";
 			productName = "Pods-CubeAgentMacOSTests";
-			productReference = 94A67AABF3D1AF6A7E243E576DFC735F /* libPods-CubeAgentMacOSTests.a */;
+			productReference = 12AA16CAAACDD06955926C15E4D5C920 /* libPods-CubeAgentMacOSTests.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		BEB111D3A908C07E223D2071B2462D68 /* Pods-CubeAgentMacOS */ = {
+		BD30BC69D5CD84020EE2831B62D5A458 /* Pods-CubeAgentMacOSUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D809E91BBEE62D3A572992A6CAA7591 /* Build configuration list for PBXNativeTarget "Pods-CubeAgentMacOS" */;
+			buildConfigurationList = 0987E61B54F30FE7121440857154B78B /* Build configuration list for PBXNativeTarget "Pods-CubeAgentMacOSUITests" */;
 			buildPhases = (
-				46A01B3EDD29B33BF189725E1D61F5C9 /* Headers */,
-				EA0E67C9BA0399841CC1D2299412DDD4 /* Sources */,
-				CFBCA6ECB35B8B10A4DD65FB7E43C451 /* Frameworks */,
+				923A74285244667F64918D1411ABA3B2 /* Headers */,
+				CA77336D68D3F7C1FABED9E1E6F1BB26 /* Sources */,
+				77C11271477D0D96DAB0129A99399EE9 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9879F4A6F5234A9FB19691ED72C339C2 /* PBXTargetDependency */,
+				A854CF266ED98A6E593156ED685DEC34 /* PBXTargetDependency */,
 			);
-			name = "Pods-CubeAgentMacOS";
-			productName = "Pods-CubeAgentMacOS";
-			productReference = 37B0C5BA79A41FEC30F7384D6A286EE8 /* libPods-CubeAgentMacOS.a */;
+			name = "Pods-CubeAgentMacOSUITests";
+			productName = "Pods-CubeAgentMacOSUITests";
+			productReference = D9F27285A3DC6DEEFC5C1180323CB354 /* libPods-CubeAgentMacOSUITests.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -441,32 +441,40 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 001E12D986B355CDEA775E3AF0D47671 /* Products */;
+			productRefGroup = C0A671AAB2215097FBC05C99E3EE29B1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				160822FD4D40AF503A4F916DF2130AB9 /* CocoaLumberjack */,
-				BEB111D3A908C07E223D2071B2462D68 /* Pods-CubeAgentMacOS */,
-				9373ADBD2E66C6B686A9BA33D9E61EA2 /* Pods-CubeAgentMacOSTests */,
-				3599054C57DD64E03E020DD83667FF42 /* Pods-CubeAgentMacOSUITests */,
+				303F15C210FE8FBE50E134D8315293DF /* Pods-Cube Agent */,
+				A5D89302F8E3C21D57736EE511E5E21A /* Pods-CubeAgentMacOSTests */,
+				BD30BC69D5CD84020EE2831B62D5A458 /* Pods-CubeAgentMacOSUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D19B853953859EBF26A02A3E0E998A89 /* Sources */ = {
+		A0D044518E89897857EE6FFB68899DD4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A1AAA0824AA8F5FB6480E1258AD7BD0 /* Pods-CubeAgentMacOSTests-dummy.m in Sources */,
+				471D46A0867622A50E390AAC977F7C4E /* Pods-CubeAgentMacOSTests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DF5D217F593C6C609FD0A5089DB01B57 /* Sources */ = {
+		CA77336D68D3F7C1FABED9E1E6F1BB26 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E70037AD72D83E2109D09D1FA704A62 /* Pods-CubeAgentMacOSUITests-dummy.m in Sources */,
+				011070DCB42E7E9C20B8A0343B95C9F4 /* Pods-CubeAgentMacOSUITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D62C71FAC99FE5E7E8F590A272EDA892 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4021A2C144FF96FD6D8C7B7FC96F49C0 /* Pods-Cube Agent-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,60 +496,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EA0E67C9BA0399841CC1D2299412DDD4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A2C45DBEBFE2958B02C892FF19CBE45A /* Pods-CubeAgentMacOS-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		68E40D009A0063CBC2AA02E041DA72FB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Pods-CubeAgentMacOS";
-			target = BEB111D3A908C07E223D2071B2462D68 /* Pods-CubeAgentMacOS */;
-			targetProxy = 1D71A7EC0EE25E939320FD95454C471C /* PBXContainerItemProxy */;
-		};
-		9879F4A6F5234A9FB19691ED72C339C2 /* PBXTargetDependency */ = {
+		65750F51B878886B620CE147BCAE56C6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CocoaLumberjack;
 			target = 160822FD4D40AF503A4F916DF2130AB9 /* CocoaLumberjack */;
-			targetProxy = 00926A4A57284504657FDE10B1E9310E /* PBXContainerItemProxy */;
+			targetProxy = 38F6AB8F056B2358EF924F8F48D5D597 /* PBXContainerItemProxy */;
 		};
-		D435B0668AFBFB51ECEE125BB0039BD4 /* PBXTargetDependency */ = {
+		7F131252246C914B890BF2F206FD37F9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Pods-CubeAgentMacOS";
-			target = BEB111D3A908C07E223D2071B2462D68 /* Pods-CubeAgentMacOS */;
-			targetProxy = 10A2299D46C81DD2C83605B8344AE15E /* PBXContainerItemProxy */;
+			name = "Pods-Cube Agent";
+			target = 303F15C210FE8FBE50E134D8315293DF /* Pods-Cube Agent */;
+			targetProxy = 986505763BD0A0D0E2F3ED4C16243A46 /* PBXContainerItemProxy */;
+		};
+		A854CF266ED98A6E593156ED685DEC34 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-Cube Agent";
+			target = 303F15C210FE8FBE50E134D8315293DF /* Pods-Cube Agent */;
+			targetProxy = 943478D1AF50A1FEDCA4417B409883BC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		097B9C0873DF46713C4A3F50928C41D7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FCE1EDC7AE96CFA2A0E9DAE879425A6F /* Pods-CubeAgentMacOSUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
 		0CDD98E4E8BAAF5DAF91471FF8BB8011 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -693,6 +671,28 @@
 			};
 			name = Debug;
 		};
+		4036AC2635DBA48BC037DD94D64D3A8C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 614392D7196F4964473D8381A01D5280 /* Pods-CubeAgentMacOSTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				EXECUTABLE_PREFIX = lib;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		472509877626DFB965393C2D36968130 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7B3D4EDB63A7CED7B3A8B432A58D3BA7 /* CocoaLumberjack.xcconfig */;
@@ -716,9 +716,53 @@
 			};
 			name = Debug;
 		};
-		8A2FD4B0619B96E94ED6A8CF3FFB0AC3 /* Release */ = {
+		594CAA29138932F85819C0344FA1413B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01FE2C51E4886EFB5C2AA5DFC0BBA9C0 /* Pods-CubeAgentMacOS.release.xcconfig */;
+			baseConfigurationReference = 918994157D6A3F7116A64B6C42DFBDE1 /* Pods-CubeAgentMacOSTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				EXECUTABLE_PREFIX = lib;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		5B6EF6FE351AC374B0E2212522A7ECC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D373B04FECE79FDF3CC31895816D92DA /* Pods-CubeAgentMacOSUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				EXECUTABLE_PREFIX = lib;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		9DBBF0E08E2CFC18E0E512F60DA4C7A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC98797A4A60E06E7BCFB7A5F1C1E4ED /* Pods-Cube Agent.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -738,9 +782,31 @@
 			};
 			name = Release;
 		};
-		8EBD84658E759370CC61223365B0CF69 /* Release */ = {
+		AF0D8D321875A7EFC3914CBBF1D9A9D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A76909571F79ED8222E8B9CEC119650C /* Pods-CubeAgentMacOSTests.release.xcconfig */;
+			baseConfigurationReference = 000783D71E0A9E8088D7DF8FB19B948E /* Pods-Cube Agent.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				EXECUTABLE_PREFIX = lib;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		ED5D5688E6A3B0AD326EA5CEF5809D84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D48B4DE8EFB4DBD2A777A0C38453DD82 /* Pods-CubeAgentMacOSUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -759,81 +825,33 @@
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
-		};
-		C11492D5F3FEB462A5BAFA97129A3B3D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F31292D59AF460B1D76A1D42527DB9A8 /* Pods-CubeAgentMacOSUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		D2F3C9193E457B684A5728B127D12DF4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69F26C9E1E33D66CBF2826E2038C75AE /* Pods-CubeAgentMacOS.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		F2CE3AF24D35F36DD6C091A0B1F5B2C0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D9B9AAE392C4CD8B00B3B2C8B2EAC29D /* Pods-CubeAgentMacOSTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2D809E91BBEE62D3A572992A6CAA7591 /* Build configuration list for PBXNativeTarget "Pods-CubeAgentMacOS" */ = {
+		0987E61B54F30FE7121440857154B78B /* Build configuration list for PBXNativeTarget "Pods-CubeAgentMacOSUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D2F3C9193E457B684A5728B127D12DF4 /* Debug */,
-				8A2FD4B0619B96E94ED6A8CF3FFB0AC3 /* Release */,
+				5B6EF6FE351AC374B0E2212522A7ECC2 /* Debug */,
+				ED5D5688E6A3B0AD326EA5CEF5809D84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0F56B6C702FDDAE8EBD8BA197DD1A57A /* Build configuration list for PBXNativeTarget "Pods-Cube Agent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF0D8D321875A7EFC3914CBBF1D9A9D5 /* Debug */,
+				9DBBF0E08E2CFC18E0E512F60DA4C7A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BD31CB33585C7E0FE27789B24FF325B /* Build configuration list for PBXNativeTarget "Pods-CubeAgentMacOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				594CAA29138932F85819C0344FA1413B /* Debug */,
+				4036AC2635DBA48BC037DD94D64D3A8C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -852,24 +870,6 @@
 			buildConfigurations = (
 				472509877626DFB965393C2D36968130 /* Debug */,
 				1BD470BFD6505CF0FB3EDA0C0B8CB3C1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8A63A4926B4474F7E85344937445A156 /* Build configuration list for PBXNativeTarget "Pods-CubeAgentMacOSUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C11492D5F3FEB462A5BAFA97129A3B3D /* Debug */,
-				097B9C0873DF46713C4A3F50928C41D7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8F06986786DBA5782BD3B8021310FE90 /* Build configuration list for PBXNativeTarget "Pods-CubeAgentMacOSTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F2CE3AF24D35F36DD6C091A0B1F5B2C0 /* Debug */,
-				8EBD84658E759370CC61223365B0CF69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
