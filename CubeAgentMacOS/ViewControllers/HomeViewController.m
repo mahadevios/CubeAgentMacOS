@@ -171,37 +171,65 @@
 
 -(void)validateUpdateDictationIdReponse:(NSNotification*)notification
 {
-    DDLogInfo(@"Doc file status updated successfully");
+    NSDictionary* dict = notification.object;
     
-    if ([AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count > 0)
+    NSString* errorCode = [dict valueForKey:@"errorCode"];
+    
+    if (errorCode != nil)
     {
-        if ([AppPreferences sharedAppPreferences].isReachable)
+        DDLogInfo(@"Doc file status not updated");
+
+        if ([AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count > 0)
         {
-            DDLogInfo(@"Downloading next Doc file");
-            
-            NSBlockOperation* operation = [[AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray objectAtIndex:0];
-            
-            [[AppPreferences sharedAppPreferences].docDownloadQueue addOperation:operation];
-            
-            [[AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray removeObjectAtIndex:0];
+            [[AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray removeAllObjects];
         }
-        else
-        {
-            [self checkForNewFilesSubSequentTimer];
-        }
-        
-    }
-    else
-    {
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
             [self performSelector:@selector(cleanUpTableViewAfterDocDownload) withObject:nil afterDelay:3.0];
             
+            [self checkForNewFilesSubSequentTimer];
+            
+            return;
+            
         });
         
     }
+    else
+    {
+        DDLogInfo(@"Doc file status updated successfully");
+        
+        if ([AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray.count > 0)
+        {
+            if ([AppPreferences sharedAppPreferences].isReachable)
+            {
+                DDLogInfo(@"Downloading next Doc file");
+                
+                NSBlockOperation* operation = [[AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray objectAtIndex:0];
+                
+                [[AppPreferences sharedAppPreferences].docDownloadQueue addOperation:operation];
+                
+                [[AppPreferences sharedAppPreferences].nextBlockToBeDownloadPoolArray removeObjectAtIndex:0];
+            }
+            else
+            {
+                [self checkForNewFilesSubSequentTimer];
+            }
+            
+        }
+        else
+        {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self performSelector:@selector(cleanUpTableViewAfterDocDownload) withObject:nil afterDelay:3.0];
+                
+            });
+            
+        }
 
+    }
+   
 }
 
 -(void)validateDictatorsFolderReponse:(NSNotification*)notification
@@ -528,7 +556,8 @@
 
         long errorCode = [[dict objectForKey:@"errorCode"] longLongValue];
 
-       
+        // delete the encypted file
+        [[AppPreferences sharedAppPreferences] deleteFileAtPath:audioFileObject.originalFileNamePath];
 //        [self performCleanUp:audioFileObject.originalFileNamePath];
         
 //        [listOfAudioFilesToUploadDict removeObjectForKey:audioFileObject.fileName];
@@ -958,10 +987,10 @@
             DDLogInfo(@"Updating downloaded Doc file status, name = %@", audioFile.originalFileName);
             
             [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
-           // [self demoDOwnload];
+          // [self demoDOwnload];
         
                 
-                
+
                 self.progressIndicator.doubleValue = 100;
                 
                 self.uploadingCountLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];

@@ -22,6 +22,9 @@
     [super viewDidLoad];
     
     [[AppPreferences sharedAppPreferences] startReachabilityNotifier];
+//    [self.autoModeCheckBox setWantsLayer:YES];
+//    [self.autoModeCheckBox.layer setBorderWidth:3.0];
+//    [self.autoModeCheckBox.layer setBorderColor:[NSColor redColor].CGColor];
 
 //    [[NSApplication sharedApplication].keyWindow setRepresentedFilename:(NSString * _Nonnull)];
     
@@ -157,8 +160,9 @@
     BOOL isAutoMode = [[NSUserDefaults standardUserDefaults] boolForKey:AUTOMODE];
 
     bool isRemember = [[NSUserDefaults standardUserDefaults] boolForKey:REMEMBER_ME];
-  // isAutoMode = false;
-   
+  
+    isAutoMode = false;
+    
     if (isAutoMode)
     {
         NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];

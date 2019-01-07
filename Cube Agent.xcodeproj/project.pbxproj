@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		506164820C68A88C458087C8 /* libPods-Cube Agent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE4F1776C4373C3BFDAC162 /* libPods-Cube Agent.a */; };
+		3268AF4A38E344EB71795C5A /* libPods-CubeAgentMacOSUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143F0274841F71D931110C5E /* libPods-CubeAgentMacOSUITests.a */; };
 		50E3B6DD21AFF5F8002F904A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E3B6DC21AFF5F8002F904A /* HomeViewController.m */; };
-		77C8C79C94EF9B8424EBDC71 /* libPods-CubeAgentMacOSUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A80C6773F28A107A4714E676 /* libPods-CubeAgentMacOSUITests.a */; };
 		841DEFF221C13E5600AF99BE /* BaseLogFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 841DEFEE21C13E5600AF99BE /* BaseLogFileManager.m */; };
 		841DEFF321C13E5600AF99BE /* UITextViewLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 841DEFF121C13E5600AF99BE /* UITextViewLogger.m */; };
 		841E1B4521A80BCB006F5C63 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 841E1B4421A80BCB006F5C63 /* AppDelegate.m */; };
@@ -41,7 +40,8 @@
 		846EB11D21B16FCA006EA4FF /* CubeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 846EB11C21B16FCA006EA4FF /* CubeConfig.m */; };
 		84CB517121B7C98100E868A0 /* ViewTCIdList.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CB517021B7C98100E868A0 /* ViewTCIdList.m */; };
 		84CB517421B7F30A00E868A0 /* VCIdList.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CB517321B7F30A00E868A0 /* VCIdList.m */; };
-		EEEBBFB19BD2DEBBCF501A88 /* libPods-CubeAgentMacOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECDF0775F754F7A037FFC387 /* libPods-CubeAgentMacOSTests.a */; };
+		E179007E2B99A9304D0A7402 /* libPods-Cube Agent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB52A23F30BB216669A67D9A /* libPods-Cube Agent.a */; };
+		E70E43F46AD94207048771D7 /* libPods-CubeAgentMacOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B3217E719CDF815E5FB8E07 /* libPods-CubeAgentMacOSTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,10 +62,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0696D4242D8D2EE7B4E612DB /* Pods-CubeAgentMacOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOSTests/Pods-CubeAgentMacOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		143F0274841F71D931110C5E /* libPods-CubeAgentMacOSUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CubeAgentMacOSUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B3217E719CDF815E5FB8E07 /* libPods-CubeAgentMacOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CubeAgentMacOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		431DD8CD998BEFED375790AF /* Pods-Cube Agent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cube Agent.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cube Agent/Pods-Cube Agent.release.xcconfig"; sourceTree = "<group>"; };
 		50E3B6DB21AFF5F8002F904A /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		50E3B6DC21AFF5F8002F904A /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		549F22027338EE0653013FFE /* Pods-CubeAgentMacOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOSUITests/Pods-CubeAgentMacOSUITests.release.xcconfig"; sourceTree = "<group>"; };
-		6FE4F1776C4373C3BFDAC162 /* libPods-Cube Agent.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cube Agent.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C44FFA2E035D797CA24FA5F /* Pods-CubeAgentMacOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOSTests/Pods-CubeAgentMacOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		841DEFEC21C13C6F00AF99BE /* CubeAgentMacOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CubeAgentMacOS-Prefix.pch"; sourceTree = "<group>"; };
 		841DEFEE21C13E5600AF99BE /* BaseLogFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseLogFileManager.m; sourceTree = "<group>"; };
 		841DEFEF21C13E5600AF99BE /* UITextViewLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextViewLogger.h; sourceTree = "<group>"; };
@@ -130,13 +133,10 @@
 		84CB517021B7C98100E868A0 /* ViewTCIdList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewTCIdList.m; sourceTree = "<group>"; };
 		84CB517221B7F30A00E868A0 /* VCIdList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCIdList.h; sourceTree = "<group>"; };
 		84CB517321B7F30A00E868A0 /* VCIdList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCIdList.m; sourceTree = "<group>"; };
-		A6007F03FCB63EB4500AA75F /* Pods-CubeAgentMacOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOSTests/Pods-CubeAgentMacOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		A80C6773F28A107A4714E676 /* libPods-CubeAgentMacOSUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CubeAgentMacOSUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B82E6A4F107BD78D3B081DDC /* Pods-Cube Agent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cube Agent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cube Agent/Pods-Cube Agent.debug.xcconfig"; sourceTree = "<group>"; };
-		CB52CBDAFB07657204B8A002 /* Pods-CubeAgentMacOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOSTests/Pods-CubeAgentMacOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		DCEAF256C45A98229BFC77D6 /* Pods-CubeAgentMacOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOSUITests/Pods-CubeAgentMacOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		ECDF0775F754F7A037FFC387 /* libPods-CubeAgentMacOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CubeAgentMacOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F16E8059CD037A3322CDA767 /* Pods-Cube Agent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cube Agent.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cube Agent/Pods-Cube Agent.release.xcconfig"; sourceTree = "<group>"; };
+		8BAF07DE6C71A633AD8E4283 /* Pods-CubeAgentMacOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOSUITests/Pods-CubeAgentMacOSUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C26BAA2177FD2E3EDE01E46B /* Pods-Cube Agent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cube Agent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cube Agent/Pods-Cube Agent.debug.xcconfig"; sourceTree = "<group>"; };
+		EE63884824A303B20806CE09 /* Pods-CubeAgentMacOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOSUITests/Pods-CubeAgentMacOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		FB52A23F30BB216669A67D9A /* libPods-Cube Agent.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cube Agent.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,7 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				841E1CD921A84415006F5C63 /* IOKit.framework in Frameworks */,
-				506164820C68A88C458087C8 /* libPods-Cube Agent.a in Frameworks */,
+				E179007E2B99A9304D0A7402 /* libPods-Cube Agent.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,7 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEEBBFB19BD2DEBBCF501A88 /* libPods-CubeAgentMacOSTests.a in Frameworks */,
+				E70E43F46AD94207048771D7 /* libPods-CubeAgentMacOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,26 +161,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77C8C79C94EF9B8424EBDC71 /* libPods-CubeAgentMacOSUITests.a in Frameworks */,
+				3268AF4A38E344EB71795C5A /* libPods-CubeAgentMacOSUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4078683CAACDDAB97046F4F0 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B82E6A4F107BD78D3B081DDC /* Pods-Cube Agent.debug.xcconfig */,
-				F16E8059CD037A3322CDA767 /* Pods-Cube Agent.release.xcconfig */,
-				A6007F03FCB63EB4500AA75F /* Pods-CubeAgentMacOSTests.debug.xcconfig */,
-				CB52CBDAFB07657204B8A002 /* Pods-CubeAgentMacOSTests.release.xcconfig */,
-				DCEAF256C45A98229BFC77D6 /* Pods-CubeAgentMacOSUITests.debug.xcconfig */,
-				549F22027338EE0653013FFE /* Pods-CubeAgentMacOSUITests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		841DEFED21C13E5600AF99BE /* LoggerSupport */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,7 +187,7 @@
 				841E1B6421A80BCF006F5C63 /* CubeAgentMacOSUITests */,
 				841E1B4121A80BCB006F5C63 /* Products */,
 				841E1CD721A84414006F5C63 /* Frameworks */,
-				4078683CAACDDAB97046F4F0 /* Pods */,
+				9141833F8AF9FA2CFE8467E6 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -352,9 +339,9 @@
 			isa = PBXGroup;
 			children = (
 				841E1CD821A84415006F5C63 /* IOKit.framework */,
-				6FE4F1776C4373C3BFDAC162 /* libPods-Cube Agent.a */,
-				ECDF0775F754F7A037FFC387 /* libPods-CubeAgentMacOSTests.a */,
-				A80C6773F28A107A4714E676 /* libPods-CubeAgentMacOSUITests.a */,
+				FB52A23F30BB216669A67D9A /* libPods-Cube Agent.a */,
+				3B3217E719CDF815E5FB8E07 /* libPods-CubeAgentMacOSTests.a */,
+				143F0274841F71D931110C5E /* libPods-CubeAgentMacOSUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -385,6 +372,19 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		9141833F8AF9FA2CFE8467E6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C26BAA2177FD2E3EDE01E46B /* Pods-Cube Agent.debug.xcconfig */,
+				431DD8CD998BEFED375790AF /* Pods-Cube Agent.release.xcconfig */,
+				7C44FFA2E035D797CA24FA5F /* Pods-CubeAgentMacOSTests.debug.xcconfig */,
+				0696D4242D8D2EE7B4E612DB /* Pods-CubeAgentMacOSTests.release.xcconfig */,
+				EE63884824A303B20806CE09 /* Pods-CubeAgentMacOSUITests.debug.xcconfig */,
+				8BAF07DE6C71A633AD8E4283 /* Pods-CubeAgentMacOSUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -392,7 +392,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 841E1B6A21A80BCF006F5C63 /* Build configuration list for PBXNativeTarget "Cube Agent" */;
 			buildPhases = (
-				7D3B2A98912A64D17C83AEA5 /* [CP] Check Pods Manifest.lock */,
+				184160AE9652F6B8E61878C1 /* [CP] Check Pods Manifest.lock */,
 				841E1B3C21A80BCB006F5C63 /* Sources */,
 				841E1B3D21A80BCB006F5C63 /* Frameworks */,
 				841E1B3E21A80BCB006F5C63 /* Resources */,
@@ -410,7 +410,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 841E1B6D21A80BCF006F5C63 /* Build configuration list for PBXNativeTarget "CubeAgentMacOSTests" */;
 			buildPhases = (
-				2AD4E2A240B6520241634516 /* [CP] Check Pods Manifest.lock */,
+				CFB22F4208F812AE8E509740 /* [CP] Check Pods Manifest.lock */,
 				841E1B5221A80BCF006F5C63 /* Sources */,
 				841E1B5321A80BCF006F5C63 /* Frameworks */,
 				841E1B5421A80BCF006F5C63 /* Resources */,
@@ -429,7 +429,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 841E1B7021A80BCF006F5C63 /* Build configuration list for PBXNativeTarget "CubeAgentMacOSUITests" */;
 			buildPhases = (
-				CDA630ADEF5533349F262337 /* [CP] Check Pods Manifest.lock */,
+				F4F557790253BB489485B2E5 /* [CP] Check Pods Manifest.lock */,
 				841E1B5D21A80BCF006F5C63 /* Sources */,
 				841E1B5E21A80BCF006F5C63 /* Frameworks */,
 				841E1B5F21A80BCF006F5C63 /* Resources */,
@@ -518,29 +518,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2AD4E2A240B6520241634516 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-CubeAgentMacOSTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7D3B2A98912A64D17C83AEA5 /* [CP] Check Pods Manifest.lock */ = {
+		184160AE9652F6B8E61878C1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -562,7 +540,29 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CDA630ADEF5533349F262337 /* [CP] Check Pods Manifest.lock */ = {
+		CFB22F4208F812AE8E509740 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CubeAgentMacOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4F557790253BB489485B2E5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -777,7 +777,7 @@
 		};
 		841E1B6B21A80BCF006F5C63 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B82E6A4F107BD78D3B081DDC /* Pods-Cube Agent.debug.xcconfig */;
+			baseConfigurationReference = C26BAA2177FD2E3EDE01E46B /* Pods-Cube Agent.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CubeAgentMacOS/CubeAgentMacOS.entitlements;
@@ -801,7 +801,7 @@
 		};
 		841E1B6C21A80BCF006F5C63 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F16E8059CD037A3322CDA767 /* Pods-Cube Agent.release.xcconfig */;
+			baseConfigurationReference = 431DD8CD998BEFED375790AF /* Pods-Cube Agent.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CubeAgentMacOS/CubeAgentMacOS.entitlements;
@@ -825,7 +825,7 @@
 		};
 		841E1B6E21A80BCF006F5C63 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A6007F03FCB63EB4500AA75F /* Pods-CubeAgentMacOSTests.debug.xcconfig */;
+			baseConfigurationReference = 7C44FFA2E035D797CA24FA5F /* Pods-CubeAgentMacOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -845,7 +845,7 @@
 		};
 		841E1B6F21A80BCF006F5C63 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CB52CBDAFB07657204B8A002 /* Pods-CubeAgentMacOSTests.release.xcconfig */;
+			baseConfigurationReference = 0696D4242D8D2EE7B4E612DB /* Pods-CubeAgentMacOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -865,7 +865,7 @@
 		};
 		841E1B7121A80BCF006F5C63 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DCEAF256C45A98229BFC77D6 /* Pods-CubeAgentMacOSUITests.debug.xcconfig */;
+			baseConfigurationReference = EE63884824A303B20806CE09 /* Pods-CubeAgentMacOSUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -884,7 +884,7 @@
 		};
 		841E1B7221A80BCF006F5C63 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 549F22027338EE0653013FFE /* Pods-CubeAgentMacOSUITests.release.xcconfig */;
+			baseConfigurationReference = 8BAF07DE6C71A633AD8E4283 /* Pods-CubeAgentMacOSUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
