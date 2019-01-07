@@ -260,6 +260,21 @@
                 return;
                 
             }
+            
+            
+            if ([self.downLoadEntityJobName isEqualToString:UPDATE_DOWNLOAD_FILE_STATUS_API])
+            {
+                NSMutableDictionary* encryptedDict = [NSMutableDictionary new];
+                
+                //            NSString* audioFileName = self.audioFileObject.originalFileNamePath;
+                
+                [encryptedDict setObject:[NSString stringWithFormat:@"%ld",error.code] forKey:@"errorCode"];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_UPDATE_DOWNLOAD_FILE_STATUS_API object:encryptedDict];
+                
+                return;
+                
+            }
         }
         
 
@@ -515,7 +530,10 @@ else
         if (statusCode == 200)
         {
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_UPDATE_DOWNLOAD_FILE_STATUS_API object:response];
+            
+            NSDictionary* responseDict = [[NSDictionary alloc] initWithObjectsAndKeys:@"200",@"response",nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_UPDATE_DOWNLOAD_FILE_STATUS_API object:responseDict];
             
             return;
             
