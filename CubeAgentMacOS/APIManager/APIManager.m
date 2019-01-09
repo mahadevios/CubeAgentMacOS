@@ -86,8 +86,6 @@ static APIManager *singleton = nil;
          [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please check your internet connection."];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_NO_INTERNET object:nil];
-
-        
     }
     
 }
