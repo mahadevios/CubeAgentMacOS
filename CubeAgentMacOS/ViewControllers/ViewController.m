@@ -168,7 +168,7 @@
 
     bool isRemember = [[NSUserDefaults standardUserDefaults] boolForKey:REMEMBER_ME];
   
-   // isAutoMode = false;
+   //isAutoMode = false;
     
     if (isAutoMode)
     {
