@@ -1844,11 +1844,13 @@
 //        view.frame = NSRectFromCGRect(CGRectMake(0, 0, 100, 10));
         if ([item isKindOfClass:[NSDictionary class]])
         {
-            view.textField.stringValue = @"Application Directory";
+            view.textField.stringValue = @"Downloads";
         }
         else
         {
-            view.textField.stringValue = [AppPreferences sharedAppPreferences].loggedInUser.userName;
+//            view.textField.stringValue = [AppPreferences sharedAppPreferences].loggedInUser.userName;
+            view.textField.stringValue = @"CuebFiles";
+
         }
         
         
