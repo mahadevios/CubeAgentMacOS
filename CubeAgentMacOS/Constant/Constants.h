@@ -47,6 +47,8 @@
 #define UPDATE_DOWNLOAD_FILE_STATUS_API           @"MacBook_UpdateDownloadFileStatus"
 #define GET_DICTATORS_FOLDER_API                  @"MacBook_GetDictatorsFolder"
 #define GENERATE_FILENAME_API                     @"MacBook_GenerateFileName"
+#define DOWNLOAD_FOLDER_BOOKMARK_GENERATED        @"downloadBookmarkGenerated"
+#define DOWNLOAD_FOLDER_BOOKMARK_PATH             @"downloadBookmarkPath"
 
 
 //NSNOTIFICATION

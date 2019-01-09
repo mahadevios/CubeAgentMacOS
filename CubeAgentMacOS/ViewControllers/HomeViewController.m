@@ -126,33 +126,69 @@
     [[APIManager sharedManager] setVCID:[NSString stringWithFormat:@"%ld",[AppPreferences sharedAppPreferences].loggedInUser.userId]];
     
 //    [[APIManager sharedManager] getSingleQueryValueComment:StrSQL];
-
-//    [self getFilesToBeUploadFromUploadFilesFolder];
-
+    
     CGSize size =  CGSizeMake(900, 770);
     
     self.preferredContentSize = size;
 
-    [self checkForFilesFirstTimeAfterLoginRapidTimer];
-//    [[APIManager sharedManager] getEncryptDecryptString];
-//    [[APIManager sharedManager] getDictatorsFolder:[NSString stringWithFormat:@"%ld",[AppPreferences sharedAppPreferences].loggedInUser.userId]];
+    [self checkIfFolderGeneratedAndStartCycle];
+   
+}
+
+-(void)checkIfFolderGeneratedAndStartCycle
+{
+//    [[NSUserDefaults standardUserDefaults] setBool:false forKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
+    BOOL isCubeFilesFolderGenerated = [[NSUserDefaults standardUserDefaults] boolForKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
     
-//    [self getDictationIds];
+    if (isTimerStartedFirstTime == false)
+    {
+        if (isCubeFilesFolderGenerated)
+        {
+            [self startInitialCycle];
+            
+            [folderGeneratedTimer invalidate];
+            
+            isTimerStartedFirstTime = true;
+        }
+        else
+        {
+            [self isCubeFilesFolderGeneratedTimer];
+        }
+    }
+    
+}
+
+-(void)isCubeFilesFolderGeneratedTimer
+{
+    if ([folderGeneratedTimer isValid])
+    {
+        [folderGeneratedTimer invalidate];
+    }
+    folderGeneratedTimer =  [NSTimer scheduledTimerWithTimeInterval:20.0 target:self selector:@selector(checkIfFolderGeneratedAndStartCycle) userInfo:nil repeats:YES];
+    
+}
+-(void)startInitialCycle
+{
+  
+    [self checkForFilesFirstTimeAfterLoginRapidTimer];
     
     [self testLogs];
     
     [self.outlineView reloadData];
 }
-
 -(void)validateNoInternet:(NSNotification*)noti
 {
 //    [hud removeFromSuperview];
     
 }
+
+
 -(void)testLogs
 {
 //    setenv("XcodeColors", "YES", 0);
 //
+    [[AppPreferences sharedAppPreferences] startScope];
+    
     [[AppPreferences sharedAppPreferences] addLoggerOnce];
 
     // And we also enable colors
@@ -166,6 +202,7 @@
     
     textViewLogger.textView = self.logTextView;
     
+    [[AppPreferences sharedAppPreferences] stopScope];
 }
 #pragma mark : Notification Callback Methods
 
@@ -986,8 +1023,10 @@
 
             DDLogInfo(@"Updating downloaded Doc file status, name = %@", audioFile.originalFileName);
             
-            [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
-          // [self demoDOwnload];
+
+//            [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
+            [self demoDOwnload];
+
         
                 
 
@@ -1040,6 +1079,8 @@
     }
 
 }
+
+
 
 #pragma mark: Reset Tableview
 
@@ -1217,9 +1258,13 @@
 {
     DDLogInfo(@"Checking audio files for upload");
     
+    [[AppPreferences sharedAppPreferences] startScope];
+
+    NSError* error;
+    
     NSString* filePath =  [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
     
-    NSError * error;
+//    NSError * error;
     
     NSArray * directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:filePath error:&error];
     
@@ -1241,6 +1286,9 @@
     }
     
     [self getAllFiles:filePath];
+    
+    [[AppPreferences sharedAppPreferences] stopScope];
+    
 }
 
 -(void) checkBrowserAudioFilesForDownload
@@ -1539,24 +1587,197 @@
 
 - (IBAction)pasteAudioFilesButtonClicked:(id)sender
 {
-    NSString* uploadFilesFolderPath = [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
+//    NSData* bookmarkData = [[NSUserDefaults standardUserDefaults] objectForKey:@"bookmark"];
+//    NSURL* urlFromBookmark = [NSURL URLByResolvingBookmarkData:bookmarkData
+//                                                       options:NSURLBookmarkResolutionWithSecurityScope
+//                                                 relativeToURL:nil
+//                                           bookmarkDataIsStale:nil
+//                                                         error:nil];
+//
+//
+//    NSString* uploadFilesFolderPath = urlFromBookmark.path;
+
+//    NSString* uploadFilesFolderPath = [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
     
-    [self openFolderInFinder:uploadFilesFolderPath];
+//    [self openFolderInFinder:uploadFilesFolderPath];
+    
+    BOOL isCubeFilesFolderGenerated = [[NSUserDefaults standardUserDefaults] boolForKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
+
+    if (isCubeFilesFolderGenerated)
+    {
+        NSString* uploadFilesFolderPath = [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
+        
+        [self openFolderInFinder:uploadFilesFolderPath];
+    }
+    else
+    {
+       NSAlert* alert   = [[NSAlert alloc] init];
+        [alert setMessageText:@"Action Required!"];
+        [alert setInformativeText:@"You need to select Downloads folder first to allow Cube Agent to save and access files from Downloads folder?"];
+        [alert addButtonWithTitle:@"Select Downloads Folder"];
+        [alert addButtonWithTitle:@"Cancel"];
+
+        [alert setAlertStyle:NSWarningAlertStyle];
+        [alert beginSheetModalForWindow:[NSApplication sharedApplication].keyWindow completionHandler:^(NSModalResponse returnCode) {
+            if (returnCode == NSAlertFirstButtonReturn) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [self bookmark];
+                    
+                    
+                });
+                
+            }
+            else if (NSAlertSecondButtonReturn)
+            {
+                return;
+            }
+        }];
+    }
+   
 }
 
 - (IBAction)getDownloadedFilesButtonClicked:(id)sender
 {
-    NSString* downloadedTransFolderPath = [[AppPreferences sharedAppPreferences] getUsernameTranscriptionDirectoryPath];
     
-    [self openFolderInFinder:downloadedTransFolderPath];
+    
+    BOOL isCubeFilesFolderGenerated = [[NSUserDefaults standardUserDefaults] boolForKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
+    
+    if (isCubeFilesFolderGenerated)
+    {
+        NSString* downloadedTransFolderPath = [[AppPreferences sharedAppPreferences] getUsernameTranscriptionDirectoryPath];
+        
+        [self openFolderInFinder:downloadedTransFolderPath];
+    }
+    else
+    {
+        NSAlert* alert   = [[NSAlert alloc] init];
+        [alert setMessageText:@"Action Required!"];
+        [alert setInformativeText:@"You need to select Downloads folder first to allow Cube Agent to save and access files from Downloads folder?"];
+        [alert addButtonWithTitle:@"Select Downloads Folder"];
+        [alert addButtonWithTitle:@"Cancel"];
+        
+        [alert setAlertStyle:NSWarningAlertStyle];
+        [alert beginSheetModalForWindow:[NSApplication sharedApplication].keyWindow completionHandler:^(NSModalResponse returnCode) {
+            if (returnCode == NSAlertFirstButtonReturn) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [self bookmark];
+                    
+                    
+                });
+                
+            }
+            else if (NSAlertSecondButtonReturn)
+            {
+                return;
+            }
+        }];
+    }
 }
 
 - (IBAction)getBackupFilesButtonClicked:(id)sender
 {
-    NSString* backupFolderPath = [[AppPreferences sharedAppPreferences] getUsernameBacupAudioDirectoryPath];
+    BOOL isCubeFilesFolderGenerated = [[NSUserDefaults standardUserDefaults] boolForKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
     
-    [self openFolderInFinder:backupFolderPath];
+    if (isCubeFilesFolderGenerated)
+    {
+        NSString* backupFolderPath = [[AppPreferences sharedAppPreferences] getUsernameBacupAudioDirectoryPath];
+        
+        [self openFolderInFinder:backupFolderPath];
+    }
+    else
+    {
+        NSAlert* alert   = [[NSAlert alloc] init];
+        [alert setMessageText:@"Action Required!"];
+        [alert setInformativeText:@"You need to select Downloads folder first to allow Cube Agent to save and access files from Downloads folder?"];
+        [alert addButtonWithTitle:@"Select Downloads Folder"];
+        [alert addButtonWithTitle:@"Cancel"];
+        
+        [alert setAlertStyle:NSWarningAlertStyle];
+        [alert beginSheetModalForWindow:[NSApplication sharedApplication].keyWindow completionHandler:^(NSModalResponse returnCode) {
+            if (returnCode == NSAlertFirstButtonReturn) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [self bookmark];
+                    
+                    
+                });
+                
+            }
+            else if (NSAlertSecondButtonReturn)
+            {
+                return;
+            }
+        }];
+    }
 }
+
+-(void)bookmark
+{
+    openDlg = [NSOpenPanel openPanel];
+    [openDlg setCanChooseDirectories:YES];
+    [openDlg setCanCreateDirectories:YES];
+    [openDlg setAllowsMultipleSelection:FALSE];
+    if ( [openDlg runModal] == NSModalResponseOK )
+    {
+        NSURL *url = openDlg.URL;
+        
+        NSError *error = nil;
+        NSData *bookmark = [url bookmarkDataWithOptions:NSURLBookmarkCreationWithSecurityScope
+                         includingResourceValuesForKeys:nil
+                                          relativeToURL:nil
+                                                  error:&error];
+        if (bookmark != nil)
+        {
+            
+            NSURL* urlFromBookmark = [NSURL URLByResolvingBookmarkData:bookmark
+                                                               options:NSURLBookmarkResolutionWithSecurityScope
+                                                         relativeToURL:nil
+                                                   bookmarkDataIsStale:nil
+                                                                 error:&error];
+            
+            NSString* lastPathComponent = [urlFromBookmark lastPathComponent];
+            
+            if (![lastPathComponent isEqualToString:@"Downloads"])
+            {
+                [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please select only Downloads folder"];
+                
+                
+            }
+            else
+            {
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                [userDefaults setObject:bookmark forKey:DOWNLOAD_FOLDER_BOOKMARK_PATH];
+                [userDefaults synchronize];
+                
+                //                NSData* bookmarkData = [userDefaults objectForKey:@"bookmark"];
+                
+                [[NSUserDefaults standardUserDefaults] setBool:true forKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
+                
+//                NSString* downloadedTransFolderPath = [[AppPreferences sharedAppPreferences] getUsernameTranscriptionDirectoryPath];
+//
+//                [self openFolderInFinder:downloadedTransFolderPath];
+                [[AppPreferences sharedAppPreferences] createAllFolderOnce];
+                
+                [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Folder Created Successfully" subTitle:@"Please keep your audio files inside Downloads/CubeFiles/UploadAudio"];
+                
+               
+            }
+            NSLog(@"url = %@", urlFromBookmark);
+        }
+        else
+        {
+            //check the error
+        }
+        
+        
+    }
+}
+#pragma mark: Outline View Datasource and Delegates
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 
@@ -1648,6 +1869,9 @@
     
     return view;
 }
+
+
+
 
 
 //-(NSTableRowView *)outlineView:(NSOutlineView *)outlineView rowViewForItem:(id)item

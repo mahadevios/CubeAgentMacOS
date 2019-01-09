@@ -16,6 +16,7 @@
 {
     MBProgressHUD* hud;
     NSAlert *alert;
+    NSOpenPanel* openDlg;
 }
 @property (weak) IBOutlet NSButton *autoModeCheckBox;
 - (IBAction)autoModeCheckBoxClicked:(id)sender;

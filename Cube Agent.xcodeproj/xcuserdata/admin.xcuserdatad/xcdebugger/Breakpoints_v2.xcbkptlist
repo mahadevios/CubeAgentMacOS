@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CubeAgentMacOS/ViewControllers/HomeViewController.m"
-            timestampString = "568463614.447716"
+            timestampString = "568655635.195417"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1062"
-            endingLineNumber = "1062"
+            startingLineNumber = "1101"
+            endingLineNumber = "1101"
             landmarkName = "-cleanUpTableViewAfterDocDownload"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CubeAgentMacOS/APIManager/AppPreferences.m"
-            timestampString = "567613330.317456"
+            timestampString = "568655635.195918"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "365"
-            endingLineNumber = "365"
+            startingLineNumber = "418"
+            endingLineNumber = "418"
             landmarkName = "-deleteFileAtPath:"
             landmarkType = "7">
          </BreakpointContent>
