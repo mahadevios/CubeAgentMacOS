@@ -23,6 +23,10 @@
     
     [[AppPreferences sharedAppPreferences] startReachabilityNotifier];
 
+//    [self.autoModeCheckBox setWantsLayer:YES];
+//    [self.autoModeCheckBox.layer setBorderWidth:3.0];
+//    [self.autoModeCheckBox.layer setBorderColor:[NSColor redColor].CGColor];
+
 //    [[NSApplication sharedApplication].keyWindow setRepresentedFilename:(NSString * _Nonnull)];
     
 //    [[[NSApplication sharedApplication].keyWindow standardWindowButton:NSWindowDocumentIconButton]
@@ -163,8 +167,9 @@
     BOOL isAutoMode = [[NSUserDefaults standardUserDefaults] boolForKey:AUTOMODE];
 
     bool isRemember = [[NSUserDefaults standardUserDefaults] boolForKey:REMEMBER_ME];
-  // isAutoMode = false;
-   
+  
+   // isAutoMode = false;
+    
     if (isAutoMode)
     {
         NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
@@ -263,7 +268,8 @@
     }
     if ([responseCodeString  isEqualToString: @"200"] && [macIdValidString isEqualToString:SUCCESS])
     {
-        DDLogInfo(@"Authenticating User");
+        // ---> adding username in log
+        DDLogInfo(@"Authenticating User : %@",self.loginTextField.stringValue);
 
         [[APIManager sharedManager] authenticateUser:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
 
@@ -294,7 +300,7 @@
     
     if ([responseCodeString  isEqualToString: @"200"] && ![userIdString isEqualToString:@"0"])
     {
-        DDLogInfo(@"User authenticated successfully");
+        DDLogInfo(@"%@ User authenticated successfully",self.loginTextField.stringValue);
 
         User* user = [[User alloc] init];
         

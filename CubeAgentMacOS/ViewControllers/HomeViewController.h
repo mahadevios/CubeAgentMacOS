@@ -51,9 +51,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray*  dictationIdsArrayForDownload;
 @property (nonatomic, strong) NSMutableArray*  audioFileAddedInQueueArray;
 @property (nonatomic, strong) NSMutableArray*  duplicateFileCheckArray;
+@property (nonatomic, strong) NSMutableArray*  validForTCIdCallNonDuplicateAudioArray;
 
 @property (weak) IBOutlet NSView *homeBackgroundView;
 @property (weak) IBOutlet NSOutlineView *outlineView;
+// ---> decalring method for setting background color of the buttons and view
+-(void) setBackgroundColorOFButtonsAndView;
 
 @end
 
