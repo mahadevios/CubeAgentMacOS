@@ -22,6 +22,7 @@
     [super viewDidLoad];
     
     [[AppPreferences sharedAppPreferences] startReachabilityNotifier];
+
 //    [self.autoModeCheckBox setWantsLayer:YES];
 //    [self.autoModeCheckBox.layer setBorderWidth:3.0];
 //    [self.autoModeCheckBox.layer setBorderColor:[NSColor redColor].CGColor];
@@ -161,7 +162,7 @@
 
     bool isRemember = [[NSUserDefaults standardUserDefaults] boolForKey:REMEMBER_ME];
   
-    isAutoMode = false;
+   // isAutoMode = false;
     
     if (isAutoMode)
     {
