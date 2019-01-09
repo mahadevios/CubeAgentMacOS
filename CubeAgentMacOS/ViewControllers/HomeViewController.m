@@ -113,7 +113,7 @@
 
 -(void)checkIfFolderGeneratedAndStartCycle
 {
-// [[NSUserDefaults standardUserDefaults] setBool:false forKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
+//[[NSUserDefaults standardUserDefaults] setBool:false forKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
     BOOL isCubeFilesFolderGenerated = [[NSUserDefaults standardUserDefaults] boolForKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
     
     if (isTimerStartedFirstTime == false)
