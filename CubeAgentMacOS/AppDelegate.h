@@ -12,6 +12,10 @@
 #import "User.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
+{
+    NSWindow *overlayWindow ;
+    NSWindowController* vc;
+}
 @property (nonatomic,strong) ViewController *viewController;
 @property (nonatomic,strong) HomeViewController *homeViewController;
 

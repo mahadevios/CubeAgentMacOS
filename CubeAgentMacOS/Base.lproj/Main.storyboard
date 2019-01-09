@@ -26,7 +26,88 @@
                     </connections>
                 </windowController>
             </objects>
-            <point key="canvasLocation" x="82.5" y="-89"/>
+            <point key="canvasLocation" x="38" y="-69"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="vO2-dD-lNc">
+            <objects>
+                <windowController storyboardIdentifier="Window" id="Ccj-ba-Ecl" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Lsc-Xh-YHQ">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="294" y="313" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+                        <connections>
+                            <outlet property="delegate" destination="Ccj-ba-Ecl" id="8Sr-0L-Uqw"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="BL8-j6-Nd0" kind="relationship" relationship="window.shadowedContentViewController" id="fdL-Ii-cGU"/>
+                    </connections>
+                </windowController>
+                <customObject id="ToO-1j-yu6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-448" y="297"/>
+        </scene>
+        <!--About Cube Agent View Controller-->
+        <scene sceneID="4B9-ip-lUC">
+            <objects>
+                <viewController storyboardIdentifier="AboutCubeAgent" id="BL8-j6-Nd0" customClass="AboutCubeAgentViewController" sceneMemberID="viewController">
+                    <view key="view" id="NmZ-Qt-3dk">
+                        <rect key="frame" x="0.0" y="0.0" width="288" height="176"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2to-3F-1lK">
+                                <rect key="frame" x="120" y="122" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="bkm-kC-gzf"/>
+                                    <constraint firstAttribute="width" constant="48" id="n4i-J1-Edb"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="home_logo" id="hgh-TI-FZJ"/>
+                            </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mfM-5z-OxM">
+                                <rect key="frame" x="105" y="97" width="78" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Cube Agent" id="gvM-7n-v7C">
+                                    <font key="font" metaFont="systemSemibold" size="13"/>
+                                    <color key="textColor" name="labelColor"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Umm-q8-TDy">
+                                <rect key="frame" x="5" y="54" width="279" height="11"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="© 2019 Xanadutec Data Solutions Pvt. Ltd. All rights reserved." id="KyV-Rb-ocQ">
+                                    <font key="font" metaFont="system" size="9"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bgr-4a-n3P">
+                                <rect key="frame" x="122" y="76" width="44" height="14"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Version" id="6xd-HE-DQA">
+                                    <font key="font" metaFont="system" size="11"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Umm-q8-TDy" firstAttribute="centerX" secondItem="2to-3F-1lK" secondAttribute="centerX" id="Td3-fR-Jaq"/>
+                            <constraint firstItem="2to-3F-1lK" firstAttribute="top" secondItem="NmZ-Qt-3dk" secondAttribute="top" constant="6" id="an6-Dw-coy"/>
+                            <constraint firstItem="Bgr-4a-n3P" firstAttribute="top" secondItem="2to-3F-1lK" secondAttribute="bottom" constant="32" id="hK0-Ud-a2H"/>
+                            <constraint firstItem="mfM-5z-OxM" firstAttribute="centerX" secondItem="2to-3F-1lK" secondAttribute="centerX" id="iy7-GB-10S"/>
+                            <constraint firstItem="2to-3F-1lK" firstAttribute="centerX" secondItem="NmZ-Qt-3dk" secondAttribute="centerX" id="pv8-Mq-33q"/>
+                            <constraint firstItem="Bgr-4a-n3P" firstAttribute="centerX" secondItem="2to-3F-1lK" secondAttribute="centerX" id="qBj-8i-9I5"/>
+                            <constraint firstItem="Umm-q8-TDy" firstAttribute="top" secondItem="2to-3F-1lK" secondAttribute="bottom" constant="57" id="sNZ-5D-mrB"/>
+                            <constraint firstItem="mfM-5z-OxM" firstAttribute="top" secondItem="2to-3F-1lK" secondAttribute="bottom" constant="8" id="yVh-xm-008"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="versionLabel" destination="Bgr-4a-n3P" id="gb6-ak-Gj9"/>
+                    </connections>
+                </viewController>
+                <customObject id="I2l-Yg-Ixj" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3" y="266"/>
         </scene>
         <!--Login-04-->
         <scene sceneID="hIz-AP-VOD">
@@ -707,9 +788,24 @@
                 <application id="RXN-Zo-zTB" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="9oh-1X-i1R">
                         <items>
-                            <menuItem title="CubeAgent_MacOs_LogDemo" id="QoB-Zq-WXj">
+                            <menuItem title="Cube Agent" id="QoB-Zq-WXj">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="CubeAgent_MacOs_LogDemo" systemMenu="apple" id="75y-uJ-WDU"/>
+                                <menu key="submenu" title="Cube Agent" systemMenu="apple" id="75y-uJ-WDU">
+                                    <items>
+                                        <menuItem title="About Cube Agent" id="6Y6-oj-6hZ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="aboutCubeAgentButtonClicked:" target="lbo-Hl-24W" id="naN-99-EnC"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Quit Cube Agent" id="w2T-kc-v1p">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="quitCubeAgentButtonClicked:" target="lbo-Hl-24W" id="Lkk-vj-Yhu"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
                             </menuItem>
                         </items>
                     </menu>

@@ -79,6 +79,12 @@
 
     [[AppPreferences sharedAppPreferences] addLoggerOnce];
     
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    
+    NSString *majorVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:majorVersion forKey:APP_CURRENT_VERSION];
+    
     DDLogInfo(@"In LoginView");
     
    
