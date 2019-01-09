@@ -61,7 +61,7 @@
 
 -(void) startReachabilityNotifier;
 
--(NSString*)getUsernameInregrationDirectoryPath;
+//-(NSString*)getUsernameInregrationDirectoryPath;
 
 -(NSString*)getUsernameUploadAudioDirectoryPath;
 
@@ -73,7 +73,7 @@
 
 -(NSString*)getCubeLogDirectoryPath;
 
--(NSString*)getCubeFilesDirectoryPath;
+//-(NSString*)getCubeFilesDirectoryPath;
 
 -(void)deleteFileAtPath:(NSString*)filePath;
 
@@ -92,6 +92,12 @@
 -(void)addLoggerOnce;
 
 -(void)moveDuplicateAudioFileToGivenDateBackup:(NSString*)dateFolderName filePath:(NSString*)filePath;
+
+-(void)startScope;
+
+-(void)stopScope;
+
+-(void)createAllFolderOnce;
 
 @end
 

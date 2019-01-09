@@ -21,14 +21,16 @@ NS_ASSUME_NONNULL_BEGIN
     VCIdList* vcIdList1;
     NSTimer* progressTimer;
     NSTimer* checkForNewFilesTimer;
+    NSTimer* folderGeneratedTimer;
     int totalFilesToBeAddedInTableView;
     
     NSArray* dataSource;
     NSDictionary *firstParent;
     
     NSDictionary *secondParent;
-    
+     NSOpenPanel* openDlg;
     NSArray *list;
+    bool isTimerStartedFirstTime;
 }
 @property (weak) IBOutlet NSTableView *tableView;
 @property (unsafe_unretained) IBOutlet NSTextView *logTextView;

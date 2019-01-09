@@ -81,7 +81,7 @@
     
     DDLogInfo(@"In LoginView");
     
-
+   
 }
 
 -(void)adjustViewAppearance
@@ -530,14 +530,15 @@
     if ([sender state] == NSOnState)
     {
         [[NSUserDefaults standardUserDefaults] setBool:true forKey:AUTOMODE];
-        
+
     }
     else
     {
         [[NSUserDefaults standardUserDefaults] setBool:false forKey:AUTOMODE];
-        
+
     }
-    
+
+//     [self bookmark];
 }
 - (IBAction)rememberMeCheckBoxClicked:(NSButton*)sender
 {
@@ -688,5 +689,43 @@
     return NO;
 }
 
+//-(void)bookmark
+//{
+//    openDlg = [NSOpenPanel openPanel];
+//    [openDlg setCanChooseDirectories:YES];
+//    [openDlg setCanCreateDirectories:YES];
+//    [openDlg setAllowsMultipleSelection:FALSE];
+//    if ( [openDlg runModal] == NSModalResponseOK )
+//    {
+//        NSURL *url = openDlg.URL;
+//        
+//        NSError *error = nil;
+//        NSData *bookmark = [url bookmarkDataWithOptions:NSURLBookmarkCreationWithSecurityScope
+//                         includingResourceValuesForKeys:nil
+//                                          relativeToURL:nil
+//                                                  error:&error];
+//        if (bookmark != nil)
+//        {
+//            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//            [userDefaults setObject:bookmark forKey:@"bookmark"];
+//            [userDefaults synchronize];
+//            
+//           NSData* bookmarkData = [userDefaults objectForKey:@"bookmark"];
+//            NSURL* urlFromBookmark = [NSURL URLByResolvingBookmarkData:bookmarkData
+//                                                        options:NSURLBookmarkResolutionWithSecurityScope
+//                                                  relativeToURL:nil
+//                                            bookmarkDataIsStale:nil
+//                                                          error:&error];
+//            
+//            NSLog(@"url = %@", urlFromBookmark);
+//        }
+//        else
+//        {
+//            //check the error
+//        }
+//    
+//        
+//    }
+//}
 @end
 

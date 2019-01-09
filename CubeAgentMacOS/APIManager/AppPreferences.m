@@ -9,6 +9,7 @@
 #import "AppPreferences.h"
 #include <sys/xattr.h>
 #import "AppDelegate.h"
+#import "Constants.h"
 
 
 @implementation AppPreferences
@@ -221,100 +222,145 @@ static AppPreferences *singleton = nil;
 //    }
 }
 
--(NSString*)getCubeFilesDirectoryPath
-{
-    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-
-    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles", documentsDirectoryPath];
-    
-    NSError* error;
-    
-    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeFiles])
-        {
-            [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeFiles withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
-            NSLog(@"");
-        }
-    
-    return pathToCubeFiles;
-}
+//-(NSString*)getCubeFilesDirectoryPath
+//{
+//    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+//
+//    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles", documentsDirectoryPath];
+//    
+//    NSError* error;
+//    
+//    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeFiles])
+//        {
+//            [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeFiles withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+//            NSLog(@"");
+//        }
+//    
+//    return pathToCubeFiles;
+//}
 
 -(NSString*)getCubeLogDirectoryPath
 {
-    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    
-    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeLog", documentsDirectoryPath];
+//    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+//
+//    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeLog", documentsDirectoryPath];
   
+      [self startScope];
+    
+    NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
+
+    NSString *pathToCubeLogFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeLog", cubeFilesFolderPath];
+
     NSError* error;
     
-    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeFiles])
+    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeLogFiles])
     {
-        [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeFiles withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+        [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeLogFiles withIntermediateDirectories:YES attributes:nil error:&error]; //Create folder
         NSLog(@"");
     }
     
-    return pathToCubeFiles;
+     [self stopScope];
+    
+    return pathToCubeLogFiles;
 }
 
 -(NSString*)getCubeTempDirectoryPath
 {
-    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+//    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+//
+//    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeTemp", documentsDirectoryPath];
+      [self startScope];
     
-    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeTemp", documentsDirectoryPath];
-    
-   
+    NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
+
+    NSString *pathToCubeTempFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeTemp", cubeFilesFolderPath];
+
     NSError* error;
     
-    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeFiles])
+    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeTempFiles])
     {
-        [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeFiles withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+        [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeTempFiles withIntermediateDirectories:YES attributes:nil error:&error]; //Create folder
         NSLog(@"");
     }
     
-    return pathToCubeFiles;
+     [self stopScope];
+    
+    return pathToCubeTempFiles;
 }
 
 -(NSString*)getUsernameBacupAudioDirectoryPath
 {
+      [self startScope];
     
-    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
+
+//    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     
-    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/BackupAudio", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
-    
+//    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/BackupAudio", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+    NSString *pathToCubeBackUpFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/BackupAudio", cubeFilesFolderPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+
     NSError* error;
     
-    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeFiles])
+    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeBackUpFiles])
     {
-        [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeFiles withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+        [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeBackUpFiles withIntermediateDirectories:YES attributes:nil error:&error]; //Create folder
         NSLog(@"");
     }
     
-    return pathToCubeFiles;
+     [self stopScope];
+    return pathToCubeBackUpFiles;
 }
 
 -(NSString*)getUsernameTranscriptionDirectoryPath
 {
-    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+     [self startScope];
     
-    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/Transcription", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+    NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
+
+//    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+//
+//    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/Transcription", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
     
-    
+    NSString *pathToCubeTransFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/Transcription", cubeFilesFolderPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+
     NSError* error;
     
-    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeFiles])
+    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeTransFiles])
     {
-        [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeFiles withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+        [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeTransFiles withIntermediateDirectories:YES attributes:nil error:&error]; //Create folder
         NSLog(@"");
     }
     
-    return pathToCubeFiles;
+     [self stopScope];
+    
+    return pathToCubeTransFiles;
 }
 
+-(void)createAllFolderOnce
+{
+    [self getCubeLogDirectoryPath];
+    
+    [self getCubeTempDirectoryPath];
+    
+    [self getUsernameUploadAudioDirectoryPath];
+    
+    [self getUsernameBacupAudioDirectoryPath];
+    
+    [self getUsernameTranscriptionDirectoryPath];
+    
+}
 -(NSString*)getUsernameUploadAudioDirectoryPath
 {
-    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-
-    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/UploadAudio", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+    [self startScope];
     
+    NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
+    
+//    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    
+//    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/UploadAudio", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+
+    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/UploadAudio", cubeFilesFolderPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+
 //    NSString *pathToCubeFiles = [NSString stringWithFormat:@"/Users/%@/Documents/CubeFiles", NSUserName()];
 
     NSURL* url = [NSURL fileURLWithPath:pathToCubeFiles];
@@ -326,59 +372,62 @@ static AppPreferences *singleton = nil;
         NSLog(@"");
     }
     
+     [self stopScope];
+    
     return pathToCubeFiles;
 }
 
--(NSString*)getUsernameInregrationDirectoryPath
-{
-    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    
-    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/Integration", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
-    
-    NSError* error;
-    
-    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeFiles])
-    {
-        [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeFiles withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
-        NSLog(@"");
-    }
-    
-    return pathToCubeFiles;
-}
+//-(NSString*)getUsernameInregrationDirectoryPath
+//{
+//    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+//
+//    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/Integration", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+//
+//    NSError* error;
+//    
+//    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeFiles])
+//    {
+//        [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeFiles withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+//        NSLog(@"");
+//    }
+//    
+//    return pathToCubeFiles;
+//}
 
 -(void)deleteFileAtPath:(NSString*)filePath
 {
-    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     
-    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeTemp", documentsDirectoryPath];
+//    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+//
+//    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeTemp", documentsDirectoryPath];
+      [self startScope];
     
+    NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
+
+    NSString *pathToCubeTempFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeTemp", cubeFilesFolderPath];
     NSString* fileName = [filePath lastPathComponent];
     
-    pathToCubeFiles = [[pathToCubeFiles stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"fcfe"];
+    pathToCubeTempFiles = [[pathToCubeTempFiles stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"fcfe"];
     
     NSError* error;
     
-    if ([[NSFileManager defaultManager] fileExistsAtPath:pathToCubeFiles])
+    if ([[NSFileManager defaultManager] fileExistsAtPath:pathToCubeTempFiles])
     {
-        bool isRemoved = [[NSFileManager defaultManager] removeItemAtPath:pathToCubeFiles error:&error];
+        bool isRemoved = [[NSFileManager defaultManager] removeItemAtPath:pathToCubeTempFiles error:&error];
         
         NSLog(@"%d", isRemoved);
     }
     
+      [self stopScope];
 }
 
 -(void)moveAudioFileToBackup:(NSString*)filePath
 {
+   
     
-//    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    
-//    NSString* fileName = [filePath lastPathComponent];
-
     NSString *pathToBackUpFiles = [self getDateWiseBackUpAudioFolderPath];
     
-//     NSString *pathToCubeFiles = [self getUsernameUploadAudioDirectoryPath];
-    
-//    pathToCubeFiles = [pathToCubeFiles stringByAppendingPathComponent:fileName];
+     [self startScope];
     
     pathToBackUpFiles = [pathToBackUpFiles stringByAppendingPathComponent:[filePath lastPathComponent]];
 
@@ -398,13 +447,17 @@ static AppPreferences *singleton = nil;
     }
     NSLog(@"ismoved"); 
     
+     [self stopScope];
 }
 
 -(void)moveDuplicateAudioFileToGivenDateBackup:(NSString*)dateFolderName filePath:(NSString*)filePath
 {
     
+    
     NSString *pathToBackUpFiles = [self getGivenDateBackUpAudioFolderPath:dateFolderName];
    
+    [self startScope];
+    
     pathToBackUpFiles = [pathToBackUpFiles stringByAppendingPathComponent:[filePath lastPathComponent]];
     
    
@@ -435,6 +488,8 @@ static AppPreferences *singleton = nil;
         DDLogInfo(@"Audio file moved to BackupAudio folder");
     }
     NSLog(@"ismoved");
+    
+     [self stopScope];
     
 }
 -(uint64_t)getFileSize:(NSString*)filePath
@@ -477,9 +532,13 @@ static AppPreferences *singleton = nil;
 
 -(NSString*)getDateWiseBackUpAudioFolderPath
 {
+
+    
     NSString* todaysDate = [self getTimestamp];
     
     NSString* backDirectoryPath = [self getUsernameBacupAudioDirectoryPath];
+    
+        [self startScope];
     
     NSString* backUpDatewiseFolderPath = [backDirectoryPath stringByAppendingPathComponent:todaysDate];
     
@@ -491,14 +550,18 @@ static AppPreferences *singleton = nil;
         NSLog(@"");
     }
     
+     [self stopScope];
     return backUpDatewiseFolderPath;
 }
 
 -(NSString*)getGivenDateBackUpAudioFolderPath:(NSString*)uploadedAudioDate
 {
 //    NSString* todaysDate = [self getTimestamp];
+   
     
     NSString* backDirectoryPath = [self getUsernameBacupAudioDirectoryPath];
+    
+     [self startScope];
     
     NSString* backUpDatewiseFolderPath = [backDirectoryPath stringByAppendingPathComponent:uploadedAudioDate];
     
@@ -510,6 +573,8 @@ static AppPreferences *singleton = nil;
         NSLog(@"");
     }
     
+    [self stopScope];
+    
     return backUpDatewiseFolderPath;
 }
 
@@ -517,6 +582,7 @@ static AppPreferences *singleton = nil;
 {
 //    NSString* todaysDate = [self getTimestamp];
     
+     [self startScope];
     NSString* transDirectoryPath = [self getUsernameTranscriptionDirectoryPath];
     
     NSString* transDatewiseFolderPath = [transDirectoryPath stringByAppendingPathComponent:uploadedAudioDate];
@@ -529,6 +595,7 @@ static AppPreferences *singleton = nil;
         NSLog(@"");
     }
     
+     [self stopScope];
     return transDatewiseFolderPath;
 }
 /*=================================================================================================================================================*/
@@ -571,7 +638,9 @@ static AppPreferences *singleton = nil;
 
 -(void)addLoggerOnce
 {
-    if (!self.isLoggerAdded)
+    BOOL isCubeFilesFolderGenerated = [[NSUserDefaults standardUserDefaults] boolForKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
+    
+    if (!self.isLoggerAdded && isCubeFilesFolderGenerated)
     {
         [DDLog addLogger:[DDTTYLogger sharedInstance]];
         
@@ -601,5 +670,52 @@ static AppPreferences *singleton = nil;
 //    });
     
     return [dateFormatter stringFromDate:NSDate.date];
+}
+
+-(NSString*)getCubeFilesFolderPathUsingBookmark
+{
+    NSData* bookmarkData = [[NSUserDefaults standardUserDefaults] objectForKey:DOWNLOAD_FOLDER_BOOKMARK_PATH];
+    NSURL* urlFromBookmark = [NSURL URLByResolvingBookmarkData:bookmarkData
+                                                       options:NSURLBookmarkResolutionWithSecurityScope
+                                                 relativeToURL:nil
+                                           bookmarkDataIsStale:nil
+                                                         error:nil];
+    
+    
+    NSString* documentsDirectoryPath = urlFromBookmark.path;
+    
+    return documentsDirectoryPath;
+}
+
+-(void)startScope
+{
+    NSData* bookmarkData = [[NSUserDefaults standardUserDefaults] objectForKey:DOWNLOAD_FOLDER_BOOKMARK_PATH];
+    
+    BOOL isStale;
+    NSError* error;
+    NSURL* saveFolder = [NSURL URLByResolvingBookmarkData:bookmarkData
+                                                  options:NSURLBookmarkResolutionWithSecurityScope
+                                            relativeToURL:nil
+                                      bookmarkDataIsStale:&isStale
+                                                    error:&error];
+    
+    [saveFolder startAccessingSecurityScopedResource];
+    
+}
+
+-(void)stopScope
+{
+    NSData* bookmarkData = [[NSUserDefaults standardUserDefaults] objectForKey:DOWNLOAD_FOLDER_BOOKMARK_PATH];
+    
+    BOOL isStale;
+    NSError* error;
+    NSURL* saveFolder = [NSURL URLByResolvingBookmarkData:bookmarkData
+                                                  options:NSURLBookmarkResolutionWithSecurityScope
+                                            relativeToURL:nil
+                                      bookmarkDataIsStale:&isStale
+                                                    error:&error];
+    
+    [saveFolder stopAccessingSecurityScopedResource];
+    
 }
 @end
