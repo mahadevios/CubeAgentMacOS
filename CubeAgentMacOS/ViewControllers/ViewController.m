@@ -262,7 +262,8 @@
     }
     if ([responseCodeString  isEqualToString: @"200"] && [macIdValidString isEqualToString:SUCCESS])
     {
-        DDLogInfo(@"Authenticating User");
+        // ---> adding username in log
+        DDLogInfo(@"Authenticating User : %@",self.loginTextField.stringValue);
 
         [[APIManager sharedManager] authenticateUser:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
 
@@ -293,7 +294,7 @@
     
     if ([responseCodeString  isEqualToString: @"200"] && ![userIdString isEqualToString:@"0"])
     {
-        DDLogInfo(@"User authenticated successfully");
+        DDLogInfo(@"%@ User authenticated successfully",self.loginTextField.stringValue);
 
         User* user = [[User alloc] init];
         

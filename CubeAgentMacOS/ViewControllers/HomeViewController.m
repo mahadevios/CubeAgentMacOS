@@ -37,39 +37,13 @@
     
     firstParent = [[NSDictionary alloc] initWithObjectsAndKeys:[NSArray arrayWithObjects:@"app", nil], @"children", nil];
     
+    // ---> calling setBackgroundColorOFButtonsAndView method
+    [self setBackgroundColorOFButtonsAndView];
+    
 //    secondParent = [[NSDictionary alloc] initWithObjectsAndKeys:@"Elisabeth",@"parent",[NSArray arrayWithObjects:@"Jimmie",@"Kate", nil],@"children", nil];
    
     list = [NSArray arrayWithObjects:firstParent, nil];
 
-    [self.pasteAudioFileButton setBordered:NO];
-    
-    [self.pasteAudioFileButton setWantsLayer:YES];
-    
-    self.pasteAudioFileButton.layer.cornerRadius = 5;
-    
-    self.pasteAudioFileButton.layer.backgroundColor = [NSColor colorWithCalibratedRed:0.220f green:0.514f blue:0.827f alpha:1.0f].CGColor;
-    
-    [self.getDownloadFileButton setBordered:NO];
-    
-    [self.getDownloadFileButton setWantsLayer:YES];
-    
-    self.getDownloadFileButton.layer.cornerRadius = 5;
-
-    self.getDownloadFileButton.layer.backgroundColor = [NSColor colorWithCalibratedRed:0.220f green:0.514f blue:0.827f alpha:1.0f].CGColor;
-    
-    [self.backupFileButton setBordered:NO];
-    
-    [self.backupFileButton setWantsLayer:YES];
-    
-    self.backupFileButton.layer.cornerRadius = 5;
-    
-    self.backupFileButton.layer.backgroundColor = [NSColor colorWithCalibratedRed:0.220f green:0.514f blue:0.827f alpha:1.0f].CGColor;
-    
-    [self.homeBackgroundView setWantsLayer:YES];
-    
-    //    self.submitButton.layer.cornerRadius = 8;
-    self.homeBackgroundView.layer.backgroundColor = [NSColor colorWithCalibratedRed:255.0f green:255.0f blue:255.0f alpha:1.0f].CGColor;
-    
     self.uploadedAudioFilesArrayForTableView = [NSMutableArray new];
     
     self.dictationIdsArrayForDownload = [NSMutableArray new];
@@ -77,6 +51,8 @@
     self.audioFileAddedInQueueArray = [NSMutableArray new];
     
     self.duplicateFileCheckArray = [NSMutableArray new];
+    
+    self.validForTCIdCallNonDuplicateAudioArray = [NSMutableArray new];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(validateNoInternet:) name:NOTIFICATION_NO_INTERNET
@@ -137,7 +113,7 @@
 
 -(void)checkIfFolderGeneratedAndStartCycle
 {
-//    [[NSUserDefaults standardUserDefaults] setBool:false forKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
+// [[NSUserDefaults standardUserDefaults] setBool:false forKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
     BOOL isCubeFilesFolderGenerated = [[NSUserDefaults standardUserDefaults] boolForKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
     
     if (isTimerStartedFirstTime == false)
@@ -315,6 +291,8 @@
         {
             if ([AppPreferences sharedAppPreferences].isReachable)
             {
+                [self.validForTCIdCallNonDuplicateAudioArray addObject:audioFileName];
+                
                  [[APIManager sharedManager] FTPGetTCIdView:[NSString stringWithFormat:@"%ld",[AppPreferences sharedAppPreferences].loggedInUser.userId] originalFileName:audioFileName filePath:audioFilePath];
             }
             else
@@ -337,12 +315,15 @@
         
         DDLogInfo(@"Moving %@ audio file to BackupAudio folder", audioFileName);
 
+
         NSString* FileServerPath = [responseString valueForKey:@"FileServerPath"];
         
         NSArray* arr = [FileServerPath componentsSeparatedByString:@"\\"];
         
         NSString* dateFolderName = [arr lastObject];
         
+        DDLogInfo(@"Uploaded Date = %@", dateFolderName);
+
         [self performCleanUpForDuplicate:dateFolderName filePath:audioFilePath];
         
         [listOfAudioFilesToUploadDict removeObjectForKey:audioFileName];
@@ -353,7 +334,7 @@
             [self checkForNewFilesSubSequentTimer];
         }
         // if internet available and last file checked and no file in tableview then start browser file download
-        else if (self.duplicateFileCheckArray.count < 1 && self.uploadedAudioFilesArrayForTableView.count < 1)
+        else if (self.duplicateFileCheckArray.count < 1 && self.uploadedAudioFilesArrayForTableView.count < 1 && self.validForTCIdCallNonDuplicateAudioArray.count < 1)
         {
             [self checkBrowserAudioFilesForDownload];
         }
@@ -388,6 +369,10 @@
 -(void)validateVCIDViewReponse:(NSNotification*)notification
 {
     DDLogInfo(@"VC info received");
+    
+    // --->adding username in log
+    
+    DDLogInfo(@"Welcome %@", [AppPreferences sharedAppPreferences].loggedInUser.userName);
 
     NSDictionary* responseString = notification.object;
     
@@ -439,6 +424,10 @@
         
         NSString* audioFileName = [responseString objectForKey:@"audioFileName"];
         
+        if ([self.validForTCIdCallNonDuplicateAudioArray containsObject:audioFileName])
+        {
+            [self.validForTCIdCallNonDuplicateAudioArray removeObject:audioFileName];
+        }
         NSString* filePath = [responseString objectForKey:@"audioFilePath"];
         
         [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
@@ -1024,8 +1013,8 @@
             DDLogInfo(@"Updating downloaded Doc file status, name = %@", audioFile.originalFileName);
             
 
-//            [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
-            [self demoDOwnload];
+         //   [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
+          [self demoDOwnload];
 
         
                 
@@ -1214,6 +1203,8 @@
 
 -(void)checkForNewFilesForSubSequentTime
 {
+    [[AppPreferences sharedAppPreferences] addLoggerOnce];
+
     self.checkingFilesLabel.stringValue = @"Checking Files...";
     
     self.checkingFilesLabel.textColor = [NSColor orangeColor];
@@ -1613,7 +1604,7 @@
     {
        NSAlert* alert   = [[NSAlert alloc] init];
         [alert setMessageText:@"Action Required!"];
-        [alert setInformativeText:@"You need to select Downloads folder first to allow Cube Agent to save and access files from Downloads folder?"];
+        [alert setInformativeText:@"You need to select Downloads folder first to allow Cube Agent to save and access files from Downloads folder"];
         [alert addButtonWithTitle:@"Select Downloads Folder"];
         [alert addButtonWithTitle:@"Cancel"];
 
@@ -1654,7 +1645,7 @@
     {
         NSAlert* alert   = [[NSAlert alloc] init];
         [alert setMessageText:@"Action Required!"];
-        [alert setInformativeText:@"You need to select Downloads folder first to allow Cube Agent to save and access files from Downloads folder?"];
+        [alert setInformativeText:@"You need to select Downloads folder first to allow Cube Agent to save and access files from Downloads folder"];
         [alert addButtonWithTitle:@"Select Downloads Folder"];
         [alert addButtonWithTitle:@"Cancel"];
         
@@ -1692,7 +1683,7 @@
     {
         NSAlert* alert   = [[NSAlert alloc] init];
         [alert setMessageText:@"Action Required!"];
-        [alert setInformativeText:@"You need to select Downloads folder first to allow Cube Agent to save and access files from Downloads folder?"];
+        [alert setInformativeText:@"You need to select Downloads folder first to allow Cube Agent to save and access files from Downloads folder"];
         [alert addButtonWithTitle:@"Select Downloads Folder"];
         [alert addButtonWithTitle:@"Cancel"];
         
@@ -1763,8 +1754,13 @@
 //                [self openFolderInFinder:downloadedTransFolderPath];
                 [[AppPreferences sharedAppPreferences] createAllFolderOnce];
                 
-                [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Folder Created Successfully" subTitle:@"Please keep your audio files inside Downloads/CubeFiles/UploadAudio"];
+               // [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Folder Created Successfully" subTitle:@"Please keep your audio files inside Downloads/CubeFiles/UploadAudio"];
                 
+                // ---> changing folder path in Alert
+                
+                NSString * pathToCubeLogStr = [@"Please keep your audio files inside Downloads/CubeFiles/" stringByAppendingString:[AppPreferences sharedAppPreferences].loggedInUser.userName];
+                
+                 [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Folder Created Successfully" subTitle: [pathToCubeLogStr stringByAppendingString:@"/UploadAudio"]];
                
             }
             NSLog(@"url = %@", urlFromBookmark);
@@ -1870,6 +1866,39 @@
     return view;
 }
 
+// ---> Defining setBackgroundColorOFButtonsAndView method
+-(void) setBackgroundColorOFButtonsAndView
+{
+    [self.pasteAudioFileButton setBordered:NO];
+    
+    [self.pasteAudioFileButton setWantsLayer:YES];
+    
+    self.pasteAudioFileButton.layer.cornerRadius = 5;
+    
+    self.pasteAudioFileButton.layer.backgroundColor = [NSColor colorWithCalibratedRed:0.220f green:0.514f blue:0.827f alpha:1.0f].CGColor;
+    
+    [self.getDownloadFileButton setBordered:NO];
+    
+    [self.getDownloadFileButton setWantsLayer:YES];
+    
+    self.getDownloadFileButton.layer.cornerRadius = 5;
+    
+    self.getDownloadFileButton.layer.backgroundColor = [NSColor colorWithCalibratedRed:0.220f green:0.514f blue:0.827f alpha:1.0f].CGColor;
+    
+    [self.backupFileButton setBordered:NO];
+    
+    [self.backupFileButton setWantsLayer:YES];
+    
+    self.backupFileButton.layer.cornerRadius = 5;
+    
+    self.backupFileButton.layer.backgroundColor = [NSColor colorWithCalibratedRed:0.220f green:0.514f blue:0.827f alpha:1.0f].CGColor;
+    
+    [self.homeBackgroundView setWantsLayer:YES];
+    
+    //    self.submitButton.layer.cornerRadius = 8;
+    self.homeBackgroundView.layer.backgroundColor = [NSColor colorWithCalibratedRed:255.0f green:255.0f blue:255.0f alpha:1.0f].CGColor;
+    
+}
 
 
 
