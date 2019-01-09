@@ -798,6 +798,8 @@
                 {
                     [self.progressIndicator setDoubleValue:100];
                     
+                    self.uploadingCountLabel.textColor = [NSColor colorWithRed:92/255.0 green:168/255.0 blue:48/255.0 alpha:1.0];
+
                     self.uploadingCountLabel.stringValue = [NSString stringWithFormat:@"Downloaded %ld of %ld",responseArray.count, responseArray.count];
                 }
                 [self performSelector:@selector(cleanUpTableViewAfterAudioDownload) withObject:nil afterDelay:3.0];
@@ -1013,8 +1015,8 @@
             DDLogInfo(@"Updating downloaded Doc file status, name = %@", audioFile.originalFileName);
             
 
-         // [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
-          [self demoDOwnload];
+          [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
+//          [self demoDOwnload];
 
         
                 
@@ -1192,7 +1194,7 @@
         }
           self->checkForNewFilesTimer =  [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(checkForNewFilesForSubSequentTime) userInfo:nil repeats:YES];
         
-        [self->checkForNewFilesTimer invalidate];
+       
     });
 //    dispatch_async(dispatch_get_main_queue(), ^{
 //
@@ -1212,6 +1214,22 @@
     self.checkingFilesLabel.textColor = [NSColor orangeColor];
     
     [self getFilesToBeUploadFromUploadFilesFolder];
+    
+    if ([checkForNewFilesTimer isValid])
+    {
+        [checkForNewFilesTimer invalidate];
+    }
+    
+     dispatch_async(dispatch_get_main_queue(), ^{
+         
+         if ([self->checkForNewFilesTimer isValid])
+         {
+             [self->checkForNewFilesTimer invalidate];
+         }
+         
+    
+         
+          });
 }
 
 -(void)startFileUploadProgressBarTimer
