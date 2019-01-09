@@ -1191,6 +1191,8 @@
             [self->checkForNewFilesTimer invalidate];
         }
           self->checkForNewFilesTimer =  [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(checkForNewFilesForSubSequentTime) userInfo:nil repeats:YES];
+        
+        [self->checkForNewFilesTimer invalidate];
     });
 //    dispatch_async(dispatch_get_main_queue(), ^{
 //
