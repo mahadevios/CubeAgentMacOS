@@ -640,19 +640,29 @@ static AppPreferences *singleton = nil;
 {
     BOOL isCubeFilesFolderGenerated = [[NSUserDefaults standardUserDefaults] boolForKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
     
-    if (!self.isLoggerAdded && isCubeFilesFolderGenerated)
+    if (isCubeFilesFolderGenerated)
     {
-        [DDLog addLogger:[DDTTYLogger sharedInstance]];
+        NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
         
-        NSString* logDirectoryPath = [[AppPreferences sharedAppPreferences] getCubeLogDirectoryPath];
+        NSString *pathToCubeLogFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeLog", cubeFilesFolderPath];
         
-        DDLogFileManagerDefault *logManager = [[BaseLogFileManager alloc] initWithLogsDirectory:logDirectoryPath];
+        NSError* error;
         
-        DDFileLogger * file = [[DDFileLogger alloc] initWithLogFileManager:logManager];
-        
-        [DDLog addLogger:file];
-        
-        self.isLoggerAdded = true;
+        if (!self.isLoggerAdded || ![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeLogFiles])
+        {
+            [DDLog addLogger:[DDTTYLogger sharedInstance]];
+            
+            NSString* logDirectoryPath = [[AppPreferences sharedAppPreferences] getCubeLogDirectoryPath];
+            
+            DDLogFileManagerDefault *logManager = [[BaseLogFileManager alloc] initWithLogsDirectory:logDirectoryPath];
+            
+            DDFileLogger * file = [[DDFileLogger alloc] initWithLogFileManager:logManager];
+            
+            [DDLog addLogger:file];
+            
+            self.isLoggerAdded = true;
+        }
+     
     }
   
 }
