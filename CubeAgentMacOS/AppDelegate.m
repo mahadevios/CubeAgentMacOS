@@ -132,6 +132,16 @@
     
     [vc.window standardWindowButton:NSWindowMiniaturizeButton].enabled = false;
 
+    [vc.window standardWindowButton:NSWindowFullScreenButton].enabled = false;
+
+//    [vc.window standardWindowButton:NSWindowTitleHidden].enabled = false;
+//    [vc.window standardWindowButton:NSWindowStyleMaskResizable].enabled = false;
+
+//    [vc.window setStyleMask:NSWindowStyleMaskResizable];
+    vc.window.title = @"";
+    
+//    self.preferredContentSize = NSMakeSize(self.view.frame.size.width, self.view.frame.size.height);
+
 //    [self.windowController showWindow:[NSApplication sharedApplication].keyWindow];
     
 //    [self.windowController.contentViewController presentViewControllerAsModalWindow:vc];
