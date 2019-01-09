@@ -40,8 +40,10 @@
 		846EB11D21B16FCA006EA4FF /* CubeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 846EB11C21B16FCA006EA4FF /* CubeConfig.m */; };
 		84CB517121B7C98100E868A0 /* ViewTCIdList.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CB517021B7C98100E868A0 /* ViewTCIdList.m */; };
 		84CB517421B7F30A00E868A0 /* VCIdList.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CB517321B7F30A00E868A0 /* VCIdList.m */; };
-		E179007E2B99A9304D0A7402 /* libPods-Cube Agent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB52A23F30BB216669A67D9A /* libPods-Cube Agent.a */; };
-		E70E43F46AD94207048771D7 /* libPods-CubeAgentMacOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B3217E719CDF815E5FB8E07 /* libPods-CubeAgentMacOSTests.a */; };
+
+		84EDB0BC21E613CE00FEDBA4 /* AboutCubeAgentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EDB0BB21E613CE00FEDBA4 /* AboutCubeAgentViewController.m */; };
+		EEEBBFB19BD2DEBBCF501A88 /* libPods-CubeAgentMacOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECDF0775F754F7A037FFC387 /* libPods-CubeAgentMacOSTests.a */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,10 +135,17 @@
 		84CB517021B7C98100E868A0 /* ViewTCIdList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewTCIdList.m; sourceTree = "<group>"; };
 		84CB517221B7F30A00E868A0 /* VCIdList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCIdList.h; sourceTree = "<group>"; };
 		84CB517321B7F30A00E868A0 /* VCIdList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCIdList.m; sourceTree = "<group>"; };
-		8BAF07DE6C71A633AD8E4283 /* Pods-CubeAgentMacOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOSUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOSUITests/Pods-CubeAgentMacOSUITests.release.xcconfig"; sourceTree = "<group>"; };
-		C26BAA2177FD2E3EDE01E46B /* Pods-Cube Agent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cube Agent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cube Agent/Pods-Cube Agent.debug.xcconfig"; sourceTree = "<group>"; };
-		EE63884824A303B20806CE09 /* Pods-CubeAgentMacOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOSUITests/Pods-CubeAgentMacOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		FB52A23F30BB216669A67D9A /* libPods-Cube Agent.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Cube Agent.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+
+		84EDB0BA21E613CE00FEDBA4 /* AboutCubeAgentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutCubeAgentViewController.h; sourceTree = "<group>"; };
+		84EDB0BB21E613CE00FEDBA4 /* AboutCubeAgentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutCubeAgentViewController.m; sourceTree = "<group>"; };
+		A6007F03FCB63EB4500AA75F /* Pods-CubeAgentMacOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOSTests/Pods-CubeAgentMacOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A80C6773F28A107A4714E676 /* libPods-CubeAgentMacOSUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CubeAgentMacOSUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B82E6A4F107BD78D3B081DDC /* Pods-Cube Agent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cube Agent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cube Agent/Pods-Cube Agent.debug.xcconfig"; sourceTree = "<group>"; };
+		CB52CBDAFB07657204B8A002 /* Pods-CubeAgentMacOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOSTests/Pods-CubeAgentMacOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		DCEAF256C45A98229BFC77D6 /* Pods-CubeAgentMacOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CubeAgentMacOSUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CubeAgentMacOSUITests/Pods-CubeAgentMacOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		ECDF0775F754F7A037FFC387 /* libPods-CubeAgentMacOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CubeAgentMacOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F16E8059CD037A3322CDA767 /* Pods-Cube Agent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cube Agent.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cube Agent/Pods-Cube Agent.release.xcconfig"; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -329,6 +338,8 @@
 			children = (
 				841E1B4621A80BCB006F5C63 /* ViewController.h */,
 				841E1B4721A80BCB006F5C63 /* ViewController.m */,
+				84EDB0BA21E613CE00FEDBA4 /* AboutCubeAgentViewController.h */,
+				84EDB0BB21E613CE00FEDBA4 /* AboutCubeAgentViewController.m */,
 				50E3B6DB21AFF5F8002F904A /* HomeViewController.h */,
 				50E3B6DC21AFF5F8002F904A /* HomeViewController.m */,
 			);
@@ -592,6 +603,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8438169221BD44E800465805 /* AudioFile.m in Sources */,
+				84EDB0BC21E613CE00FEDBA4 /* AboutCubeAgentViewController.m in Sources */,
 				841DEFF321C13E5600AF99BE /* UITextViewLogger.m in Sources */,
 				846EB11A21B15974006EA4FF /* User.m in Sources */,
 				841E1CD521A82691006F5C63 /* SBJson4.h in Sources */,

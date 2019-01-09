@@ -49,6 +49,7 @@
 #define GENERATE_FILENAME_API                     @"MacBook_GenerateFileName"
 #define DOWNLOAD_FOLDER_BOOKMARK_GENERATED        @"downloadBookmarkGenerated"
 #define DOWNLOAD_FOLDER_BOOKMARK_PATH             @"downloadBookmarkPath"
+#define APP_CURRENT_VERSION                       @"appCurrentVersion"
 
 
 //NSNOTIFICATION
