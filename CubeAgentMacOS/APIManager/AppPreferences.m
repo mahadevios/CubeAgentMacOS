@@ -249,9 +249,13 @@ static AppPreferences *singleton = nil;
     
     NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
 
-    NSString *pathToCubeLogFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeLog", cubeFilesFolderPath];
+    NSString *pathToCubeLogFiles = [NSString stringWithFormat:@"%@/CubeLog", cubeFilesFolderPath];
 
     NSError* error;
+    
+//    NSURL* downloadsFolderUrl = [[NSFileManager defaultManager] URLForDirectory:NSDownloadsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:false error:&error];
+//
+//    NSURL* url = [downloadsFolderUrl URLByAppendingPathComponent:[NSString stringWithFormat:@"CubeFiles/CubeLog"]];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeLogFiles])
     {
@@ -269,13 +273,18 @@ static AppPreferences *singleton = nil;
 //    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
 //
 //    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeTemp", documentsDirectoryPath];
-      [self startScope];
-    
+//      [self startScope];
+//
     NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
 
-    NSString *pathToCubeTempFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeTemp", cubeFilesFolderPath];
+    NSString *pathToCubeTempFiles = [NSString stringWithFormat:@"%@/CubeTemp", cubeFilesFolderPath];
 
     NSError* error;
+    
+    [self startScope];
+//    NSURL* downloadsFolderUrl = [[NSFileManager defaultManager] URLForDirectory:NSDownloadsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:false error:&error];
+//
+//    NSURL* url = [downloadsFolderUrl URLByAppendingPathComponent:[NSString stringWithFormat:@"CubeFiles/CubeTemp"]];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeTempFiles])
     {
@@ -297,9 +306,14 @@ static AppPreferences *singleton = nil;
 //    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     
 //    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/BackupAudio", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
-    NSString *pathToCubeBackUpFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/BackupAudio", cubeFilesFolderPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+    NSString *pathToCubeBackUpFiles = [NSString stringWithFormat:@"%@/%@/BackupAudio", cubeFilesFolderPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
 
     NSError* error;
+    
+    
+//    NSURL* downloadsFolderUrl = [[NSFileManager defaultManager] URLForDirectory:NSDownloadsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:false error:&error];
+    
+//    NSURL* url = [downloadsFolderUrl URLByAppendingPathComponent:[NSString stringWithFormat:@"CubeFiles/%@/BackupAudio",[AppPreferences sharedAppPreferences].loggedInUser.userName]];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeBackUpFiles])
     {
@@ -321,9 +335,13 @@ static AppPreferences *singleton = nil;
 //
 //    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/Transcription", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
     
-    NSString *pathToCubeTransFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/Transcription", cubeFilesFolderPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
-
+    NSString *pathToCubeTransFiles = [NSString stringWithFormat:@"%@/%@/Transcription", cubeFilesFolderPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
     NSError* error;
+
+//    NSURL* downloadsFolderUrl = [[NSFileManager defaultManager] URLForDirectory:NSDownloadsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:false error:&error];
+//
+//    NSURL* url = [downloadsFolderUrl URLByAppendingPathComponent:[NSString stringWithFormat:@"CubeFiles/%@/Transcription",[AppPreferences sharedAppPreferences].loggedInUser.userName]];
+//
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeTransFiles])
     {
@@ -352,21 +370,26 @@ static AppPreferences *singleton = nil;
 -(NSString*)getUsernameUploadAudioDirectoryPath
 {
     [self startScope];
-    
+    NSError* error;
+
     NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
-    
-//    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    
-//    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/UploadAudio", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
 
-    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/UploadAudio", cubeFilesFolderPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/%@/UploadAudio", cubeFilesFolderPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
 
+//    NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+//    NSURL* downloadsFolderUrl = [[NSFileManager defaultManager] URLForDirectory:NSDownloadsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:false error:&error];
+//
+//    NSURL* url = [downloadsFolderUrl URLByAppendingPathComponent:[NSString stringWithFormat:@"CubeFiles/%@/UploadAudio",[AppPreferences sharedAppPreferences].loggedInUser.userName]];
+    //    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    
+    //    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/%@/UploadAudio", documentsDirectoryPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+    
 //    NSString *pathToCubeFiles = [NSString stringWithFormat:@"/Users/%@/Documents/CubeFiles", NSUserName()];
 
-    NSURL* url = [NSURL fileURLWithPath:pathToCubeFiles];
-    NSError* error;
+//    NSURL* url = [NSURL fileURLWithPath:pathToCubeFiles];
     
-    if (![[NSFileManager defaultManager] fileExistsAtPath:url.relativePath])
+    if (![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeFiles])
     {
        BOOL created =  [[NSFileManager defaultManager] createDirectoryAtPath:pathToCubeFiles withIntermediateDirectories:true attributes:nil error:&error]; //Create folder
         NSLog(@"");
@@ -402,14 +425,21 @@ static AppPreferences *singleton = nil;
 //    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeTemp", documentsDirectoryPath];
       [self startScope];
     
-    NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
+    NSError* error;
 
-    NSString *pathToCubeTempFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeTemp", cubeFilesFolderPath];
+    NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
+//    NSURL* downloadsFolderUrl = [[NSFileManager defaultManager] URLForDirectory:NSDownloadsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:false error:&error];
+//
+//    NSURL* url = [downloadsFolderUrl URLByAppendingPathComponent:[NSString stringWithFormat:@"CubeFiles/CubeTemp"]];
+    
+    NSString *pathToCubeTempFiles = [NSString stringWithFormat:@"%@/CubeTemp", cubeFilesFolderPath];
+    
+//    NSString *pathToCubeTempFiles = url.path;
+    
     NSString* fileName = [filePath lastPathComponent];
     
     pathToCubeTempFiles = [[pathToCubeTempFiles stringByAppendingPathComponent:fileName] stringByAppendingPathExtension:@"fcfe"];
     
-    NSError* error;
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:pathToCubeTempFiles])
     {
@@ -456,7 +486,7 @@ static AppPreferences *singleton = nil;
     
     NSString *pathToBackUpFiles = [self getGivenDateBackUpAudioFolderPath:dateFolderName];
    
-    [self startScope];
+//    [self startScope];
     
     pathToBackUpFiles = [pathToBackUpFiles stringByAppendingPathComponent:[filePath lastPathComponent]];
     
@@ -489,7 +519,7 @@ static AppPreferences *singleton = nil;
     }
     NSLog(@"ismoved");
     
-     [self stopScope];
+//     [self stopScope];
     
 }
 -(uint64_t)getFileSize:(NSString*)filePath
@@ -639,14 +669,19 @@ static AppPreferences *singleton = nil;
 -(void)addLoggerOnce
 {
     BOOL isCubeFilesFolderGenerated = [[NSUserDefaults standardUserDefaults] boolForKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
-    
+
     if (isCubeFilesFolderGenerated)
     {
         NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
-        
-        NSString *pathToCubeLogFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeLog", cubeFilesFolderPath];
-        
+
+        NSString *pathToCubeLogFiles = [NSString stringWithFormat:@"%@/CubeLog", cubeFilesFolderPath];
+    
         NSError* error;
+    
+//        NSURL* downloadsFolderUrl = [[NSFileManager defaultManager] URLForDirectory:NSDownloadsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:false error:&error];
+    
+//        NSURL* url = [downloadsFolderUrl URLByAppendingPathComponent:[NSString stringWithFormat:@"CubeFiles/CubeLog"]];
+    
         
         if (!self.isLoggerAdded || ![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeLogFiles])
         {
@@ -691,7 +726,7 @@ static AppPreferences *singleton = nil;
                                            bookmarkDataIsStale:nil
                                                          error:nil];
     
-    
+//     NSString* documentsDirectoryPath = @"/Users/admin/Library/Containers/com.xanadutec.CubeAgentMacOS/Data/Downloads";
     NSString* documentsDirectoryPath = urlFromBookmark.path;
     
     return documentsDirectoryPath;
@@ -709,7 +744,9 @@ static AppPreferences *singleton = nil;
                                       bookmarkDataIsStale:&isStale
                                                     error:&error];
     
-    [saveFolder startAccessingSecurityScopedResource];
+   [saveFolder startAccessingSecurityScopedResource];
+//    bool is1 =  [saveFolder startAccessingSecurityScopedResource];
+
     
 }
 

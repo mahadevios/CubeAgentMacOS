@@ -31,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
      NSOpenPanel* openDlg;
     NSArray *list;
     bool isTimerStartedFirstTime;
+    NSWindow *window ;
+    ;
 }
 @property (weak) IBOutlet NSTableView *tableView;
 @property (unsafe_unretained) IBOutlet NSTextView *logTextView;

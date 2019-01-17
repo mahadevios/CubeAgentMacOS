@@ -23,6 +23,19 @@
     
     [[AppPreferences sharedAppPreferences] startReachabilityNotifier];
 
+    NSError *error;
+//    NSURL *appSupportDir = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
+    
+//    NSLog(@"%@", appSupportDir);
+    // file://localhost/Users/abhi/Library/Application%20Support/
+//    NSLog(@"%@", NSHomeDirectory());
+    
+//    [[NSUserDefaults standardUserDefaults] setObject:@"/Users/admin/Library/Containers/com.xanadutec.CubeAgentMacOS/Data/Downloads" forKey:DOWNLOAD_FOLDER_BOOKMARK_PATH];
+    
+//    NSString *libraryPath = [NSSearchPathForDirectoriesInDomains(NSMusicDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+//    NSArray *libraryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:libraryPath error:nil];
+    
 //    [self.autoModeCheckBox setWantsLayer:YES];
 //    [self.autoModeCheckBox.layer setBorderWidth:3.0];
 //    [self.autoModeCheckBox.layer setBorderColor:[NSColor redColor].CGColor];
@@ -89,9 +102,33 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:majorVersion forKey:APP_CURRENT_VERSION];
     
+    NSURL* url = [self applicationDataDirectory];
+
     DDLogInfo(@"In LoginView");
     
-   
+}
+
+- (NSURL*)applicationDataDirectory
+{
+    NSFileManager* sharedFM = [NSFileManager defaultManager];
+    NSArray* possibleURLs = [sharedFM URLsForDirectory:NSApplicationSupportDirectory
+                                             inDomains:NSLocalDomainMask];
+    NSURL* appSupportDir = nil;
+    NSURL* appDirectory = nil;
+    
+    if ([possibleURLs count] >= 1) {
+        // Use the first directory (if multiple are returned)
+        appSupportDir = [possibleURLs objectAtIndex:0];
+    }
+    
+    // If a valid app support directory exists, add the
+    // app's bundle ID to it to specify the final directory.
+    if (appSupportDir) {
+        NSString* appBundleID = [[NSBundle mainBundle] bundleIdentifier];
+        appDirectory = [appSupportDir URLByAppendingPathComponent:appBundleID];
+    }
+    
+    return appDirectory;
 }
 
 -(void)adjustViewAppearance

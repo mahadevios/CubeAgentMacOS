@@ -26,6 +26,7 @@
 {
     [super viewDidLoad];
     
+//    NSString* appDir = [self applicationSupportDirectory];
 //    dataSource = [NSArray arrayWithObjects:@"John", @"Mary", @"George", nil];
 
 //    dataSource = [NSArray arrayWithObjects:[[NSDictionary alloc] initWithObjectsAndKeys:[[NSDictionary alloc] initWithObjectsAndKeys:@"obj1",@"children", nil],@"children", nil], nil];
@@ -109,6 +110,8 @@
 
     [self checkIfFolderGeneratedAndStartCycle];
    
+//    window = [NSWindow new];
+//    [self startInitialCycle];
 }
 
 -(void)checkIfFolderGeneratedAndStartCycle
@@ -1269,7 +1272,7 @@
 {
     DDLogInfo(@"Checking audio files for upload");
     
-    [[AppPreferences sharedAppPreferences] startScope];
+//    [[AppPreferences sharedAppPreferences] startScope];
 
     NSError* error;
     
@@ -1298,7 +1301,7 @@
     
     [self getAllFiles:filePath];
     
-    [[AppPreferences sharedAppPreferences] stopScope];
+//    [[AppPreferences sharedAppPreferences] stopScope];
     
 }
 
@@ -1604,8 +1607,8 @@
 //                                                 relativeToURL:nil
 //                                           bookmarkDataIsStale:nil
 //                                                         error:nil];
-//
-//
+
+
 //    NSString* uploadFilesFolderPath = urlFromBookmark.path;
 
 //    NSString* uploadFilesFolderPath = [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
@@ -1623,22 +1626,30 @@
     else
     {
        NSAlert* alert   = [[NSAlert alloc] init];
+        
         [alert setMessageText:@"Action Required!"];
-        [alert setInformativeText:@"You need to select Downloads folder first to allow Cube Agent to save and access files from Downloads folder"];
-        [alert addButtonWithTitle:@"Select Downloads Folder"];
+        
+        [alert setInformativeText:@"You need to create and/or select CubeFiles folder first to allow Cube Agent to access files from created folder"];
+        
+        [alert addButtonWithTitle:@"Create and/or Select CubeFiles Folder"];
+        
+//        [alert setInformativeText:[NSString stringWithFormat:@"You need to create or select Downloads/CubeFiles/%@/UploadAudio folder first to allow Cube Agent to access files from UploadAudio folder", [AppPreferences sharedAppPreferences].loggedInUser.userName]];
+//
+//         [alert addButtonWithTitle:[NSString stringWithFormat:@"Select or Create Downloads/CubeFiles/%@/UploadAudio Folder",[AppPreferences sharedAppPreferences].loggedInUser.userName]];
+        
         [alert addButtonWithTitle:@"Cancel"];
 
         [alert setAlertStyle:NSWarningAlertStyle];
         [alert beginSheetModalForWindow:[NSApplication sharedApplication].keyWindow completionHandler:^(NSModalResponse returnCode) {
             if (returnCode == NSAlertFirstButtonReturn) {
-                
+
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [self bookmark];
-                    
-                    
+
+                    [self bookmark:@"upload"];
+
+
                 });
-                
+
             }
             else if (NSAlertSecondButtonReturn)
             {
@@ -1651,10 +1662,9 @@
 
 - (IBAction)getDownloadedFilesButtonClicked:(id)sender
 {
-    
-    
+   
     BOOL isCubeFilesFolderGenerated = [[NSUserDefaults standardUserDefaults] boolForKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
-    
+
     if (isCubeFilesFolderGenerated)
     {
         NSString* downloadedTransFolderPath = [[AppPreferences sharedAppPreferences] getUsernameTranscriptionDirectoryPath];
@@ -1664,22 +1674,29 @@
     else
     {
         NSAlert* alert   = [[NSAlert alloc] init];
-        [alert setMessageText:@"Action Required!"];
-        [alert setInformativeText:@"You need to select Downloads folder first to allow Cube Agent to save and access files from Downloads folder"];
-        [alert addButtonWithTitle:@"Select Downloads Folder"];
-        [alert addButtonWithTitle:@"Cancel"];
         
+        [alert setMessageText:@"Action Required!"];
+        
+        [alert setInformativeText:@"You need to create and/or select CubeFiles folder first to allow Cube Agent to access files from created folder"];
+        
+        [alert addButtonWithTitle:@"Select and/or Create CubeFiles Folder"];
+//         [alert setInformativeText:[NSString stringWithFormat:@"You need to create or select Downloads/CubeFiles/%@/Transcription folder first to allow Cube Agent to save files in Transcription folder", [AppPreferences sharedAppPreferences].loggedInUser.userName]];
+//
+//        [alert addButtonWithTitle:[NSString stringWithFormat:@"Select or Create Downloads/CubeFiles/%@/Transcription Folder",[AppPreferences sharedAppPreferences].loggedInUser.userName]];
+
+        [alert addButtonWithTitle:@"Cancel"];
+
         [alert setAlertStyle:NSWarningAlertStyle];
         [alert beginSheetModalForWindow:[NSApplication sharedApplication].keyWindow completionHandler:^(NSModalResponse returnCode) {
             if (returnCode == NSAlertFirstButtonReturn) {
-                
+
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [self bookmark];
-                    
-                    
+
+                    [self bookmark:@"download"];
+
+
                 });
-                
+
             }
             else if (NSAlertSecondButtonReturn)
             {
@@ -1692,7 +1709,7 @@
 - (IBAction)getBackupFilesButtonClicked:(id)sender
 {
     BOOL isCubeFilesFolderGenerated = [[NSUserDefaults standardUserDefaults] boolForKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
-    
+
     if (isCubeFilesFolderGenerated)
     {
         NSString* backupFolderPath = [[AppPreferences sharedAppPreferences] getUsernameBacupAudioDirectoryPath];
@@ -1702,9 +1719,16 @@
     else
     {
         NSAlert* alert   = [[NSAlert alloc] init];
+        
         [alert setMessageText:@"Action Required!"];
-        [alert setInformativeText:@"You need to select Downloads folder first to allow Cube Agent to save and access files from Downloads folder"];
-        [alert addButtonWithTitle:@"Select Downloads Folder"];
+        
+        [alert setInformativeText:@"You need to create and/or select CubeFiles folder first to allow Cube Agent to access files from created folder"];
+        
+        [alert addButtonWithTitle:@"Create and/or Select CubeFiles Folder"];
+//        [alert setInformativeText:[NSString stringWithFormat:@"You need to create or select Downloads/CubeFiles/%@/BackupAudio folder first to allow Cube Agent to backup files in BackupAudio folder", [AppPreferences sharedAppPreferences].loggedInUser.userName]];
+//
+//        [alert addButtonWithTitle:[NSString stringWithFormat:@"Select or Create Downloads/CubeFiles/%@/BackupAudio Folder",[AppPreferences sharedAppPreferences].loggedInUser.userName]];
+        
         [alert addButtonWithTitle:@"Cancel"];
         
         [alert setAlertStyle:NSWarningAlertStyle];
@@ -1713,7 +1737,7 @@
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
-                    [self bookmark];
+                    [self bookmark:@"backup"];
                     
                     
                 });
@@ -1727,16 +1751,24 @@
     }
 }
 
--(void)bookmark
+-(void)bookmark:(NSString*)createdByButton
 {
+//    NSOpenPanel *  panel;
+    
+//    panel = [NSOpenPanel openPanel];
+//    panel.canChooseDirectories = YES;
+//    panel.allowsMultipleSelection = NO;
+//    panel.canChooseFiles = NO;
+
     openDlg = [NSOpenPanel openPanel];
     [openDlg setCanChooseDirectories:YES];
     [openDlg setCanCreateDirectories:YES];
     [openDlg setAllowsMultipleSelection:FALSE];
+    [openDlg setPrompt:@"Select"];
     if ( [openDlg runModal] == NSModalResponseOK )
     {
         NSURL *url = openDlg.URL;
-        
+
         NSError *error = nil;
         NSData *bookmark = [url bookmarkDataWithOptions:NSURLBookmarkCreationWithSecurityScope
                          includingResourceValuesForKeys:nil
@@ -1744,44 +1776,50 @@
                                                   error:&error];
         if (bookmark != nil)
         {
-            
+
+
             NSURL* urlFromBookmark = [NSURL URLByResolvingBookmarkData:bookmark
                                                                options:NSURLBookmarkResolutionWithSecurityScope
                                                          relativeToURL:nil
                                                    bookmarkDataIsStale:nil
                                                                  error:&error];
-            
+
+            NSString* selectedPath = urlFromBookmark.path;
+
+            bool isContain = [selectedPath containsString:@"/CubeFiles"];
             NSString* lastPathComponent = [urlFromBookmark lastPathComponent];
-            
-            if (![lastPathComponent isEqualToString:@"Downloads"])
+
+            if (!isContain)
             {
-                [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please select only Downloads folder"];
-                
-                
+                [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please Create and/or Select CubeFiles folder in choosed location"];
+
+
             }
             else
             {
                 NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                 [userDefaults setObject:bookmark forKey:DOWNLOAD_FOLDER_BOOKMARK_PATH];
                 [userDefaults synchronize];
-                
+
                 //                NSData* bookmarkData = [userDefaults objectForKey:@"bookmark"];
-                
+
                 [[NSUserDefaults standardUserDefaults] setBool:true forKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
-                
+
 //                NSString* downloadedTransFolderPath = [[AppPreferences sharedAppPreferences] getUsernameTranscriptionDirectoryPath];
 //
 //                [self openFolderInFinder:downloadedTransFolderPath];
                 [[AppPreferences sharedAppPreferences] createAllFolderOnce];
-                
+
                // [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Folder Created Successfully" subTitle:@"Please keep your audio files inside Downloads/CubeFiles/UploadAudio"];
-                
+
                 // ---> changing folder path in Alert
-                
-                NSString * pathToCubeLogStr = [@"Please keep your audio files inside Downloads/CubeFiles/" stringByAppendingString:[AppPreferences sharedAppPreferences].loggedInUser.userName];
-                
-                 [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Folder Created Successfully" subTitle: [pathToCubeLogStr stringByAppendingString:@"/UploadAudio"]];
-               
+
+                 NSString * pathToCubeLogStr = [NSString stringWithFormat:@"Please keep your audio files inside %@/%@/UploadAudio folder",selectedPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
+
+//                NSString * pathToCubeLogStr = [@"Please keep your audio files inside Downloads/CubeFiles/" stringByAppendingString:[AppPreferences sharedAppPreferences].loggedInUser.userName];
+
+                 [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Folder Created Successfully" subTitle: pathToCubeLogStr];
+
             }
             NSLog(@"url = %@", urlFromBookmark);
         }
@@ -1789,8 +1827,8 @@
         {
             //check the error
         }
-        
-        
+
+
     }
 }
 #pragma mark: Outline View Datasource and Delegates
@@ -1864,12 +1902,12 @@
 //        view.frame = NSRectFromCGRect(CGRectMake(0, 0, 100, 10));
         if ([item isKindOfClass:[NSDictionary class]])
         {
-            view.textField.stringValue = @"Downloads";
+            view.textField.stringValue = @"CuebFiles";
         }
         else
         {
-//            view.textField.stringValue = [AppPreferences sharedAppPreferences].loggedInUser.userName;
-            view.textField.stringValue = @"CuebFiles";
+            
+            view.textField.stringValue = [AppPreferences sharedAppPreferences].loggedInUser.userName;
 
         }
         
@@ -2008,6 +2046,74 @@
 //    return nil; // if shit happens, don't blame it on me !
 //
 //}
+
+
+- (NSString *)findOrCreateDirectory:(NSSearchPathDirectory)searchPathDirectory
+                           inDomain:(NSSearchPathDomainMask)domainMask
+                appendPathComponent:(NSString *)appendComponent
+                              error:(NSError **)errorOut
+{
+    // Search for the path
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(
+                                                         searchPathDirectory,
+                                                         domainMask,
+                                                         YES);
+    if ([paths count] == 0)
+    {
+        // *** creation and return of error object omitted for space
+        return nil;
+    }
+    
+    // Normally only need the first path
+    NSString *resolvedPath = [paths objectAtIndex:0];
+    
+    if (appendComponent)
+    {
+        resolvedPath = [resolvedPath
+                        stringByAppendingPathComponent:appendComponent];
+    }
+    
+    // Create the path if it doesn't exist
+    NSError *error;
+    BOOL success = [[NSFileManager defaultManager]
+                    createDirectoryAtPath:resolvedPath
+                    withIntermediateDirectories:YES
+                    attributes:nil
+                    error:&error];
+    if (!success)
+    {
+        if (errorOut)
+        {
+            *errorOut = error;
+        }
+        return nil;
+    }
+    
+    // If we've made it this far, we have a success
+    if (errorOut)
+    {
+        *errorOut = nil;
+    }
+    return resolvedPath;
+}
+
+- (NSString *)applicationSupportDirectory
+{
+    NSString *executableName =
+    [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleExecutable"];
+    NSError *error;
+    NSString *result =
+    [self
+     findOrCreateDirectory:NSApplicationSupportDirectory
+     inDomain:NSUserDomainMask
+     appendPathComponent:executableName
+     error:&error];
+    if (error)
+    {
+        NSLog(@"Unable to find or create application support directory:\n%@", error);
+    }
+    return result;
+}
 
 @end
 
