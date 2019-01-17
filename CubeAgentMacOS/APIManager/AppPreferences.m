@@ -675,13 +675,6 @@ static AppPreferences *singleton = nil;
         NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
 
         NSString *pathToCubeLogFiles = [NSString stringWithFormat:@"%@/CubeLog", cubeFilesFolderPath];
-    
-        NSError* error;
-    
-//        NSURL* downloadsFolderUrl = [[NSFileManager defaultManager] URLForDirectory:NSDownloadsDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:false error:&error];
-    
-//        NSURL* url = [downloadsFolderUrl URLByAppendingPathComponent:[NSString stringWithFormat:@"CubeFiles/CubeLog"]];
-    
         
         if (!self.isLoggerAdded || ![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeLogFiles])
         {
@@ -689,7 +682,7 @@ static AppPreferences *singleton = nil;
             
             NSString* logDirectoryPath = [[AppPreferences sharedAppPreferences] getCubeLogDirectoryPath];
             
-            DDLogFileManagerDefault *logManager = [[BaseLogFileManager alloc] initWithLogsDirectory:logDirectoryPath];
+            DDLogFileManagerDefault* logManager = [[BaseLogFileManager alloc] initWithLogsDirectory:logDirectoryPath];
             
             DDFileLogger * file = [[DDFileLogger alloc] initWithLogFileManager:logManager];
             

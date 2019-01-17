@@ -23,7 +23,7 @@
     
     NSAlert *alert;
 
-    
+//    DDLogFileManagerDefault *logManager;
 }
 
 @property (nonatomic,strong)    id<AppPreferencesDelegate> alertDelegate;
@@ -99,6 +99,7 @@
 
 -(void)createAllFolderOnce;
 
+-(NSString*)getCubeFilesFolderPathUsingBookmark;
 @end
 
 
