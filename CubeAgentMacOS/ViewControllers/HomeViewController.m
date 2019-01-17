@@ -714,12 +714,15 @@
         
         if(isArray)
         {
+            
             NSArray* responseArray = response;
             
             DDLogInfo(@"%ld audio file(s) downloaded successfully", responseArray.count);
 
             for (int i =0; i < responseArray.count; i++)
             {
+                [[AppPreferences sharedAppPreferences] startScope];
+                
                 NSDictionary* response = [responseArray objectAtIndex:0];
                 
                 AudioFile* audioFile = [AudioFile new];
@@ -939,6 +942,7 @@
     
     NSData* data = [NSData dataWithContentsOfURL:downloadLocation];
     
+    [[AppPreferences sharedAppPreferences] startScope];
     
     if ([downloadStatus isEqualToString:@"Downloaded"])
     {
@@ -1140,6 +1144,8 @@
     
     [self.tableView reloadData];
     
+    [[AppPreferences sharedAppPreferences] stopScope];
+    
     [self checkForNewFilesSubSequentTimer];
     
 }
@@ -1155,6 +1161,8 @@
     [self.progressIndicator setDoubleValue:0];
 
     [self.tableView reloadData];
+    
+    [[AppPreferences sharedAppPreferences] stopScope];
     
     [self getDictationIds];
 }
