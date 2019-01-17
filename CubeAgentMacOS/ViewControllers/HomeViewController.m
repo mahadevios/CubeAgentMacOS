@@ -170,8 +170,6 @@
     
     [[AppPreferences sharedAppPreferences] addLoggerOnce];
 
-    // And we also enable colors
-    [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
     // setup the text view logger
     UITextViewLogger *textViewLogger = [UITextViewLogger new];
     
@@ -182,6 +180,7 @@
     textViewLogger.textView = self.logTextView;
     
     [[AppPreferences sharedAppPreferences] stopScope];
+    
 }
 #pragma mark : Notification Callback Methods
 
@@ -1900,14 +1899,22 @@
         view = [outlineView makeViewWithIdentifier:@"children" owner:self];
 
 //        view.frame = NSRectFromCGRect(CGRectMake(0, 0, 100, 10));
+       NSString* CubeFilesFolderPath = [[AppPreferences sharedAppPreferences] getCubeFilesFolderPathUsingBookmark];
+        
+        NSString* cubeFilesFolder = [CubeFilesFolderPath lastPathComponent];
+        
+        CubeFilesFolderPath = [CubeFilesFolderPath stringByDeletingLastPathComponent];
+        
+        NSString* systemFilesFolder = [CubeFilesFolderPath lastPathComponent];
+
         if ([item isKindOfClass:[NSDictionary class]])
         {
-            view.textField.stringValue = @"CuebFiles";
+            view.textField.stringValue = systemFilesFolder;
         }
         else
         {
             
-            view.textField.stringValue = [AppPreferences sharedAppPreferences].loggedInUser.userName;
+            view.textField.stringValue = cubeFilesFolder;
 
         }
         

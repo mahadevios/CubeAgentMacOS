@@ -95,14 +95,13 @@
     self.preferredContentSize = size;
 
     [[AppPreferences sharedAppPreferences] addLoggerOnce];
-    
+
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     
     NSString *majorVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     
     [[NSUserDefaults standardUserDefaults] setObject:majorVersion forKey:APP_CURRENT_VERSION];
     
-    NSURL* url = [self applicationDataDirectory];
 
     DDLogInfo(@"In LoginView");
     
@@ -197,6 +196,7 @@
 }
 -(void)viewWillAppear
 {
+
     NSString* macId = [self getFinalMacId];
     
     [self.macIdLabel setStringValue:[@"MACID : "stringByAppendingString:macId]];
