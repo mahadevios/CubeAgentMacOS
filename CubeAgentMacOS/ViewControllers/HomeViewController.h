@@ -32,7 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
     NSArray *list;
     bool isTimerStartedFirstTime;
     NSWindow *window ;
-    ;
+    NSString* CubeFilesFolderPath;
+    NSMutableArray* pathComponents;
 }
 @property (weak) IBOutlet NSTableView *tableView;
 @property (unsafe_unretained) IBOutlet NSTextView *logTextView;

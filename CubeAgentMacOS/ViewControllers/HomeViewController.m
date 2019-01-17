@@ -36,7 +36,15 @@
 
 //    firstParent = [[NSDictionary alloc] initWithObjectsAndKeys:[NSArray arrayWithObjects:[[NSDictionary alloc] initWithObjectsAndKeys:[NSArray arrayWithObjects:[[NSDictionary alloc] initWithObjectsAndKeys:[NSArray arrayWithObjects:@"Mary", nil],@"children", nil], nil],@"children", nil], nil],@"children", nil];
     
-    firstParent = [[NSDictionary alloc] initWithObjectsAndKeys:[NSArray arrayWithObjects:@"app", nil], @"children", nil];
+//    firstParent = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                                                                [NSArray arrayWithObjects:[[NSDictionary alloc] initWithObjectsAndKeys:[NSArray arrayWithObjects:@"Mary", nil],@"children", nil], nil], @"children",
+//                                                                nil];
+
+    firstParent =
+    
+                    [[NSDictionary alloc] initWithObjectsAndKeys:
+                     [[NSDictionary alloc] initWithObjectsAndKeys:
+                      [[NSArray alloc] initWithObjects:@"",nil],@"children", nil],@"children", nil];
     
     // ---> calling setBackgroundColorOFButtonsAndView method
     [self setBackgroundColorOFButtonsAndView];
@@ -1017,8 +1025,8 @@
             DDLogInfo(@"Updating downloaded Doc file status, name = %@", audioFile.originalFileName);
             
 
-          [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
-//          [self demoDOwnload];
+//          [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
+          [self demoDOwnload];
 
         
                 
@@ -1832,21 +1840,7 @@
 }
 #pragma mark: Outline View Datasource and Delegates
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 
-{
-   
-    if ([item isKindOfClass:[NSDictionary class]] || [item isKindOfClass:[NSArray class]]) {
-       
-        return YES;
-       
-    }else {
-       
-        return NO;
-       
-    }
-   
-}
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
 
@@ -1882,13 +1876,46 @@
 
     if ([item isKindOfClass:[NSDictionary class]]) {
       
-        return [[item objectForKey:@"children"] objectAtIndex:index];
- 
+//        return [[item objectForKey:@"children"] objectAtIndex:index];
+
+        return [item objectForKey:@"children"];
+
     }
  
     
 
     return nil;
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
+
+{
+    
+//    if ([item isKindOfClass:[NSDictionary class]] || [item isKindOfClass:[NSArray class]])
+//    {
+//
+//        return YES;
+//
+//    }
+//    else
+//    {
+//
+//        return NO;
+//
+//    }
+
+    if ([item isKindOfClass:[NSDictionary class]])
+    {
+        
+        return YES;
+        
+    }
+    else
+    {
+        
+        return NO;
+        
+    }
 }
 
 -(NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
@@ -1899,26 +1926,46 @@
         view = [outlineView makeViewWithIdentifier:@"children" owner:self];
 
 //        view.frame = NSRectFromCGRect(CGRectMake(0, 0, 100, 10));
-       NSString* CubeFilesFolderPath = [[AppPreferences sharedAppPreferences] getCubeFilesFolderPathUsingBookmark];
+        if (CubeFilesFolderPath == nil)
+        {
+            CubeFilesFolderPath = [[AppPreferences sharedAppPreferences] getCubeFilesFolderPathUsingBookmark];
+
+        }
         
+        if (CubeFilesFolderPath == nil)
+        {
+            return view;
+        }
         NSString* cubeFilesFolder = [CubeFilesFolderPath lastPathComponent];
         
-        CubeFilesFolderPath = [CubeFilesFolderPath stringByDeletingLastPathComponent];
+        if (pathComponents == nil || pathComponents.count == 0)
+        {
+           pathComponents = [CubeFilesFolderPath pathComponents];
+            
+           [pathComponents removeObject:@"/"];
+
+//            for (int i =0; i < pathComponents.count; i++)
+//            {
+//                [NSDictionary alloc] initWithObjectsAndKeys:<#(nonnull id), ...#>, nil
+//            }
+        }
+        
+//        CubeFilesFolderPath = [CubeFilesFolderPath stringByDeletingLastPathComponent];
         
         NSString* systemFilesFolder = [CubeFilesFolderPath lastPathComponent];
 
         if ([item isKindOfClass:[NSDictionary class]])
         {
-            view.textField.stringValue = systemFilesFolder;
+            view.textField.stringValue = [pathComponents objectAtIndex:0];
         }
         else
         {
             
-            view.textField.stringValue = cubeFilesFolder;
+            view.textField.stringValue = [pathComponents objectAtIndex:0];
 
         }
         
-        
+        [pathComponents removeObjectAtIndex:0];
     }
     return view;
 }
