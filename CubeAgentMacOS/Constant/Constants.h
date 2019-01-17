@@ -121,7 +121,7 @@
 #define RESPONSE_IS_MAC_ID_VALID               @"responseMacID"
 
 
-#define SHARED_GROUP_IDENTIFIER                @"group.com.coreFlexSolutions.CubeDictate"
+//#define SHARED_GROUP_IDENTIFIER                @"group.com.coreFlexSolutions.CubeDictate"
 #define MAC_ID                                 @"macId"
 //#define MAC_ID                                 @"e0:2c:b2:ec:5a:8e"
 
