@@ -1017,11 +1017,12 @@
             DDLogInfo(@"Updating downloaded Doc file status, name = %@", audioFile.originalFileName);
             
 
-          [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
-//          [self demoDOwnload];
+//         [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
+       
+            [self demoDOwnload];
 
         
-                
+            
 
                 self.progressIndicator.doubleValue = 100;
                 
@@ -1158,6 +1159,8 @@
     
     [self.tableView reloadData];
     
+    [[AppPreferences sharedAppPreferences] stopScope];
+
     [self checkBrowserAudioFilesForDownload];
     
     [self.progressIndicator setDoubleValue:0];
@@ -1278,7 +1281,7 @@
     NSString* filePath =  [[AppPreferences sharedAppPreferences] getUsernameUploadAudioDirectoryPath];
     
 //    NSError * error;
-    
+    [[AppPreferences sharedAppPreferences] startScope];
     NSArray * directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:filePath error:&error];
     
     
@@ -1785,14 +1788,13 @@
 
             NSString* selectedPath = urlFromBookmark.path;
 
-            bool isContain = [selectedPath containsString:@"/CubeFiles"];
-            NSString* lastPathComponent = [urlFromBookmark lastPathComponent];
+            NSString* lastPathComponent = [selectedPath lastPathComponent];
 
-            if (!isContain)
+            if (![@"CubeFiles" isEqualToString: lastPathComponent])
             {
                 [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please Create and/or Select CubeFiles folder in choosed location"];
 
-
+                return;
             }
             else
             {
