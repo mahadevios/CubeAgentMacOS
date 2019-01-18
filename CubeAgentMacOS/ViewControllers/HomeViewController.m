@@ -55,7 +55,6 @@
     
 //    secondParent = [[NSDictionary alloc] initWithObjectsAndKeys:@"Elisabeth",@"parent",[NSArray arrayWithObjects:@"Jimmie",@"Kate", nil],@"children", nil];
    
-    list = [NSArray arrayWithObjects:firstParent, nil];
 
     self.uploadedAudioFilesArrayForTableView = [NSMutableArray new];
     
@@ -165,6 +164,9 @@
     }
    
     firstParent = inside1;
+    
+    list = [NSArray arrayWithObjects:firstParent, nil];
+
 }
 -(void)checkIfFolderGeneratedAndStartCycle
 {
@@ -1086,9 +1088,9 @@
             DDLogInfo(@"Updating downloaded Doc file status, name = %@", audioFile.originalFileName);
             
 
-//      [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
+      [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
        
-           [self demoDOwnload];
+//           [self demoDOwnload];
 
 
         
