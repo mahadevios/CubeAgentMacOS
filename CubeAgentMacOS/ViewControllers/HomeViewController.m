@@ -42,64 +42,7 @@
 //                                                                [NSArray arrayWithObjects:[[NSDictionary alloc] initWithObjectsAndKeys:[NSArray arrayWithObjects:@"Mary", nil],@"children", nil], nil], @"children",
 //                                                                nil];
 
-    CubeFilesFolderPath = [[AppPreferences sharedAppPreferences] getCubeFilesFolderPathUsingBookmark];
-    
-    pathComponents = [CubeFilesFolderPath pathComponents];
-    
-    [pathComponents removeObject:@"/"];
-    
-    pathComponents = [[pathComponents reverseObjectEnumerator] allObjects];
-
-    NSMutableArray* allDict = [NSMutableArray new];
-    
-    NSDictionary* inside1;
-    
-    int i = 0;
-    
-//    inside1 = [[NSDictionary alloc] initWithObjectsAndKeys:
-//               [[NSArray alloc] initWithObjects:@"",nil],@"children", nil];
-
-    inside1 = [[NSDictionary alloc] initWithObjectsAndKeys:
-               [[NSArray alloc] initWithObjects:@"",nil],@"children", nil];
-    
-//    NSDictionary* inside2 = [[NSDictionary alloc] initWithObjectsAndKeys:
-//                             inside1,@"children", nil];
-    
-//    NSDictionary* inside3 =  [[NSDictionary alloc] initWithObjectsAndKeys:
-//                              inside2,@"children", nil];
-    
-//    [allDict addObject:inside1];
-//
-//    [allDict addObject:inside2];
-//
-//    [allDict addObject:inside3];
-    
-    pairingDict = [[NSMutableDictionary alloc] init];
-
-    while (i < pathComponents.count)
-    {
-       
-        [pairingDict setObject:[pathComponents objectAtIndex:i] forKey:inside1];
-        
-        i++;
-        
-        if (i != pathComponents.count)
-        {
-            inside1 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                       inside1,@"children", nil];
-        }
-       
-        
-    }
-    
-//   NSDictionary* inside1 = [[NSDictionary alloc] initWithObjectsAndKeys:
-//     [[NSArray alloc] initWithObjects:@"",nil],@"children", nil];
-    
-    
-    
    
-    
-    firstParent = inside1;
     
 //    [pairingDict setObject:@"Users" forKey:inside1];
 //
@@ -183,6 +126,46 @@
 //    [self startInitialCycle];
 }
 
+-(void)prepareDataForOutlineView
+{
+    CubeFilesFolderPath = [[AppPreferences sharedAppPreferences] getCubeFilesFolderPathUsingBookmark];
+    
+    pathComponents = [CubeFilesFolderPath pathComponents];
+    
+    [pathComponents removeObject:@"/"];
+    
+    pathComponents = [[pathComponents reverseObjectEnumerator] allObjects];
+    
+    NSMutableArray* allDict = [NSMutableArray new];
+    
+    NSDictionary* inside1;
+    
+    int i = 0;
+    
+    
+    inside1 = [[NSDictionary alloc] initWithObjectsAndKeys:
+               [[NSArray alloc] initWithObjects:@"",nil],@"children", nil];
+    
+    pairingDict = [[NSMutableDictionary alloc] init];
+    
+    while (i < pathComponents.count)
+    {
+        
+        [pairingDict setObject:[pathComponents objectAtIndex:i] forKey:inside1];
+        
+        i++;
+        
+        if (i != pathComponents.count)
+        {
+            inside1 = [[NSDictionary alloc] initWithObjectsAndKeys:
+                       inside1,@"children", nil];
+        }
+        
+        
+    }
+   
+    firstParent = inside1;
+}
 -(void)checkIfFolderGeneratedAndStartCycle
 {
 //[[NSUserDefaults standardUserDefaults] setBool:false forKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
@@ -229,6 +212,7 @@
 //    pathComponents = [CubeFilesFolderPath pathComponents];
 //
 //    [pathComponents removeObject:@"/"];
+    [self prepareDataForOutlineView];
     
     [self.outlineView reloadData];
 }
