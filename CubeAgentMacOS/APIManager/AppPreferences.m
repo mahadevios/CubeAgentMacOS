@@ -241,15 +241,15 @@ static AppPreferences *singleton = nil;
 
 -(NSString*)getCubeLogDirectoryPath
 {
-//    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-//
-//    NSString *pathToCubeFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeLog", documentsDirectoryPath];
-  
-      [self startScope];
-    
-    NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
+    NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
 
-    NSString *pathToCubeLogFiles = [NSString stringWithFormat:@"%@/CubeLog", cubeFilesFolderPath];
+    NSString *pathToCubeLogFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeLog", documentsDirectoryPath];
+  
+//      [self startScope];
+    
+//    NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
+//
+//    NSString *pathToCubeLogFiles = [NSString stringWithFormat:@"%@/CubeLog", cubeFilesFolderPath];
 
     NSError* error;
     
@@ -263,7 +263,7 @@ static AppPreferences *singleton = nil;
         NSLog(@"");
     }
     
-     [self stopScope];
+//     [self stopScope];
     
     return pathToCubeLogFiles;
 }
@@ -673,15 +673,18 @@ static AppPreferences *singleton = nil;
     if (isCubeFilesFolderGenerated)
     {
         NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
-
+        
+        
         NSString *pathToCubeLogFiles = [NSString stringWithFormat:@"%@/CubeLog", cubeFilesFolderPath];
         
-        if (!self.isLoggerAdded || ![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeLogFiles])
+        if (!self.isLoggerAdded)
         {
             [DDLog addLogger:[DDTTYLogger sharedInstance]];
             
             NSString* logDirectoryPath = [[AppPreferences sharedAppPreferences] getCubeLogDirectoryPath];
             
+            [[AppPreferences sharedAppPreferences] startScope];
+
             DDLogFileManagerDefault* logManager = [[BaseLogFileManager alloc] initWithLogsDirectory:logDirectoryPath];
             
             DDFileLogger * file = [[DDFileLogger alloc] initWithLogFileManager:logManager];
@@ -689,6 +692,9 @@ static AppPreferences *singleton = nil;
             [DDLog addLogger:file];
             
             self.isLoggerAdded = true;
+            
+            [[AppPreferences sharedAppPreferences] stopScope];
+
         }
      
     }

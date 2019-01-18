@@ -23,7 +23,6 @@
     
     NSAlert *alert;
 
-//    DDLogFileManagerDefault *logManager;
 }
 
 @property (nonatomic,strong)    id<AppPreferencesDelegate> alertDelegate;

@@ -44,7 +44,8 @@
     
                     [[NSDictionary alloc] initWithObjectsAndKeys:
                      [[NSDictionary alloc] initWithObjectsAndKeys:
-                      [[NSArray alloc] initWithObjects:@"",nil],@"children", nil],@"children", nil];
+                      [[NSDictionary alloc] initWithObjectsAndKeys:
+                       [[NSArray alloc] initWithObjects:@"",nil],@"children", nil],@"children", nil],@"children", nil];
     
     // ---> calling setBackgroundColorOFButtonsAndView method
     [self setBackgroundColorOFButtonsAndView];
@@ -174,7 +175,7 @@
 {
 //    setenv("XcodeColors", "YES", 0);
 //
-    [[AppPreferences sharedAppPreferences] startScope];
+//    [[AppPreferences sharedAppPreferences] startScope];
     
     [[AppPreferences sharedAppPreferences] addLoggerOnce];
 
@@ -187,7 +188,7 @@
     
     textViewLogger.textView = self.logTextView;
     
-    [[AppPreferences sharedAppPreferences] stopScope];
+//    [[AppPreferences sharedAppPreferences] stopScope];
     
 }
 #pragma mark : Notification Callback Methods
