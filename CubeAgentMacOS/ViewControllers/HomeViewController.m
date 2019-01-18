@@ -26,6 +26,8 @@
 {
     [super viewDidLoad];
     
+    self.checkingFilesLabel.stringValue = @"";
+
 //    NSString* appDir = [self applicationSupportDirectory];
 //    dataSource = [NSArray arrayWithObjects:@"John", @"Mary", @"George", nil];
 
@@ -1100,7 +1102,7 @@
             DDLogInfo(@"Updating downloaded Doc file status, name = %@", audioFile.originalFileName);
             
 
-    //   [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
+//      [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
        
            [self demoDOwnload];
 
@@ -1723,9 +1725,9 @@
         
         [alert setMessageText:@"Action Required!"];
         
-        [alert setInformativeText:@"You need to create and/or select CubeFiles folder first to allow Cube Agent to access files from created folder"];
+        [alert setInformativeText:@"You have to select or create & select CubeFiles folder first to allow Cube Agent to access files from created folder"];
         
-        [alert addButtonWithTitle:@"Create and/or Select CubeFiles Folder"];
+        [alert addButtonWithTitle:@"Select OR Create & Select CubeFiles Folder"];
         
 //        [alert setInformativeText:[NSString stringWithFormat:@"You need to create or select Downloads/CubeFiles/%@/UploadAudio folder first to allow Cube Agent to access files from UploadAudio folder", [AppPreferences sharedAppPreferences].loggedInUser.userName]];
 //
@@ -1771,9 +1773,9 @@
         
         [alert setMessageText:@"Action Required!"];
         
-        [alert setInformativeText:@"You need to create and/or select CubeFiles folder first to allow Cube Agent to access files from created folder"];
+        [alert setInformativeText:@"You have to select or create & select CubeFiles folder first to allow Cube Agent to access files from created folder"];
         
-        [alert addButtonWithTitle:@"Select and/or Create CubeFiles Folder"];
+        [alert addButtonWithTitle:@"Select OR Create & Select CubeFiles Folder"];
 //         [alert setInformativeText:[NSString stringWithFormat:@"You need to create or select Downloads/CubeFiles/%@/Transcription folder first to allow Cube Agent to save files in Transcription folder", [AppPreferences sharedAppPreferences].loggedInUser.userName]];
 //
 //        [alert addButtonWithTitle:[NSString stringWithFormat:@"Select or Create Downloads/CubeFiles/%@/Transcription Folder",[AppPreferences sharedAppPreferences].loggedInUser.userName]];
@@ -1816,9 +1818,9 @@
         
         [alert setMessageText:@"Action Required!"];
         
-        [alert setInformativeText:@"You need to create and/or select CubeFiles folder first to allow Cube Agent to access files from created folder"];
+        [alert setInformativeText:@"You have to select or create & select CubeFiles folder first to allow Cube Agent to access files from created folder"];
         
-        [alert addButtonWithTitle:@"Create and/or Select CubeFiles Folder"];
+        [alert addButtonWithTitle:@"Select OR Create & Select CubeFiles Folder"];
 //        [alert setInformativeText:[NSString stringWithFormat:@"You need to create or select Downloads/CubeFiles/%@/BackupAudio folder first to allow Cube Agent to backup files in BackupAudio folder", [AppPreferences sharedAppPreferences].loggedInUser.userName]];
 //
 //        [alert addButtonWithTitle:[NSString stringWithFormat:@"Select or Create Downloads/CubeFiles/%@/BackupAudio Folder",[AppPreferences sharedAppPreferences].loggedInUser.userName]];
@@ -1882,9 +1884,10 @@
 
             NSString* lastPathComponent = [selectedPath lastPathComponent];
 
+//            if( !([@"CubeFiles" caseInsensitiveCompare:lastPathComponent] == NSOrderedSame) )
             if (![@"CubeFiles" isEqualToString: lastPathComponent])
             {
-                [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please Create and/or Select CubeFiles folder in choosed location"];
+                [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please Select OR Create & Select CubeFiles Folder in choosed location"];
 
                 return;
             }
