@@ -465,8 +465,20 @@ static AppPreferences *singleton = nil;
 
     if ([[NSFileManager defaultManager] fileExistsAtPath:pathToBackUpFiles])
     {
-        bool isRemoved = [[NSFileManager defaultManager] removeItemAtPath:pathToBackUpFiles error:&error];
-
+        NSString* pathExtension = [pathToBackUpFiles pathExtension];
+        
+        pathToBackUpFiles = [pathToBackUpFiles stringByDeletingPathExtension];
+        
+        //        NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
+        // NSTimeInterval is defined as double
+        //        NSNumber *timeStampObj = [NSNumber numberWithDouble: timeStamp];
+        NSString* timeStampObj = [self getTimestampForFileName];
+        
+        pathToBackUpFiles = [pathToBackUpFiles stringByAppendingString:[NSString stringWithFormat:@"_CopiedOn_%@",timeStampObj]];
+        
+        pathToBackUpFiles = [pathToBackUpFiles stringByAppendingPathExtension:pathExtension];
+        //        bool isRemoved = [[NSFileManager defaultManager] removeItemAtPath:pathToBackUpFiles error:&error];
+        
     }
 
    bool isMoved = [[NSFileManager defaultManager] moveItemAtPath:filePath toPath:pathToBackUpFiles error:&error];
