@@ -982,11 +982,15 @@
 
             NSString* transDirectoryPath = [[AppPreferences sharedAppPreferences] getGivenDateTranscriptionFolderPath:dateFolderName];
             
+            NSLog(@"response = %@", response);
+
             NSString* base64EncryptedString = [response valueForKey:@"FileData"];
             
             NSString* newFilePath = [transDirectoryPath stringByAppendingPathComponent:audioFile.originalFileName];
             
             audioFile.originalFileNamePath = newFilePath;
+            
+            NSLog(@"base64EncryptedString = %@", base64EncryptedString);
             
             NSData *encodedData = [[NSData alloc] initWithBase64EncodedString:base64EncryptedString options:0];
             
@@ -1032,9 +1036,9 @@
             DDLogInfo(@"Updating downloaded Doc file status, name = %@", audioFile.originalFileName);
             
 
-//         [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
+    //   [[APIManager sharedManager] updateDownloadFileStatus:@"13" dictationId:[NSString stringWithFormat:@"%ld",dictationID]];
        
-            [self demoDOwnload];
+           [self demoDOwnload];
 
 
         
