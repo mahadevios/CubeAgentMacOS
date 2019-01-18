@@ -34,6 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSWindow *window ;
     NSString* CubeFilesFolderPath;
     NSMutableArray* pathComponents;
+    NSMutableDictionary * pairingDict;
 }
 @property (weak) IBOutlet NSTableView *tableView;
 @property (unsafe_unretained) IBOutlet NSTextView *logTextView;

@@ -40,15 +40,71 @@
 //                                                                [NSArray arrayWithObjects:[[NSDictionary alloc] initWithObjectsAndKeys:[NSArray arrayWithObjects:@"Mary", nil],@"children", nil], nil], @"children",
 //                                                                nil];
 
-   NSDictionary* dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:
-     [[NSArray alloc] initWithObjects:@"",nil],@"children", nil];
+    CubeFilesFolderPath = [[AppPreferences sharedAppPreferences] getCubeFilesFolderPathUsingBookmark];
     
-    firstParent =
-                    [[NSDictionary alloc] initWithObjectsAndKeys:
-                     [[NSDictionary alloc] initWithObjectsAndKeys:
-                      [[NSDictionary alloc] initWithObjectsAndKeys:
-                       [[NSArray alloc] initWithObjects:@"",nil],@"children", nil],@"children", nil],@"children", nil];
+    pathComponents = [CubeFilesFolderPath pathComponents];
     
+    [pathComponents removeObject:@"/"];
+    
+    pathComponents = [[pathComponents reverseObjectEnumerator] allObjects];
+
+    NSMutableArray* allDict = [NSMutableArray new];
+    
+    NSDictionary* inside1;
+    
+    int i = 0;
+    
+//    inside1 = [[NSDictionary alloc] initWithObjectsAndKeys:
+//               [[NSArray alloc] initWithObjects:@"",nil],@"children", nil];
+
+    inside1 = [[NSDictionary alloc] initWithObjectsAndKeys:
+               [[NSArray alloc] initWithObjects:@"",nil],@"children", nil];
+    
+//    NSDictionary* inside2 = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                             inside1,@"children", nil];
+    
+//    NSDictionary* inside3 =  [[NSDictionary alloc] initWithObjectsAndKeys:
+//                              inside2,@"children", nil];
+    
+//    [allDict addObject:inside1];
+//
+//    [allDict addObject:inside2];
+//
+//    [allDict addObject:inside3];
+    
+    pairingDict = [[NSMutableDictionary alloc] init];
+
+    while (i < pathComponents.count)
+    {
+       
+        [pairingDict setObject:[pathComponents objectAtIndex:i] forKey:inside1];
+        
+        i++;
+        
+        if (i != pathComponents.count)
+        {
+            inside1 = [[NSDictionary alloc] initWithObjectsAndKeys:
+                       inside1,@"children", nil];
+        }
+       
+        
+    }
+    
+//   NSDictionary* inside1 = [[NSDictionary alloc] initWithObjectsAndKeys:
+//     [[NSArray alloc] initWithObjects:@"",nil],@"children", nil];
+    
+    
+    
+   
+    
+    firstParent = inside1;
+    
+//    [pairingDict setObject:@"Users" forKey:inside1];
+//
+//    [pairingDict setObject:@"admin" forKey:inside2];
+//
+//    [pairingDict setObject:@"Documents" forKey:inside3];
+
     // ---> calling setBackgroundColorOFButtonsAndView method
     [self setBackgroundColorOFButtonsAndView];
     
@@ -142,6 +198,8 @@
         }
         else
         {
+//            self.checkingFilesLabel.stringValue = @"CubeFiles folder not selected";
+
             [self isCubeFilesFolderGeneratedTimer];
         }
     }
@@ -163,6 +221,12 @@
     [self checkForFilesFirstTimeAfterLoginRapidTimer];
     
     [self testLogs];
+    
+//    CubeFilesFolderPath = [[AppPreferences sharedAppPreferences] getCubeFilesFolderPathUsingBookmark];
+//
+//    pathComponents = [CubeFilesFolderPath pathComponents];
+//
+//    [pathComponents removeObject:@"/"];
     
     [self.outlineView reloadData];
 }
@@ -1845,6 +1909,8 @@
 
                  [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Folder Created Successfully" subTitle: pathToCubeLogStr];
 
+                 self.checkingFilesLabel.stringValue = @"Checking Files..";
+
             }
             NSLog(@"url = %@", urlFromBookmark);
         }
@@ -1924,8 +1990,16 @@
 
     if ([item isKindOfClass:[NSDictionary class]])
     {
+        if ([[item objectForKey:@"children"] isKindOfClass:[NSArray class]])
+        {
+            return false;
+        }
+        else
+        {
+            return YES;
+        }
         
-        return YES;
+        
         
     }
     else
@@ -1954,36 +2028,32 @@
         {
             return view;
         }
-        NSString* cubeFilesFolder = [CubeFilesFolderPath lastPathComponent];
+//        NSString* cubeFilesFolder = [CubeFilesFolderPath lastPathComponent];
+//
+//        if (pathComponents == nil || pathComponents.count == 0)
+//        {
+//           pathComponents = [CubeFilesFolderPath pathComponents];
+//
+//           [pathComponents removeObject:@"/"];
+//
+//
+//        }
         
-        if (pathComponents == nil || pathComponents.count == 0)
-        {
-           pathComponents = [CubeFilesFolderPath pathComponents];
-            
-           [pathComponents removeObject:@"/"];
-
-//            for (int i =0; i < pathComponents.count; i++)
-//            {
-//                [NSDictionary alloc] initWithObjectsAndKeys:<#(nonnull id), ...#>, nil
-//            }
-        }
         
-//        CubeFilesFolderPath = [CubeFilesFolderPath stringByDeletingLastPathComponent];
-        
-        NSString* systemFilesFolder = [CubeFilesFolderPath lastPathComponent];
+//        NSString* systemFilesFolder = [CubeFilesFolderPath lastPathComponent];
 
         if ([item isKindOfClass:[NSDictionary class]])
         {
-            view.textField.stringValue = [pathComponents objectAtIndex:0];
+            view.textField.stringValue = [pairingDict objectForKey:item];
         }
-        else
-        {
-            
-            view.textField.stringValue = [pathComponents objectAtIndex:0];
-
-        }
+//        else
+//        {
+//
+//            view.textField.stringValue = @"last";
+//
+//        }
         
-        [pathComponents removeObjectAtIndex:0];
+//        [pathComponents removeObjectAtIndex:0];
     }
     return view;
 }

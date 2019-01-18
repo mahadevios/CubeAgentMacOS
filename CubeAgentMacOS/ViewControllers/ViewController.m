@@ -325,6 +325,11 @@
         [self.loginTextField becomeFirstResponder];
         
     }
+    else
+    {
+        [hud removeFromSuperview];
+
+    }
 }
 
 -(void)validateAuthenticateUserResponse:(NSNotification*)dictObj
