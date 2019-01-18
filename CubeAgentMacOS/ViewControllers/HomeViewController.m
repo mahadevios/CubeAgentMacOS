@@ -40,8 +40,10 @@
 //                                                                [NSArray arrayWithObjects:[[NSDictionary alloc] initWithObjectsAndKeys:[NSArray arrayWithObjects:@"Mary", nil],@"children", nil], nil], @"children",
 //                                                                nil];
 
-    firstParent =
+   NSDictionary* dict1 = [[NSDictionary alloc] initWithObjectsAndKeys:
+     [[NSArray alloc] initWithObjects:@"",nil],@"children", nil];
     
+    firstParent =
                     [[NSDictionary alloc] initWithObjectsAndKeys:
                      [[NSDictionary alloc] initWithObjectsAndKeys:
                       [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -1236,23 +1238,23 @@
     
     self.checkingFilesLabel.textColor = [NSColor orangeColor];
     
-    [self getFilesToBeUploadFromUploadFilesFolder];
-    
     if ([checkForNewFilesTimer isValid])
     {
         [checkForNewFilesTimer invalidate];
     }
     
-     dispatch_async(dispatch_get_main_queue(), ^{
-         
-         if ([self->checkForNewFilesTimer isValid])
-         {
-             [self->checkForNewFilesTimer invalidate];
-         }
-         
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if ([self->checkForNewFilesTimer isValid])
+        {
+            [self->checkForNewFilesTimer invalidate];
+        }
+        
+    });
     
-         
-          });
+    [self getFilesToBeUploadFromUploadFilesFolder];
+    
+  
 }
 
 -(void)startFileUploadProgressBarTimer
@@ -1461,12 +1463,16 @@
         }
         else
         {
+            DDLogInfo(@"Internet connection appears to be offline");
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"The Internet connection appears to be offline. Operations could not be processed."];
+                
+                 [self checkForNewFilesSubSequentTimer];
 
             });
            
-            [self checkForNewFilesSubSequentTimer];
+           
           
         }
     }
