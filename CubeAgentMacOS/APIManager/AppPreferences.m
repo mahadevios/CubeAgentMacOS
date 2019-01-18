@@ -677,6 +677,7 @@ static AppPreferences *singleton = nil;
         
         NSString *pathToCubeLogFiles = [NSString stringWithFormat:@"%@/CubeLog", cubeFilesFolderPath];
         
+        // && ![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeLogFiles]
         if (!self.isLoggerAdded)
         {
             [DDLog addLogger:[DDTTYLogger sharedInstance]];
