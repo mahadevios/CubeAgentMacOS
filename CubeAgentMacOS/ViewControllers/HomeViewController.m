@@ -161,8 +161,7 @@
             inside1 = [[NSDictionary alloc] initWithObjectsAndKeys:
                        inside1,@"children", nil];
         }
-        
-        
+      
     }
    
     firstParent = inside1;
