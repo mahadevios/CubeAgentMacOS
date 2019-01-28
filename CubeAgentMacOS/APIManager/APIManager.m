@@ -72,7 +72,7 @@ static APIManager *singleton = nil;
         
         
         
-        NSString* str2=[dataDesc base64EncodedStringWithOptions:0];
+        NSString* str2 = [dataDesc base64EncodedStringWithOptions:0];
         
         NSDictionary *dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:str2,@"encDevChkKey", nil];
         

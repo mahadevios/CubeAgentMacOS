@@ -158,7 +158,6 @@
 
 - (NSString *)shortErrorFromError:(NSError *)error
 {
-   
     return [error localizedDescription];
 }
 
@@ -1177,7 +1176,7 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
 //    NSLog(@"bytesWritten = %lld", bytesWritten);
 
     
-    DDLogInfo(@"Total bytes written in the file = %lld", totalBytesWritten);
+ //   DDLogInfo(@"Total bytes written in the file = %lld", totalBytesWritten);
 
 //    NSLog(@"totalBytesExpectedToWrite = %lld", totalBytesExpectedToWrite);
 

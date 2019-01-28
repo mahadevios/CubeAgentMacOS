@@ -115,6 +115,8 @@
     
 //    [[APIManager sharedManager] getSingleQueryValueComment:StrSQL];
     
+    //increase size of the home screen window
+    
     CGSize size =  CGSizeMake(900, 770);
     
     self.preferredContentSize = size;
@@ -778,7 +780,7 @@
             {
                 [[AppPreferences sharedAppPreferences] startScope];
                 
-                NSDictionary* response = [responseArray objectAtIndex:0];
+                NSDictionary* response = [responseArray objectAtIndex:i];
                 
                 AudioFile* audioFile = [AudioFile new];
                 
@@ -1365,6 +1367,7 @@
     
     NSArray *contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:filePath error:&error] ;
     
+    // Not Required
     NSMutableArray *listOfAudioFiles = [NSMutableArray arrayWithCapacity:0];
     
     // Check for Audios of supported type
@@ -1376,6 +1379,8 @@
             [listOfAudioFiles addObject:filepath];
         }
     }
+    
+    // end not required
     
     [self getAllFiles:filePath];
     
@@ -1434,7 +1439,7 @@
         // File or directory
         if ([fileMgr fileExistsAtPath:entry isDirectory:&isDirectory] && isDirectory)
         {
-            
+            // will never be here 
         }
         else
         {

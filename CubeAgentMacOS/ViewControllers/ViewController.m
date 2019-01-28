@@ -107,6 +107,78 @@
     
 }
 
+-(void)viewWillAppear
+{
+    
+    NSString* macId = [self getFinalMacId];
+    
+    [self.macIdLabel setStringValue:[@"MACID : "stringByAppendingString:macId]];
+    
+    BOOL isAutoMode = [[NSUserDefaults standardUserDefaults] boolForKey:AUTOMODE];
+    
+    bool isRemember = [[NSUserDefaults standardUserDefaults] boolForKey:REMEMBER_ME];
+    
+    //isAutoMode = false;
+    
+    if (isAutoMode)
+    {
+        NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+        
+        NSString* password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+        
+        if (username != nil && password != nil)
+        {
+            self.loginTextField.stringValue = username;
+            
+            self.paswordTextField.stringValue = password;
+        }
+       
+        
+        [self.autoModeCheckBox setState:NSOnState];
+        
+        //        [self performSelector:@selector(submitUserValidate) withObject:nil afterDelay:2.0];
+        [self submitUserValidate];
+        
+    }
+    else
+    {
+        [self.autoModeCheckBox setState:NSOffState];
+        
+    }
+    
+    if (isRemember)
+    {
+        NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
+        
+        NSString* password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
+        
+        if (username != nil && password != nil)
+        {
+            self.loginTextField.stringValue = username;
+            
+            self.paswordTextField.stringValue = password;
+        }
+        
+        [self.rememberMeCheckBox setState:NSOnState];
+        
+    }
+    else
+    {
+        [self.rememberMeCheckBox setState:NSOffState];
+        
+    }
+    //    else
+    //    {
+    //        self.loginTextField.stringValue = @"";
+    //
+    //        self.paswordTextField.stringValue = @"";
+    //
+    //        [self.rememberMeCheckBox setState:NSOffState];
+    //
+    //    }
+    
+    
+}
 - (NSURL*)applicationDataDirectory
 {
     NSFileManager* sharedFM = [NSFileManager defaultManager];
@@ -194,71 +266,7 @@
     [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Unable to reach the server. Please try again."];
     
 }
--(void)viewWillAppear
-{
 
-    NSString* macId = [self getFinalMacId];
-    
-    [self.macIdLabel setStringValue:[@"MACID : "stringByAppendingString:macId]];
-    
-    BOOL isAutoMode = [[NSUserDefaults standardUserDefaults] boolForKey:AUTOMODE];
-
-    bool isRemember = [[NSUserDefaults standardUserDefaults] boolForKey:REMEMBER_ME];
-  
-  //isAutoMode = false;
-    
-    if (isAutoMode)
-    {
-        NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-        
-        NSString* password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
-        
-        self.loginTextField.stringValue = username;
-        
-        self.paswordTextField.stringValue = password;
-        
-        [self.autoModeCheckBox setState:NSOnState];
-        
-//        [self performSelector:@selector(submitUserValidate) withObject:nil afterDelay:2.0];
-       [self submitUserValidate];
-
-    }
-    else
-    {
-        [self.autoModeCheckBox setState:NSOffState];
-
-    }
-    
-    if (isRemember)
-    {
-        NSString* username = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
-        
-        NSString* password = [[NSUserDefaults standardUserDefaults] objectForKey:@"password"];
-        
-        self.loginTextField.stringValue = username;
-        
-        self.paswordTextField.stringValue = password;
-        
-        [self.rememberMeCheckBox setState:NSOnState];
-
-    }
-    else
-    {
-        [self.rememberMeCheckBox setState:NSOffState];
-        
-    }
-//    else
-//    {
-//        self.loginTextField.stringValue = @"";
-//
-//        self.paswordTextField.stringValue = @"";
-//
-//        [self.rememberMeCheckBox setState:NSOffState];
-//
-//    }
-    
-
-}
 
 
 //- (void) redirectConsoleLogToDocumentFolder
