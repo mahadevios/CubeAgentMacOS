@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CubeAgentMacOS/ViewControllers/HomeViewController.m"
-            timestampString = "569495204.60875"
+            timestampString = "570350385.134058"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1180"
             endingLineNumber = "1180"
-            landmarkName = "-performCleanUp:"
+            landmarkName = "-performCleanUpForDuplicate:filePath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CubeAgentMacOS/APIManager/DownloadMetaDataJob.m"
-            timestampString = "568366255.108457"
+            timestampString = "569513356.4854341"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "578"
-            endingLineNumber = "578"
+            startingLineNumber = "582"
+            endingLineNumber = "582"
             landmarkName = "-connectionDidFinishLoading:"
             landmarkType = "7">
          </BreakpointContent>
