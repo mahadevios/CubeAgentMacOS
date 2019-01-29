@@ -178,6 +178,8 @@
     {
         if (isCubeFilesFolderGenerated)
         {
+            self.checkingFilesLabel.stringValue = @"Checking Files..";
+
             [self startInitialCycle];
             
             [folderGeneratedTimer invalidate];
@@ -823,7 +825,7 @@
                 
                 BOOL isWritten = [decryptedData writeToFile:newFilePath options:NSDataWritingAtomic error:&error];
                 
-                bool isDeleted = [[NSFileManager defaultManager] removeItemAtURL:downloadLocation error:&error1];
+                [[NSFileManager defaultManager] removeItemAtURL:downloadLocation error:&error1];
                 
                 if (isWritten)
                 {
@@ -1274,6 +1276,11 @@
         {
             [self->checkForNewFilesTimer invalidate];
         }
+        
+        self.checkingFilesLabel.textColor = [NSColor colorWithRed:255/255.0 green:149/255.0 blue:0/255.0 alpha:1.0];
+        
+        self.checkingFilesLabel.stringValue = @"Checking Files..";
+        
           self->checkForNewFilesTimer =  [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(checkForNewFilesForSubSequentTime) userInfo:nil repeats:YES];
         
        
@@ -2255,4 +2262,6 @@
 }
 
 @end
+
+
 

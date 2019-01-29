@@ -687,7 +687,7 @@ static AppPreferences *singleton = nil;
         NSString* cubeFilesFolderPath = [self getCubeFilesFolderPathUsingBookmark];
         
         
-        NSString *pathToCubeLogFiles = [NSString stringWithFormat:@"%@/CubeLog", cubeFilesFolderPath];
+//        NSString *pathToCubeLogFiles = [NSString stringWithFormat:@"%@/CubeLog", cubeFilesFolderPath];
         
         // && ![[NSFileManager defaultManager] fileExistsAtPath:pathToCubeLogFiles]
         if (!self.isLoggerAdded)
