@@ -112,12 +112,20 @@
     }
     else
     {
-        urlConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            NSURLConnection* urlConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+            
+           
+            
+            NSLog(@"%@",urlConnection);
+            
+        });
+       
     }
     
 //    [urlConnection start];
-    NSLog(@"%@",urlConnection);
+    
 //    DDLogInfo(@"%@",urlConnection);
 
 }
@@ -310,9 +318,17 @@
             }
             else
             {
-               NSDictionary* reponseDict = [[NSDictionary alloc] initWithObjectsAndKeys:SUCCESS,RESPONSE_IS_MAC_ID_VALID,@"200",RESPONSE_CODE, nil];
                 
-                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_UPDATE_MAC_ID_API object:reponseDict];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                
+                    NSDictionary* reponseDict = [[NSDictionary alloc] initWithObjectsAndKeys:SUCCESS,RESPONSE_IS_MAC_ID_VALID,@"200",RESPONSE_CODE, nil];
+
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_UPDATE_MAC_ID_API object:reponseDict];
+
+                    
+                    return;
+                    
+                });
             }
         }
         else
@@ -324,7 +340,7 @@
             [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Something went wrong, please try again."];
 
 //            DDLogInfo(@"API Name = %@, Response = %@, Status Code = %d", self.downLoadEntityJobName, response, statusCode);
-            return;
+//            return;
         }
         
     }

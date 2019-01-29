@@ -70,9 +70,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(validateNoInternet:) name:NOTIFICATION_NO_INTERNET
                                                object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(validateMacIDResponse:) name:NOTIFICATION_UPDATE_MAC_ID_API
                                                object:nil];
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(validateAuthenticateUserResponse:) name:NOTIFICATION_AUTHENTICATE_API
@@ -254,7 +256,8 @@
 }
 -(void)viewWillDisappear
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_NO_INTERNET object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 -(void)validateNoInternet:(NSNotification*)noti
 {
@@ -292,6 +295,8 @@
     
     // Update the view, if already loaded.
 }
+
+
 
 -(void)validateMacIDResponse:(NSNotification*)dictObj
 {
@@ -658,7 +663,13 @@
             
             [hud setDetailsLabelText:@"Logging In, please wait"];
 
-            [[APIManager sharedManager] updateDeviceMacID:macId password:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
+//            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+                 [[APIManager sharedManager] updateDeviceMacID:macId password:self.paswordTextField.stringValue username:self.loginTextField.stringValue];
+                
+//            });
+
+          
             
            
         }
