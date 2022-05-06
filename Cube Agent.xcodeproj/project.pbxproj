@@ -140,6 +140,7 @@
 		84CB517321B7F30A00E868A0 /* VCIdList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCIdList.m; sourceTree = "<group>"; };
 		84EDB0BA21E613CE00FEDBA4 /* AboutCubeAgentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutCubeAgentViewController.h; sourceTree = "<group>"; };
 		84EDB0BB21E613CE00FEDBA4 /* AboutCubeAgentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutCubeAgentViewController.m; sourceTree = "<group>"; };
+		9A85EA1227EF5ADE00B736A7 /* Cube AgentRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Cube AgentRelease.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +186,7 @@
 		841E1B3721A80BCB006F5C63 = {
 			isa = PBXGroup;
 			children = (
+				9A85EA1227EF5ADE00B736A7 /* Cube AgentRelease.entitlements */,
 				841E1B4221A80BCB006F5C63 /* CubeAgentMacOS */,
 				841E1B5921A80BCF006F5C63 /* CubeAgentMacOSTests */,
 				841E1B6421A80BCF006F5C63 /* CubeAgentMacOSUITests */,
@@ -790,7 +792,9 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = Y56BAH343T;
+				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CubeAgentMacOS/CubeAgentMacOS-Prefix.pch";
 				INFOPLIST_FILE = CubeAgentMacOS/Info.plist;
@@ -799,6 +803,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xanadutec.CubeAgentMacOS;
 				PRODUCT_NAME = "Cube Agent";
 				PROVISIONING_PROFILE_SPECIFIER = CubeAgentDevelopment;
@@ -810,11 +815,13 @@
 			baseConfigurationReference = 431DD8CD998BEFED375790AF /* Pods-Cube Agent.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = CubeAgentMacOS/CubeAgentMacOS.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Cube AgentRelease.entitlements";
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = Y56BAH343T;
+				ENABLE_HARDENED_RUNTIME = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CubeAgentMacOS/CubeAgentMacOS-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -827,6 +834,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xanadutec.CubeAgentMacOS;
 				PRODUCT_NAME = "Cube Agent";
 				PROVISIONING_PROFILE_SPECIFIER = CubeAgentDistribution;

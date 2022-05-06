@@ -985,6 +985,8 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
+            [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Internet connection appears to be offline. Operations could not be processed."];
+            
             [self performSelector:@selector(cleanUpTableViewAfterDocDownload) withObject:nil afterDelay:3.0];
             
             [self checkForNewFilesSubSequentTimer];
@@ -1722,13 +1724,11 @@
         
         [alert setMessageText:@"Action Required!"];
         
-        [alert setInformativeText:@"You have to select or create & select CubeFiles folder first to allow Cube Agent to access files from created folder"];
+        //CubeFilesV3
+        [alert setInformativeText:@"You have to select or create & select \"CubeFiles\" folder from Downloads first to allow Cube Agent to access files from the folder"];
         
-        [alert addButtonWithTitle:@"Select OR Create & Select CubeFiles Folder"];
-        
-//        [alert setInformativeText:[NSString stringWithFormat:@"You need to create or select Downloads/CubeFiles/%@/UploadAudio folder first to allow Cube Agent to access files from UploadAudio folder", [AppPreferences sharedAppPreferences].loggedInUser.userName]];
-//
-//         [alert addButtonWithTitle:[NSString stringWithFormat:@"Select or Create Downloads/CubeFiles/%@/UploadAudio Folder",[AppPreferences sharedAppPreferences].loggedInUser.userName]];
+        //CubeFilesV3
+        [alert addButtonWithTitle:@"Select OR Create & Select \"CubeFiles\" Folder"];
         
         [alert addButtonWithTitle:@"Cancel"];
 
@@ -1770,12 +1770,11 @@
         
         [alert setMessageText:@"Action Required!"];
         
-        [alert setInformativeText:@"You have to select or create & select CubeFiles folder first to allow Cube Agent to access files from created folder"];
+        //CubeFilesV3
+        [alert setInformativeText:@"You have to select or create & select \"CubeFiles\" folder from Downloads first to allow Cube Agent to access files from the folder"];
         
-        [alert addButtonWithTitle:@"Select OR Create & Select CubeFiles Folder"];
-//         [alert setInformativeText:[NSString stringWithFormat:@"You need to create or select Downloads/CubeFiles/%@/Transcription folder first to allow Cube Agent to save files in Transcription folder", [AppPreferences sharedAppPreferences].loggedInUser.userName]];
-//
-//        [alert addButtonWithTitle:[NSString stringWithFormat:@"Select or Create Downloads/CubeFiles/%@/Transcription Folder",[AppPreferences sharedAppPreferences].loggedInUser.userName]];
+        //CubeFilesV3
+        [alert addButtonWithTitle:@"Select OR Create & Select \"CubeFiles\" Folder from Downloads"];
 
         [alert addButtonWithTitle:@"Cancel"];
 
@@ -1815,13 +1814,12 @@
         
         [alert setMessageText:@"Action Required!"];
         
-        [alert setInformativeText:@"You have to select or create & select CubeFiles folder first to allow Cube Agent to access files from created folder"];
+        //CubeFilesV3
+        [alert setInformativeText:@"You have to select or create & select \"CubeFiles\" folder from Downloads first to allow Cube Agent to access files from the folder"];
         
-        [alert addButtonWithTitle:@"Select OR Create & Select CubeFiles Folder"];
-//        [alert setInformativeText:[NSString stringWithFormat:@"You need to create or select Downloads/CubeFiles/%@/BackupAudio folder first to allow Cube Agent to backup files in BackupAudio folder", [AppPreferences sharedAppPreferences].loggedInUser.userName]];
-//
-//        [alert addButtonWithTitle:[NSString stringWithFormat:@"Select or Create Downloads/CubeFiles/%@/BackupAudio Folder",[AppPreferences sharedAppPreferences].loggedInUser.userName]];
-        
+        //CubeFilesV3
+        [alert addButtonWithTitle:@"Select OR Create & Select \"CubeFiles\" Folder"];
+ 
         [alert addButtonWithTitle:@"Cancel"];
         
         [alert setAlertStyle:NSWarningAlertStyle];
@@ -1862,6 +1860,7 @@
     {
         NSURL *url = openDlg.URL;
 
+        
         NSError *error = nil;
         NSData *bookmark = [url bookmarkDataWithOptions:NSURLBookmarkCreationWithSecurityScope
                          includingResourceValuesForKeys:nil
@@ -1881,14 +1880,7 @@
 
             NSString* lastPathComponent = [selectedPath lastPathComponent];
 
-//            if( !([@"CubeFiles" caseInsensitiveCompare:lastPathComponent] == NSOrderedSame) )
-            if (![@"CubeFiles" isEqualToString: lastPathComponent])
-            {
-                [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please Select OR Create & Select CubeFiles Folder in choosed location"];
-
-                return;
-            }
-            else
+            if (([@"CubeFiles" isEqualToString: lastPathComponent] && [selectedPath containsString:@"Downloads"]))
             {
                 NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                 [userDefaults setObject:bookmark forKey:DOWNLOAD_FOLDER_BOOKMARK_PATH];
@@ -1898,22 +1890,20 @@
 
                 [[NSUserDefaults standardUserDefaults] setBool:true forKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
 
-//                NSString* downloadedTransFolderPath = [[AppPreferences sharedAppPreferences] getUsernameTranscriptionDirectoryPath];
-//
-//                [self openFolderInFinder:downloadedTransFolderPath];
                 [[AppPreferences sharedAppPreferences] createAllFolderOnce];
 
-               // [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Folder Created Successfully" subTitle:@"Please keep your audio files inside Downloads/CubeFiles/UploadAudio"];
-
-                // ---> changing folder path in Alert
-
                  NSString * pathToCubeLogStr = [NSString stringWithFormat:@"Please keep your audio files inside %@/%@/UploadAudio folder",selectedPath,[AppPreferences sharedAppPreferences].loggedInUser.userName];
-
-//                NSString * pathToCubeLogStr = [@"Please keep your audio files inside Downloads/CubeFiles/" stringByAppendingString:[AppPreferences sharedAppPreferences].loggedInUser.userName];
 
                  [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Folder Created Successfully" subTitle: pathToCubeLogStr];
 
                  self.checkingFilesLabel.stringValue = @"Checking Files..";
+            }
+            else
+            {
+                //CubeFilesV3
+                [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Alert" subTitle:@"Please Select OR Create & Select \"CubeFiles\" Folder from Downloads"];
+
+                return;
 
             }
             NSLog(@"url = %@", urlFromBookmark);
@@ -2032,32 +2022,13 @@
         {
             return view;
         }
-//        NSString* cubeFilesFolder = [CubeFilesFolderPath lastPathComponent];
-//
-//        if (pathComponents == nil || pathComponents.count == 0)
-//        {
-//           pathComponents = [CubeFilesFolderPath pathComponents];
-//
-//           [pathComponents removeObject:@"/"];
-//
-//
-//        }
-        
-        
-//        NSString* systemFilesFolder = [CubeFilesFolderPath lastPathComponent];
+
 
         if ([item isKindOfClass:[NSDictionary class]])
         {
             view.textField.stringValue = [pairingDict objectForKey:item];
         }
-//        else
-//        {
-//
-//            view.textField.stringValue = @"last";
-//
-//        }
-        
-//        [pathComponents removeObjectAtIndex:0];
+
     }
     return view;
 }

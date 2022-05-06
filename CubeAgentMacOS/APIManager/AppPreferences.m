@@ -243,6 +243,7 @@ static AppPreferences *singleton = nil;
 {
     NSString* documentsDirectoryPath =  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
 
+    //CubeFilesV3
     NSString *pathToCubeLogFiles = [NSString stringWithFormat:@"%@/CubeFiles/CubeLog", documentsDirectoryPath];
   
 //      [self startScope];
@@ -731,17 +732,51 @@ static AppPreferences *singleton = nil;
 
 -(NSString*)getCubeFilesFolderPathUsingBookmark
 {
+    BOOL isStale;
+     NSError *error;
+    
     NSData* bookmarkData = [[NSUserDefaults standardUserDefaults] objectForKey:DOWNLOAD_FOLDER_BOOKMARK_PATH];
     NSURL* urlFromBookmark = [NSURL URLByResolvingBookmarkData:bookmarkData
                                                        options:NSURLBookmarkResolutionWithSecurityScope
                                                  relativeToURL:nil
-                                           bookmarkDataIsStale:nil
-                                                         error:nil];
+                                           bookmarkDataIsStale:&isStale
+                                                         error:&error];
     
-//     NSString* documentsDirectoryPath = @"/Users/admin/Library/Containers/com.xanadutec.CubeAgentMacOS/Data/Downloads";
-    NSString* documentsDirectoryPath = urlFromBookmark.path;
-    
-    return documentsDirectoryPath;
+    if (error != nil) {
+        [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Error Resolving Bookmark!" subTitle:error.localizedDescription];
+        return @"";
+      } else if (isStale) {
+          [[AppPreferences sharedAppPreferences] showAlertWithTitle:@"Bookmark is Stale!" subTitle:@"Please contact Cube Agent Support Team"];
+          
+//        if ([urlFromBookmark startAccessingSecurityScopedResource]) {
+//          NSLog(@"Attempting to renew bookmark for %@", urlFromBookmark);
+//          // NOTE: This is the bit that fails, a 256 error is
+//          //       returned due to a deny file-read-data from sandboxd
+//            bookmarkData = [urlFromBookmark bookmarkDataWithOptions:NSURLBookmarkCreationWithSecurityScope
+//                   includingResourceValuesForKeys:nil
+//                                    relativeToURL:nil
+//                                            error:&error];
+//          [urlFromBookmark stopAccessingSecurityScopedResource];
+//          if (error != nil) {
+//            NSLog(@"Failed to renew bookmark: %@", error);
+//            return @"";
+//          }
+//          [[NSUserDefaults standardUserDefaults] setObject:bookmarkData forKey:@"bookmark"];
+//          NSLog(@"Bookmark renewed, yay.");
+//        } else {
+//          NSLog(@"Could not start using the bookmarked url");
+//        }
+      } else {
+          
+          NSDictionary* urlFromBookmark1 = [NSURL resourceValuesForKeys:[NSArray
+                                                                         arrayWithObject:NSURLPathKey]  fromBookmarkData:bookmarkData];
+          
+      //     NSString* documentsDirectoryPath = @"/Users/admin/Library/Containers/com.xanadutec.CubeAgentMacOS/Data/Downloads";
+          NSString* documentsDirectoryPath = urlFromBookmark.path;
+          
+          return documentsDirectoryPath;
+      }
+    return @"";
 }
 
 -(void)startScope

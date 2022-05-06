@@ -72,8 +72,6 @@
 
 -(NSString*)getCubeLogDirectoryPath;
 
-//-(NSString*)getCubeFilesDirectoryPath;
-
 -(void)deleteFileAtPath:(NSString*)filePath;
 
 -(void)moveAudioFileToBackup:(NSString*)filePath;
