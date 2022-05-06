@@ -96,15 +96,35 @@
     CGSize size =  CGSizeMake(580, 269);
     self.preferredContentSize = size;
 
+    NSString* existingVersion = [[NSUserDefaults standardUserDefaults] objectForKey:APP_CURRENT_VERSION];
+
     [[AppPreferences sharedAppPreferences] addLoggerOnce];
 
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     
     NSString *majorVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     
-    [[NSUserDefaults standardUserDefaults] setObject:majorVersion forKey:APP_CURRENT_VERSION];
-    
+  
+//    [[NSUserDefaults standardUserDefaults] setObject:@"1.0.2" forKey:APP_CURRENT_VERSION];
+//
+//    [[NSUserDefaults standardUserDefaults] setBool:false forKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
+//    
+//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//    [userDefaults removeObjectForKey:DOWNLOAD_FOLDER_BOOKMARK_PATH];
+//    [userDefaults synchronize];
+    if(![majorVersion isEqualToString:existingVersion]){
+        
+        [[NSUserDefaults standardUserDefaults] setObject:majorVersion forKey:APP_CURRENT_VERSION];
 
+        [[NSUserDefaults standardUserDefaults] setBool:false forKey:DOWNLOAD_FOLDER_BOOKMARK_GENERATED];
+        
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults removeObjectForKey:DOWNLOAD_FOLDER_BOOKMARK_PATH];
+        [userDefaults synchronize];
+        
+    }
+    
+    
     DDLogInfo(@"In LoginView");
     
 }

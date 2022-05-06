@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -67,7 +67,7 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="home_logo" id="hgh-TI-FZJ"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mfM-5z-OxM">
-                                <rect key="frame" x="105" y="97" width="78" height="17"/>
+                                <rect key="frame" x="105" y="98" width="78" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Cube Agent" id="gvM-7n-v7C">
                                     <font key="font" metaFont="systemSemibold" size="13"/>
                                     <color key="textColor" name="labelColor"/>
@@ -161,7 +161,7 @@
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Plr-Rg-jaZ">
-                                        <rect key="frame" x="331" y="124" width="64" height="16"/>
+                                        <rect key="frame" x="331" y="126" width="64" height="15"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Password" id="wMb-uz-B9f">
                                             <font key="font" metaFont="systemBold" size="12"/>
                                             <color key="textColor" name="labelColor"/>
@@ -169,7 +169,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sGd-3B-ueF">
-                                        <rect key="frame" x="331" y="165" width="53" height="16"/>
+                                        <rect key="frame" x="331" y="166" width="53" height="15"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Login ID" id="ixL-t5-meX">
                                             <font key="font" metaFont="systemBold" size="12"/>
                                             <color key="textColor" name="labelColor"/>
@@ -233,7 +233,7 @@
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jvN-LJ-wgQ">
-                                        <rect key="frame" x="425" y="6" width="144" height="17"/>
+                                        <rect key="frame" x="425" y="7" width="144" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Powered by Xanadutec" id="a5U-RQ-C7B">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor"/>
@@ -335,7 +335,7 @@
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="DscribeNewLogo_1" id="T32-pR-hSI"/>
                                     </imageView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nx8-AU-4b5">
-                                        <rect key="frame" x="8" y="648" width="154" height="17"/>
+                                        <rect key="frame" x="8" y="649" width="154" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="fZW-sV-iQv"/>
                                         </constraints>
@@ -346,7 +346,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="x6r-dG-rG9">
-                                        <rect key="frame" x="240" y="648" width="204" height="17"/>
+                                        <rect key="frame" x="240" y="649" width="204" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="9Yc-6N-XQG"/>
                                         </constraints>
@@ -357,21 +357,20 @@
                                         </textFieldCell>
                                     </textField>
                                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cI-Sa-kfW">
-                                        <rect key="frame" x="10" y="231" width="844" height="379"/>
+                                        <rect key="frame" x="10" y="232" width="844" height="379"/>
                                         <clipView key="contentView" id="j3j-sa-Syf">
                                             <rect key="frame" x="1" y="0.0" width="842" height="378"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="Lvr-oi-dAs" viewBased="YES" id="KwQ-bT-N8G">
                                                     <rect key="frame" x="0.0" y="0.0" width="842" height="353"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
                                                         <tableColumn identifier="fileName" editable="NO" width="150" minWidth="40" maxWidth="1000" id="oOH-0Q-r28">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="File Name">
-                                                                <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -404,7 +403,6 @@
                                                         </tableColumn>
                                                         <tableColumn identifier="fileSize" editable="NO" width="100" minWidth="40" maxWidth="1000" id="uoM-u8-qmc">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="File Size">
-                                                                <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -437,7 +435,6 @@
                                                         </tableColumn>
                                                         <tableColumn identifier="byteSent" width="123" minWidth="10" maxWidth="3.4028234663852886e+38" id="Muc-56-fUK">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Bytes Sent/Received">
-                                                                <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </tableHeaderCell>
@@ -470,7 +467,6 @@
                                                         </tableColumn>
                                                         <tableColumn identifier="status" width="100" minWidth="10" maxWidth="3.4028234663852886e+38" id="23j-fl-sp8">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Status">
-                                                                <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </tableHeaderCell>
@@ -503,7 +499,6 @@
                                                         </tableColumn>
                                                         <tableColumn identifier="originalFileName" width="170" minWidth="10" maxWidth="3.4028234663852886e+38" id="DEq-Ou-800">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Original File Name">
-                                                                <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </tableHeaderCell>
@@ -536,7 +531,6 @@
                                                         </tableColumn>
                                                         <tableColumn identifier="originalFileNamePath" width="181" minWidth="10" maxWidth="3.4028234663852886e+38" id="lBa-Mf-AMn">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Original File Name Path">
-                                                                <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </tableHeaderCell>
@@ -628,24 +622,23 @@
                                         </connections>
                                     </button>
                                     <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="tCN-dc-qkT">
-                                        <rect key="frame" x="10" y="619" width="844" height="20"/>
+                                        <rect key="frame" x="10" y="620" width="844" height="20"/>
                                     </progressIndicator>
                                     <scrollView autohidesScrollers="YES" horizontalLineScroll="18" horizontalPageScroll="10" verticalLineScroll="18" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q6o-eG-7ah">
-                                        <rect key="frame" x="447" y="10" width="407" height="211"/>
+                                        <rect key="frame" x="447" y="11" width="407" height="211"/>
                                         <clipView key="contentView" id="tSj-5T-qVD">
                                             <rect key="frame" x="1" y="0.0" width="405" height="210"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" rowHeight="16" rowSizeStyle="automatic" headerView="jqK-Xa-jMm" viewBased="YES" indentationPerLevel="16" outlineTableColumn="f2s-6X-abW" id="Fms-5L-sn9">
                                                     <rect key="frame" x="0.0" y="0.0" width="405" height="185"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
                                                         <tableColumn identifier="name" width="402" minWidth="40" maxWidth="1000" id="f2s-6X-abW">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Files">
-                                                                <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
@@ -698,7 +691,7 @@
                                         </tableHeaderView>
                                     </scrollView>
                                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C0b-TJ-RoM">
-                                        <rect key="frame" x="10" y="10" width="432" height="211"/>
+                                        <rect key="frame" x="10" y="11" width="432" height="211"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="ZqO-el-RXp">
                                             <rect key="frame" x="0.0" y="0.0" width="417" height="211"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -714,6 +707,10 @@
                                                 </textView>
                                             </subviews>
                                         </clipView>
+                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="wYz-Kk-7uV">
+                                            <rect key="frame" x="-100" y="-100" width="417" height="15"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
                                         <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="4r0-kp-U0o">
                                             <rect key="frame" x="417" y="0.0" width="15" height="211"/>
                                             <autoresizingMask key="autoresizingMask"/>
@@ -823,7 +820,7 @@
     <resources>
         <image name="DscribeNewLogo_1" width="150" height="86"/>
         <image name="bg" width="580" height="269"/>
-        <image name="home_logo" width="36" height="33.75"/>
+        <image name="home_logo" width="48" height="45"/>
         <namedColor name="labelColor">
             <color red="0.15299999713897705" green="0.13600000739097595" blue="0.081000000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
